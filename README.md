@@ -25,6 +25,15 @@ First Run
 8. Use ``gulp`` to run the application (it will automatically start Mongo)
 9. Navigate your browser to [http://localhost:4000](http://localhost:4000/)
 
+### Phoenix Solutions Specifics
+* You may need to add MongoDB's bin folder to your path.
+    * [OSX Tutorial](http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/)
+    * On Windows, you'll need to go to **My Computer**, go to **Advanced System Settings**, **Environment Variables**, and then add the location of your MongoDB /bin folder to the *Path*. For example, mine is:
+
+    ```
+    C:\Program Files\MongoDB\Server\3.2\bin
+    ```
+
 Push to testing environment
 ----------------------------
 1. Install git and heroku toolbelt (https://toolbelt.heroku.com/)

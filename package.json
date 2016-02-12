@@ -24,7 +24,7 @@
     "gulp-uglify": "^1.1.0",
     "gulp-util": "^3.0.4",
     "hjs": "~0.0.6",
-    "mongodb": "*",
+    "mongodb": "~1.4",
     "monk": "*",
     "morgan": "~1.5.1",
     "multer": "^0.1.8",
