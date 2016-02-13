@@ -62,12 +62,6 @@ var mobileAppointment = require('./routes/api/appointment');
 var mobileToken = require('./routes/api/mobiletoken');
 var business = require('./routes/api/business');
 
-// view engine setup
-//app.set('views', path.join(__dirname, 'views'));
-app.set('views', path.join(__dirname, 'client/views'));
-app.set('view engine', 'hjs');
-
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
@@ -93,15 +87,6 @@ app.use(multer({
     console.log(file.fieldname + ' uploaded to  ' + file.path);
   }
 }));
-
-
-
-
-/*
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'static')));
-*/
-
 
 //so... when only using router, for some reason deserialize wont work
 //but when using both or just app.use(session), the route works
@@ -130,12 +115,11 @@ app.use(function(req, res, next) {
 });
 
 
-
 // Set Webapp Routes
 //app.use('/office', require('./routes/webapp/checkin'));
 //app.use('/', businessRoutes);
-app.use('/', express.static(__dirname + '/client'));
-
+app.use('/', express.static(__dirname + '/client/marketing'));
+app.use('/app', express.static(__dirname + '/client/app'));
 
 
 // Set Mobile Routes
