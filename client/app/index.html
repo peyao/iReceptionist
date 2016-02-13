@@ -14,45 +14,43 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/material-icons.css">
     <!-- endbuild -->
 </head>
 
-<body ng-app="iReceptionistApp">
+<body ng-app="iReceptionistApp" ng-controller="IndexCtrl" layout="row" flex>
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-        <div class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="MainSidenav" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">iReceptionist</h1>
+        </md-toolbar>
+        <md-content class="md-primary" layout="column">
+            <md-button ui-sref="dashboard" class="" ng-click="toggleSidenav()">
+                Dashboard
+            </md-button>
+            <md-button ui-sref="about" class="" ng-click="toggleSidenav()">
+                About
+            </md-button>
+        </md-content>
+    </md-sidenav>
 
-                    <a class="navbar-brand" href="#/">iReceptionist</a>
-                </div>
-
-                <div class="collapse">
-
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#/">Home</a></li>
-                        <li><a ng-href="#/about">About</a></li>
-                        <li><a ng-href="#/">Contact</a></li>
-                    </ul>
-                </div>
+    <md-content flex>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleSidenav()" hide-gt-md>
+                    <!-- https://design.google.com/icons -->
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <h2>
+                    <span>{{toolbarTitle}}</span>
+                </h2>
             </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div ng-view=""></div>
-    </div>
-
-    <div class="footer">
-        <div class="container">
-            <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-        </div>
-    </div>
-
+        </md-toolbar>
+        <div ui-view layout-padding></div>
+    </md-content>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
@@ -70,10 +68,10 @@
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js"></script>
     <script src="bower_components/angular-material/angular-material.min.js"></script>
@@ -82,7 +80,8 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/index.js"></script>
+    <script src="scripts/controllers/dashboard.js"></script>
     <script src="scripts/controllers/about.js"></script>
     <script src="scripts/services/authenticationservice.js"></script>
     <script src="scripts/services/appointmentservice.js"></script>

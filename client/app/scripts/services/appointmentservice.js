@@ -9,7 +9,7 @@
  */
 angular.module('iReceptionistApp')
 .factory('AppointmentService', function(config, $http) {
-    console.log('config.apiUrl is: ', config.apiUrl);
+    console.log('AppointmentService loaded.');
 
     return {
         getAppointment: function(success, error) {

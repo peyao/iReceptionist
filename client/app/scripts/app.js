@@ -13,25 +13,23 @@ angular
     'ngAnimate',
     'ngCookies',
     'ngResource',
-    'ngRoute',
     'ngSanitize',
     'ngAria',
     'ngMaterial',
+    'ui.router',
 ])
-.config(function($routeProvider) {
-    $routeProvider
-        .when('/', {
+.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $stateProvider
+        .state('dashboard', {
+            url: '/',
             templateUrl: 'views/dashboard.html',
-            controller: 'DashboardCtrl',
-            controllerAs: 'dashboard',
+            controller: 'DashboardCtrl'
         })
-        .when('/about', {
+        .state('about', {
+            url: '/about',
             templateUrl: 'views/about.html',
-            controller: 'AboutCtrl',
-            controllerAs: 'about'
-        })
-        .otherwise({
-            redirectTo: '/'
+            controller: 'AboutCtrl'
         });
 })
 .constant('config', {

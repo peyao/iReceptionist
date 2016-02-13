@@ -8,10 +8,8 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('AboutCtrl', function() {
-    this.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-    ];
+.controller('AboutCtrl', function($rootScope) {
+    $rootScope.toolbarTitle = 'About';
+
+    console.log('AboutCtrl loaded.');
 });

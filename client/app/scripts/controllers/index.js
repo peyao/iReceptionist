@@ -8,10 +8,11 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('DashboardCtrl', function(AppointmentService) {
-    this.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-    ];
+.controller('IndexCtrl', function($scope, $mdSidenav) {
+    console.log('IndexCtrl loaded.');
+
+    $scope.toggleSidenav = function() {
+        $mdSidenav('MainSidenav').toggle();
+    };
+
 });
