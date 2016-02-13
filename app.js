@@ -63,7 +63,8 @@ var mobileToken = require('./routes/api/mobiletoken');
 var business = require('./routes/api/business');
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+//app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'client/views'));
 app.set('view engine', 'hjs');
 
 
@@ -96,8 +97,10 @@ app.use(multer({
 
 
 
+/*
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'static')));
+*/
 
 
 //so... when only using router, for some reason deserialize wont work
@@ -129,12 +132,14 @@ app.use(function(req, res, next) {
 
 
 // Set Webapp Routes
-app.use('/office', require('./routes/webapp/checkin'));
-app.use('/', businessRoutes);
+//app.use('/office', require('./routes/webapp/checkin'));
+//app.use('/', businessRoutes);
+app.use('/', express.static(__dirname + '/client'));
 
 
 
 // Set Mobile Routes
+/*
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
@@ -142,6 +147,7 @@ app.use('/api/m/mobiletoken', mobileToken);
 app.use('/api/m/business', business);
 app.use('/api/m/example', require('./routes/api/example'));
 app.use('/api', require('./routes/webapi'));
+*/
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

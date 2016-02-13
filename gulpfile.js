@@ -1,35 +1,18 @@
 // gulpfile.js
 var gulp = require('gulp');
 var child_process = require('child_process');
-//var gutil = require('gulp-util');
-//var clean = require('gulp-clean');
-//var concat = require('gulp-concat');
-//var uglify = require('gulp-uglify');
-//var rename = require('gulp-rename');
 var server = require('gulp-express');
 var browserSync = require('browser-sync');
-var mongobackup = require('mongobackup')
+var mongobackup = require('mongobackup');
+var sass = require('gulp-sass');
 
 var plugins= require('gulp-load-plugins')({
-	pattern: ['gulp-*', 'gulp.*', 'check-*', 
+	pattern: ['gulp-*', 'gulp.*', 'check-*',
 	'jasmine-*', 'mongobackup', 'karma', 'karma-*', 'yargs'],
 	scope: ['dependencies', 'devDependencies'],
 	lazy: false
 
 });
-
-
-//console.log(plugins);
-//var argv = require('yargs').argv;
-
-//var nodemon = require('gulp-nodemon');
-//var jshint = require('gulp-jshint');
-
-//var checkPages = require('check-pages');
-
-//var mongobackup = require('mongobackup');
-//var shell = require('gulp-shell');
-
 
 var exec = require('child_process').exec;
 function execute(command, callback){
@@ -59,6 +42,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('vendor', function() {
+	/*
   return gulp.src('./public/javascripts/*.js')
     .pipe(plugins.concat('vendor.js'))
     .pipe(gulp.dest('./public/javascripts/'))
@@ -66,18 +50,21 @@ gulp.task('vendor', function() {
     .pipe(plugins.rename('vendor.min.js'))
     .pipe(gulp.dest('./public/javascripts/'))
     .on('error', plugins.util.log)
+	*/
 });
 
-//gulp.task('build', ['vendor'], function() {
+// NOTE: Does not work? We are using .scss files.
 gulp.task('build-concat', ['vendor'], function() {
-  return gulp.src('./public/stylesheets/*.css')
+	/*
+  return gulp.src('./client/styles/*.css')
 	.pipe(plugins.minifyCss({keepBreaks:false}))
     	.pipe(plugins.rename('style.min.css'))
     	.pipe(gulp.dest('./build/concat/stylesheets/'))
-	});
+	*/
+});
 
 gulp.task('compress', function() {
-  gulp.src('./public/javascripts/*.js')
+  gulp.src('./client/scripts/**/*.js')
     .pipe(plugins.uglify())
     .pipe(plugins.rename(function (path) {
         path.basename += ".min";
@@ -85,8 +72,14 @@ gulp.task('compress', function() {
     .pipe(gulp.dest('./build/js'))
 });
 
+gulp.task('sass', function() {
+	return gulp.src('./client/styles/**/*.scss')
+		.pipe(sass().on('error', sass.logError))
+		.pipe(gulp.dest('./client/styles'));
+});
+
 gulp.task('build', ['compress'], function() {
-  return gulp.src('./public/stylesheets/*.css')
+  return gulp.src('./client/styles/*.css')
     .pipe(plugins.minifyCss({keepBreaks:false}))
     .pipe(plugins.rename(function (path) {
         path.basename += ".min";
@@ -97,6 +90,7 @@ gulp.task('build', ['compress'], function() {
     //.pipe(rename('style.min.css'))
     //.pipe(gulp.dest('./public/stylesheets/'))
 });
+
 
 //// end of additional plugins
 gulp.task('nodemon', ['lint'], function (cb) {
@@ -145,13 +139,14 @@ gulp.task('mongoend', function() {
     });
 })
 
-gulp.task('browser-sync', ['nodemon', 'mongostart', 'watch-check'], function () {
+gulp.task('browser-sync', ['sass', 'nodemon', 'mongostart', 'watch-check'], function () {
 
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
   browserSync.init({
 
     // watch the following files; changes will be injected (css & images) or cause browser to refresh
-    files: ['public/**/*.*', 'views/**/*.*', 'public/javascripts/*.js'],
+    //files: ['public/**/*.*', 'views/**/*.*', 'public/javascripts/*.js'],
+    files: ['client/**/*.*'],
 
     // informs browser-sync to proxy our expressjs app which would run at the following location
     proxy: 'http://localhost:3000',
@@ -204,10 +199,10 @@ gulp.task('test', function (done) {
 //               - must be authenticated with heroku
 //               - must have git installed and be in application root directory
 //               - must be authenticated with git so that password does not have to be entered on push
-gulp.task('stage', ['test'], function(){ 
+gulp.task('stage', ['test'], function(){
     execute('git symbolic-ref --short HEAD', function(br){
         console.log('deploying current branch: ' + br);
-        var timer; 
+        var timer;
         return gulp.src('')
                 .pipe(plugins.shell([
                     '<%= setKillTimer() %>',
@@ -240,7 +235,7 @@ gulp.task('stage', ['test'], function(){
                         }
                     }
                 }));
-    }); 
+    });
 })
 
 // check pages on local
@@ -275,9 +270,7 @@ gulp.task('checkLocal', ['lint'], function(callback) {
 });
 
 gulp.task('watch-check', function() {
-    gulp.watch('public/**/*.*', ['lint']);
-    gulp.watch('views/**/*.*', ['lint']);
-    gulp.watch('public/javascripts/*.js', ['lint']);
+	gulp.watch('client/**/*.*', ['lint']);
 });
 
 // check pages on development
@@ -335,7 +328,7 @@ gulp.task('apidoc', function(){
 var deploy = require('gulp-gh-pages');
 
 gulp.task('deploy-gh', function () {
-   	var currentdate = new Date();    
+   	var currentdate = new Date();
 	var timeString = currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/"
                 + currentdate.getFullYear() + " @ "
@@ -354,7 +347,8 @@ var open = require('gulp-open');
 // Open API Docs
 gulp.task('apidoc-url', function(){
   var options = {
-    url: 'http://cse112-goldteam.github.io/web-app/'
+    //url: 'http://cse112-goldteam.github.io/web-app/'
+    url: 'http://peyao.github.io/iReceptionist/'
   };
   return gulp.src('./README.md')
   .pipe(plugins.open('', options));
