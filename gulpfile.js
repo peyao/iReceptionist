@@ -5,6 +5,7 @@ var server = require('gulp-express');
 var browserSync = require('browser-sync');
 var mongobackup = require('mongobackup');
 var sass = require('gulp-sass');
+var bower = require('gulp-bower');
 
 var plugins= require('gulp-load-plugins')({
 	pattern: ['gulp-*', 'gulp.*', 'check-*',
@@ -78,6 +79,13 @@ gulp.task('sass', function() {
 		.pipe(gulp.dest('./client/styles'));
 });
 
+gulp.task('bower', function() {
+	return bower({
+		//directory: './client/bower_components',
+		cwd: './client',
+	});//.pipe(gulp.dest('client/bower_components'));
+});
+
 gulp.task('build', ['compress'], function() {
   return gulp.src('./client/styles/*.css')
     .pipe(plugins.minifyCss({keepBreaks:false}))
@@ -139,7 +147,7 @@ gulp.task('mongoend', function() {
     });
 })
 
-gulp.task('browser-sync', ['sass', 'nodemon', 'mongostart', 'watch-check'], function () {
+gulp.task('browser-sync', ['nodemon', 'mongostart', 'watch-check'], function () {
 
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
   browserSync.init({
@@ -182,7 +190,7 @@ gulp.task('mongorestore', function() {
 
 
 
-gulp.task('default', ['browser-sync']);
+gulp.task('default', ['sass', 'bower', 'browser-sync']);
 
 var karma = require('karma').server;
 /**
