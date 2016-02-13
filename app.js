@@ -1,3 +1,4 @@
+require('dotenv').config();
 var newrelic = false;
 
 if (process.env.NODE_ENV && process.env.NODE_ENV !== 'development') {
@@ -15,6 +16,7 @@ var multer = require('multer');
 var passport = require('passport');
 var async = require('async');
 var app = express();
+
 
 global.__base = __dirname + '/';
 
@@ -54,7 +56,6 @@ require('./config/passport')(passport); // pass passport for configuration
 
 
 var businessRoutes = require('./routes/webapp/business')(passport);
-
 // Load Routes for Mobile
 var mobileAuth = require('./routes/api/auth');
 var mobileForm = require('./routes/api/form');
@@ -123,15 +124,13 @@ app.use('/app', express.static(__dirname + '/client/app'));
 
 
 // Set Mobile Routes
-/*
 app.use('/', mobileAuth);
 app.use('/api/m/form', mobileForm);
 app.use('/api/m/appointment', mobileAppointment);
 app.use('/api/m/mobiletoken', mobileToken);
 app.use('/api/m/business', business);
 app.use('/api/m/example', require('./routes/api/example'));
-app.use('/api', require('./routes/webapi'));
-*/
+//app.use('/api', require('./routes/webapi'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

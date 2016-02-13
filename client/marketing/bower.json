@@ -1,9 +1,7 @@
 {
   "name": "iReceptionist-marketing",
   "homepage": "https://github.com/peyao/iReceptionist",
-  "authors": [
-    "Peter Yao <peyao@ucsd.edu>"
-  ],
+  "authors": [],
   "description": "Marketing page for iReceptionist.",
   "main": "index.html",
   "moduleType": [],

@@ -135,7 +135,7 @@ gulp.task('mongoend', function() {
     });
 })
 
-gulp.task('browser-sync', ['nodemon', 'mongostart', 'watch-check'], function() {
+gulp.task('browser-sync', ['nodemon', 'watch-check'], function() {
 
     // for more browser-sync config options: http://www.browsersync.io/docs/options/
     browserSync.init({
@@ -335,10 +335,11 @@ gulp.task('deploy-gh', function() {
     var currentdate = new Date();
     var timeString = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
     var options = {
-        message: "Update API Doc --skip-ci"
+        message: "Update API Doc --skip-ci",
     };
     return gulp.src('./apidoc/**/*')
-        .pipe(plugins.deploy(options));
+        //.pipe(plugins.deploy(options));
+        .pipe(deploy(options));
 });
 
 var open = require('gulp-open');
@@ -347,7 +348,7 @@ var open = require('gulp-open');
 gulp.task('apidoc-url', function() {
     var options = {
         //url: 'http://cse112-goldteam.github.io/web-app/'
-        url: 'http://peyao.github.io/iReceptionist/'
+        url: 'http://peyao.github.io/iReceptionist'
     };
     return gulp.src('./README.md')
         .pipe(plugins.open('', options));

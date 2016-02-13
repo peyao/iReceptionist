@@ -8,10 +8,10 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-    .controller('MainCtrl', function() {
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
-    });
+.controller('DashboardCtrl', function(AppointmentService) {
+    this.awesomeThings = [
+        'HTML5 Boilerplate',
+        'AngularJS',
+        'Karma'
+    ];
+});
