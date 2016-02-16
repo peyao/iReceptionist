@@ -2,7 +2,12 @@
     width: 100px;
     height: 100px;
     margin-right: 8px;
+}
+
+.settings-caption {
+    font-size: 14px;
     margin-bottom: 18px;
+    text-align: center;
 }
 
 .settings-container {
