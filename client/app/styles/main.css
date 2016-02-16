@@ -1,3 +1,29 @@
+.navbar-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 40px;
+}
+
+.navbar-left-link {
+    margin-left: 20px;
+}
+
+.navbar-divider {
+    border-right: 0.1px solid #eee;
+    height: 45px;
+    margin-left: 100px;
+}
+
+.navbar-ipad {
+    font-size: 60px;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
 .avatar {
     width: 100px;
     height: 100px;
