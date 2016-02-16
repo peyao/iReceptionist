@@ -30,6 +30,11 @@ angular
             url: '/about',
             templateUrl: 'views/about.html',
             controller: 'AboutCtrl'
+        })
+        .state('settings', {
+            url: '/settings',
+            templateUrl: 'views/settings.html',
+            controller: 'SettingsCtrl'
         });
 })
 .constant('config', {
