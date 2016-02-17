@@ -14,5 +14,4 @@ mongo.log
 newrelic_agent.log
 *.sw?
 .env
-
 apidoc/
