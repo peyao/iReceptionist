@@ -30,7 +30,12 @@ angular
             url: '/about',
             templateUrl: 'views/about.html',
             controller: 'AboutCtrl'
-        });
+        })
+        .state('employees', {
+            url: '/employees',
+            templateUrl: 'views/employees.html',
+            controller: 'EmployeesCtrl'
+        });     
 })
 .constant('config', {
     'apiUrl': 'http://localhost/api'
