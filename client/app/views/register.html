@@ -1,0 +1,69 @@
+<!--<div class="test">-->
+<!--<h1>{{toolbarTitle}}</h1>-->
+
+<!--</div>-->
+
+<!--<div layout="row" layout-align="center center" ng-cloak>-->
+<!--<md-toolbar class="md-primary md-hue-2" flex="50" layout-padding>-->
+<!--<h2 class="md-toolbar-tools">-->
+<!--<span>Start A New Account</span>-->
+<!--</h2>-->
+<!--</md-toolbar>-->
+<!--</div>-->
+
+<div layout="row" layout-align="center center" ng-cloak>
+    <md-whiteframe class="md-whiteframe-1dp" flex="50">
+        <md-toolbar class="md-primary md-hue-2">
+            <div class="md-toolbar-tools" layout-align="">
+                <h4>
+                    <span>Start A New Account </span>
+                </h4>
+            </div>
+        </md-toolbar>
+
+        <md-content class="autoScroll" layout-padding>
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>First Name</label>
+                <input ng-model="user.firstname" type="text">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Last Name</label>
+                <input ng-model="user.lastname" type="text">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Password</label>
+                <input ng-model="user.name" type="password">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Confirm Password</label>
+                <input ng-model="user.name" type="password">
+            </md-input-container>
+
+            <div layout="row" layout-sm="" layout-wrap>
+                <div flex="">
+                    <md-button class="md-primary" ng-href="{{googleUrl}}" target="_blank">Cancel</md-button>
+                    <md-button class="md-primary" ng-href="{{googleUrl}}" target="_blank">Log In</md-button>
+                </div>
+
+                <div flex="30"> </div>
+                <md-button class="md-raised md-primary">Create Account</md-button>
+            </div>
+
+            <!--<div layout="row" layout-sm="column" layout-align="center center" layout-wrap>-->
+            <!--<md-button class="md-raised md-primary">Create Account</md-button>-->
+            <!--</div>-->
+
+
+
+        </md-content>
+
+
+    </md-whiteframe>
+</div>

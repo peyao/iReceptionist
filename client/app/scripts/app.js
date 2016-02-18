@@ -35,7 +35,37 @@ angular
             url: '/employees',
             templateUrl: 'views/employees.html',
             controller: 'EmployeesCtrl'
-        });     
+        })
+        .state('settings', {
+            url: '/settings',
+            templateUrl: 'views/settings.html',
+            controller: 'SettingsCtrl'
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'views/register.html',
+            controller: 'RegisterCtrl'
+        })
+        .state('createcompany', {
+            url: '/createcompany',
+            templateUrl: 'views/createcompany.html',
+            controller: 'CreateCompanyCtrl'
+        })
+        .state('visitorform', {
+            url: '/visitorform',
+            templateUrl: 'views/visitorform.html',
+            controller: 'VisitorFormCtrl'
+        })
+        .state('themes', {
+            url: '/themes',
+            templateUrl: 'views/themes.html',
+            controller: 'ThemesCtrl'
+        })
+        .state('addemployees', {
+            url: '/addemployees',
+            templateUrl: 'views/addemployees.html',
+            controller: 'AddEmployeesCtrl'
+        });
 })
 .constant('config', {
     'apiUrl': 'http://localhost/api'

@@ -14,39 +14,26 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="styles/main.css">
+
+    <link rel="stylesheet" href="styles/material-icons.css">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- endbuild -->
 </head>
 
 <body ng-app="iReceptionistApp" ng-controller="IndexCtrl" layout="row" flex>
-
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="MainSidenav" md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar class="md-theme-indigo">
-            <h1 class="md-toolbar-tools">iReceptionist</h1>
-        </md-toolbar>
-        <md-content class="md-primary" layout="column">
-            <md-button ui-sref="dashboard" class="" ng-click="toggleSidenav()">
-                Dashboard
-            </md-button>
-            <md-button ui-sref="about" class="" ng-click="toggleSidenav()">
-                About
-            </md-button>
-            <md-button ui-sref="employees" class="" ng-click="toggleSidenav()">
-                Employees
-            </md-button>            
-        </md-content>
-    </md-sidenav>
-
     <md-content flex>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleSidenav()" hide-gt-md>
-                    <!-- https://design.google.com/icons -->
-                    <md-icon>menu</md-icon>
-                </md-button>
-                <h2>
-                    <span>{{toolbarTitle}}</span>
-                </h2>
+                <img src="images/phoenix-logo.png" class="navbar-logo">
+                <h2>Company Name</h2>
+                <div class="navbar-divider"></div>
+                <md-button ui-sref="dashboard" class="navbar-left-link">Dashboard</md-button>
+                <md-button ui-sref="employees">Employees</md-button>
+                <md-button ui-sref="settings">Settings</md-button>
+                <span class="flex"></span>
+                <i class="material-icons md-48 navbar-ipad">tablet_mac</i>
+                <md-button class="navbar-logout">Log Out</md-button>
             </div>
         </md-toolbar>
         <div ui-view layout-padding></div>
@@ -82,8 +69,14 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/index.js"></script>
     <script src="scripts/controllers/dashboard.js"></script>
+    <script src="scripts/controllers/employees.js"></script>
     <script src="scripts/controllers/about.js"></script>
-    <script src="scripts/controllers/employees.js"></script> 
+    <script src="scripts/controllers/settings.js"></script>
+    <script src="scripts/controllers/register.js"></script>
+    <script src="scripts/controllers/createcompany.js"></script>
+    <script src="scripts/controllers/visitorform.js"></script>
+    <script src="scripts/controllers/themes.js"></script>
+    <script src="scripts/controllers/addemployees.js"></script>
     <script src="scripts/services/authenticationservice.js"></script>
     <script src="scripts/services/appointmentservice.js"></script>
     <script src="scripts/services/formservice.js"></script>
