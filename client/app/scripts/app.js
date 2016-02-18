@@ -35,6 +35,16 @@ angular
             url: '/settings',
             templateUrl: 'views/settings.html',
             controller: 'SettingsCtrl'
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'views/register.html',
+            controller: 'RegisterCtrl'
+        })
+        .state('createcompany', {
+            url: '/createcompany',
+            templateUrl: 'views/createcompany.html',
+            controller: 'CreateCompanyCtrl'
         });
 })
 .constant('config', {

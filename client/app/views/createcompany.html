@@ -1,0 +1,63 @@
+<!--<div class="test">-->
+<!--<h1>{{toolbarTitle}}</h1>-->
+
+<!--</div>-->
+
+<!--<div layout="row" layout-align="center center" ng-cloak>-->
+<!--<md-toolbar class="md-primary md-hue-2" flex="50" layout-padding>-->
+<!--<h2 class="md-toolbar-tools">-->
+<!--<span>Start A New Account</span>-->
+<!--</h2>-->
+<!--</md-toolbar>-->
+<!--</div>-->
+
+<div layout="row" layout-align="center center" ng-cloak>
+    <md-whiteframe class="md-whiteframe-1dp" flex="50">
+        <md-toolbar class="md-primary md-hue-2">
+            <div class="md-toolbar-tools" layout-align="">
+                <h4>
+                    <span>Create Your Company</span>
+                </h4>
+            </div>
+        </md-toolbar>
+
+        <md-content class="autoScroll" layout-padding>
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Company Name</label>
+                <input ng-model="user.companyname" type="text">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Company Email</label>
+                <input ng-model="user.companyemail" type="email">
+            </md-input-container>
+
+            <md-input-container class="md-icon-float md-block">
+                <!-- Use floating label instead of placeholder -->
+                <label>Company Phone Number</label>
+                <input ng-model="user.companyphone" type="text">
+            </md-input-container>
+
+            <input type="checkbox" value="Other"> Accounting <br>
+            <input type="checkbox" value="Fitness"> Entertainment <br>
+            <input type="checkbox" value="Health Care"> Health Care <br>
+            <input type="checkbox" value="Health Care"> Technology <br>
+            <input type="checkbox" value="Fitness"> Other <br>
+
+            <div layout="row" layout-sm="" layout-wrap>
+                <div>
+                    <md-button class="md-primary" ng-href="{{googleUrl}}" target="_blank">Cancel</md-button>
+                </div>
+
+                <div layout="row" layout-align="">
+                    <md-button class="md-raised md-primary">Next</md-button>
+                </div>
+            </div>
+
+        </md-content>
+
+
+    </md-whiteframe>
+</div>
