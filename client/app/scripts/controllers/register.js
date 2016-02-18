@@ -11,9 +11,8 @@
  * Controller for the registration page
  */
 angular.module('iReceptionistApp')
-    .controller('RegisterCtrl', function($rootScope, $scope, AppointmentService) {
-        $rootScope.toolbarTitle = 'Start A New Account';
-        $scope.helloworld = "hello world";
+.controller('RegisterCtrl', function($rootScope, AppointmentService) {
+    $rootScope.toolbarTitle = 'Start A New Account';
 
-        console.log('RegisterCtrl loaded.');
-    });
+    console.log('RegisterCtrl loaded.');
+});
