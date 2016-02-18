@@ -2,8 +2,6 @@
 	width:48px;
 	margin:16px;
 }
-
-
 .title{
 	position:fixed;
 	padding-top: 0px;
@@ -37,5 +35,18 @@
 		background-image: url("/images/searchicon.png");
 		background-repeat: no-repeat;
 		background-position: left;
+}
 
+.listdemoBasicUsage md-divider {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+#dash-content {
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid black;
+}
+
+#dash-checkbox {
+  left: 18px;
 }
