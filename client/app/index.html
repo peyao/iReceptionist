@@ -14,7 +14,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/material-icons.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- endbuild -->
 </head>
 
@@ -34,6 +34,9 @@
             <md-button ui-sref="about" class="" ng-click="toggleSidenav()">
                 About
             </md-button>
+            <md-button ui-sref="employees" class="" ng-click="toggleSidenav()">
+                Employees
+            </md-button>            
         </md-content>
     </md-sidenav>
 
@@ -83,6 +86,7 @@
     <script src="scripts/controllers/index.js"></script>
     <script src="scripts/controllers/dashboard.js"></script>
     <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/employees.js"></script> 
     <script src="scripts/services/authenticationservice.js"></script>
     <script src="scripts/services/appointmentservice.js"></script>
     <script src="scripts/services/formservice.js"></script>
