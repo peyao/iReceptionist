@@ -45,6 +45,21 @@ angular
             url: '/createcompany',
             templateUrl: 'views/createcompany.html',
             controller: 'CreateCompanyCtrl'
+        })
+        .state('visitorform', {
+            url: '/visitorform',
+            templateUrl: 'views/visitorform.html',
+            controller: 'VisitorFormCtrl'
+        })
+        .state('themes', {
+            url: '/themes',
+            templateUrl: 'views/themes.html',
+            controller: 'ThemesCtrl'
+        })
+        .state('addemployees', {
+            url: '/addemployees',
+            templateUrl: 'views/addemployees.html',
+            controller: 'AddEmployeesCtrl'
         });
 })
 .constant('config', {

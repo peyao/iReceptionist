@@ -16,7 +16,7 @@
         <md-toolbar class="md-primary md-hue-2">
             <div class="md-toolbar-tools" layout-align="">
                 <h4>
-                    <span>Create Your Company</span>
+                    <span>Customize the Visitor Form</span>
                 </h4>
             </div>
         </md-toolbar>
@@ -24,39 +24,27 @@
         <md-content class="autoScroll" layout-padding>
             <md-input-container class="md-icon-float md-block">
                 <!-- Use floating label instead of placeholder -->
-                <label>Company Name</label>
-                <input ng-model="user.companyname" type="text">
+                <label>Name</label>
+                <input ng-model="user.visitorname" type="text">
             </md-input-container>
 
             <md-input-container class="md-icon-float md-block">
                 <!-- Use floating label instead of placeholder -->
-                <label>Company Email</label>
-                <input ng-model="user.companyemail" type="email">
+                <label>Phone Number</label>
+                <input ng-model="user.visitorphone" type="text">
             </md-input-container>
 
-            <md-input-container class="md-icon-float md-block">
-                <!-- Use floating label instead of placeholder -->
-                <label>Company Phone Number</label>
-                <input ng-model="user.companyphone" type="text">
-            </md-input-container>
+            <md-button class="md-raised md-primary" flex="50">Add Fields</md-button>
+            <br><br><br><br><br><br>
 
-            <div>
-                <p> Select the type of business you are creating:</p>
-                <input type="checkbox" value="Fitness"> Fitness <br>
-                <input type="checkbox" value="Health Care"> Health Care <br>
-                <input type="checkbox" value="Technology"> Technology <br>
-                <input type="checkbox" value="Other"> Other <br>
-            </div>
-
-            <div layout="row" layout-sm="" layout-wrap>
-                <div>
+            <div layout="row" layout-align="">
+                <div layout="column" flex="5" layout-sm="" layout-wrap>
+                    <md-button class="md-primary" flex="10" ng-href="{{googleUrl}}" target="_blank">Skip All</md-button>
                     <md-button class="md-primary" ng-href="{{googleUrl}}" target="_blank">Cancel</md-button>
                 </div>
-
-                <div flex="65"></div>
-                <md-button class="md-raised md-primary">Next</md-button>
-
-            </div>
+                <div flex="80"> </div>
+                <span flex="5"> <md-button class="md-raised md-primary">Next</md-button> </span>
+            <div>
 
         </md-content>
 
