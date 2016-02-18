@@ -63,6 +63,9 @@ h6 {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 700;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 10px 20px;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -155,6 +158,10 @@ fieldset[disabled] .btn-xl.active {
     color: #fed136;
     font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
 }
+
+.navbar-default .container{
+    width:90%;
+}
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:active,
@@ -231,16 +238,17 @@ fieldset[disabled] .btn-xl.active {
     }
 }
 header {
-    background-image: url('../img/hand-header.jpg');
-    background-repeat: none;
-    background-attachment: scroll;
-    background-position: center center;
+    background: url('../img/desk-header.jpg') no-repeat scroll center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
     text-align: center;
-    color: black;
+    color: white;
+}
+header .container{
+    background-color: rgba(0, 0, 0, 0.41);
+    width: 100%;
 }
 header .intro-text {
     padding-top: 100px;
@@ -566,6 +574,7 @@ section h3.section-subheading {
 }
 aside.clients img {
     margin: 50px auto;
+    width: 10%;
 }
 section#contact {
     background-color: #222222;
