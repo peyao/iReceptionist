@@ -18,7 +18,11 @@ angular
     'ngMaterial',
     'ui.router',
 ])
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+    $mdThemingProvider.theme('docs-dark', 'default')
+        .primaryPalette('yellow')
+        .dark();
+
     $urlRouterProvider.otherwise('/');
     $stateProvider
         .state('dashboard', {
@@ -46,12 +50,12 @@ angular
             templateUrl: 'views/register.html',
             controller: 'RegisterCtrl'
         })
-        .state('createcompany', {
+        .state('createCompany', {
             url: '/createcompany',
             templateUrl: 'views/createcompany.html',
             controller: 'CreateCompanyCtrl'
         })
-        .state('visitorform', {
+        .state('visitorForm', {
             url: '/visitorform',
             templateUrl: 'views/visitorform.html',
             controller: 'VisitorFormCtrl'
@@ -61,7 +65,7 @@ angular
             templateUrl: 'views/themes.html',
             controller: 'ThemesCtrl'
         })
-        .state('addemployees', {
+        .state('addEmployees', {
             url: '/addemployees',
             templateUrl: 'views/addemployees.html',
             controller: 'AddEmployeesCtrl'
