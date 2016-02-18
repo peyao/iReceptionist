@@ -12,121 +12,103 @@
             <md-tab label="Account">
                 <md-content class="md-padding">
                     <div class="md-padding" ng-cloak>
-                        <div layout-lg="row" layout="column">
-                            <div flex="45" class="settings-user-container">
-                                <md-toolbar class="settings-toolbar">
-                                    <div class="md-toolbar-tools">
-                                        User
-                                    </div>
-                                </md-toolbar>
-                                <div class="settings-container" flex>
-                                    <div layout="row">
-                                        <div layout="column" flex="50">
-                                            <div class="settings-left">
-                                                <md-input-container>
-                                                    <label>Change email address</label>
-                                                    <input>
-                                                </md-input-container>
-                                            </div>
-                                            <div class="settings-left">
-                                                <md-input-container>
-                                                    <label>Change phone number</label>
-                                                    <input>
-                                                </md-input-container>
-                                            </div>
-                                            <div class="settings-left">
-                                                <md-input-container>
-                                                    <label>Change password</label>
-                                                    <input>
-                                                </md-input-container>
-                                            </div>
-                                            <div class="settings-left">
-                                                <md-input-container>
-                                                    <label>Confirm password</label>
-                                                    <input>
-                                                </md-input-container>
-                                            </div>
+                        <div>
+                            <fieldset class="standard user-fieldset">
+                                <legend>User</legend>
+                                <div layout="row">
+                                    <div layout="column" flex="50">
+                                        <div flex="20" class="settings-container">
+                                            <md-input-container>
+                                                <label>Change email address</label>
+                                                <input>
+                                            </md-input-container>
                                         </div>
-
-                                        <div layout="column" flex="50">
-                                            <div class="settings-left avatar-container" flex="50">
-                                                <div layout="row">
-                                                    <div layout="column">
-                                                        <div>
-                                                            <img src="images/avatar.png" class="avatar" alt="" />
-                                                        </div>
-                                                        <div class="settings-caption">
-                                                            (100 x 100)
-                                                        </div>
-                                                    </div>
+                                        <div flex="20" class="settings-container">
+                                            <md-input-container>
+                                                <label>Change phone number</label>
+                                                <input>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex="50" class="settings-container">
+                                            <div layout="row">
+                                                <div layout="column">
                                                     <div>
-                                                        <md-button class="md-raised settings-button">Upload Image</md-button>
+                                                        <img src="images/avatar.png" class="avatar" alt="" />
+                                                    </div>
+                                                    <div class="settings-caption">
+                                                        (100 x 100)
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div flex="50">
-                                                <md-switch  aria-label="Enable Email Notifications">
-                                                    Enable Email Notifications
-                                                </md-switch>
-                                                <md-switch  aria-label="Enable SMS Notifications">
-                                                    Enable SMS Notifications
-                                                </md-switch>
+                                                <div>
+                                                    <md-button class="md-raised settings-button">Upload Image</md-button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div layout="row" layout-align="center center" layout-margin>
-                                        <div>
+                                        <div flex="10">
                                             <md-button class="md-raised md-primary">Save Changes</md-button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div flex></div>
-
-                            <div flex="45">
-                                <md-toolbar class="settings-toolbar">
-                                    <div class="md-toolbar-tools">
-                                        Company
-                                    </div>
-                                </md-toolbar>
-                                <div class="settings-container" flex>
-                                    <div layout="row">
-                                        <div layout="column" flex="50">
-                                            <div class="settings-left">
-                                                <md-input-container>
-                                                    <label>Change company name</label>
-                                                    <input>
-                                                </md-input-container>
-                                            </div>
-                                            <div class="settings-left">
-                                                <md-input-container>
-                                                    <label>Change email address</label>
-                                                    <input>
-                                                </md-input-container>
-                                            </div>
-                                            <div class="settings-left">
-                                                <md-input-container>
-                                                    <label>Change phone number</label>
-                                                    <input>
-                                                </md-input-container>
-                                            </div>
-                                            <!-- This is here to make the boxes the same size -->
-                                            <div class="settings-left hidden">
-                                                <md-input-container>
-                                                    <label></label>
-                                                    <input>
-                                                </md-input-container>
-                                            </div>
+                                    <div layout="column" flex="50">
+                                        <div flex="20" class="settings-container">
+                                            <md-input-container>
+                                                <label>Change password</label>
+                                                <input>
+                                            </md-input-container>
                                         </div>
+                                        <div flex="20" class="settings-container">
+                                            <md-input-container>
+                                                <label>Confirm password</label>
+                                                <input>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex="50">
+                                            <md-button class="md-raised">Update Password</md-button>
+                                        </div>
+                                        <div flex="10">
+                                            <md-switch  aria-label="Enable Email Notifications">
+                                                Enable Email Notifications
+                                            </md-switch>
+                                            <md-switch  aria-label="Enable SMS Notifications">
+                                                Enable SMS Notifications
+                                            </md-switch>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
 
-                                        <div layout="column" flex="50">
-                                            <div>
-                                                <h3>Tablet</h3>
-                                            </div>
-                                            <div>
+                            <fieldset class="standard">
+                                <legend>Company</legend>
+                                <div layout="row">
+                                    <div layout="column" flex="50">
+                                        <div flex="30" class="settings-container">
+                                            <md-input-container>
+                                                <label>Change company name</label>
+                                                <input>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex="30" class="settings-container">
+                                            <md-input-container>
+                                                <label>Change email address</label>
+                                                <input>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex="30" class="settings-container">
+                                            <md-input-container>
+                                                <label>Change phone number</label>
+                                                <input>
+                                            </md-input-container>
+                                        </div>
+                                        <div flex="10">
+                                            <md-button class="md-raised md-primary">Save Changes</md-button>
+                                        </div>
+                                    </div>
+
+                                    <div layout="column" flex="50">
+                                        <h3>Tablet</h3>
+                                        <div flex="50">
+                                            <div layout="row">
                                                 <div layout="row">
-                                                    <div>
+                                                    <div layout="column">
                                                         <div>
                                                             <img src="images/thumbnail.png" class="avatar" alt="" />
                                                         </div>
@@ -139,25 +121,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div layout="row">
-                                                    <div>
-                                                        <img src="images/thumbnail.png" class="avatar" alt="" />
-                                                    </div>
-                                                    <div>
-                                                        <md-button class="md-raised settings-button">Upload Background</md-button>
-                                                    </div>
+                                        </div>
+                                        <div flex="50">
+                                            <div layout="row">
+                                                <div>
+                                                    <img src="images/thumbnail.png" class="avatar" alt="" />
+                                                </div>
+                                                <div>
+                                                    <md-button class="md-raised settings-button">Upload Background</md-button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div layout="row" layout-align="center center" layout-margin>
-                                        <div>
-                                            <md-button class="md-raised md-primary">Save Changes</md-button>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
+                            </fieldset>
                         </div>
                     </div>
                 </md-content>
@@ -174,105 +151,98 @@
 
             <md-tab label="Billing">
                 <md-content class="md-padding">
-                    <div layout-lg="row" layout="column">
-                        <div flex="66" class="pricing-table">
+                    <div layout="row">
+                        <div flex="66">
                             <div layout="row">
-                                <div flex="10"></div>
-                                <div flex="40">
-                                    <md-toolbar class="settings-toolbar">
-                                        <h2 class="md-toolbar-tools">
-                                            <span>Free</span>
-                                        </h2>
-                                    </md-toolbar>
-                                    <md-content>
-                                        <md-list class="settings-container">
-                                            <md-list-item class="md-3-line" >
-                                                <div class="md-list-item-text">
-                                                    <i class="material-icons settings-check-icon">done</i>
-                                                    Feature 1
-                                                </div>
-                                                <md-divider></md-divider>
-                                            </md-list-item>
-                                            <md-list-item class="md-3-line" >
-                                                <div class="md-list-item-text">
-                                                    <i class="material-icons settings-check-icon">done</i>
-                                                    Feature 2
-                                                </div>
-                                                <md-divider></md-divider>
-                                            </md-list-item>
-                                            <md-list-item class="md-3-line" >
-                                                <div class="md-list-item-text">
-                                                    <i class="material-icons settings-check-icon">done</i>
-                                                    Feature 3
-                                                </div>
-                                                <md-divider></md-divider>
-                                            </md-list-item>
-                                            <md-list-item class="md-3-line" >
-                                                <div class="md-list-item-text">
-                                                    <i class="material-icons settings-check-icon">done</i>
-                                                    Feature 4
-                                                </div>
-                                                <md-divider></md-divider>
-                                            </md-list-item>
-                                            <md-list-item class="md-3-line" >
-                                                <md-button ng-disabled="true" class="pricing-button">Current Plan</md-button>
-                                            </md-list-item>
-                                        </md-list>
-                                    </md-content>
+                                <div flex="45">
+                                    <table class="pricing-table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <h2 class="pricing-table-header">
+                                                        Free
+                                                    </h2>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="pricing-table-row">
+                                                <td class="pricing-table-feature">
+                                                    <i class="material-icons pricing-table-feature-check">done</i>
+                                                    <span>Feature 1</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="pricing-table-row">
+                                                <td class="pricing-table-feature">
+                                                    <i class="material-icons pricing-table-feature-check">done</i>
+                                                    <span>Feature 2</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="pricing-table-row">
+                                                <td class="pricing-table-feature">
+                                                    <i class="material-icons pricing-table-feature-check">done</i>
+                                                    <span>Feature 3</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="pricing-table-row">
+                                                <td class="pricing-table-feature">
+                                                    <div class="pricing-table-button">
+                                                        <md-button ng-disabled="true" class="md-primary pricing-table-button">Current Plan</md-button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-
-                                <div flex="40">
-                                    <md-toolbar>
-                                        <h2 class="md-toolbar-tools">
-                                            <span>Premium</span>
-                                        </h2>
-                                    </md-toolbar>
-                                    <md-content>
-                                        <md-list class="settings-container">
-                                            <md-list-item class="md-3-line" >
-                                                <div class="md-list-item-text">
-                                                    <i class="material-icons settings-check-icon">done</i>
-                                                    Feature 1
-                                                </div>
-                                                <md-divider></md-divider>
-                                            </md-list-item>
-                                            <md-list-item class="md-3-line" >
-                                                <div class="md-list-item-text">
-                                                    <i class="material-icons settings-check-icon">done</i>
-                                                    Feature 2
-                                                </div>
-                                                <md-divider></md-divider>
-                                            </md-list-item>
-                                            <md-list-item class="md-3-line" >
-                                                <div class="md-list-item-text">
-                                                    <i class="material-icons settings-check-icon">done</i>
-                                                    Feature 3
-                                                </div>
-                                                <md-divider></md-divider>
-                                            </md-list-item>
-                                            <md-list-item class="md-3-line" >
-                                                <div class="md-list-item-text">
-                                                    <i class="material-icons settings-check-icon">done</i>
-                                                    Feature 4
-                                                </div>
-                                                <md-divider></md-divider>
-                                            </md-list-item>
-                                            <md-list-item class="md-3-line">
-                                                <md-button class="md-raised pricing-button">Purchase</md-button>
-                                            </md-list-item>
-                                        </md-list>
-                                    </md-content>
+                                <div flex="45">
+                                    <table class="pricing-table pricing-table-premium">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <h2>
+                                                        Premium
+                                                    </h2>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="pricing-table-row">
+                                                <td class="pricing-table-feature">
+                                                    <i class="material-icons pricing-table-feature-check">done</i>
+                                                    <span>Feature 1</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="pricing-table-row">
+                                                <td class="pricing-table-feature">
+                                                    <i class="material-icons pricing-table-feature-check">done</i>
+                                                    <span>Feature 2</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="pricing-table-row">
+                                                <td class="pricing-table-feature">
+                                                    <i class="material-icons pricing-table-feature-check">done</i>
+                                                    <span>Feature 3</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="pricing-table-row">
+                                                <td class="pricing-table-feature">
+                                                    <div class="pricing-table-button">
+                                                        <md-button class="md-raised">Purchase</md-button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-
-                        <div flex="33" layout="column" layout-align-lg="" layout-align="center center">
-                            <h4 class="settings-left">Your current plan: Free</h4>
-                            <md-input-container class="settings-left">
+                        <div flex="33">
+                            <h4 class="settings-container">Your current plan: Free</h4>
+                            <md-input-container class="settings-container">
                                 <label>Credit Card Number</label>
                                 <input>
                             </md-input-container>
-                            <div layout="row" class="settings-left">
+                            <div layout="row" class="settings-container">
                                 <md-input-container>
                                     <label>Expiration Date</label>
                                     <input>

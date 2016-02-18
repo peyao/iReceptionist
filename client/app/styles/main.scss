@@ -30,17 +30,13 @@
     margin-right: 8px;
 }
 
-.avatar-container {
-    margin-top: 30px;
-}
-
 .settings-caption {
     font-size: 14px;
     margin-bottom: 18px;
     text-align: center;
 }
 
-.settings-left {
+.settings-container {
     margin-left: 8px;
 }
 
@@ -52,20 +48,36 @@
     margin-top: 0px;
 }
 
-.settings-toolbar {
-    border-radius: 3px 3px 0 0;
-    box-shadow: 0 1px rgba(255, 255, 255, 0.1);
+.pricing-table {
+    color: #000;
+    font-size: 16px;
+    width: 100%;
+    border-spacing: 0;
+    position: relative;
+    -webkit-transition: box-shadow .2s ease-in 0s;
+    transition: box-shadow .2s ease-in 0s;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.12),0 1px 2px 0 rgba(0,0,0,0.24);
+    margin-top: 21.28px;
 }
 
-.settings-container {
-    border: 0.01px solid #eee;
+.pricing-table-premium {
+    background-color: #eee;
 }
 
-.settings-user-container {
-    margin-bottom: 30px;
+.pricing-table-row {
+    border-bottom: 1px solid #d6d6d6;
+    -webkit-transition: background-color .2s ease-in 0s;
+    transition: background-color .2s ease-in 0s;
 }
 
-.settings-check-icon {
+.pricing-table-feature {
+    line-height: 28px;
+    border-top: 1px solid #d6d6d6;
+    padding: 20px 15px;
+    text-align: left;
+}
+
+.pricing-table-feature-check {
     display: inline-block;
     vertical-align: top;
     position: relative;
@@ -75,14 +87,6 @@
     color: #36bae2;
 }
 
-.pricing-button {
-    margin-top: 25px;
-}
-
-.pricing-table {
-    margin-top: 21px;
-}
-
-.hidden {
-    visibility: hidden;
+.pricing-table-button {
+    text-align: center;
 }
