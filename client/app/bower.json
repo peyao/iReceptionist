@@ -11,7 +11,8 @@
     "angular-aria": "^1.4.0",
     "angular-material": "^1.0.5",
     "oclazyload": "^1.0.9",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "^0.2.18",
+    "angular-dropzone": "^0.1.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

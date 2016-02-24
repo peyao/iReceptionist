@@ -8,11 +8,11 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope, $mdSidenav) {
+.controller('IndexCtrl', function($scope) {
     console.log('IndexCtrl loaded.');
 
-    $scope.toggleSidenav = function() {
-        $mdSidenav('MainSidenav').toggle();
+    $scope.toggleSidebar = function() {
+        App.sidebar('toggle-sidebar');
     };
 
 });

@@ -15,6 +15,10 @@ angular.module('iReceptionistApp')
     $rootScope.toolbarTitle = 'Start A New Account';
     $scope.step = 1;
 
+    $scope.register = {};
+    $('.select-select2').select2();
+
+
     $scope.backStep = function() {
         $scope.step--;
         if ($scope.step === 0) {

@@ -15,13 +15,10 @@ angular
     'ngResource',
     'ngSanitize',
     'ngAria',
-    'ngMaterial',
     'ui.router',
+    'ngDropzone',
 ])
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
-    $mdThemingProvider.theme('docs-dark', 'default')
-        .primaryPalette('yellow')
-        .dark();
+.config(function($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
