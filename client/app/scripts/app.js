@@ -47,28 +47,8 @@ angular
         })
         .state('register', {
             url: '/register',
-            templateUrl: 'views/register.html',
+            templateUrl: 'views/auth/register.html',
             controller: 'RegisterCtrl'
-        })
-        .state('createCompany', {
-            url: '/createcompany',
-            templateUrl: 'views/createcompany.html',
-            controller: 'CreateCompanyCtrl'
-        })
-        .state('visitorForm', {
-            url: '/visitorform',
-            templateUrl: 'views/visitorform.html',
-            controller: 'VisitorFormCtrl'
-        })
-        .state('themes', {
-            url: '/themes',
-            templateUrl: 'views/themes.html',
-            controller: 'ThemesCtrl'
-        })
-        .state('addEmployees', {
-            url: '/addemployees',
-            templateUrl: 'views/addemployees.html',
-            controller: 'AddEmployeesCtrl'
         });
 })
 .constant('config', {

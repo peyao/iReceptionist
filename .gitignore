@@ -15,4 +15,4 @@ newrelic_agent.log
 *.sw?
 .env
 apidoc/
-main.css
+ireceptionist.css
