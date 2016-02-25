@@ -1,9 +1,4 @@
 /**
- * Created by erikxu on 2/17/16.
- */
-'use strict';
-
-/**
  * @ngdoc function
  * @name iReceptionistApp.controller:RegisterCtrl
  * @description
@@ -12,12 +7,11 @@
  */
 angular.module('iReceptionistApp')
 .controller('RegisterCtrl', function($rootScope, $scope, AppointmentService) {
-    $rootScope.toolbarTitle = 'Start A New Account';
+    $scope.currentState = 'register';
     $scope.step = 1;
-
     $scope.register = {};
-    $('.select-select2').select2();
 
+    $('.select-select2').select2();
 
     $scope.backStep = function() {
         $scope.step--;

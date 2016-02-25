@@ -7,7 +7,7 @@
  */
 angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, AppointmentService) {
-        $rootScope.toolbarTitle = 'Dashboard';
+        $scope.currentState = 'dashboard';
 
         $scope.showVisitorsMore = false;
         $scope.visitors = [{
