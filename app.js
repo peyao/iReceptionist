@@ -13,7 +13,7 @@ app.use('/', express.static(__dirname + '/client/marketing'));
 app.use('/app', express.static(__dirname + '/client/app'));
 
 app.listen(3000, function() {
-    console.log('Phoenix Solution :: iReceptionist Business Client listening on port 3000.');
+    console.log('[iReceptionist Business Client listening on port 3000]');
 });
 
 //exports = module.exports = app;

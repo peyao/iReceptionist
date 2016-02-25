@@ -16,7 +16,7 @@ angular
     'ngSanitize',
     'ngAria',
     'ui.router',
-    'ngDropzone',
+    'ui.bootstrap',
 ])
 .config(function($stateProvider, $urlRouterProvider) {
 
