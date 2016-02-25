@@ -6,7 +6,7 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope) {
+.controller('IndexCtrl', function($scope, $rootScope) {
     console.log('IndexCtrl loaded.');
 
     $scope.toggleSidebar = function() {

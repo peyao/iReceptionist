@@ -7,7 +7,7 @@
  */
 angular.module('iReceptionistApp')
     .controller('EmployeesCtrl', function($rootScope, $scope) {
-        $scope.currentState = 'employees';
+        $rootScope.currentState = 'employees';
 
         $scope.showEmployeesMore = false;
         $scope.employees = [{

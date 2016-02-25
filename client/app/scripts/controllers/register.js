@@ -7,7 +7,7 @@
  */
 angular.module('iReceptionistApp')
 .controller('RegisterCtrl', function($rootScope, $scope, AppointmentService) {
-    $scope.currentState = 'register';
+    $rootScope.currentState = 'register';
     $scope.step = 1;
     $scope.register = {};
 

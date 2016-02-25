@@ -59,7 +59,6 @@
         <div id="page-wrapper" class="">
             <!-- Preloader -->
             <!-- Preloader functionality (initialized in js/app.js) - pageLoading() -->
-            <!-- Used only if page preloader enabled from inc/config (PHP version) or the class 'page-loading' is added in #page-wrapper element (HTML version) -->
             <div class="preloader">
                 <div class="inner">
                     <!-- Animation spinner for all modern browsers -->
@@ -72,7 +71,6 @@
             <!-- END Preloader -->
 
             <!-- Page Container -->
-            <!-- In the PHP version you can set the following options from inc/config file -->
             <!--
                 Available #page-container classes:
 
@@ -129,14 +127,14 @@
                         <div class="sidebar-content">
                             <!-- Sidebar Navigation -->
                             <ul class="sidebar-nav">
-                                <li ng-class="{active: true}">
-                                    <a ui-sref="dashboard" class="active">
+                                <li>
+                                    <a ui-sref="dashboard" ng-class="{active: currentState === 'dashboard'}">
                                         <i class="gi gi-compass sidebar-nav-icon"></i>
                                         <span class="sidebar-nav-mini-hide">Dashboard</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="employees">
+                                    <a ui-sref="employees" ng-class="{active: currentState === 'employees'}">
                                         <i class="gi gi-compass sidebar-nav-icon"></i>
                                         <span class="sidebar-nav-mini-hide">Employees</span>
                                     </a>
@@ -149,9 +147,15 @@
                                     </a>
                                     <ul>
                                         <li>
-                                            <a ui-sref="settings-account">Account</a>
-                                            <a ui-sref="settings-forms-themes">Forms & Themes</a>
-                                            <a ui-sref="settings-billing">Billing</a>
+                                            <a ui-sref="settings-account" ng-class="{active: currentState === 'settings-account'}">
+                                                Account
+                                            </a>
+                                            <a ui-sref="settings-forms-themes" ng-class="{active: currentState === 'settings-forms-themes'}">
+                                                Forms & Themes
+                                            </a>
+                                            <a ui-sref="settings-billing" ng-class="{active: currentState === 'settings-billing'}">
+                                                Billing
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
@@ -319,7 +323,7 @@
         <script src="scripts/controllers/index.js"></script>
         <script src="scripts/controllers/dashboard.js"></script>
         <script src="scripts/controllers/employees.js"></script>
-        <script src="scripts/controllers/settings_accounts.js"></script>
+        <script src="scripts/controllers/settings_account.js"></script>
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/services/authentication_service.js"></script>
         <script src="scripts/services/appointment_service.js"></script>
