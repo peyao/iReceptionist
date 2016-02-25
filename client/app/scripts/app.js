@@ -17,6 +17,7 @@ angular
     'ngAria',
     'ui.router',
     'ui.bootstrap',
+    'anim-in-out',
 ])
 .config(function($stateProvider, $urlRouterProvider) {
 

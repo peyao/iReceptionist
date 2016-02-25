@@ -28,6 +28,7 @@
         <!-- Stylesheets -->
         <!-- Bootstrap is included in its original form, unaltered -->
         <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
 
         <!-- Related styles of various icon packs and plugins -->
         <link rel="stylesheet" href="vendor/css/plugins.css">
@@ -289,7 +290,7 @@
 
                     <!-- Page content -->
                     <div id="page-content">
-                        <div ui-view></div>
+                        <div ui-view id="page-content-ui-view" class="anim-in-out anim-fade anim-slide-below" style="position: absolute; width: {{pageContentWidth()}}px;"></div>
                     </div>
                     <!-- END Page Content -->
                 </div>
@@ -314,6 +315,7 @@
         <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
         <script src="bower_components/angular-aria/angular-aria.min.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
 
 
         <!-- endbower -->
