@@ -18,6 +18,8 @@ angular
     'ui.router',
     'ui.bootstrap',
     'anim-in-out',
+    'ngRoute',
+    'cloudinary'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
 

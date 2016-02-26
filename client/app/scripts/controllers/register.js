@@ -13,13 +13,13 @@ angular.module('iReceptionistApp')
 
     $('.select-select2').select2();
 
-    $scope.backStep = function() {
+    $scope.backStep = function () {
         $scope.step--;
         if ($scope.step === 0) {
             $scope.step = 1;
         }
     };
-    $scope.nextStep = function() {
+    $scope.nextStep = function () {
         $scope.step++;
         if ($scope.step === 6) {
             $scope.step = 5;
@@ -34,10 +34,10 @@ angular.module('iReceptionistApp')
      *  Description: Custom javascript code used in Forms Wizard page
      */
 
-    var FormsWizard = function() {
+    var FormsWizard = function () {
 
         return {
-            init: function() {
+            init: function () {
                 /*
                  *  Jquery Wizard, Check out more examples and documentation at http://www.thecodemine.org
                  *  Jquery Validation, Check out more examples and documentation at https://github.com/jzaefferer/jquery-validation
@@ -56,7 +56,7 @@ angular.module('iReceptionistApp')
 
                 clickableWizard.formwizard(wizardOptions);
 
-                $('.clickable-steps a').on('click', function(){
+                $('.clickable-steps a').on('click', function () {
                     var gotostep = $(this).data('gotostep');
                     clickableWizard.formwizard('show', gotostep);
                 });
@@ -70,8 +70,8 @@ angular.module('iReceptionistApp')
                     .css('width', '33%')
                     .attr('aria-valuenow', '33');
 
-                $("#progress-wizard").bind('step_shown', function(event, data){
-    		if (data.currentStep === 'progress-first') {
+                $("#progress-wizard").bind('step_shown', function (event, data) {
+                    if (data.currentStep === 'progress-first') {
                         progressBar
                             .css('width', '33%')
                             .attr('aria-valuenow', '33')
@@ -101,14 +101,14 @@ angular.module('iReceptionistApp')
                     validationOptions: {
                         errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                         errorElement: 'span',
-                        errorPlacement: function(error, e) {
+                        errorPlacement: function (error, e) {
                             e.parents('.form-group > div').append(error);
                         },
-                        highlight: function(e) {
+                        highlight: function (e) {
                             $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
                             $(e).closest('.help-block').remove();
                         },
-                        success: function(e) {
+                        success: function (e) {
                             // You can use the following if you would like to highlight with green color the input after successful validation!
                             e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                             e.closest('.help-block').remove();
@@ -159,5 +159,26 @@ angular.module('iReceptionistApp')
         };
     }();
 
-    $(function(){ FormsWizard.init(); });
+    $(function () {
+        FormsWizard.init();
+    });
+
+
+    <!-- TODO: Make more Angular...y -->
+    Dropzone.autoDiscover = false;
+
+    var myDropzone = new Dropzone("div#dZUpload", {
+        uploadMultiple: false,
+        parallelUploads: 1,
+        url: "https://api.cloudinary.com/v1_1/phoenix-sol/image/upload"
+    });
+    myDropzone.on('sending', function (file, xhr, formData) {
+        console.log("sending test");
+        formData.append('api_key', 652212869154129);
+        formData.append('timestamp', Date.now() / 1000 | 0);
+        formData.append('upload_preset', 'phtsmngp');
+    });
+    myDropzone.on('success', function (file, response) {
+        console.log('Success! Cloudinary public ID is', response.public_id);
+    });
 });
