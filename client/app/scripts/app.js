@@ -17,6 +17,9 @@ angular
     'ngAria',
     'ui.router',
     'ui.bootstrap',
+    'builder',
+    'builder.components',
+    'validator.rules'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
 
