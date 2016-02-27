@@ -21,7 +21,7 @@
                         <!-- END Horizontal Form Title -->
 
                         <!-- Horizontal Form Content -->
-                        <form action="" method="post" class="form-horizontal form-bordered" onsubmit="return false;">
+                        <form class="form-horizontal form-bordered" onsubmit="return false;">
                             <div class="form-group">
                                 <label for="email">Change Email Address</label>
                                 <input type="text" id="email" name="email" class="form-control input-lg" placeholder="example@example.com">
@@ -49,11 +49,11 @@
                             </div>
                             <div class="form-group">
                                 <img src="images/avatar.png" class="avatar"/>
-                                <button class="btn upload-button">Upload Image</button>
+                                <button class="btn btn-default upload-button">Upload Image</button>
                             </div>
                             <div class="form-group form-actions">
                                 <div class="col-md-9 col-md-offset-3">
-                                    <button type="submit" class="btn btn-effect-ripple btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" onclick="App.alert('account');">Submit</button>
                                     <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
                                 </div>
                             </div>
@@ -83,20 +83,27 @@
                             </div>
                             <div class="form-group">
                                 <img src="images/thumbnail.png" class="tablet-image"/>
-                                <button class="btn upload-button">Upload Icon</button>
+                                <button class="btn btn-default upload-button">Upload Icon</button>
                             </div>
                             <div class="form-group">
                                 <img src="images/thumbnail.png" class="tablet-image"/>
-                                <button class="btn upload-button">Upload Background</button>
+                                <button class="btn btn-default upload-button">Upload Background</button>
                             </div>
                             <div class="form-group form-actions">
                                 <div class="col-md-9 col-md-offset-3">
-                                    <button type="submit" class="btn btn-effect-ripple btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" onclick="App.alert('account');">Submit</button>
                                     <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
                                 </div>
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="alert alert-success alert-dismissable display-none">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><strong>Success</strong></h4>
+                    <p>Settings were updated successfully!</p>
                 </div>
             </div>
         </div>

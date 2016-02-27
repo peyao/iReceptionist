@@ -21,7 +21,14 @@ angular.module('iReceptionistApp')
 
         /* Add default name field if it hasn't been added already */
         var name;
-        if ($builder.forms['default'].length == 0) {
+        var nameAdded = false;
+        for (var i = 0; i < $builder.forms['default'].length; i++) {
+            if ($builder.forms['default'][i]['id'] === 'name') {
+                nameAdded = true;
+            }
+        }
+
+        if (!nameAdded) {
             name = $builder.addFormObject('default', {
                 id: 'name',
                 component: 'textInput',
@@ -32,27 +39,6 @@ angular.module('iReceptionistApp')
                 editable: false
             });
             $scope.defaultValue[name.id] = 'default value';
-        }
-        else {
-            var nameAdded = false;
-            for (var i = 0; i < $builder.forms['default'].length; i++) {
-                if ($builder.forms['default'][i]['id'] === 'name') {
-                    nameAdded = true;
-                }
-            }
-
-            if (!nameAdded) {
-                name = $builder.addFormObject('default', {
-                    id: 'name',
-                    component: 'textInput',
-                    label: 'Name',
-                    description: 'Your name',
-                    placeholder: 'Your name',
-                    required: true,
-                    editable: false
-                });
-                $scope.defaultValue[name.id] = 'default value';
-            }
         }
 
         $scope.form = $builder.forms['default'];

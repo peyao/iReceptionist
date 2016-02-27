@@ -11,7 +11,8 @@
 <div class="container" ng-controller="SettingsFormsThemesCtrl">
     <div class="row">
         <h1>Customize Your Form</h1>
-        <p>Drag and drop form elements on the right into the Form Builder.</p>
+        <p>Drag and drop form elements on the right into the Form Builder. Click on a form element in the Form Builder
+        to edit it.</p>
 
         <div class="col-md-6">
             <div class="panel panel-default">
@@ -19,6 +20,14 @@
                     <h3 class="panel-title">Form Builder</h3>
                 </div>
                 <div fb-builder="default"></div>
+                <div class="text-center">
+                    <button class="btn btn-primary save-form-button" onclick="App.alert('forms-themes');">Save Form</button>
+                </div>
+            </div>
+            <div class="alert alert-success alert-dismissable display-none">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><strong>Success</strong></h4>
+                <p>Your form has been saved!</p>
             </div>
         </div>
 
