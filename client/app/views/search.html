@@ -8,7 +8,32 @@
                 </h1>
             </div>
         </div>
-        <div class="col-xs-6">
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <h1>Visitors</h1>
+        <div class="col-xs-4" ng-repeat="v in visitors">
+            <a href="javascript:void(0)" class="widget" ng-click="activateVisitor($index)">
+                <div class="widget-content text-left clearfix">
+                    <h2 class="widget-heading h3"><strong>{{v.name}}</strong></h2>
+                    <span class="text-muted">{{v.phone}}</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <h1>Employees</h1>
+        <div class="col-xs-4" ng-repeat="e in employees">
+            <a href="javascript:void(0)" class="widget" ng-click="activateEmployee($index)">
+                <div class="widget-content text-left clearfix" ng-class="{'themed-background-danger': e.role === 'admin'}">
+                    <img src="vendor/img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar pull-right">
+                    <h2 class="widget-heading h3" ng-class="{'text-light': e.role === 'admin'}"><strong>{{e.name}}</strong></h2>
+                    <span class="text-muted" ng-class="{'text-light': e.role === 'admin'}">{{e.email}}</span>
+                    <br>
+                    <span class="text-muted" ng-class="{'text-light': e.role === 'admin'}">{{e.phone}}</span>
+                </div>
+            </a>
         </div>
     </div>
 </div>

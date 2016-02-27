@@ -17,43 +17,56 @@ angular.module('iReceptionistApp')
         $scope.returnState();
     }
 
+    $scope.activateVisitor = function(index) {
+        $scope.showVisitor = true;
+        $scope.activeVisitor = $scope.visitors[index];
+    };
+    $scope.activateEmployee = function(index) {
+        $scope.showEmployee = true;
+        $scope.activeEmployee = $scope.employees[index];
+    };
+
     $scope.employees = [{
         name: 'Amanda',
         phone: '(123) 456-7890',
-        email: 'amanda@gmail.com'
+        email: 'amanda@gmail.com',
+        role: 'employee',
     }, {
         name: 'Marco Botton',
         phone: '(123) 456-7890',
-        email: 'marco@gmail.com'
+        email: 'marco@gmail.com',
+        role: 'employee',
     }, {
         name: 'Venkman',
         phone: '(123) 456-7890',
-        email: 'venkman@gmail.com'
+        email: 'venkman@gmail.com',
+        role: 'admin',
     }, {
         name: 'Powell',
         phone: '(123) 456-7890',
-        email: 'powell@gmail.com'
+        email: 'powell@gmail.com',
+        role: 'employee',
     }];
 
     $scope.visitors = [{
         phone: '(123) 456-7890',
         name: 'Giacomo Guilizzoni',
-        employee: 'Amanda',
-        notes: 'Just a check up'
+        email: 'giacomog@gmail.com',
+        timesVisited: 5
     }, {
         phone: '(123) 456-7890',
         name: 'Marco Botton',
-        employee: 'Peter',
-        notes: 'Not a checkup'
+        email: 'marcob@gmail.com',
+        timesVisited: 3
     }, {
         phone: '(123) 456-7890',
         name: 'Mariah Maclachlan',
-        employee: 'Venkman',
-        notes: ''
+        email: 'mariahm@gmail.com',
+        timesVisited: 1
     }, {
         phone: '(123) 456-7890',
         name: 'Valerie Liberty',
-        employee: 'Powell',
-        notes: ''
+        email: 'valeriel@gmail.com',
+        timesVisited: 12
     }];
 });
