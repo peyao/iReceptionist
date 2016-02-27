@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name iReceptionistApp
@@ -54,7 +52,12 @@ angular
             url: '/register',
             templateUrl: 'views/auth/register.html',
             controller: 'RegisterCtrl'
-        });
+        })
+        .state('search', {
+            url: '/search',
+            templateUrl: 'views/search.html',
+            controller: 'SearchCtrl'
+        }) ;
 })
 .constant('config', {
     'apiUrl': 'http://localhost/api'

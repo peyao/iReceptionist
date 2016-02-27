@@ -117,7 +117,7 @@
                 <div id="sidebar">
                     <!-- Sidebar Brand -->
                     <div id="sidebar-brand" class="themed-background">
-                        <a href="index.html" class="sidebar-title">
+                        <a href="/app" class="sidebar-title">
                             <i class="fa fa-cube"></i> <span class="sidebar-nav-mini-hide">iReceptionist<strong>VIP</strong></span>
                         </a>
                     </div>
@@ -350,8 +350,8 @@
                         <ul class="nav navbar-nav-custom pull-right">
                             <!-- Search Form -->
                             <li>
-                                <form action="index.html" method="post" class="navbar-form-custom" role="search">
-                                    <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
+                                <form action="javascript:void(0);" class="navbar-form-custom" role="search">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control" placeholder="Search" ng-change="search(searchString)">
                                 </form>
                             </li>
                             <!-- END Search Form -->
@@ -414,7 +414,7 @@
 
                     <!-- Page content -->
                     <div id="page-content" style="min-height: {{pageContentHeight()}}px">
-                        <div ui-view id="page-content-ui-view" class="anim-in-out anim-fade anim-slide-below" style="position: absolute; width: {{pageContentWidth()}}px;"></div>
+                        <div ui-view id="page-content-ui-view" class="anim-in-out anim-fade anim-slide-below" data-anim-speed="500" style="position: absolute; width: {{pageContentWidth()}}px;"></div>
                     </div>
                     <!-- END Page Content -->
                 </div>
@@ -447,12 +447,14 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/index.js"></script>
+        <script src="scripts/controllers/search.js"></script>
         <script src="scripts/controllers/vip_dashboard.js"></script>
         <script src="scripts/controllers/vip_settings.js"></script>
         <script src="scripts/services/authentication_service.js"></script>
         <script src="scripts/services/appointment_service.js"></script>
         <script src="scripts/services/form_service.js"></script>
         <script src="scripts/services/business_service.js"></script>
+        <script src="scripts/services/search_service.js"></script>
         <!-- endbuild -->
     </body>
 </html>

@@ -22,7 +22,7 @@ angular.module('iReceptionistApp')
     });
 
     $scope.clock = '';
-    $scope.tickInterval = 1000; //ms
+    $scope.tickInterval = 10000; //ms (1000ms = 1s)
 
     var tick = function() {
         $scope.clock = moment().format('LT');
