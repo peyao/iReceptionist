@@ -28,11 +28,6 @@ angular
             templateUrl: 'views/dashboard.html',
             controller: 'DashboardCtrl'
         })
-        .state('about', {
-            url: '/about',
-            templateUrl: 'views/about.html',
-            controller: 'AboutCtrl'
-        })
         .state('employees', {
             url: '/employees',
             templateUrl: 'views/employees.html',
@@ -59,6 +54,16 @@ angular
             url: '/register',
             templateUrl: 'views/auth/register.html',
             controller: 'RegisterCtrl'
+        })
+        .state('vip-dashboard', {
+            url: '/vip',
+            templateUrl: 'views/vip/vip_dashboard.html',
+            controller: 'VipDashboardCtrl'
+        })
+        .state('vip-settings', {
+            url: '/vip/settings',
+            templateUrl: 'views/vip/vip_settings.html',
+            controller: 'VipSettingsCtrl'
         });
 })
 .constant('config', {
