@@ -9,27 +9,32 @@ angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, AppointmentService) {
         $rootScope.currentState = 'dashboard';
 
-        $scope.showVisitorsMore = false;
+		$scope.showMine = true;
+        $scope.showActive = true;
         $scope.visitors = [{
-            phone: '(123) 456-7890',
             name: 'Giacomo Guilizzoni',
             employee: 'Amanda',
-            notes: 'Just a check up'
+            notes: 'Just a check up',
+			phone: '(123) 456-7890',
+			active: true
         }, {
-            phone: '(123) 456-7890',
-            name: 'Marco Botton',
+			name: 'Marco Botton',
             employee: 'Peter',
-            notes: 'Not a checkup'
+            notes: 'Not a checkup',
+			phone: '(123) 456-7890',
+			active: true
         }, {
-            phone: '(123) 456-7890',
             name: 'Mariah Maclachlan',
             employee: 'Venkman',
-            notes: ''
+            notes: '',
+			phone: '(123) 456-7890',
+			active: true
         }, {
-            phone: '(123) 456-7890',
             name: 'Valerie Liberty',
             employee: 'Powell',
-            notes: ''
+            notes: '',
+			phone: '(123) 456-7890',
+			active: false
         }, ];
 
         console.log('DashboardCtrl loaded.');
