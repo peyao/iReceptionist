@@ -6,7 +6,7 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope, $rootScope) {
+.controller('IndexCtrl', function($scope, $rootScope, $timeout) {
     console.log('IndexCtrl loaded.');
 
     $rootScope.pageContentWidth = function() {
@@ -21,5 +21,14 @@ angular.module('iReceptionistApp')
         $('#page-content').height($rootScope.pageContentHeight());
     });
 
+    $scope.clock = '';
+    $scope.tickInterval = 1000; //ms
 
+    var tick = function() {
+        $scope.clock = moment().format('LT');
+        $timeout(tick, $scope.tickInterval); // Reset Timer
+    };
+
+    // Start the timer
+    $timeout(tick, $scope.tickInterval);
 });
