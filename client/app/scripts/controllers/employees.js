@@ -8,6 +8,10 @@
 angular.module('iReceptionistApp')
     .controller('EmployeesCtrl', function($rootScope, $scope) {
         $rootScope.currentState = 'employees';
+        $('#page-content-ui-view').resize(function() {
+            $('#page-content-ui-view').width($rootScope.pageContentWidth());
+            $('#page-content').height($rootScope.pageContentHeight());
+        });
 
         $scope.showEmployeesMore = false;
         $scope.employees = [{
@@ -27,6 +31,4 @@ angular.module('iReceptionistApp')
             phone: '(123) 456-7890',
             email: 'powell@gmail.com'
         }, ];
-
-        console.log('EmployeesCtrl loaded.');
     });

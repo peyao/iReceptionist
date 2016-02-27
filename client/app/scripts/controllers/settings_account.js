@@ -8,6 +8,8 @@
 angular.module('iReceptionistApp')
     .controller('SettingsAccountCtrl', function($rootScope, $scope, AppointmentService) {
         $rootScope.currentState = 'settings-account';
-
-        console.log('SettingsAccountCtrl loaded.');
+        $('#page-content-ui-view').resize(function() {
+            $('#page-content-ui-view').width($rootScope.pageContentWidth());
+            $('#page-content').height($rootScope.pageContentHeight());
+        });
     });

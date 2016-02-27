@@ -8,6 +8,11 @@
 angular.module('iReceptionistApp')
 .controller('RegisterCtrl', function($rootScope, $scope, AppointmentService) {
     $rootScope.currentState = 'register';
+    $('#page-content-ui-view').resize(function() {
+        $('#page-content-ui-view').width($rootScope.pageContentWidth());
+        $('#page-content').height($rootScope.pageContentHeight());
+    });
+
     $scope.step = 1;
     $scope.register = {};
 
@@ -25,8 +30,6 @@ angular.module('iReceptionistApp')
             $scope.step = 5;
         }
     };
-
-    console.log('RegisterCtrl loaded.');
 
     /*
      *  Document   : formsWizard.js
