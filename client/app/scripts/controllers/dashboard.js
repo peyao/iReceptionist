@@ -9,7 +9,7 @@ angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, AppointmentService) {
         $rootScope.currentState = 'dashboard';
 
-		$scope.showMine = true;
+		$scope.showMine = false;
         $scope.showActive = true;
         $scope.visitors = [{
             name: 'Giacomo Guilizzoni',
