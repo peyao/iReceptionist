@@ -12,8 +12,13 @@ angular.module('iReceptionistApp')
     $rootScope.pageContentWidth = function() {
         return $('#page-content').width();
     };
+    $rootScope.pageContentHeight = function() {
+        console.log($('#page-content-ui-view').innerHeight());
+        return $('#page-content-ui-view').innerHeight();
+    };
 
     $('#page-content').resize(function() {
         $('#page-content-ui-view').width($rootScope.pageContentWidth());
+        $('#page-content').height($rootScope.pageContentHeight());
     });
 });
