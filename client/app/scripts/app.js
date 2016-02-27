@@ -54,16 +54,6 @@ angular
             url: '/register',
             templateUrl: 'views/auth/register.html',
             controller: 'RegisterCtrl'
-        })
-        .state('vip-dashboard', {
-            url: '/vip',
-            templateUrl: 'views/vip/vip_dashboard.html',
-            controller: 'VipDashboardCtrl'
-        })
-        .state('vip-settings', {
-            url: '/vip/settings',
-            templateUrl: 'views/vip/vip_settings.html',
-            controller: 'VipSettingsCtrl'
         });
 })
 .constant('config', {

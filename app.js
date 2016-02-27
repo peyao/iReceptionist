@@ -1,5 +1,4 @@
 //require('dotenv').config();
-
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -11,9 +10,8 @@ app.use(logger('dev'));
 
 app.use('/', express.static(__dirname + '/client/marketing'));
 app.use('/app', express.static(__dirname + '/client/app'));
+app.use('/vip', express.static(__dirname + '/client/vip'));
 
 app.listen(3000, function() {
-    console.log('[iReceptionist Business Client listening on port 3000]');
+    console.log('[iReceptionist Client listening on port 3000]');
 });
-
-//exports = module.exports = app;

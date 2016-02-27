@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc factory
  * @name iReceptionistApp.BusinessService
@@ -9,7 +7,6 @@
  */
 angular.module('iReceptionistApp')
 .factory('BusinessService', function(config, $http) {
-    console.log('BusinessService loaded.');
 
     return {
         apiCall: function(req, success, error) {

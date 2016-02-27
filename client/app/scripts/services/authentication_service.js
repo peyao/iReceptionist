@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc factory
  * @name iReceptionistApp.AuthenticationService
@@ -9,7 +7,6 @@
  */
 angular.module('iReceptionistApp')
 .factory('AuthenticationService', function(config, $http) {
-    console.log('AuthenticationService loaded.');
 
     return {
         apiCall: function(req, success, error) {

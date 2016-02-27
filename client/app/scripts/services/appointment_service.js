@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc factory
  * @name iReceptionistApp.AppointmentService
@@ -9,7 +7,6 @@
  */
 angular.module('iReceptionistApp')
 .factory('AppointmentService', function(config, $http) {
-    console.log('AppointmentService loaded.');
 
     return {
         getAppointment: function(success, error) {

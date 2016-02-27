@@ -7,13 +7,11 @@
  */
 angular.module('iReceptionistApp')
 .controller('IndexCtrl', function($scope, $rootScope) {
-    console.log('IndexCtrl loaded.');
 
     $rootScope.pageContentWidth = function() {
         return $('#page-content').width();
     };
     $rootScope.pageContentHeight = function() {
-        console.log($('#page-content-ui-view').innerHeight());
         return $('#page-content-ui-view').innerHeight();
     };
 

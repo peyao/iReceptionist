@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc factory
  * @name iReceptionistApp.FormService
@@ -9,7 +7,6 @@
  */
 angular.module('iReceptionistApp')
 .factory('FormService', function(config, $http) {
-    console.log('FormService loaded.');
     
     return {
         apiCall: function(req, success, error) {

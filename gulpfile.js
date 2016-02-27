@@ -17,11 +17,15 @@ gulp.task('sass-app', function() {
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./client/app/styles'));
 });
-
 gulp.task('sass-marketing', function() {
     return gulp.src('./client/marketing/styles/*.scss')
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./client/marketing/styles'));
+});
+gulp.task('sass-vip', function() {
+    return gulp.src('./client/vip/styles/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./client/vip/styles'));
 });
 
 gulp.task('bower-app', function() {
@@ -29,10 +33,14 @@ gulp.task('bower-app', function() {
         cwd: './client/app',
     });
 });
-
 gulp.task('bower-marketing', function() {
     return bower({
         cwd: './client/marketing',
+    });
+});
+gulp.task('bower-vip', function() {
+    return bower({
+        cwd: './client/app',
     });
 });
 
@@ -65,8 +73,10 @@ gulp.task('browser-sync', [], function() {
 gulp.task('default', [
     'sass-app',
     'sass-marketing',
+    'sass-vip',
     'bower-app',
     'bower-marketing',
+    'bower-vip',
     'nodemon',
     'browser-sync'
 ]);
