@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name iReceptionistApp.controller:MainCtrl
@@ -8,11 +6,14 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope) {
+.controller('IndexCtrl', function($scope, $rootScope) {
     console.log('IndexCtrl loaded.');
 
-    $scope.toggleSidebar = function() {
-        App.sidebar('toggle-sidebar');
+    $rootScope.pageContentWidth = function() {
+        return $('#page-content').width();
     };
 
+    $('#page-content').resize(function() {
+        $('#page-content-ui-view').width($rootScope.pageContentWidth());
+    });
 });

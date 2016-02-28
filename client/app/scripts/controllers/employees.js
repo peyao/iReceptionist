@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name iReceptionistApp.controller:EmployeeCtrl
@@ -9,21 +7,25 @@
  */
 angular.module('iReceptionistApp')
     .controller('EmployeesCtrl', function($rootScope, $scope) {
-        $rootScope.toolbarTitle = 'Employees';
+        $rootScope.currentState = 'employees';
 
         $scope.showEmployeesMore = false;
         $scope.employees = [{
-            number: '(123) 456-7890',
             name: 'Amanda',
+            phone: '(123) 456-7890',
+            email: 'amanda@gmail.com'
         }, {
-            number: '(123) 456-7890',
             name: 'Marco Botton',
+            phone: '(123) 456-7890',
+            email: 'marco@gmail.com'
         }, {
-            number: '(123) 456-7890',
             name: 'Venkman',
+            phone: '(123) 456-7890',
+            email: 'venkman@gmail.com'
         }, {
-            number: '(123) 456-7890',
             name: 'Powell',
+            phone: '(123) 456-7890',
+            email: 'powell@gmail.com'
         }, ];
 
         console.log('EmployeesCtrl loaded.');
