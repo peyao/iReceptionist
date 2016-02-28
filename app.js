@@ -11,6 +11,7 @@ app.use(logger('dev'));
 app.use('/', express.static(__dirname + '/client/marketing'));
 app.use('/app', express.static(__dirname + '/client/app'));
 app.use('/vip', express.static(__dirname + '/client/vip'));
+app.use('/auth', express.static(__dirname + '/client/auth'));
 
 app.use('/assets', express.static(__dirname + '/client/assets'));
 
