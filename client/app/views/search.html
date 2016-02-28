@@ -27,7 +27,7 @@
         <div class="col-xs-4" ng-repeat="e in employees">
             <a href="javascript:void(0)" class="widget" ng-click="activateEmployee($index)">
                 <div class="widget-content text-left clearfix" ng-class="{'themed-background-danger': e.role === 'admin'}">
-                    <img src="vendor/img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar pull-right">
+                    <img src="/assets/vendor/img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar pull-right">
                     <h2 class="widget-heading h3" ng-class="{'text-light': e.role === 'admin'}"><strong>{{e.name}}</strong></h2>
                     <span class="text-muted" ng-class="{'text-light': e.role === 'admin'}">{{e.email}}</span>
                     <br>
