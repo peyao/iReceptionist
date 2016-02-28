@@ -10,4 +10,9 @@ angular.module('iReceptionistApp')
         $scope.currentState = 'settings-billing';
 
         console.log('SettingsBillingCtrl loaded.');
+
+        $('#page-content-ui-view').resize(function() {
+            $('#page-content-ui-view').width($rootScope.pageContentWidth());
+            $('#page-content').height($rootScope.pageContentHeight());
+        });
     });

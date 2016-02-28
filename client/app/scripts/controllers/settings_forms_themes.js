@@ -5,17 +5,15 @@
  * # SettingsFormsThemesCtrl
  * Controller for the settings page
  */
-/*angular.module('iReceptionistApp'),
-    .controller('SettingsFormsThemesCtrl', function($rootScope, $scope, AppointmentService) {
-        $scope.currentState = 'settings-forms-themes';
-
-        console.log('SettingsFormsThemesCtrl loaded.');
-    });*/
-
 angular.module('iReceptionistApp')
     .controller('SettingsFormsThemesCtrl', function($scope, $builder, $validator, $rootScope, AppointmentService) {
         $scope.currentState = 'settings-forms-themes';
         console.log('SettingsFormsThemesCtrl loaded.');
+
+        $('#page-content-ui-view').resize(function() {
+            $('#page-content-ui-view').width($rootScope.pageContentWidth());
+            $('#page-content').height($rootScope.pageContentHeight());
+        });
 
         $scope.defaultValue = {};
 
