@@ -167,9 +167,10 @@ angular.module('iReceptionistApp')
     });
 
 
-    <!-- TODO: Make more Angular...y -->
+    // Dropzone Handling - Don't gain much from more Angular based directive/controller structure
     Dropzone.autoDiscover = false;
 
+    // Logo Dropzone
     var logoDrop = new Dropzone("div#logoUpload", {
         uploadMultiple: false,
         parallelUploads: 1,
@@ -192,6 +193,7 @@ angular.module('iReceptionistApp')
         logoDrop.addFile(file);
     });
 
+    // Background Dropzone
     var bgDrop = new Dropzone("div#bgUpload", {
         uploadMultiple: false,
         parallelUploads: 1,
