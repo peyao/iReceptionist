@@ -12,6 +12,8 @@ app.use('/', express.static(__dirname + '/client/marketing'));
 app.use('/app', express.static(__dirname + '/client/app'));
 app.use('/vip', express.static(__dirname + '/client/vip'));
 
+app.use('/assets', express.static(__dirname + '/client/assets'));
+
 app.listen(3000, function() {
     console.log('[iReceptionist Client listening on port 3000]');
 });

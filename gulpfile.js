@@ -28,19 +28,14 @@ gulp.task('sass-vip', function() {
         .pipe(gulp.dest('./client/vip/styles'));
 });
 
-gulp.task('bower-app', function() {
+gulp.task('bower-assets', function() {
     return bower({
-        cwd: './client/app',
+        cwd: './client/assets',
     });
 });
 gulp.task('bower-marketing', function() {
     return bower({
         cwd: './client/marketing',
-    });
-});
-gulp.task('bower-vip', function() {
-    return bower({
-        cwd: './client/app',
     });
 });
 
@@ -74,9 +69,8 @@ gulp.task('default', [
     'sass-app',
     'sass-marketing',
     'sass-vip',
-    'bower-app',
+    'bower-assets',
     'bower-marketing',
-    'bower-vip',
     'nodemon',
     'browser-sync'
 ]);

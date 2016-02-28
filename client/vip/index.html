@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" ng-app="iReceptionistApp" ng-controller='IndexCtrl'> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
 
@@ -14,40 +14,40 @@
 
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="vendor/img/favicon.png">
-        <link rel="apple-touch-icon" href="vendor/img/icon57.png" sizes="57x57">
-        <link rel="apple-touch-icon" href="vendor/img/icon72.png" sizes="72x72">
-        <link rel="apple-touch-icon" href="vendor/img/icon76.png" sizes="76x76">
-        <link rel="apple-touch-icon" href="vendor/img/icon114.png" sizes="114x114">
-        <link rel="apple-touch-icon" href="vendor/img/icon120.png" sizes="120x120">
-        <link rel="apple-touch-icon" href="vendor/img/icon144.png" sizes="144x144">
-        <link rel="apple-touch-icon" href="vendor/img/icon152.png" sizes="152x152">
-        <link rel="apple-touch-icon" href="vendor/img/icon180.png" sizes="180x180">
+        <link rel="shortcut icon" href="/assets/vendor/img/favicon.png">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon57.png" sizes="57x57">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon72.png" sizes="72x72">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon76.png" sizes="76x76">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon114.png" sizes="114x114">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon120.png" sizes="120x120">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon144.png" sizes="144x144">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon152.png" sizes="152x152">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon180.png" sizes="180x180">
         <!-- END Icons -->
 
         <!-- Stylesheets -->
         <!-- Bootstrap is included in its original form, unaltered -->
-        <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
-        <link rel="stylesheet" href="bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
+        <link rel="stylesheet" href="/assets/vendor/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
 
         <!-- Related styles of various icon packs and plugins -->
-        <link rel="stylesheet" href="vendor/css/plugins.css">
+        <link rel="stylesheet" href="/assets/vendor/css/plugins.css">
 
         <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
-        <link rel="stylesheet" href="vendor/css/main.css">
+        <link rel="stylesheet" href="/assets/vendor/css/main.css">
         <link rel="stylesheet" href="styles/ireceptionist.css">
 
-        <!-- Include a specific file here from vendor/css/themes/ folder to alter the default theme of the template -->
+        <!-- Include a specific file here from /assets/vendor/css/themes/ folder to alter the default theme of the template -->
 
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
-        <link rel="stylesheet" href="vendor/css/themes/passion.css">
-        <link rel="stylesheet" href="vendor/css/themes.css">
+        <link rel="stylesheet" href="/assets/vendor/css/themes/passion.css">
+        <link rel="stylesheet" href="/assets/vendor/css/themes.css">
         <!-- END Stylesheets -->
 
         <!-- Modernizr (browser feature detection library) -->
-        <script src="vendor/js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="/assets/vendor/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
-    <body ng-app="iReceptionistApp" ng-controller='IndexCtrl'>
+    <body>
         <!-- Page Wrapper -->
         <!-- In the PHP version you can set the following options from inc/config file -->
         <!--
@@ -157,37 +157,37 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-classy" data-toggle="tooltip" title="Classy" data-theme="vendor/css/themes/classy.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-classy" data-toggle="tooltip" title="Classy" data-theme="/assets/vendor/css/themes/classy.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
                                             <span class="section-side themed-background-dark-classy"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-social" data-toggle="tooltip" title="Social" data-theme="vendor/css/themes/social.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-social" data-toggle="tooltip" title="Social" data-theme="/assets/vendor/css/themes/social.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
                                             <span class="section-side themed-background-dark-social"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-flat" data-toggle="tooltip" title="Flat" data-theme="vendor/css/themes/flat.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-flat" data-toggle="tooltip" title="Flat" data-theme="/assets/vendor/css/themes/flat.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
                                             <span class="section-side themed-background-dark-flat"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-amethyst" data-toggle="tooltip" title="Amethyst" data-theme="vendor/css/themes/amethyst.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-amethyst" data-toggle="tooltip" title="Amethyst" data-theme="/assets/vendor/css/themes/amethyst.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
                                             <span class="section-side themed-background-dark-amethyst"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-creme" data-toggle="tooltip" title="Creme" data-theme="vendor/css/themes/creme.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-creme" data-toggle="tooltip" title="Creme" data-theme="/assets/vendor/css/themes/creme.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
                                             <span class="section-side themed-background-dark-creme"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-passion" data-toggle="tooltip" title="Passion" data-theme="vendor/css/themes/passion.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-passion" data-toggle="tooltip" title="Passion" data-theme="/assets/vendor/css/themes/passion.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="">
                                             <span class="section-side themed-background-dark-passion"></span>
                                             <span class="section-content"></span>
                                         </a>
@@ -199,37 +199,37 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-classy" data-toggle="tooltip" title="Classy + Light Sidebar" data-theme="vendor/css/themes/classy.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
+                                        <a href="javascript:void(0)" class="themed-background-classy" data-toggle="tooltip" title="Classy + Light Sidebar" data-theme="/assets/vendor/css/themes/classy.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
                                             <span class="section-side"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-social" data-toggle="tooltip" title="Social + Light Sidebar" data-theme="vendor/css/themes/social.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
+                                        <a href="javascript:void(0)" class="themed-background-social" data-toggle="tooltip" title="Social + Light Sidebar" data-theme="/assets/vendor/css/themes/social.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
                                             <span class="section-side"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-flat" data-toggle="tooltip" title="Flat + Light Sidebar" data-theme="vendor/css/themes/flat.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
+                                        <a href="javascript:void(0)" class="themed-background-flat" data-toggle="tooltip" title="Flat + Light Sidebar" data-theme="/assets/vendor/css/themes/flat.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
                                             <span class="section-side"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-amethyst" data-toggle="tooltip" title="Amethyst + Light Sidebar" data-theme="vendor/css/themes/amethyst.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
+                                        <a href="javascript:void(0)" class="themed-background-amethyst" data-toggle="tooltip" title="Amethyst + Light Sidebar" data-theme="/assets/vendor/css/themes/amethyst.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
                                             <span class="section-side"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-creme" data-toggle="tooltip" title="Creme + Light Sidebar" data-theme="vendor/css/themes/creme.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
+                                        <a href="javascript:void(0)" class="themed-background-creme" data-toggle="tooltip" title="Creme + Light Sidebar" data-theme="/assets/vendor/css/themes/creme.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
                                             <span class="section-side"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-passion" data-toggle="tooltip" title="Passion + Light Sidebar" data-theme="vendor/css/themes/passion.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
+                                        <a href="javascript:void(0)" class="themed-background-passion" data-toggle="tooltip" title="Passion + Light Sidebar" data-theme="/assets/vendor/css/themes/passion.css" data-theme-navbar="navbar-inverse" data-theme-sidebar="sidebar-light">
                                             <span class="section-side"></span>
                                             <span class="section-content"></span>
                                         </a>
@@ -242,42 +242,42 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-classy" data-toggle="tooltip" title="Classy + Light Header" data-theme="vendor/css/themes/classy.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-classy" data-toggle="tooltip" title="Classy + Light Header" data-theme="/assets/vendor/css/themes/classy.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
                                             <span class="section-header"></span>
                                             <span class="section-side themed-background-dark-classy"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-social" data-toggle="tooltip" title="Social + Light Header" data-theme="vendor/css/themes/social.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-social" data-toggle="tooltip" title="Social + Light Header" data-theme="/assets/vendor/css/themes/social.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
                                             <span class="section-header"></span>
                                             <span class="section-side themed-background-dark-social"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-flat" data-toggle="tooltip" title="Flat + Light Header" data-theme="vendor/css/themes/flat.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-flat" data-toggle="tooltip" title="Flat + Light Header" data-theme="/assets/vendor/css/themes/flat.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
                                             <span class="section-header"></span>
                                             <span class="section-side themed-background-dark-flat"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-amethyst" data-toggle="tooltip" title="Amethyst + Light Header" data-theme="vendor/css/themes/amethyst.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-amethyst" data-toggle="tooltip" title="Amethyst + Light Header" data-theme="/assets/vendor/css/themes/amethyst.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
                                             <span class="section-header"></span>
                                             <span class="section-side themed-background-dark-amethyst"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-creme" data-toggle="tooltip" title="Creme + Light Header" data-theme="vendor/css/themes/creme.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-creme" data-toggle="tooltip" title="Creme + Light Header" data-theme="/assets/vendor/css/themes/creme.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
                                             <span class="section-header"></span>
                                             <span class="section-side themed-background-dark-creme"></span>
                                             <span class="section-content"></span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)" class="themed-background-passion" data-toggle="tooltip" title="Passion + Light Header" data-theme="vendor/css/themes/passion.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
+                                        <a href="javascript:void(0)" class="themed-background-passion" data-toggle="tooltip" title="Passion + Light Header" data-theme="/assets/vendor/css/themes/passion.css" data-theme-navbar="navbar-default" data-theme-sidebar="">
                                             <span class="section-header"></span>
                                             <span class="section-side themed-background-dark-passion"></span>
                                             <span class="section-content"></span>
@@ -367,7 +367,7 @@
                             <!-- User Dropdown -->
                             <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="vendor/img/placeholders/avatars/avatar.jpg" alt="avatar">
+                                    <img src="/assets/vendor/img/placeholders/avatars/avatar.jpg" alt="avatar">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li class="dropdown-header">
@@ -425,21 +425,21 @@
         <!-- END Page Wrapper -->
 
         <!-- jQuery, Bootstrap, jQuery plugins and Custom JS code -->
-        <script src="vendor/js/vendor/jquery-2.2.0.min.js"></script>
-        <script src="vendor/js/vendor/bootstrap.min.js"></script>
-        <script src="vendor/js/plugins.js"></script>
-        <script src="vendor/js/app.js"></script>
+        <script src="/assets/vendor/js/vendor/jquery-2.2.0.min.js"></script>
+        <script src="/assets/vendor/js/vendor/bootstrap.min.js"></script>
+        <script src="/assets/vendor/js/plugins.js"></script>
+        <script src="/assets/vendor/js/app.js"></script>
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
-        <script src="bower_components/angular/angular.min.js"></script>
-        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-        <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-        <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-        <script src="bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
+        <script src="/assets/bower_components/angular/angular.min.js"></script>
+        <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="/assets/bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="/assets/bower_components/angular-resource/angular-resource.min.js"></script>
+        <script src="/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>
+        <script src="/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
 
 
         <!-- endbower -->
@@ -450,11 +450,11 @@
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/controllers/vip_dashboard.js"></script>
         <script src="scripts/controllers/vip_settings.js"></script>
-        <script src="scripts/services/authentication_service.js"></script>
-        <script src="scripts/services/appointment_service.js"></script>
-        <script src="scripts/services/form_service.js"></script>
-        <script src="scripts/services/business_service.js"></script>
-        <script src="scripts/services/search_service.js"></script>
+        <script src="/assets/services/authentication_service.js"></script>
+        <script src="/assets/services/appointment_service.js"></script>
+        <script src="/assets/services/form_service.js"></script>
+        <script src="/assets/services/business_service.js"></script>
+        <script src="/assets/services/search_service.js"></script>
         <!-- endbuild -->
     </body>
 </html>
