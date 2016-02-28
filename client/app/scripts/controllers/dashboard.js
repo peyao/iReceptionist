@@ -8,6 +8,10 @@
 angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, AppointmentService) {
         $rootScope.currentState = 'dashboard';
+        $('#page-content-ui-view').resize(function() {
+            $('#page-content-ui-view').width($rootScope.pageContentWidth());
+            $('#page-content').height($rootScope.pageContentHeight());
+        });
 
         $scope.showVisitorsMore = false;
         $scope.visitors = [{
@@ -31,6 +35,4 @@ angular.module('iReceptionistApp')
             employee: 'Powell',
             notes: ''
         }, ];
-
-        console.log('DashboardCtrl loaded.');
     });

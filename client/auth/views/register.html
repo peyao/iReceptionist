@@ -1,0 +1,251 @@
+<!-- Full Background -->
+<!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
+<img src="/assets/vendor/img/placeholders/layout/login2_full_bg.jpg" alt="Full Background" class="full-bg animation-pulseSlow">
+<!-- END Full Background -->
+
+<div id="login-container">
+    <!-- Register Header -->
+    <h1 class="h2 text-light text-center push-top-bottom animation-slideDown">
+        <i class="fa fa-plus"></i> <strong>Create Account</strong>
+    </h1>
+    <!-- END Register Header -->
+
+    <!-- Register Form -->
+    <div class="block animation-fadeInQuickInv" id="register-block">
+        <!-- Register Title -->
+        <div class="block-title">
+            <div class="block-options pull-right" ng-if="step === 1">
+                <button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!"><i class="fa fa-user"></i></button>
+            </div>
+            <div class="block-options pull-right" ng-if="step > 1">
+                <a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip the rest <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+            <h2>Register</h2>
+        </div>
+        <!-- END Register Title -->
+
+        <!--
+        <form id="register-wizard" class="form-horizontal form-bordered">
+        -->
+        <form class="form-horizontal form-bordered" id="register-wizard" action="javascript:void(0);">
+            <!-- START STEP 1 -->
+            <div id="register-step1" class="step">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <ul class="nav nav-pills nav-justified clickable-steps">
+                            <li ng-class="{'active': step == 1}"><a href="javascript:void(0)" data-gotostep="register-step1" ng-click="step = 1;"><i class="fa fa-user"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 2}"><a href="javascript:void(0)" data-gotostep="register-step2" ng-click="step = 2;"><i class="fa fa-building"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 3}"><a href="javascript:void(0)" data-gotostep="register-step3" ng-click="step = 3;"><i class="fa fa-image"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 4}"><a href="javascript:void(0)" data-gotostep="register-step4" ng-click="step = 4;"><i class="fa fa-users"></i><strong></strong></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <fieldset class="register-field-set">
+                    <legend>Your Account</legend>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step1.email" type="text" id="register-step1-email" name="register-step1-email" class="form-control" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step1.fullName" type="text" id="register-step1-fullname" name="register-step1-fullname" class="form-control" placeholder="Full Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step1.password" type="password" id="register-step1-password" name="register-step1-password" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step1.confirmPassword" type="password" id="register-step1-confirm-password" name="register-step1-confirm-password" class="form-control" placeholder="Confirm Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label class="csscheckbox csscheckbox-primary" data-toggle="tooltip" title="Agree to the terms">
+                                <input ng-model="register.step1.terms" ng-change="termsHandler(register.step1.terms)" type="checkbox" id="register-terms" name="register-terms">
+                                <span></span>
+                            </label>
+                            &nbsp;I agree with the
+                            <a ng-href="/register#modal-terms" data-toggle="modal">terms</a>!
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <!-- END STEP 1-->
+
+            <!-- START STEP 2 -->
+            <div id="register-step2" class="step">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <ul class="nav nav-pills nav-justified clickable-steps">
+                            <li ng-class="{'active': step == 1}"><a href="javascript:void(0)" data-gotostep="register-step1" ng-click="step = 1;"><i class="fa fa-user"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 2}"><a href="javascript:void(0)" data-gotostep="register-step2" ng-click="step = 2;"><i class="fa fa-building"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 3}"><a href="javascript:void(0)" data-gotostep="register-step3" ng-click="step = 3;"><i class="fa fa-image"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 4}"><a href="javascript:void(0)" data-gotostep="register-step4" ng-click="step = 4;"><i class="fa fa-users"></i><strong></strong></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <fieldset class="register-field-set">
+                    <legend>Your Business</legend>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step2.businessName" type="text" id="register-step2-business-name" name="register-step2-business-name" class="form-control" placeholder="Business Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step2.phone" type="text" id="register-step2-business-phone" name="register-step2-business-phone" class="form-control" placeholder="Business Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <select ng-model="register.step2.type" id="register-step2-type" name="register-step2-type" class="select-select2" style="width: 100%;" data-placeholder="Type of Business">
+                                <option></option>
+                                <option value="health_care">Health Care</option>
+                                <option value="fitness">Fitness</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!-- END STEP 2 -->
+
+            <!-- START STEP 3 -->
+            <div id="register-step3" class="step">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <ul class="nav nav-pills nav-justified clickable-steps">
+                            <li ng-class="{'active': step == 1}"><a href="javascript:void(0)" data-gotostep="register-step1" ng-click="step = 1;"><i class="fa fa-user"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 2}"><a href="javascript:void(0)" data-gotostep="register-step2" ng-click="step = 2;"><i class="fa fa-building"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 3}"><a href="javascript:void(0)" data-gotostep="register-step3" ng-click="step = 3;"><i class="fa fa-image"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 4}"><a href="javascript:void(0)" data-gotostep="register-step4" ng-click="step = 4;"><i class="fa fa-users"></i><strong></strong></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dropzone Upload -->
+                <fieldset class="register-field-set">
+                    <legend>Upload Images</legend>
+                    <div class="row reg-upload">
+                        <div class="col-xs-6">
+                            <div id="logoUpload" class="dropzone">
+                                <div class="dz-default dz-message"></div>
+                            </div>
+                            <h5 class="text-center">Logo</h5>
+                        </div>
+                        <div class="col-xs-6">
+                            <div id="bgUpload" class="dropzone">
+                                <div class="dz-default dz-message"></div>
+                            </div>
+                            <h5 class="text-center">Visitor Background</h5>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Example transformation
+                <cl-image public-id="officialchucknorrispage" type="facebook" angle="20">
+                    <cl-transformation format="png" height="95" width="95" crop="thumb" gravity="face" effect="sepia" radius="20"/>
+                </cl-image>-->
+            </div>
+            <!-- END STEP 3 -->
+
+            <!-- START STEP 4 -->
+            <div id="register-step4" class="step">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <ul class="nav nav-pills nav-justified clickable-steps">
+                            <li ng-class="{'active': step == 1}"><a href="javascript:void(0)" data-gotostep="register-step1" ng-click="step = 1;"><i class="fa fa-user"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 2}"><a href="javascript:void(0)" data-gotostep="register-step2" ng-click="step = 2;"><i class="fa fa-building"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 3}"><a href="javascript:void(0)" data-gotostep="register-step3" ng-click="step = 3;"><i class="fa fa-image"></i><strong></strong></a></li>
+                            <li ng-class="{'active': step == 4}"><a href="javascript:void(0)" data-gotostep="register-step4" ng-click="step = 4;"><i class="fa fa-users"></i><strong></strong></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <fieldset class="register-field-set">
+                    <legend>Invite an Employee</legend>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step4.name" type="text" id="register-step4-name" name="register-step4-name" class="form-control" placeholder="Employee Name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step4.email" type="text" id="register-step4-email" name="register-step4-email" class="form-control" placeholder="Employee Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input ng-model="register.step4.phone" type="text" id="register-step4-phone" name="register-step4-phone" class="form-control" placeholder="Employee Phone Number">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!-- END STEP 4 -->
+
+            <!-- BUTTONS -->
+            <div class="form-group form-actions">
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-block btn-effect-ripple btn-default" ng-disabled="step === 1" ng-click="backStep()"><i class="fa fa-arrow-left"></i></button>
+                </div>
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-block btn-effect-ripple btn-primary" ng-disabled="disableNextButton" ng-click="nextStep()"><i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <!-- END BUTTONS -->
+
+        </form>
+        <!-- END FORM -->
+
+    </div>
+    <!-- END Register Block -->
+
+</div>
+<!-- END Login Container -->
+
+<!-- Modal Terms -->
+<div id="modal-terms" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center"><strong>Terms and Conditions</strong></h3>
+            </div>
+            <div class="modal-body">
+                <h4 class="page-header">1. <strong>General</strong></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor.</p>
+                <h4 class="page-header">2. <strong>Account</strong></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor.</p>
+                <h4 class="page-header">3. <strong>Service</strong></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor.</p>
+                <h4 class="page-header">4. <strong>Payments</strong></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor.</p>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+                    <button type="button" class="btn btn-effect-ripple btn-sm btn-primary" data-dismiss="modal">I've read them!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Modal Terms -->
+
+
+<!-- Used as a Theme Template for DropZone -->
+<div id="preview-template" style="display: none;">
+    <div class="dz-preview dz-image-preview">
+        <div class="dz-image">
+            <img data-dz-thumbnail />
+        </div>
+        <button data-dz-remove class="btn btn-xs btn-danger rmv-upload" >
+            <i class="fa fa-times"></i>
+        </button>
+        <div class="dz-progress">
+            <span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span>
+        </div>
+    </div>
+</div>
