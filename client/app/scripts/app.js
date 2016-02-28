@@ -18,6 +18,9 @@ angular
     'anim-in-out',
     'ngRoute',
     'cloudinary'
+    'builder',
+    'builder.components',
+    'validator.rules'
 ])
 .config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
 
@@ -38,18 +41,16 @@ angular
             templateUrl: 'views/settings/settings_account.html',
             controller: 'SettingsAccountCtrl'
         })
-        /*
         .state('settings-forms-themes', {
             url: '/settings/forms-themes',
-            templateUrl: 'views/settings_forms_themes.html',
+            templateUrl: 'views/settings/settings_forms_themes.html',
             controller: 'SettingsFormsThemesCtrl'
         })
         .state('settings-billing', {
             url: '/settings/billing',
-            templateUrl: 'views/settings_billing.html',
+            templateUrl: 'views/settings/settings_billing.html',
             controller: 'SettingsBillingCtrl'
         })
-        */
         .state('register', {
             url: '/register',
             templateUrl: 'views/auth/register.html',

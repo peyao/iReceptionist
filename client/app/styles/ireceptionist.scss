@@ -1,6 +1,5 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-
 // Dropzone Register
 #register-step4
 .dropzone {
@@ -28,4 +27,29 @@
   right: 0;
   top: -1px;
   z-index: 100;
+
+.avatar {
+  width: 100px;
+  height: 100px;
+}
+
+.tablet-image {
+  width: 133px;
+  height: 100px;
+}
+
+.upload-button {
+  margin-left: 10px
+}
+
+.save-form-button {
+  margin-bottom: 30px;
+}
+
+.display-none {
+  display: none;
+}
+
+.settings-form {
+  margin: 1px;
 }

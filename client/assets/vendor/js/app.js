@@ -577,6 +577,19 @@ var App = function() {
         page.prop('class', pageCls);
     };
 
+    /* Show an alert */
+    var showAlert = function(page) {
+        $('.alert').fadeIn(1000, function() {
+            if (page === "account") {
+                // Scroll to the bottom of the page where the alert will be shown
+                $('html, body').animate({
+                    scrollTop: $(".alert").offset().top
+                }, 2000);
+            }
+            $('.alert').fadeOut(2000);
+        });
+    };
+
     return {
         init: function() {
             uiInit(); // Initialize UI
@@ -590,6 +603,9 @@ var App = function() {
         },
         pagePrint: function() {
             handlePrint(); // Print functionality
+        },
+        alert: function(page) {
+            showAlert(page);  // Show alert
         }
     };
 }();
