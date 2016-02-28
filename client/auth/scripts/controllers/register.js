@@ -31,9 +31,10 @@ angular.module('iReceptionistApp')
         // TODO
     };
 
-    // TODO: Make more Angular...y
+    // Dropzone Handling - Don't gain much from more Angular based directive/controller structure
     Dropzone.autoDiscover = false;
 
+    // Logo Dropzone
     var logoDrop = new Dropzone("div#logoUpload", {
         uploadMultiple: false,
         parallelUploads: 1,
@@ -56,6 +57,7 @@ angular.module('iReceptionistApp')
         logoDrop.addFile(file);
     });
 
+    // Background Dropzone
     var bgDrop = new Dropzone("div#bgUpload", {
         uploadMultiple: false,
         parallelUploads: 1,
@@ -78,19 +80,9 @@ angular.module('iReceptionistApp')
         bgDrop.addFile(file);
     });
 
-
-
-
-
-
-
-
-
-    /*
-     *  Jquery Wizard, Check out more examples and documentation at http://www.thecodemine.org
-     *  Jquery Validation, Check out more examples and documentation at https://github.com/jzaefferer/jquery-validation
-     */
-
+    /**
+    *  Jquery Wizard
+    */
     /* Set default wizard options */
     var wizardOptions = {
         focusFirstInput: true,
@@ -176,6 +168,5 @@ angular.module('iReceptionistApp')
         } else {
             $scope.disableNextButton = true;
         }
-
     };
 });
