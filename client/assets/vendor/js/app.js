@@ -579,15 +579,19 @@ var App = function() {
 
     /* Show an alert */
     var showAlert = function(page) {
-        $('.alert').fadeIn(1000, function() {
-            if (page === "account") {
-                // Scroll to the bottom of the page where the alert will be shown
-                $('html, body').animate({
-                    scrollTop: $(".alert").offset().top
-                }, 2000);
-            }
-            $('.alert').fadeOut(2000);
-        });
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "timeOut": "2500"
+        };
+        if (page === "account") {
+            toastr.success("Your settings have been updated!");
+        }
+        else if (page === "billing") {
+            toastr.success("Your plan has been updated!");
+        }
+        else if (page === "forms-themes") {
+            toastr.success("Your form has been saved!");
+        }
     };
 
     return {
