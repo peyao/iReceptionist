@@ -134,12 +134,22 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="dZUpload" class="dropzone">
-                        <div class="dz-default dz-message"></div>
+
+                    <div class="row reg-upload">
+                        <div class="col-md-12">
+                            <div id="logoUpload" class="dropzone col-md-3 col-md-offset-2">
+                                <div class="dz-default dz-message"></div>
+                            </div>
+                            <div id="bgUpload" class="dropzone col-md-3 col-md-offset-2">
+                                <div class="dz-default dz-message"></div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Example transformation
                     <cl-image public-id="officialchucknorrispage" type="facebook" angle="20">
                         <cl-transformation format="png" height="95" width="95" crop="thumb" gravity="face" effect="sepia" radius="20"/>
-                    </cl-image>
+                    </cl-image>-->
                     <!-- TODO: Add zome image upload functionality NOTE: FORMS CANNOT GO IN FORMS! DROPZONE WONT WORK HERE-->
                 </div>
                 <!-- END STEP 4 -->
@@ -190,6 +200,21 @@
             </form>
             <!-- END FORM -->
 
+        </div>
+    </div>
+</div>
+
+<!-- Used as a Theme Template for DropZone -->
+<div id="preview-template" style="display: none;">
+    <div class="dz-preview dz-image-preview">
+        <div class="dz-image">
+            <img data-dz-thumbnail />
+        </div>
+        <button data-dz-remove class="btn btn-xs btn-danger rmv-upload" >
+            <i class="fa fa-times"></i>
+        </button>
+        <div class="dz-progress">
+            <span class="dz-upload" data-dz-uploadprogress="" style="width: 100%;"></span>
         </div>
     </div>
 </div>

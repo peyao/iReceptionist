@@ -167,18 +167,47 @@ angular.module('iReceptionistApp')
     <!-- TODO: Make more Angular...y -->
     Dropzone.autoDiscover = false;
 
-    var myDropzone = new Dropzone("div#dZUpload", {
+    var logoDrop = new Dropzone("div#logoUpload", {
         uploadMultiple: false,
         parallelUploads: 1,
+        maxFiles: 1,
+        previewTemplate: document.getElementById('preview-template').innerHTML,
+        clickable: '#logoUpload',
         url: "https://api.cloudinary.com/v1_1/phoenix-sol/image/upload"
     });
-    myDropzone.on('sending', function (file, xhr, formData) {
+    logoDrop.on('sending', function (file, xhr, formData) {
         console.log("sending test");
         formData.append('api_key', 652212869154129);
         formData.append('timestamp', Date.now() / 1000 | 0);
         formData.append('upload_preset', 'phtsmngp');
     });
-    myDropzone.on('success', function (file, response) {
+    logoDrop.on('success', function (file, response) {
         console.log('Success! Cloudinary public ID is', response.public_id);
+    });
+    logoDrop.on('maxfilesexceeded', function(file){
+        logoDrop.removeAllFiles();
+        logoDrop.addFile(file);
+    });
+
+    var bgDrop = new Dropzone("div#bgUpload", {
+        uploadMultiple: false,
+        parallelUploads: 1,
+        maxFiles: 1,
+        previewTemplate: document.getElementById('preview-template').innerHTML,
+        clickable: '#bgUpload',
+        url: "https://api.cloudinary.com/v1_1/phoenix-sol/image/upload"
+    });
+    bgDrop.on('sending', function (file, xhr, formData) {
+        console.log("sending test");
+        formData.append('api_key', 652212869154129);
+        formData.append('timestamp', Date.now() / 1000 | 0);
+        formData.append('upload_preset', 'phtsmngp');
+    });
+    bgDrop.on('success', function (file, response) {
+        console.log('Success! Cloudinary public ID is', response.public_id);
+    });
+    bgDrop.on('maxfilesexceeded', function(file){
+        bgDrop.removeAllFiles();
+        bgDrop.addFile(file);
     });
 });
