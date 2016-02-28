@@ -17,7 +17,7 @@ angular
     'ui.bootstrap',
     'anim-in-out',
     'ngRoute',
-    'cloudinary'
+    'cloudinary',
     'builder',
     'builder.components',
     'validator.rules'
