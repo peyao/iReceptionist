@@ -19,7 +19,7 @@ angular
     'ngRoute',
     'cloudinary'
 ])
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -60,7 +60,7 @@ angular
             templateUrl: 'views/search.html',
             controller: 'SearchCtrl'
         });
-        
+
     cloudinaryProvider
         .set("cloud_name", "phoenix-sol")
         .set("upload_preset", "phtsmngp");

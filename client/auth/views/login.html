@@ -1,92 +1,56 @@
+<!-- Full Background -->
+<!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
+<img src="/assets/vendor/img/placeholders/layout/login2_full_bg.jpg" alt="Full Background" class="full-bg animation-pulseSlow">
+<!-- END Full Background -->
+
 <!-- Login Container -->
 <div id="login-container">
-    <!-- Register Header -->
-    <h1 class="h2 text-light text-center push-top-bottom animation-slideDown">
-        <i class="fa fa-plus"></i> <strong>Create Account</strong>
+    <!-- Login Header -->
+    <h1 class="h2 text-light text-center push-top-bottom animation-pullDown">
+        <strong>iReceptionist <i class="fa fa-heart text-light"></i>s You!</strong>
     </h1>
-    <!-- END Register Header -->
+    <!-- END Login Header -->
 
-    <!-- Register Form -->
-    <div class="block animation-fadeInQuickInv">
-        <!-- Register Title -->
+    <!-- Login Block -->
+    <div class="block animation-fadeInQuick">
+        <!-- Login Title -->
         <div class="block-title">
             <div class="block-options pull-right">
-                <a href="page_ready_login.html" class="btn btn-effect-ripple btn-primary" data-toggle="tooltip" data-placement="left" title="Back to login"><i class="fa fa-user"></i></a>
+                <button ui-sref="reset-password" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Reset your password"><i class="fa fa-question"></i></button>
+                <button ui-sref="register" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Create a new account"><i class="fa fa-plus"></i></button>
             </div>
-            <h2>Register</h2>
+            <h2>Login</h2>
         </div>
-        <!-- END Register Title -->
+        <!-- END Login Title -->
 
-        <!-- Register Form -->
-        <form id="form-register" action="page_ready_register.html" method="post" class="form-horizontal">
+        <!-- Login Form -->
+        <form id="form-login" class="form-horizontal" action="javascript:void(0);">
             <div class="form-group">
+                <label for="login-email" class="col-xs-12">Email</label>
                 <div class="col-xs-12">
-                    <input type="text" id="register-username" name="register-username" class="form-control" placeholder="Username">
+                    <input type="text" id="login-email" name="login-email" class="form-control" placeholder="Your email">
                 </div>
             </div>
             <div class="form-group">
+                <label for="login-password" class="col-xs-12">Password</label>
                 <div class="col-xs-12">
-                    <input type="text" id="register-email" name="register-email" class="form-control" placeholder="Email">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <input type="password" id="register-password" name="register-password" class="form-control" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <input type="password" id="register-password-verify" name="register-password-verify" class="form-control" placeholder="Verify Password">
+                    <input type="password" id="login-password" name="login-password" class="form-control" placeholder="Your password">
                 </div>
             </div>
             <div class="form-group form-actions">
-                <div class="col-xs-6">
-                    <label class="csscheckbox csscheckbox-primary" data-toggle="tooltip" title="Agree to the terms">
-                        <input type="checkbox" id="register-terms" name="register-terms">
-                        <span></span>
+                <div class="col-xs-8">
+                    <label class="csscheckbox csscheckbox-primary">
+                        <input type="checkbox" id="login-remember-me" name="login-remember-me"><span></span> Remember Me!
                     </label>
-                    <a href="#modal-terms" data-toggle="modal">Terms</a>
                 </div>
-                <div class="col-xs-6 text-right">
-                    <button type="submit" class="btn btn-effect-ripple btn-success"><i class="fa fa-plus"></i> Create Account</button>
+                <div class="col-xs-4 text-right">
+                    <button type="button" class="btn btn-effect-ripple btn-sm btn-success" ng-click="doLogin()">Log In</button>
                 </div>
             </div>
         </form>
-        <!-- END Register Form -->
+        <!-- END Login Form -->
     </div>
-    <!-- END Register Block -->
+    <!-- END Login Block -->
 
-    <!-- Footer -->
-    <footer class="text-muted text-center animation-pullUp">
-        <small><span id="year-copy"></span> &copy; <a href="http://goo.gl/RcsdAh" target="_blank">AppUI 2.6</a></small>
-    </footer>
-    <!-- END Footer -->
 </div>
 <!-- END Login Container -->
-
-<!-- Modal Terms -->
-<div id="modal-terms" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title text-center"><strong>Terms and Conditions</strong></h3>
-            </div>
-            <div class="modal-body">
-                <h4 class="page-header">1. <strong>General</strong></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor.</p>
-                <h4 class="page-header">2. <strong>Account</strong></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor.</p>
-                <h4 class="page-header">3. <strong>Service</strong></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor.</p>
-                <h4 class="page-header">4. <strong>Payments</strong></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor.</p>
-            </div>
-            <div class="modal-footer">
-                <div class="text-center">
-                    <button type="button" class="btn btn-effect-ripple btn-sm btn-primary" data-dismiss="modal">I've read them!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END Modal Terms -->

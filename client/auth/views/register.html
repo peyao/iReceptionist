@@ -1,4 +1,8 @@
-<!-- Login Container -->
+<!-- Full Background -->
+<!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
+<img src="/assets/vendor/img/placeholders/layout/login2_full_bg.jpg" alt="Full Background" class="full-bg animation-pulseSlow">
+<!-- END Full Background -->
+
 <div id="login-container">
     <!-- Register Header -->
     <h1 class="h2 text-light text-center push-top-bottom animation-slideDown">
@@ -10,8 +14,11 @@
     <div class="block animation-fadeInQuickInv" id="register-block">
         <!-- Register Title -->
         <div class="block-title">
+            <div class="block-options pull-right" ng-if="step === 1">
+                <button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!"><i class="fa fa-user"></i></button>
+            </div>
             <div class="block-options pull-right" ng-if="step > 1">
-                <button type="button" class="btn btn-effect-ripple btn-primary">Skip All</button>
+                <a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip the rest <i class="fa fa-arrow-circle-right"></i></a>
             </div>
             <h2>Register</h2>
         </div>
@@ -20,7 +27,7 @@
         <!--
         <form id="register-wizard" class="form-horizontal form-bordered">
         -->
-        <form class="form-horizontal form-bordered" id="register-wizard">
+        <form class="form-horizontal form-bordered" id="register-wizard" action="javascript:void(0);">
             <!-- START STEP 1 -->
             <div id="register-step1" class="step">
                 <div class="form-group">
@@ -62,8 +69,7 @@
                                 <span></span>
                             </label>
                             &nbsp;I agree with the
-                            <a ng-href="/register#modal-terms" data-toggle="modal">terms</a>
-                            !
+                            <a ng-href="/register#modal-terms" data-toggle="modal">terms</a>!
                         </div>
                     </div>
                 </fieldset>
@@ -160,7 +166,7 @@
                     </div>
                 </div>
                 <fieldset class="register-field-set">
-                    <legend>Add Employees</legend>
+                    <legend>Invite an Employee</legend>
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input ng-model="register.step4.name" type="text" id="register-step4-name" name="register-step4-name" class="form-control" placeholder="Employee Name">
@@ -197,11 +203,6 @@
     </div>
     <!-- END Register Block -->
 
-    <!-- Footer -->
-    <footer class="text-muted text-center animation-pullUp">
-        <small><span id="year-copy"></span> &copy; <a href="http://ireceptionist.cf" target="_blank">iReceptionist</a></small>
-    </footer>
-    <!-- END Footer -->
 </div>
 <!-- END Login Container -->
 
