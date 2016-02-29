@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" ng-app="iReceptionistApp" ng-controller='IndexCtrl'> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <title>iReceptionist Authentication</title>
+
+        <meta name="description" content="iReceptionist VIP">
+        <meta name="author" content="Phoenix Solutions">
+        <meta name="robots" content="noindex, nofollow">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="/assets/vendor/img/favicon.png">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon57.png" sizes="57x57">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon72.png" sizes="72x72">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon76.png" sizes="76x76">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon114.png" sizes="114x114">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon120.png" sizes="120x120">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon144.png" sizes="144x144">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon152.png" sizes="152x152">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon180.png" sizes="180x180">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Bootstrap is included in its original form, unaltered -->
+        <link rel="stylesheet" href="/assets/vendor/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
+
+        <!-- Related styles of various icon packs and plugins -->
+        <link rel="stylesheet" href="/assets/vendor/css/plugins.css">
+
+        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+        <link rel="stylesheet" href="/assets/vendor/css/main.css">
+        <link rel="stylesheet" href="styles/ireceptionist.css">
+
+        <!-- Include a specific file here from /assets/vendor/css/themes/ folder to alter the default theme of the template -->
+
+        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" href="/assets/vendor/css/themes.css">
+        <!-- END Stylesheets -->
+
+        <!-- Modernizr (browser feature detection library) -->
+        <script src="/assets/vendor/js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <div ui-view></div>
+
+        <!-- jQuery, Bootstrap, jQuery plugins and Custom JS code -->
+        <script src="/assets/vendor/js/vendor/jquery-2.2.0.min.js"></script>
+        <script src="/assets/vendor/js/vendor/bootstrap.min.js"></script>
+        <script src="/assets/vendor/js/plugins.js"></script>
+        <script src="/assets/vendor/js/app.js"></script>
+        <!-- build:js(.) scripts/vendor.js -->
+
+        <!-- bower:js -->
+        <script src="/assets/bower_components/angular/angular.min.js"></script>
+        <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="/assets/bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="/assets/bower_components/angular-resource/angular-resource.min.js"></script>
+        <script src="/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>
+        <script src="/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
+
+        <!-- Cloudinary -->
+        <script src="/assets/bower_components/lodash/lodash.js"></script>
+        <script src="/assets/bower_components/cloudinary-core/cloudinary-core.js"></script>
+        <script src="/assets/bower_components/angular-route/angular-route.js"></script>
+        <script src="/assets/bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
+
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/index.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/register.js"></script>
+        <script src="scripts/controllers/reset-password.js"></script>
+        <script src="/assets/services/authentication_service.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>

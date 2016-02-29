@@ -1,8 +1,8 @@
 {
-  "name": "ireceptionist-business-client",
-  "version": "0.6.0",
-  "description": "iReceptionist Business Client",
-  "title": "iReceptionist Business Client",
+  "name": "ireceptionist",
+  "version": "0.1.0",
+  "description": "iReceptionist Client",
+  "title": "iReceptionist Client",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"

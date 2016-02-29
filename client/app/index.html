@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" ng-app="iReceptionistApp" ng-controller='IndexCtrl'> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
 
         <title>iReceptionist</title>
 
-        <meta name="description" content="AppUI is a Web App Bootstrap Admin Template created by pixelcave and published on Themeforest">
-        <meta name="author" content="pixelcave">
+        <meta name="description" content="iReceptionist VIP">
+        <meta name="author" content="Phoenix Solutions">
         <meta name="robots" content="noindex, nofollow">
 
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
 
         <!-- Icons -->
         <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-        <link rel="shortcut icon" href="vendor/img/favicon.png">
-        <link rel="apple-touch-icon" href="vendor/img/icon57.png" sizes="57x57">
-        <link rel="apple-touch-icon" href="vendor/img/icon72.png" sizes="72x72">
-        <link rel="apple-touch-icon" href="vendor/img/icon76.png" sizes="76x76">
-        <link rel="apple-touch-icon" href="vendor/img/icon114.png" sizes="114x114">
-        <link rel="apple-touch-icon" href="vendor/img/icon120.png" sizes="120x120">
-        <link rel="apple-touch-icon" href="vendor/img/icon144.png" sizes="144x144">
-        <link rel="apple-touch-icon" href="vendor/img/icon152.png" sizes="152x152">
-        <link rel="apple-touch-icon" href="vendor/img/icon180.png" sizes="180x180">
+        <link rel="shortcut icon" href="/assets/vendor/img/favicon.png">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon57.png" sizes="57x57">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon72.png" sizes="72x72">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon76.png" sizes="76x76">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon114.png" sizes="114x114">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon120.png" sizes="120x120">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon144.png" sizes="144x144">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon152.png" sizes="152x152">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon180.png" sizes="180x180">
         <!-- END Icons -->
 
         <!-- Stylesheets -->
         <!-- Bootstrap is included in its original form, unaltered -->
-        <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
-        <link rel="stylesheet" href="bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
+        <link rel="stylesheet" href="/assets/vendor/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
 
         <!-- Related styles of various icon packs and plugins -->
-        <link rel="stylesheet" href="vendor/css/plugins.css">
+        <link rel="stylesheet" href="/assets/vendor/css/plugins.css">
 
         <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
-        <link rel="stylesheet" href="vendor/css/main.css">
+        <link rel="stylesheet" href="/assets/vendor/css/main.css">
         <link rel="stylesheet" href="styles/ireceptionist.css">
 
-        <!-- Include a specific file here from vendor/css/themes/ folder to alter the default theme of the template -->
+        <!-- Include a specific file here from /assets/vendor/css/themes/ folder to alter the default theme of the template -->
 
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
-        <link rel="stylesheet" href="vendor/css/themes.css">
+        <link rel="stylesheet" href="/assets/vendor/css/themes.css">
         <!-- END Stylesheets -->
 
         <!-- Modernizr (browser feature detection library) -->
-        <script src="vendor/js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="/assets/vendor/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
-    <body ng-app="iReceptionistApp" ng-controller='IndexCtrl'>
+    <body>
         <!-- Page Wrapper -->
         <!-- In the PHP version you can set the following options from inc/config file -->
         <!--
@@ -116,8 +116,8 @@
                 <div id="sidebar">
                     <!-- Sidebar Brand -->
                     <div id="sidebar-brand" class="themed-background">
-                        <a href="index.html" class="sidebar-title">
-                            <i class="fa fa-cube"></i> <span class="sidebar-nav-mini-hide">App<strong>UI</strong></span>
+                        <a href="/app" class="sidebar-title">
+                            <i class="fa fa-cube"></i> <span class="sidebar-nav-mini-hide"><strong>iReceptionist</strong></span>
                         </a>
                     </div>
                     <!-- END Sidebar Brand -->
@@ -216,7 +216,7 @@
 
                             <!-- Header Link -->
                             <li class="hidden-xs animation-fadeInQuick">
-                                <a href=""><strong></strong></a>
+                                <a href="" ng-cloak><strong>{{clock}}</strong></a>
                             </li>
                             <!-- END Header Link -->
                         </ul>
@@ -226,8 +226,8 @@
                         <ul class="nav navbar-nav-custom pull-right">
                             <!-- Search Form -->
                             <li>
-                                <form action="index.html" method="post" class="navbar-form-custom" role="search">
-                                    <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
+                                <form action="javascript:void(0);" class="navbar-form-custom" role="search">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control" placeholder="Search" ng-change="search(searchString)">
                                 </form>
                             </li>
                             <!-- END Search Form -->
@@ -243,7 +243,7 @@
                             <!-- User Dropdown -->
                             <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="img/placeholders/avatars/avatar.jpg" alt="avatar">
+                                    <img src="/assets/vendor/img/placeholders/avatars/avatar.jpg" alt="avatar">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li class="dropdown-header">
@@ -289,8 +289,8 @@
                     <!-- END Header -->
 
                     <!-- Page content -->
-                    <div id="page-content">
-                        <div ui-view id="page-content-ui-view" class="anim-in-out anim-fade anim-slide-below" style="position: absolute; width: {{pageContentWidth()}}px;"></div>
+                    <div id="page-content" style="min-height: {{pageContentHeight()}}px">
+                        <div ui-view id="page-content-ui-view" class="anim-in-out anim-fade anim-slide-below" data-anim-speed="500" style="position: absolute; width: {{pageContentWidth()}}px;"></div>
                     </div>
                     <!-- END Page Content -->
                 </div>
@@ -301,22 +301,29 @@
         <!-- END Page Wrapper -->
 
         <!-- jQuery, Bootstrap, jQuery plugins and Custom JS code -->
-        <script src="vendor/js/vendor/jquery-2.2.0.min.js"></script>
-        <script src="vendor/js/vendor/bootstrap.min.js"></script>
-        <script src="vendor/js/plugins.js"></script>
-        <script src="vendor/js/app.js"></script>
+        <script src="/assets/vendor/js/vendor/jquery-2.2.0.min.js"></script>
+        <script src="/assets/vendor/js/vendor/bootstrap.min.js"></script>
+        <script src="/assets/vendor/js/plugins.js"></script>
+        <script src="/assets/vendor/js/app.js"></script>
         <!-- build:js(.) scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="bower_components/angular/angular.min.js"></script>
-        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-        <script src="bower_components/angular-resource/angular-resource.min.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-        <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-        <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-        <script src="bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
 
+        <!-- bower:js -->
+        <script src="/assets/bower_components/angular/angular.min.js"></script>
+        <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="/assets/bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="/assets/bower_components/angular-resource/angular-resource.min.js"></script>
+        <script src="/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>
+        <script src="/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
+
+        <!-- Cloudinary -->
+        <script src="/assets/bower_components/lodash/lodash.js"></script>
+        <script src="/assets/bower_components/cloudinary-core/cloudinary-core.js"></script>
+        <script src="/assets/bower_components/angular-route/angular-route.js"></script>
+        <script src="/assets/bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
 
         <!-- endbower -->
         <!-- endbuild -->
@@ -326,11 +333,12 @@
         <script src="scripts/controllers/dashboard.js"></script>
         <script src="scripts/controllers/employees.js"></script>
         <script src="scripts/controllers/settings_account.js"></script>
-        <script src="scripts/controllers/register.js"></script>
-        <script src="scripts/services/authentication_service.js"></script>
-        <script src="scripts/services/appointment_service.js"></script>
-        <script src="scripts/services/form_service.js"></script>
-        <script src="scripts/services/business_service.js"></script>
+        <script src="scripts/controllers/search.js"></script>
+        <script src="/assets/services/authentication_service.js"></script>
+        <script src="/assets/services/appointment_service.js"></script>
+        <script src="/assets/services/form_service.js"></script>
+        <script src="/assets/services/business_service.js"></script>
+        <script src="/assets/services/search_service.js"></script>
         <!-- endbuild -->
     </body>
 </html>

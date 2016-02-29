@@ -12,29 +12,55 @@ gulp.task('nodemon', function(cb) {
     });
 });
 
+/**
+ * Sass Tasks
+ */
 gulp.task('sass-app', function() {
     return gulp.src('./client/app/styles/*.scss')
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./client/app/styles'));
 });
-
 gulp.task('sass-marketing', function() {
     return gulp.src('./client/marketing/styles/*.scss')
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./client/marketing/styles'));
 });
+gulp.task('sass-vip', function() {
+    return gulp.src('./client/vip/styles/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./client/vip/styles'));
+});
+gulp.task('sass-auth', function() {
+    return gulp.src('./client/auth/styles/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./client/auth/styles'));
+});
+gulp.task('sass-all', [
+    'sass-app',
+    'sass-marketing',
+    'sass-vip',
+    'sass-auth',
+]);
 
-gulp.task('bower-app', function() {
+
+/**
+ * Bower Tasks
+ */
+gulp.task('bower-assets', function() {
     return bower({
-        cwd: './client/app',
+        cwd: './client/assets',
     });
 });
-
 gulp.task('bower-marketing', function() {
     return bower({
         cwd: './client/marketing',
     });
 });
+gulp.task('bower-all', [
+    'bower-assets',
+    'bower-marketing',
+]);
+
 
 gulp.task('browser-sync', [], function() {
 
@@ -60,13 +86,26 @@ gulp.task('browser-sync', [], function() {
 
 	gulp.watch('./client/app/styles/*.scss', ['sass-app']);
 	gulp.watch('./client/marketing/styles/*.scss', ['sass-marketing']);
+	gulp.watch('./client/vip/styles/*.scss', ['sass-vip']);
+	gulp.watch('./client/auth/styles/*.scss', ['sass-auth']);
 });
 
+
+/**
+ * 'gulp' : Runs the default dev environment including browser-sync.
+ */
 gulp.task('default', [
-    'sass-app',
-    'sass-marketing',
-    'bower-app',
-    'bower-marketing',
+    'sass-all',
+    'bower-all',
     'nodemon',
     'browser-sync'
+]);
+
+/**
+ * 'gulp prod' : Runs the prod environment. TODO: Run without nodemon.
+ */
+gulp.task('prod', [
+    'sass-all',
+    'bower-all',
+    'nodemon',
 ]);

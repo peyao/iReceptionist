@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name iReceptionistApp
@@ -18,8 +16,10 @@ angular
     'ui.router',
     'ui.bootstrap',
     'anim-in-out',
+    'ngRoute',
+    'cloudinary'
 ])
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -27,11 +27,6 @@ angular
             url: '/',
             templateUrl: 'views/dashboard.html',
             controller: 'DashboardCtrl'
-        })
-        .state('about', {
-            url: '/about',
-            templateUrl: 'views/about.html',
-            controller: 'AboutCtrl'
         })
         .state('employees', {
             url: '/employees',
@@ -59,7 +54,16 @@ angular
             url: '/register',
             templateUrl: 'views/auth/register.html',
             controller: 'RegisterCtrl'
+        })
+        .state('search', {
+            url: '/search',
+            templateUrl: 'views/search.html',
+            controller: 'SearchCtrl'
         });
+
+    cloudinaryProvider
+        .set("cloud_name", "phoenix-sol")
+        .set("upload_preset", "phtsmngp");
 })
 .constant('config', {
     'apiUrl': 'http://localhost/api'
