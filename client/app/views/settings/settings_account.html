@@ -1,0 +1,109 @@
+<div class="content-header">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="header-section">
+                <h1>Account</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Horizontal Form -->
+<section class="site-content site-section">
+    <div class="container">
+        <div class="site-block">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Update User Information</h2>
+                        </div>
+                        <!-- END Horizontal Form Title -->
+
+                        <!-- Horizontal Form Content -->
+                        <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <label for="email">Change Email Address</label>
+                                <input type="text" id="email" name="email" class="form-control input-lg" placeholder="example@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number">Change Phone Number</label>
+                                <input type="text" id="phone-number" name="phone-number" class="form-control input-lg" placeholder="Phone Number">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Change Password</label>
+                                <input type="text" id="password" name="password" class="form-control input-lg" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="text" id="confirm-password" name="confirm-password" class="form-control input-lg" placeholder="Confirm Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="email-notifications">Enable Email Notifications</label>
+                                <label class="switch switch-success"><input type="checkbox" id="email-notifications" checked><span></span></label>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="sms-notifications">Enable SMS Notifications</label>
+                                <label class="switch switch-success"><input type="checkbox" id="sms-notifications" checked><span></span></label>
+                            </div>
+                            <div class="form-group">
+                                <img src="images/avatar.png" class="avatar"/>
+                                <button class="btn btn-default upload-button">Upload Image</button>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" onclick="App.alert('account');">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Update Company Information</h2>
+                        </div>
+                        <!-- END Horizontal Form Title -->
+
+                        <!-- Horizontal Form Content -->
+                        <form action="" method="post" class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <label for="company-name">Change Company Name</label>
+                                <input type="text" id="company-name" name="company-name" class="form-control input-lg" placeholder="Company Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="company-email">Change Email Address</label>
+                                <input type="text" id="company-email" name="company-email" class="form-control input-lg" placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <label for="company-phone">Change Phone Number </label>
+                                <input type="text" id="company-phone" name="company-phone" class="form-control input-lg" placeholder="Phone Number">
+                            </div>
+                            <div class="form-group">
+                                <img src="images/thumbnail.png" class="tablet-image"/>
+                                <button class="btn btn-default upload-button">Upload Icon</button>
+                            </div>
+                            <div class="form-group">
+                                <img src="images/thumbnail.png" class="tablet-image"/>
+                                <button class="btn btn-default upload-button">Upload Background</button>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" onclick="App.alert('account');">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="alert alert-success alert-dismissable display-none">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><strong>Success</strong></h4>
+                    <p>Settings were updated successfully!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,126 @@
+<div class="content-header">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="header-section">
+                <h1>Billing</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plans -->
+<section class="site-content site-section">
+    <div class="container">
+        <div class="site-block">
+            <div class="row">
+                <div class="col-sm-4">
+                    <table class="table table-borderless table-pricing">
+                        <thead>
+                        <tr>
+                            <th>Free</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="active">
+                            <td>
+                                <h1>$<strong>0</strong><br><small>per month</small></h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature 1</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature 2</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature 3</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature 4</strong></td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                <a href="javascript:void(0)" class="btn">Current Plan</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">
+                                <small><em>* All plans include free support!</em></small>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <table class="table table-borderless table-pricing">
+                        <thead>
+                        <tr>
+                            <th>Premium</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="active">
+                            <td>
+                                <h1>$<strong>19</strong><small>.99</small><br><small>per month</small></h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature 1</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature 2</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature 3</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feature 4</strong></td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                <a href="javascript:void(0)" class="btn btn-effect-ripple  btn-success"><i class="fa fa-arrow-right"></i> Sign Up Today</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">
+                                <small><em>* All plans include free support!</em></small>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Update Your Plan</h2>
+                        </div>
+                        <form action="" method="post" class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <h4>Your Current Plan: Free</h4>
+                            <div class="form-group">
+                                <label for="credit-card">Credit Card</label>
+                                <input type="text" id="credit-card" name="credit-card" class="form-control input-lg" placeholder="Credit Card Number">
+                            </div>
+                            <div class="form-group">
+                                <label for="expiration-date">Expiration Date</label>
+                                <input type="text" id="expiration-date" name="expiration-date" class="form-control input-lg" placeholder="Expiration Date">
+                            </div>
+                            <div class="form-group">
+                                <label for="security-code">Security Code</label>
+                                <input type="text" id="security-code" name="security-code" class="form-control input-lg" placeholder="Security Code">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-primary" onclick="App.alert('billing')">Subscribe to Premium</button>
+                            </div>
+                        </form>
+                        <div class="alert alert-success alert-dismissable display-none">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h4><strong>Success</strong></h4>
+                            <p>Your plan has been updated!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END Plans -->

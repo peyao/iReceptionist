@@ -577,6 +577,23 @@ var App = function() {
         page.prop('class', pageCls);
     };
 
+    /* Show an alert */
+    var showAlert = function(page) {
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "timeOut": "2500"
+        };
+        if (page === "account") {
+            toastr.success("Your settings have been updated!");
+        }
+        else if (page === "billing") {
+            toastr.success("Your plan has been updated!");
+        }
+        else if (page === "forms-themes") {
+            toastr.success("Your form has been saved!");
+        }
+    };
+
     return {
         init: function() {
             uiInit(); // Initialize UI
@@ -590,6 +607,9 @@ var App = function() {
         },
         pagePrint: function() {
             handlePrint(); // Print functionality
+        },
+        alert: function(page) {
+            showAlert(page);  // Show alert
         }
     };
 }();
