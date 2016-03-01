@@ -23,6 +23,13 @@
         </div>
         <!-- END Login Title -->
 
+        <!-- Danger Alert -->
+        <div class="alert alert-danger alert-dismissable" ng-if="alert.danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><strong>Error</strong></h4>
+            <p>{{alert.danger}}</p>
+        </div>
+        <!-- END Danger Alert -->
         <!-- Login Form -->
         <form id="form-login" class="form-horizontal" action="javascript:void(0);">
             <div class="form-group">

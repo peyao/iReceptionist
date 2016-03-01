@@ -6,7 +6,7 @@
  * Service in the iReceptionistApp.
  */
 angular.module('iReceptionistApp')
-.factory('SearchService', function(config, $http) {
+.factory('SearchService', function($http) {
     var API_URL = 'http://52.86.89.63:3000';
 
     return {

@@ -6,7 +6,7 @@
  * Service in the iReceptionistApp.
  */
 angular.module('iReceptionistApp')
-.factory('FormService', function(config, $http) {
+.factory('FormService', function($http) {
     var API_URL = 'http://52.86.89.63:3000';
 
     return {

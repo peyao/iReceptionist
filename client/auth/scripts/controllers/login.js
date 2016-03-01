@@ -12,6 +12,11 @@ angular.module('iReceptionistApp')
     $scope.email = '';
     $scope.password = '';
     $scope.rememberMe = true;
+    $scope.alert = {
+        success: '',
+        warning: '',
+        danger: '',
+    };
 
     $scope.doLogin = function() {
         AuthenticationService.login(
@@ -36,8 +41,7 @@ angular.module('iReceptionistApp')
             },
             // Failure
             function(err) {
-                // TODO: Show alert that login failed
-                console.log('err:', err);
+                $scope.alert.danger = err.errorMsg;
             }
         );
     };

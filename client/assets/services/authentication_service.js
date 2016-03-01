@@ -6,7 +6,7 @@
  * Service in the iReceptionistApp.
  */
 angular.module('iReceptionistApp')
-.factory('AuthenticationService', function(config, $http) {
+.factory('AuthenticationService', function($http) {
     var API_URL = 'http://52.86.89.63:3000';
 
     // apiDocs: https://cse112.siriolabs.com/doc/#api-User
