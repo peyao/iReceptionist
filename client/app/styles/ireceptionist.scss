@@ -1,10 +1,11 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 // Dropzone Register
-#register-step4
 .dropzone {
   min-height: 152px;
   max-height: 152px;
+  max-width: 165px;
+  min-width: 165px;
   text-align: center;
   border-radius: 10px;
   padding: 0.9em;
@@ -16,10 +17,6 @@
 }
 .dropzone .dz-preview .dz-image {
   border-radius: 8px;
-}
-
-.reg-upload{
-  margin: 20px 0;
 }
 
 .rmv-upload {

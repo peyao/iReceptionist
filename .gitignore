@@ -16,3 +16,4 @@ newrelic_agent.log
 .env
 apidoc/
 ireceptionist.css
+client/assets/bower_components
