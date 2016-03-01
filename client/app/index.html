@@ -58,10 +58,7 @@
 
             'page-loading'      enables page preloader
         -->
-        <!--
         <div id="page-wrapper" class="page-loading">
-        -->
-        <div id="page-wrapper" class="">
             <!-- Preloader -->
             <!-- Preloader functionality (initialized in js/app.js) - pageLoading() -->
             <div class="preloader">
@@ -251,37 +248,12 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li class="dropdown-header">
-                                        <strong>ADMINISTRATOR</strong>
+                                        <strong>USER ACTIONS</strong>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="fa fa-inbox fa-fw pull-right"></i>
-                                            Link #1
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="fa fa-pencil-square fa-fw pull-right"></i>
-                                            Link #2
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="fa fa-picture-o fa-fw pull-right"></i>
-                                            Link #3
-                                        </a>
-                                    </li>
-                                    <li class="divider"><li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="gi gi-settings fa-fw pull-right"></i>
-                                            Link #1
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)">
-                                            <i class="gi gi-lock fa-fw pull-right"></i>
-                                            Link #2
+                                        <a href="#" ng-click="doLogout()">
+                                            <i class="fa fa-sign-out fa-fw pull-right"></i>
+                                            Logout
                                         </a>
                                     </li>
                                 </ul>
@@ -342,7 +314,7 @@
         <script src="scripts/controllers/settings_account.js"></script>
         <script src="scripts/controllers/search.js"></script>
         <script src="/assets/services/authentication_service.js"></script>
-        <script src="/assets/services/appointment_service.js"></script>
+        <script src="/assets/services/visitor_service.js"></script>
         <script src="/assets/services/form_service.js"></script>
         <script src="/assets/services/business_service.js"></script>
         <script src="/assets/services/search_service.js"></script>

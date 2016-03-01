@@ -7,7 +7,7 @@
  */
 angular.module('iReceptionistApp')
     .controller('SettingsBillingCtrl', function($rootScope, $scope, AppointmentService) {
-        $scope.currentState = 'settings-billing';
+        $rootScope.currentState = 'settings-billing';
 
         console.log('SettingsBillingCtrl loaded.');
 

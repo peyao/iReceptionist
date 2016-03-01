@@ -31,7 +31,4 @@ angular
             templateUrl: 'views/vip_settings.html',
             controller: 'VipSettingsCtrl'
         });
-})
-.constant('config', {
-    'apiUrl': 'http://localhost/api'
 });
