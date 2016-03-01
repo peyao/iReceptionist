@@ -39,17 +39,27 @@
                                 <input type="text" id="confirm-password" name="confirm-password" class="form-control input-lg" placeholder="Confirm Password">
                             </div>
                             <div class="form-group">
-                                <label for="email-notifications">Enable Email Notifications</label>
-                                <label class="switch switch-success"><input type="checkbox" id="email-notifications" checked><span></span></label>
-
+                                <div class="col-xs-6">
+                                    <label for="email-notifications">Enable Email Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" checked><span></span></label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label for="sms-notifications">Enable SMS Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" checked><span></span></label>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="sms-notifications">Enable SMS Notifications</label>
-                                <label class="switch switch-success"><input type="checkbox" id="sms-notifications" checked><span></span></label>
-                            </div>
-                            <div class="form-group">
-                                <img src="images/avatar.png" class="avatar"/>
-                                <button class="btn btn-default upload-button">Upload Image</button>
+                                <label for="avatarUpload" class="text-left">Avatar</label>
+                                <div id="user-upload-row" class="row">
+                                    <div class="col-xs-3">
+                                        <cl-image public-id="avatar" class="avatar"></cl-image>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div id="avatarUpload" class="dropzone">
+                                            <div class="dz-default dz-message"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
@@ -81,12 +91,31 @@
                                 <input type="text" id="company-phone" name="company-phone" class="form-control input-lg" placeholder="Phone Number">
                             </div>
                             <div class="form-group">
-                                <img src="images/thumbnail.png" class="tablet-image"/>
-                                <button class="btn btn-default upload-button">Upload Icon</button>
+                                <label for="logoUpload" class="text-left">Logo</label>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <cl-image public-id="tablet_icon" class="tablet-image"></cl-image>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div id="logoUpload" class="dropzone">
+                                            <div class="dz-default dz-message"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <img src="images/thumbnail.png" class="tablet-image"/>
-                                <button class="btn btn-default upload-button">Upload Background</button>
+                                <label for="bgUpload" class="text-left">Visitor Background</label>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <cl-image public-id="tablet_icon" class="tablet-image"></cl-image>
+
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div id="bgUpload" class="dropzone">
+                                            <div class="dz-default dz-message"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
