@@ -42,7 +42,4 @@ angular
     cloudinaryProvider
         .set("cloud_name", "phoenix-sol")
         .set("upload_preset", "phtsmngp");
-})
-.constant('config', {
-    'apiUrl': 'http://localhost/api'
 });

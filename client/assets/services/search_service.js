@@ -7,10 +7,11 @@
  */
 angular.module('iReceptionistApp')
 .factory('SearchService', function(config, $http) {
+    var API_URL = 'http://52.86.89.63:3000';
 
     return {
         apiCall: function(req, success, error) {
-            req.url = config.apiUrl + req.url;
+            req.url = API_URL + req.url;
             $http(req)
             .success(function(data) {
                 success(data);
