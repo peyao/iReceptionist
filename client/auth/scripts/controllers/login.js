@@ -15,7 +15,7 @@ angular.module('iReceptionistApp')
     $scope.alert = {
         success: '',
         warning: '',
-        danger: '',
+        danger: ''
     };
 
     $scope.doLogin = function() {
