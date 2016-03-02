@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsBillingCtrl', function($rootScope, $scope, AppointmentService) {
+    .controller('SettingsBillingCtrl', function($rootScope, $scope) {
         $rootScope.currentState = 'settings-billing';
 
         console.log('SettingsBillingCtrl loaded.');

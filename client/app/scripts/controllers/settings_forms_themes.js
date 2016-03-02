@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsFormsThemesCtrl', function($scope, $builder, $validator, $rootScope, AppointmentService) {
+    .controller('SettingsFormsThemesCtrl', function($scope, $builder, $validator, $rootScope) {
         $rootScope.currentState = 'settings-forms-themes';
         console.log('SettingsFormsThemesCtrl loaded.');
 
