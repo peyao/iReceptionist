@@ -1,5 +1,6 @@
 var working = false;
 $('.login').on('submit', function(e) {
+  console.log('submitted checkin');
   e.preventDefault();
   if (working) return;
   working = true;
@@ -11,7 +12,7 @@ $('.login').on('submit', function(e) {
     $this.addClass('ok');
     $state.html('Thank you! You will be called shortly.');
     setTimeout(function() {
-      $state.html('Log in');
+      $state.html('Check In');
       $this.removeClass('ok loading');
       working = false;
     }, 4000);
