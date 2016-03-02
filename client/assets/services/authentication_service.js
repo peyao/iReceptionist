@@ -29,6 +29,16 @@ angular.module('iReceptionistApp')
             };
             this.apiCall(req, success, error);
         },
+        getUserByToken: function(token, success, error) {
+            var req = {
+                method: 'GET',
+                url: '/user',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            };
+            this.apiCall(req, success, error);
+        },
         // TODO: User - [INCOMPLETE] Create new employee user
         // API still does not have this implemented yet.
         inviteEmployee: function(userObj, success, error) {
