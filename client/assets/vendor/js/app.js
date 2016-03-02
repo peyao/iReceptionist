@@ -148,6 +148,8 @@ var App = function() {
             } else {
                 pageWrapper.removeClass('page-loading');
             }
+        } else {
+            pageWrapper.addClass('page-loading');
         }
     };
 
@@ -597,7 +599,10 @@ var App = function() {
     return {
         init: function() {
             uiInit(); // Initialize UI
-            pageLoading(); // Initialize Page Loading
+            //pageLoading(); // Start and Stop Page Loading
+        },
+        togglePageLoading: function() {
+            pageLoading(); // Start and Stop Page Loading
         },
         sidebar: function(mode, extra) {
             handleSidebar(mode, extra); // Handle sidebars - access functionality from everywhere

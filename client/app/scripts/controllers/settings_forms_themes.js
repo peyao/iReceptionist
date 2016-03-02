@@ -7,7 +7,7 @@
  */
 angular.module('iReceptionistApp')
     .controller('SettingsFormsThemesCtrl', function($scope, $builder, $validator, $rootScope, AppointmentService) {
-        $scope.currentState = 'settings-forms-themes';
+        $rootScope.currentState = 'settings-forms-themes';
         console.log('SettingsFormsThemesCtrl loaded.');
 
         $('#page-content-ui-view').resize(function() {

@@ -6,11 +6,12 @@
  * Service in the iReceptionistApp.
  */
 angular.module('iReceptionistApp')
-.factory('BusinessService', function(config, $http) {
+.factory('BusinessService', function($http) {
+    var API_URL = 'http://52.86.89.63:3000';
 
     return {
         apiCall: function(req, success, error) {
-            req.url = config.apiUrl + req.url;
+            req.url = API_URL + req.url;
             $http(req)
             .success(function(data) {
                 success(data);

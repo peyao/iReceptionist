@@ -6,18 +6,21 @@
  * Service in the iReceptionistApp.
  */
 angular.module('iReceptionistApp')
-.factory('AppointmentService', function(config, $http) {
+.factory('VisitorService', function($http) {
+    var API_URL = 'http://52.86.89.63:3000';
 
     return {
-        getAppointment: function(success, error) {
+        /*
+        getVisitorQueue: function(success, error) {
             var req = {
                 method: 'GET',
-                url: '/appointment'
+                url: '/visitor/queue'
             };
             this.apiCall(req, success, error);
         },
+        */
         apiCall: function(req, success, error) {
-            req.url = config.apiUrl + req.url;
+            req.url = API_URL + req.url;
             $http(req)
             .success(function(data) {
                 success(data);

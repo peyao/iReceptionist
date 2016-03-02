@@ -6,7 +6,7 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-    .controller('DashboardCtrl', function($rootScope, $scope, AppointmentService) {
+    .controller('DashboardCtrl', function($rootScope, $scope) {
         $rootScope.currentState = 'dashboard';
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
