@@ -35,11 +35,17 @@ gulp.task('sass-auth', function() {
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./client/auth/styles'));
 });
+gulp.task('sass-checkin', function() {
+    return gulp.src('./client/checkin/styles/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./client/checkin/styles'));
+});
 gulp.task('sass-all', [
     'sass-app',
     'sass-marketing',
     'sass-vip',
     'sass-auth',
+    'sass-checkin'
 ]);
 
 

@@ -6,7 +6,7 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-    .controller('DashboardCtrl', function($rootScope, $scope) {
+    .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService) {
         $rootScope.currentState = 'dashboard';
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
@@ -15,29 +15,21 @@ angular.module('iReceptionistApp')
 
 		$scope.showMine = false;
         $scope.showActive = true;
-        $scope.visitors = [{
-            name: 'Giacomo Guilizzoni',
-            employee: 'Amanda',
-            notes: 'Just a check up',
-			phone: '(123) 456-7890',
-			active: true
-        }, {
-			name: 'Marco Botton',
-            employee: 'Peter',
-            notes: 'Not a checkup',
-			phone: '(123) 456-7890',
-			active: true
-        }, {
-            name: 'Mariah Maclachlan',
-            employee: 'Venkman',
-            notes: '',
-			phone: '(123) 456-7890',
-			active: true
-        }, {
-            name: 'Valerie Liberty',
-            employee: 'Powell',
-            notes: '',
-			phone: '(123) 456-7890',
-			active: false
-        }, ];
+        $scope.visitors = [];
+
+        VisitorService.getVisitorQueue(
+            1,
+            10,
+            $cookies.get('token'),
+            function(visObj){
+                $scope.visitors = visObj;
+                console.log(visObj);
+                console.log("Grabbing them visitors");
+            },
+            function(err) {
+                $scope.alert.danger = err.errorMsg;
+            }
+        );
+
+
     });
