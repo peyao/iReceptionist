@@ -36,12 +36,13 @@
                     </thead>
                     <tbody>
 						<!-- TODO filter by employee -->
-                        <tr ng-repeat="v in visitors | filter :{active : showActive}">
+                        <!-- TODO revisit Inactive toggle - an "active" visitor has a checkOff field of null so inactive would be not null -->
+                        <tr ng-repeat="v in visitors | filter:{checkOff: null}">
 							<!-- TODO Backend do your stuff.... -->
 							<!-- TODO modal popup?? -->
 							<td><strong>{{v.name}}</strong></td>
 							<td>{{v.employee}}</td>
-							<td>{{v.notes}}</td>
+							<td>{{v.email}}</td>
 							<td>{{v.phone}}</td>
 							<td class="text-center">
 								<!-- TODO is edit needed? -->
