@@ -28,6 +28,12 @@ angular.module('iReceptionistApp')
         }
     };
 
+    $scope.alert = {
+        success: 'Registration',
+        warning: 'Warning',
+        danger: 'Danger'
+    };
+
     $scope.register = {};
     $scope.register.step1 = {};
     $scope.register.step2 = {};
@@ -48,40 +54,16 @@ angular.module('iReceptionistApp')
             // Success
             function (regObj) {
                 console.log('register success');
+                var path = '/app'
+                $window.location.href = path; // Redirect
             },
 
             // Error
-            function () {
+            function (err) {
                 console.log('register fail');
-                AuthenticationService.login(
-                    {
-                        'email': $scope.register.step1.email,
-                        'password': $scope.register.step1.password
-                    },
-
-                    // Success
-                    function(userObj) {
-                        // Need to set path because we are going from '/auth' to '/app' or '/vip'
-                        // TODO: On VIP side, need to use token to reverify the user has the correct role
-                        // or else log them off because they don't belong there.
-                        // TODO: For now, just do local role level check here and redirect.
-
-                        var path = '/app';
-                        if (userObj.user.role === -1) {
-                            path = '/vip';
-                        }
-                        $cookies.put('user', userObj.user, {'path': '/auth'});
-                        $cookies.put('token', userObj.token, {'path': '/auth'});
-                        $cookies.put('user', userObj.user, {'path': path});
-                        $cookies.put('token', userObj.token, {'path': path});
-                        $window.location.href = path; // Redirect
-                    },
-                    // Failure
-                    function(err) {
-                        //$scope.alert.danger = err.errorMsg;
-                        console.log('log in fail');
-                    }
-                );
+                //$scope.alert.danger = err.errorMsg;
+                var path = '/app'
+                $window.location.href = path; // Redirect
             }
         );
 
@@ -92,7 +74,7 @@ angular.module('iReceptionistApp')
         //    },
         //
         //    // Success
-        //    function(regObj) {
+        //    function(userObj) {
         //        // Need to set path because we are going from '/auth' to '/app' or '/vip'
         //        // TODO: On VIP side, need to use token to reverify the user has the correct role
         //        // or else log them off because they don't belong there.
@@ -115,34 +97,6 @@ angular.module('iReceptionistApp')
         //    }
         //);
     };
-
-        //// use $.param jQuery function to serialize data from JSON
-        //var data = $.param({
-        //    role: 1,
-        //    name: "Erik Xu",
-        //    email: "dixu@ucsd.edu",
-        //    password: "password",
-        //    businessName: "Phoenix"
-        //});
-        //
-        //var path = '';
-        //
-        //$http.post("/user/signUp", data)
-        //    .then(
-        //        // Success callback
-        //        function(response) {
-        //            $scope.PostDataResponse = response.data;
-        //            path = '/app';
-        //            console.log('post success');
-        //            $window.location.href = path; // Redirect
-        //        },
-        //        // Failure callback
-        //        function(response) {
-        //            $scope.PostDataError = response.data;
-        //            //$window.location.href = path; // Redirect
-        //            console.log('post fail');
-        //        }
-        //);
 
     $scope.logoUpload = DropZone.createNew('#logoUpload');
     $scope.bgUpload = DropZone.createNew('#bgUpload');
