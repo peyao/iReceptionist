@@ -12,15 +12,11 @@ angular.module('iReceptionistApp')
         $rootScope.currentState = 'employees';
         $scope.showEmployeesMore = false;
         $scope.employees = [{
-            name: 'Amanda',
-            phone: '(123) 456-7890',
-            email: 'amanda@gmail.com'
-        }, {
             name: 'Marco Botton',
             phone: '(123) 456-7890',
             email: 'marco@gmail.com'
         }, {
-            name: 'Venkman',
+            name: 'Peter Venkman',
             phone: '(123) 456-7890',
             email: 'venkman@gmail.com'
         }, {
