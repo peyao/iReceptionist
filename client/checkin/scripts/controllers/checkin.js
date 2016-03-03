@@ -13,7 +13,7 @@ angular.module('iReceptionistApp')
         var $this = $(this),
             $state = $this.find('button > .check');
         $this.addClass('loading');
-        $state.html('Authenticating');
+        $state.html('Checking You In...');
         setTimeout(function () {
             $this.addClass('ok');
             $state.html('Thank you! You will be called shortly.');
@@ -32,7 +32,8 @@ angular.module('iReceptionistApp')
         console.log($cookies.get('token'));
         VisitorService.checkin(
             {
-                'name' : $scope.fstname + " " + $scope.lstname
+                'name' : $scope.fstname + " " + $scope.lstname,
+                'phone': $scope.phonenum
             },
             $cookies.get('token'),
             function(){
