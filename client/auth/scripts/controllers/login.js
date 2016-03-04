@@ -15,7 +15,7 @@ angular.module('iReceptionistApp')
     $scope.alert = {
         success: '',
         warning: '',
-        danger: '',
+        danger: ''
     };
 
     $scope.doLogin = function() {
@@ -37,6 +37,7 @@ angular.module('iReceptionistApp')
                 }
                 $cookies.put('user', userObj.user, {'path': '/auth'});
                 $cookies.put('token', userObj.token, {'path': '/auth'});
+                $cookies.put('token', userObj.token, {'path': '/checkin'});
                 $cookies.put('user', userObj.user, {'path': path});
                 $cookies.put('token', userObj.token, {'path': path});
                 $window.location.href = path; // Redirect

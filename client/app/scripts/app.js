@@ -51,6 +51,13 @@ angular
             templateUrl: 'views/settings/settings_billing.html',
             controller: 'SettingsBillingCtrl'
         })
+
+        // .state('checkin', {
+            // url: '/checkin',
+            // templateUrl: 'views/checkin/checkin.html',
+            //controller: 'CheckinCtrl'
+        // })
+
         .state('register', {
             url: '/register',
             templateUrl: 'views/auth/register.html',
