@@ -10,15 +10,27 @@ angular.module('iReceptionistApp')
     var API_URL = 'http://52.86.89.63:3000';
 
     return {
-        /*
-        getVisitorQueue: function(success, error) {
+        checkin: function(visObj, token, success, error) {
             var req = {
-                method: 'GET',
-                url: '/visitor/queue'
+                method: 'POST',
+                url: '/visitor/new',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                data: visObj
             };
             this.apiCall(req, success, error);
         },
-        */
+        getVisitorQueue: function(page, per_page, token, success, error) {
+            var req = {
+                method: 'GET',
+                url: '/visitor/queue?page=' + page + '&per_page=' + per_page,
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            };
+            this.apiCall(req, success, error);
+        },
         apiCall: function(req, success, error) {
             req.url = API_URL + req.url;
             $http(req)
