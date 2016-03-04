@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <form class="login">
+        <p class="title" align="center">Welcome!</p>
+        <input ng-model="fstname" type="text" autocapitalize="off" autocorrect="off" placeholder="First Name" autofocus/>
+        <input ng-model="lstname" type="text" autocapitalize="off" autocorrect="off" placeholder="Last Name" />
+        <input ng-model="phonenum" type="text" autocapitalize="off" autocorrect="off" placeholder="Phone Number" />
+        <!--pattern="[0­9]*-->
+
+        <button ng-click="doCheckIn()">
+            <i class="spinner"></i>
+            <span class="check">Check In</span>
+        </button>
+    </form>
+</div>

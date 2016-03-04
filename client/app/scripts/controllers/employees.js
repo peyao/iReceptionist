@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * @ngdoc function
  * @name iReceptionistApp.controller:EmployeeCtrl
@@ -6,13 +8,8 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-    .controller('EmployeesCtrl', function($rootScope, $scope) {
+    .controller('EmployeesCtrl', function ($rootScope, $scope) {
         $rootScope.currentState = 'employees';
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
-
         $scope.showEmployeesMore = false;
         $scope.employees = [{
             name: 'Amanda',
@@ -30,5 +27,16 @@ angular.module('iReceptionistApp')
             name: 'Powell',
             phone: '(123) 456-7890',
             email: 'powell@gmail.com'
-        }, ];
+        } ];
+
+      /*  $scope.submit = function (form) {
+        $http.post('/api/employee',
+              {
+                name: form.name,
+                email: form.email,
+                number: form.number
+                })
+      };*/
+
+        console.log('EmployeesCtrl loaded.');
     });

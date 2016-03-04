@@ -6,7 +6,7 @@
  * Controller for the registration page
  */
 angular.module('iReceptionistApp')
-.controller('RegisterCtrl', function($rootScope, $scope, AuthenticationService, DropZone) {
+.controller('RegisterCtrl', function($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
 
     var REGISTRATION_STEPS = 4;
     $scope.step = 1;
@@ -27,8 +27,117 @@ angular.module('iReceptionistApp')
             registerWizard.formwizard('show', 'register-step' + $scope.step);
         }
     };
+
+    $scope.alert = {
+        success: 'Registration',
+        warning: 'Warning',
+        danger: 'Danger'
+    };
+
+    $scope.register = {};
+    $scope.register.step1 = {};
+    $scope.register.step2 = {};
+    $scope.register.step1.fullName = '';
+    $scope.register.step1.email = '';
+    $scope.register.step1.password = '';
+    $scope.register.step2.businessName = '';
+
     var submitRegistration = function() {
-        // TODO
+        AuthenticationService.register({
+                'role': '2',
+                'name': $scope.register.step1.fullName,
+                'email': $scope.register.step1.email,
+                'password': $scope.register.step1.password,
+                'businessName': $scope.register.step2.businessName
+            },
+
+            // Success
+            function (regObj) {
+                console.log('register success');
+
+                //
+                // Force re-direct back to log-in screen
+                //
+                //var path = '/app'
+                //$window.location.href = path; // Redirect
+
+
+                //
+                // Automatically log-in after registration
+                //
+                AuthenticationService.login(
+                    {
+                        'email': $scope.register.step1.email,
+                        'password': $scope.register.step1.password
+                    },
+
+                    // Success
+                    function(userObj) {
+                        // Need to set path because we are going from '/auth' to '/app' or '/vip'
+                        // TODO: On VIP side, need to use token to reverify the user has the correct role
+                        // or else log them off because they don't belong there.
+                        // TODO: For now, just do local role level check here and redirect.
+
+                        var path = '/app';
+                        if (userObj.user.role === -1) {
+                            path = '/vip';
+                        }
+                        $cookies.put('user', userObj.user, {'path': '/auth'});
+                        $cookies.put('token', userObj.token, {'path': '/auth'});
+                        $cookies.put('user', userObj.user, {'path': path});
+                        $cookies.put('token', userObj.token, {'path': path});
+                        $window.location.href = path; // Redirect
+                    },
+                    // Failure
+                    function(err) {
+                        //$scope.alert.danger = err.errorMsg;
+                        console.log('log in fail');
+                    }
+                );
+            },
+
+            // Error
+            function (err) {
+                console.log('register fail');
+                //$scope.alert.danger = err.errorMsg;
+
+                //
+                // Force re-direct back to log-in screen
+                //
+                //var path = '/app'
+                //$window.location.href = path; // Redirect
+            }
+        );
+
+        //AuthenticationService.login(
+        //    {
+        //        'email': $scope.register.step1.email,
+        //        'password': $scope.register.step1.password
+        //    },
+        //
+        //    // Success
+        //    function(userObj) {
+        //        // Need to set path because we are going from '/auth' to '/app' or '/vip'
+        //        // TODO: On VIP side, need to use token to reverify the user has the correct role
+        //        // or else log them off because they don't belong there.
+        //        // TODO: For now, just do local role level check here and redirect.
+        //
+        //        var path = '/app';
+        //        if (userObj.user.role === -1) {
+        //            path = '/vip';
+        //        }
+        //        $cookies.put('user', userObj.user, {'path': '/auth'});
+        //        $cookies.put('token', userObj.token, {'path': '/auth'});
+        //        $cookies.put('user', userObj.user, {'path': path});
+        //        $cookies.put('token', userObj.token, {'path': path});
+        //        $window.location.href = path; // Redirect
+        //    },
+        //    // Failure
+        //    function(err) {
+        //        //$scope.alert.danger = err.errorMsg;
+        //        console.log('log in fail');
+        //    }
+        //);
     };
 
     $scope.logoUpload = DropZone.createNew('#logoUpload');
