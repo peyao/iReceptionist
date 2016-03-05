@@ -38,6 +38,7 @@ angular.module('iReceptionistApp')
                 $cookies.put('user', userObj.user, {'path': '/auth'});
                 $cookies.put('token', userObj.token, {'path': '/auth'});
                 $cookies.put('token', userObj.token, {'path': '/checkin'});
+                $cookies.put('businessId', userObj.user.business, {'path': path});
                 $cookies.put('user', userObj.user, {'path': path});
                 $cookies.put('token', userObj.token, {'path': path});
                 $window.location.href = path; // Redirect

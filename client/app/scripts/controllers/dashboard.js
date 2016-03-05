@@ -21,15 +21,40 @@ angular.module('iReceptionistApp')
             1,
             10,
             $cookies.get('token'),
-            function(visObj){
+            function (visObj) {
                 $scope.visitors = visObj;
                 console.log(visObj);
                 console.log("Grabbing them visitors");
             },
-            function(err) {
+            function (err) {
                 $scope.alert.danger = err.errorMsg;
             }
         );
+
+        console.log('Authorization:' + 'Bearer ' + $cookies.get('token'));
+        var pusher = new Pusher('7c84af4dd6941414d752', {
+            encrypted: true
+        });
+
+        var channelName = $cookies.get('businessId');
+        var channel = pusher.subscribe(channelName);
+        channel.bind('newVisitor', function(data){
+            VisitorService.getVisitorQueue(
+                1,
+                10,
+                $cookies.get('token'),
+                function (visObj) {
+                    $scope.visitors = visObj;
+                    console.log(visObj);
+                    console.log("Grabbing them visitors");
+                },
+                function (err) {
+                    $scope.alert.danger = err.errorMsg;
+                }
+            );
+        });
+
+
 
 
     });
