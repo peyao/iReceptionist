@@ -90,10 +90,10 @@ gulp.task('browser-sync', [], function() {
         browser: ['google chrome']
     });
 
-	gulp.watch('./client/app/styles/*.scss', ['sass-app']);
-	gulp.watch('./client/marketing/styles/*.scss', ['sass-marketing']);
-	gulp.watch('./client/vip/styles/*.scss', ['sass-vip']);
-	gulp.watch('./client/auth/styles/*.scss', ['sass-auth']);
+    gulp.watch('./client/app/styles/*.scss', ['sass-app']);
+    gulp.watch('./client/marketing/styles/*.scss', ['sass-marketing']);
+    gulp.watch('./client/vip/styles/*.scss', ['sass-vip']);
+    gulp.watch('./client/auth/styles/*.scss', ['sass-auth']);
 });
 
 
@@ -115,3 +115,4 @@ gulp.task('prod', [
     'bower-all',
     'nodemon',
 ]);
+

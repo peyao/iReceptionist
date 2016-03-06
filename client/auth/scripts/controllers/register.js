@@ -55,6 +55,7 @@ angular.module('iReceptionistApp')
             function (regObj) {
                 console.log('register success');
 
+
                 //
                 // Force re-direct back to log-in screen
                 //
@@ -77,7 +78,6 @@ angular.module('iReceptionistApp')
                         // TODO: On VIP side, need to use token to reverify the user has the correct role
                         // or else log them off because they don't belong there.
                         // TODO: For now, just do local role level check here and redirect.
-
                         var path = '/app';
                         if (userObj.user.role === -1) {
                             path = '/vip';
@@ -92,6 +92,7 @@ angular.module('iReceptionistApp')
                     function(err) {
                         //$scope.alert.danger = err.errorMsg;
                         console.log('log in fail');
+
                     }
                 );
             },
@@ -210,7 +211,7 @@ angular.module('iReceptionistApp')
                 },
                 'register-step2-business-phone': {
                     required: false,
-                    minlength: 7
+                    minlength: 10
                 },
             },
             messages: {
@@ -226,6 +227,8 @@ angular.module('iReceptionistApp')
 
 
     $scope.termsHandler = function(isChecked) {
+        // if check the box then disablenextbutton should be false, on startup the box was checked since disablenextubbton was false,
+        // then when i fill everything out and then press the button, disablenextbutton was true. since i toggled.
         if (isChecked) {
             $scope.disableNextButton = false;
         } else {

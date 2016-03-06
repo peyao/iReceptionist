@@ -17,7 +17,7 @@
             <div class="block-options pull-right" ng-if="step === 1">
                 <button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!"><i class="fa fa-user"></i></button>
             </div>
-            <div class="block-options pull-right" ng-if="step > 1">
+            <div class="block-options pull-right" ng-if="step > 2">
                 <a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip the rest <i class="fa fa-arrow-circle-right"></i></a>
             </div>
             <h2>Register</h2>
@@ -44,28 +44,28 @@
                     <legend>Your Account</legend>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input ng-model="register.step1.email" type="text" id="register-step1-email" name="register-step1-email" class="form-control" placeholder="Email">
+                            <input ng-model="register.step1.email" required type="text" id="register-step1-email" name="register-step1-email" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input ng-model="register.step1.fullName" type="text" id="register-step1-fullname" name="register-step1-fullname" class="form-control" placeholder="Full Name">
+                            <input ng-model="register.step1.fullName" required type="text" id="register-step1-fullname" name="register-step1-fullname" class="form-control" placeholder="Full Name">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input ng-model="register.step1.password" type="password" id="register-step1-password" name="register-step1-password" class="form-control" placeholder="Password">
+                            <input ng-model="register.step1.password" required  type="password" id="register-step1-password" name="register-step1-password" class="form-control" placeholder="Password">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input ng-model="register.step1.confirmPassword" type="password" id="register-step1-confirm-password" name="register-step1-confirm-password" class="form-control" placeholder="Confirm Password">
+                            <input ng-model="register.step1.confirmPassword" required type="password" id="register-step1-confirm-password" name="register-step1-confirm-password" class="form-control" placeholder="Confirm Password">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
                             <label class="csscheckbox csscheckbox-primary" data-toggle="tooltip" title="Agree to the terms">
-                                <input ng-model="register.step1.terms" ng-change="termsHandler(register.step1.terms)" type="checkbox" id="register-terms" name="register-terms">
+                                <input ng-model="register.step1.terms" required ng-change="termsHandler(register.step1.terms)" type="checkbox" id="register-terms" name="register-terms">
                                 <span></span>
                             </label>
                             &nbsp;I agree with the
