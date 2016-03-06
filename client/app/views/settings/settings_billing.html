@@ -81,7 +81,7 @@
                                     <tr>
                                         <td>
                                             <h1>$<strong>10</strong><small>/month</small></h1>
-                                            <a href="javascript:void(0)" class="btn btn-effect-ripple  btn-success"><i class="fa fa-arrow-right"></i> Select Plan</a>
+                                            <button type="submit" data-toggle="modal" data-target="#plan-modal" ng-click="planInfo='Plan A: $10/month'" class="btn btn-effect-ripple  btn-success"><i class="fa fa-arrow-right"></i> Select Plan</button>
                                         </td>
                                     </tr>
                                     <tr class="active">
@@ -109,7 +109,7 @@
                                     <tr>
                                         <td>
                                             <h1>$<strong>20</strong><small>/month</small></h1>
-                                            <a href="javascript:void(0)" class="btn btn-effect-ripple  btn-success"><i class="fa fa-arrow-right"></i> Select Plan</a>
+                                            <button type="submit" data-toggle="modal" data-target="#plan-modal" ng-click="planInfo='Plan B: $20/month'" class="btn btn-effect-ripple  btn-success"><i class="fa fa-arrow-right"></i> Select Plan</button>
                                         </td>
                                     </tr>
                                     <tr class="active">
@@ -135,3 +135,39 @@
     </div>
 </section>
 <!-- END Plans -->
+
+<div id="plan-modal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Update Your Plan
+            </div>
+            <div class="modal-body">
+                <h3>{{planInfo}}</h3>
+                <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" name="card-name" class="form-control input-lg">
+                    </div>
+                    <div class="form-group">
+                        <label for="credit-card">Credit Card</label>
+                        <input type="text" id="credit-card" name="credit-card" class="form-control input-lg">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="security-code">Security Code</label>
+                            <input type="text" id="security-code" name="security-code" class="form-control input-lg">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="expiration-date">Expiration Date</label>
+                            <input type="text" id="expiration-date" name="expiration-date" class="form-control input-lg">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="option=0">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
