@@ -2,13 +2,13 @@
  * @ngdoc function
  * @name iReceptionistApp.controller:SettingsCtrl
  * @description
- * # SettingsFormsThemesCtrl
+ * # SettingsFormsCtrl
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsFormsThemesCtrl', function($scope, $builder, $validator, $rootScope) {
-        $rootScope.currentState = 'settings-forms-themes';
-        console.log('SettingsFormsThemesCtrl loaded.');
+    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope) {
+        $rootScope.currentState = 'settings-forms';
+        console.log('SettingsFormsCtrl loaded.');
 
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
