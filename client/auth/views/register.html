@@ -18,7 +18,7 @@
                 <button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!"><i class="fa fa-user"></i></button>
             </div>
             <div class="block-options pull-right" ng-if="step > 2">
-                <a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip the rest <i class="fa fa-arrow-circle-right"></i></a>
+                <a ng-href="/app" ng-click="step = 4; nextStep();" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip the rest <i class="fa fa-arrow-circle-right"></i></a>
             </div>
             <h2>Register</h2>
         </div>
@@ -93,17 +93,17 @@
                     <legend>Your Business</legend>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input ng-model="register.step2.businessName" type="text" id="register-step2-business-name" name="register-step2-business-name" class="form-control" placeholder="Business Name">
+                            <input ng-model="register.step2.businessName" required type="text" id="register-step2-business-name" name="business-name" class="form-control" placeholder="Business Name">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input ng-model="register.step2.phone" type="text" id="register-step2-business-phone" name="register-step2-business-phone" class="form-control" placeholder="Business Phone Number">
+                            <input ng-model="register.step2.phone" required type="text" id="register-step2-business-phone" name="business-phone" class="form-control" placeholder="Business Phone Number">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <select ng-model="register.step2.type" id="register-step2-type" name="register-step2-type" class="select-select2" style="width: 100%;" data-placeholder="Type of Business">
+                            <select ng-model="register.step2.type" required id="register-step2-type" name="business-type" class="select-select2" style="width: 100%;" data-placeholder="Type of Business">
                                 <option></option>
                                 <option value="health_care">Health Care</option>
                                 <option value="fitness">Fitness</option>
