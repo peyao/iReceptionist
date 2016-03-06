@@ -11,7 +11,7 @@ angular.module('iReceptionistApp')
     var REGISTRATION_STEPS = 4;
     $scope.step = 1;
     $scope.register = {};
-    $scope.disableNextButton = false;
+    $scope.disableNextButton = true;
 
     $('.select-select2').select2();
 
@@ -227,8 +227,6 @@ angular.module('iReceptionistApp')
 
 
     $scope.termsHandler = function(isChecked) {
-        // if check the box then disablenextbutton should be false, on startup the box was checked since disablenextubbton was false,
-        // then when i fill everything out and then press the button, disablenextbutton was true. since i toggled.
         if (isChecked) {
             $scope.disableNextButton = false;
         } else {
