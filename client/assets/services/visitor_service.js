@@ -31,6 +31,16 @@ angular.module('iReceptionistApp')
             };
             this.apiCall(req, success, error);
         },
+        checkOff: function(visId, token, success, error){
+            var req = {
+                method: 'PUT',
+                url: '/visitor/' + visId,
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            };
+            this.apiCall(req, success, error);
+        },
         apiCall: function(req, success, error) {
             req.url = API_URL + req.url;
             $http(req)

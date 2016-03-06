@@ -12,8 +12,8 @@
         <div class="block">
             <div class="block-title clearfix">
                 <div class="block-options pull-right">
-					<button ng-class="{'active': showActive == true}" class="btn btn-effect-ripple btn-success" ng-click="showActive = true;">Active</button>
-					<button ng-class="{'active': showActive == false}" class="btn btn-effect-ripple btn-danger" ng-click="showActive = false;">Inactive</button>
+					<button ng-class="{'active': showActive == null}" class="btn btn-effect-ripple btn-success" ng-click="showActive = null;">Active</button>
+					<button ng-class="{'active': showActive == ''}" class="btn btn-effect-ripple btn-danger" ng-click="showActive = '';">Inactive</button>
                 </div>
 				<!-- TODO These buttons shold only appear if employee is a field name-->
 				<div class="block-options pull-right">
@@ -37,7 +37,7 @@
                     <tbody>
 						<!-- TODO filter by employee -->
                         <!-- TODO revisit Inactive toggle - an "active" visitor has a checkOff field of null so inactive would be not null -->
-                        <tr ng-repeat="v in visitors | filter:{checkOff: null}">
+                        <tr ng-repeat="v in visitors | filter:{checkOff: showActive}">
 							<!-- TODO Backend do your stuff.... -->
 							<!-- TODO modal popup?? -->
 							<td><strong>{{v.name}}</strong></td>
@@ -47,7 +47,7 @@
 							<td class="text-center">
 								<!-- TODO is edit needed? -->
 								<button data-toggle="tooltip" title="Edit User" class="btn btn-effect-ripple btn-sm btn-success"><i class="fa fa-pencil"></i></button>
-								<button data-toggle="tooltip" title="Set Inactive" class="btn btn-effect-ripple btn-sm btn-danger"><i class="fa fa-times"></i></button>
+								<button data-toggle="tooltip" title="Set Inactive" class="btn btn-effect-ripple btn-sm btn-danger" ng-click="doCheckOff(v)"><i class="fa fa-times"></i></button>
 							</td>
                         </tr>
                     </tbody>
