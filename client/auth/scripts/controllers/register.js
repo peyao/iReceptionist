@@ -19,12 +19,14 @@ angular.module('iReceptionistApp')
         $scope.step--;
         registerWizard.formwizard('show', 'register-step' + $scope.step);
     };
-    $scope.nextStep = function () {
-        if ($scope.step === REGISTRATION_STEPS) {
+    $scope.nextStep = function (skip) {
+        if ($scope.step === REGISTRATION_STEPS || skip){
             submitRegistration();
+            console.log('got in');
         } else {
             $scope.step++;
             registerWizard.formwizard('show', 'register-step' + $scope.step);
+            console.log('next');
         }
     };
 
@@ -211,11 +213,12 @@ angular.module('iReceptionistApp')
                 },
                 'register-step2-business-phone': {
                     required: false,
-                    minlength: 10
+                    minlength: 7
                 },
             },
             messages: {
                 'register-step1-email': 'Please enter a valid email address',
+                'register-step1-fullname': 'Please enter a valid name',
                 'register-step1-terms': 'Please accept the terms to continue',
                 'register-step2-business-phone': 'Please enter a valid phone number'
             }
