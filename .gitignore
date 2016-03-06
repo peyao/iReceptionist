@@ -17,3 +17,4 @@ newrelic_agent.log
 apidoc/
 ireceptionist.css
 client/assets/bower_components
+client/checking/styles/styles.css
