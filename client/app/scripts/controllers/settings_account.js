@@ -14,18 +14,7 @@ angular.module('iReceptionistApp')
         });
 
         $scope.user = $cookies.getObject('user');
-
-        BusinessService.getBusiness(
-            $cookies.get('token'),
-            $scope.user.business,
-            function (busObj){
-                console.log("Business: " + busObj);
-                console.log(busObj.name);
-            },
-            function (err) {
-                //$scope.alert.danger = err.errorMsg;
-            }
-        );
+        $scope.business = $cookies.getObject('business');
 
         /* This is how you'll want to call update -- the second argument will need to be an object with ONLY the info
         *  want to change.  So you'll want to check for changes and only include those that are different.
@@ -38,10 +27,9 @@ angular.module('iReceptionistApp')
         //    },
         //    function (busObj){
         //        console.log("update success");
-        //        console.log(busObj);
         //    },
         //    function (err) {
-        //        console.log("update success");
+        //        console.log("update fail");
         //    }
         //);
 
