@@ -16,7 +16,7 @@ angular.module('iReceptionistApp')
             $('#page-content').height($rootScope.pageContentHeight());
         });
 
-        $scope.currentPlan = "Free Plan";
+        $scope.currentPlan = "Free";
         $scope.planClicked = "";
         $scope.planInfo = "";
 

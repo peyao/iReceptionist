@@ -13,7 +13,6 @@
     <div class="container">
         <div class="site-block">
             <div class="column">
-
                 <div class="row">
                     <div class="block">
                         <div class="block-title">
@@ -24,12 +23,47 @@
                             <tr>
                                 <th>Plan</th>
                                 <th>Usage</th>
+                                <th>Payment Due Date</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td><h4>Free Plan</h4></td>
+                                <td><h4>{{currentPlan}}</h4></td>
                                 <td><h4>2 Employees</h4></td>
+                                <td><h4>{{currentPlan === 'Free' ? 'N/A' : '4/1/16'}}</h4></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Account Transactions</h2>
+                        </div>
+                        <table id="general-table" class="table table-bordered table-striped table-condensed table-vcenter">
+                            <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Paid Date</th>
+                                <th>Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><h4>Basic Plan</h4></td>
+                                <td><h4>3/1/16</h4></td>
+                                <td><h4>$10</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4>Basic Plan</h4></td>
+                                <td><h4>2/1/16</h4></td>
+                                <td><h4>$10</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4>Basic Plan</h4></td>
+                                <td><h4>1/1/16</h4></td>
+                                <td><h4>$10</h4></td>
                             </tr>
                             </tbody>
                         </table>
@@ -42,11 +76,11 @@
                         </div>
                         <!-- Mini Pricing Tables Content -->
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <table class="table table-pricing table-borderless">
                                     <thead>
                                     <tr>
-                                        <th>Free Plan</th>
+                                        <th>Free</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -54,8 +88,8 @@
                                         <td>
                                             <h1>$<strong>0</strong><small>/month</small></h1>
                                             <button type="submit" data-toggle="modal" data-target="#plan-modal"
-                                                    ng-click="planClicked='Free Plan'; planInfo = 'Free Plan: $0/month';"
-                                                    ng-disabled="currentPlan === 'Free Plan'"
+                                                    ng-click="planClicked='Free'; planInfo = 'Free Plan: $0/month';"
+                                                    ng-disabled="currentPlan === 'Free'"
                                                     class="btn btn-effect-ripple btn-success" id="free-plan-button">
                                                 <i class="fa fa-arrow-right"></i>
                                                 {{currentPlan === 'Free Plan' ? 'Current Plan' : 'Select Plan'}}</button>
@@ -75,11 +109,11 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <table class="table table-pricing table-borderless">
                                     <thead>
                                     <tr>
-                                        <th>Plan A</th>
+                                        <th>Basic</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -87,11 +121,11 @@
                                         <td>
                                             <h1>$<strong>10</strong><small>/month</small></h1>
                                             <button type="submit" data-toggle="modal" data-target="#plan-modal"
-                                                    ng-click="planClicked='Plan A'; planInfo = 'Plan A: $10/month';"
-                                                    ng-disabled="currentPlan === 'Plan A'"
-                                                    class="btn btn-effect-ripple  btn-success" id="plan-a-button">
+                                                    ng-click="planClicked='Basic'; planInfo = 'Basic Plan: $10/month';"
+                                                    ng-disabled="currentPlan === 'Basic'"
+                                                    class="btn btn-effect-ripple  btn-success" id="basic-plan-button">
                                                 <i class="fa fa-arrow-right"></i>
-                                                {{currentPlan === 'Plan A' ? 'Current Plan' : 'Select Plan'}}</button>
+                                                {{currentPlan === 'Basic' ? 'Current Plan' : 'Select Plan'}}</button>
                                         </td>
                                     </tr>
                                     <tr class="active">
@@ -108,11 +142,11 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <table class="table table-pricing table-borderless">
                                     <thead>
                                     <tr>
-                                        <th>Plan B</th>
+                                        <th>Premium</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -120,11 +154,44 @@
                                         <td>
                                             <h1>$<strong>20</strong><small>/month</small></h1>
                                             <button type="submit" data-toggle="modal" data-target="#plan-modal"
-                                                    ng-click="planClicked='Plan B'; planInfo = 'Plan B: $20/month';"
-                                                    ng-disabled="currentPlan === 'Plan B'"
+                                                    ng-click="planClicked='Premium'; planInfo = 'Premium Plan: $20/month';"
+                                                    ng-disabled="currentPlan === 'Premium'"
+                                                    class="btn btn-effect-ripple  btn-success" id="premium-plan-button">
+                                                <i class="fa fa-arrow-right"></i>
+                                                {{currentPlan === 'Premium' ? 'Current Plan' : 'Select Plan'}}</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>
+                                            <h3>
+                                                <small>
+                                                    Feature 1<br>
+                                                    Feature 2<br>
+                                                    Feature 3
+                                                </small>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-3">
+                                <table class="table table-pricing table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th>Enterprise</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <h1>$<strong>30</strong><small>/month</small></h1>
+                                            <button type="submit" data-toggle="modal" data-target="#plan-modal"
+                                                    ng-click="planClicked='Enterprise'; planInfo = 'Enterprise Plan: $30/month';"
+                                                    ng-disabled="currentPlan === 'Enterprise'"
                                                     class="btn btn-effect-ripple  btn-success" id="plan-b-button">
                                                 <i class="fa fa-arrow-right"></i>
-                                                {{currentPlan === 'Plan B' ? 'Current Plan' : 'Select Plan'}}</button>
+                                                {{currentPlan === 'Enterprise' ? 'Current Plan' : 'Select Plan'}}</button>
                                         </td>
                                     </tr>
                                     <tr class="active">
@@ -159,7 +226,7 @@
             </div>
             <div class="modal-body">
                 <h3>{{planInfo}}</h3>
-                <form class="form-horizontal form-bordered settings-form" onsubmit="return false;" ng-hide="planClicked === 'Free Plan'">
+                <form class="form-horizontal form-bordered settings-form" onsubmit="return false;" ng-hide="planClicked === 'Free'">
                     <div class="form-group">
                         <label for="card-name">Name on Card</label>
                         <input type="text" id="card-name" name="card-name" class="form-control input-lg" required>
