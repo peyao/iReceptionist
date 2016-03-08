@@ -15,4 +15,13 @@ angular.module('iReceptionistApp')
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
             $('#page-content').height($rootScope.pageContentHeight());
         });
+
+        $scope.currentPlan = "Free Plan";
+        $scope.planClicked = "";
+        $scope.planInfo = "";
+
+        $scope.updatePlan = function() {
+            // Credit card validation
+            $scope.currentPlan = $scope.planClicked;
+        }
     });
