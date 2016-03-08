@@ -41,11 +41,11 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="email-notifications">Enable Email Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" checked><span></span></label>
+                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" ng-model="user.settings.receiveEmail"><span></span></label>
                                 </div>
                                 <div class="col-xs-6">
                                     <label for="sms-notifications">Enable SMS Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" checked><span></span></label>
+                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" ng-model="user.settings.receiveSMS"><span></span></label>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-effect-ripple btn-primary" onclick="App.alert('account');">Submit</button>
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updateUser();">Submit</button>
                                 </div>
                             </div>
                         </form>
