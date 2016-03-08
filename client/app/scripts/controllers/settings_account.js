@@ -14,6 +14,7 @@ angular.module('iReceptionistApp')
         });
 
         $scope.user = $cookies.getObject('user');
+        console.log($scope.user);
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
         $scope.logoUpload = DropZone.createNew('#logoUpload');

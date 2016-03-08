@@ -8,7 +8,6 @@
 angular.module('iReceptionistApp')
     .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope) {
         $rootScope.currentState = 'settings-forms';
-        console.log('SettingsFormsCtrl loaded.');
 
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());

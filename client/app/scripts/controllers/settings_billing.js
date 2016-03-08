@@ -9,8 +9,6 @@ angular.module('iReceptionistApp')
     .controller('SettingsBillingCtrl', function($rootScope, $scope) {
         $rootScope.currentState = 'settings-billing';
 
-        console.log('SettingsBillingCtrl loaded.');
-
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
             $('#page-content').height($rootScope.pageContentHeight());
