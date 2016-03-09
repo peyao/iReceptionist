@@ -1,0 +1,15 @@
+{
+  "name": "iReceptionist",
+  "description": "Development",
+  "scripts": {
+  },
+  "env": {
+    "MONGOLAB_URI": "mongodb://9QjyvNRXDdy4tt8F:Ny4HskF2TMv8jpWt@ds047325.mongolab.com:47325/heroku_tvhx8911"
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}

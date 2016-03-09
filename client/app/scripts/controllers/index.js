@@ -6,7 +6,7 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies) {
+.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies, BusinessService) {
 
     $scope.doLogout = function() {
         $cookies.remove('user');
@@ -19,6 +19,21 @@ angular.module('iReceptionistApp')
         $scope.doLogout();
     } else {
         App.togglePageLoading(); // Stop Page Loading
+    }
+
+    if (!$cookies.get('business')){
+        BusinessService.getBusiness(
+            $cookies.get('token'),
+            $scope.user.business,
+            function (busObj){
+                console.log("Business: " + busObj);
+                console.log(busObj.name);
+                $cookies.putObject('business', busObj);
+            },
+            function (err) {
+                //$scope.alert.danger = err.errorMsg;
+            }
+        );
     }
 
     /**
