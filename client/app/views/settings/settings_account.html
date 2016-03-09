@@ -66,15 +66,15 @@
                             <div class="form-group">
                                 <div class="col-xs-4">
                                     <label for="email-notifications">Enable Email Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" ng-model="user.settings.receiveEmail"><span></span></label>
+                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" ng-model="user.settings.receiveEmail" ng-change="updateEmailNotifications();"><span></span></label>
                                 </div>
                                 <div class="col-xs-4">
                                     <label for="sms-notifications">Enable SMS Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" ng-model="user.settings.receiveSMS"><span></span></label>
+                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" ng-model="user.settings.receiveSMS" ng-change="updateSMSNotifications();"><span></span></label>
                                 </div>
                                 <div class="col-xs-4">
                                     <label for="browser-notifications">Enable In-Browser Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="browser-notifications" ng-model="user.settings.receiveSMS"><span></span></label>
+                                    <label class="switch switch-success"><input type="checkbox" id="browser-notifications"><span></span></label>
                                 </div>
                             </div>
                         </form>
@@ -91,11 +91,11 @@
                         <form action="" method="post" class="form-horizontal form-bordered settings-form" onsubmit="return false;">
                             <div class="form-group">
                                 <label for="company-name">Change Company Name</label>
-                                <input type="text" id="company-name" name="company-name" class="form-control input-lg" ng-model="business.name">
+                                <input type="text" id="company-name" name="company-name" class="form-control input-lg" ng-model="business.name" ng-change="businessFieldChanged('name');">
                             </div>
                             <div class="form-group">
                                 <label for="company-phone">Change Phone Number </label>
-                                <input type="text" id="company-phone" name="company-phone" class="form-control input-lg" ng-model="business.phone">
+                                <input type="text" id="company-phone" name="company-phone" class="form-control input-lg" ng-model="business.phone" ng-change="businessFieldChanged('phone');">
                             </div>
                             <div class="form-group">
                                 <label for="logoUpload" class="text-left">Logo</label>

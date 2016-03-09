@@ -19,7 +19,12 @@ angular.module('iReceptionistApp')
         };
 
         $scope.user = $cookies.getObject('user');
-        $scope.business = $cookies.getObject('business');
+        $scope.business = $cookies.getObject('business').business;
+
+        // Object that holds the fields to update in the business. Must also include businessId.
+        $scope.businessFields = {
+            "businessId": $scope.user.business
+        };
 
         $scope.updateUser = function() {
             // User service call
@@ -31,23 +36,40 @@ angular.module('iReceptionistApp')
             toastr.success("Your settings have been updated!");
         };
 
+        $scope.updateEmailNotifications = function() {
+            // User service call
+        };
+
+        $scope.updateSMSNotifications = function() {
+            // User service call
+        };
+
+        // Need browser notifications field in user settings
+        /*$scope.updateBrowserNotifications = function() {
+            // User service call
+        };*/
+
+        $scope.businessFieldChanged = function(field) {
+            // Add the changed field to the object that will be sent to backend
+            $scope.businessFields[field] = $scope.business[field];
+        };
+
         $scope.updateBusiness = function() {
-            /* This is how you'll want to call update -- the second argument will need to be an object with ONLY the info
-             *  want to change.  So you'll want to check for changes and only include those that are different.
-             *  The object MUST include businessId, so don't remove that part
-             */
-            //BusinessService.updateBusiness(
-            //    $cookies.get('token'),
-            //    {
-            //      "businessId": $scope.user.business
-            //    },
-            //    function (busObj){
-            //        console.log("update success");
-            //    },
-            //    function (err) {
-            //        console.log("update fail");
-            //    }
-            //);
+            BusinessService.updateBusiness(
+                $cookies.get('token'),
+                $scope.businessFields,
+                function (busObj){
+                    toastr.success("Your settings were updated!");
+
+                    // Update the business cookie
+                    var businessCookie = $cookies.getObject('business');
+                    businessCookie.business = busObj;
+                    $cookies.putObject('business', businessCookie);
+                },
+                function (err) {
+                    console.log("Error updating business settings");
+                }
+            );
         };
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
