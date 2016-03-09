@@ -29,6 +29,38 @@ angular.module('iReceptionistApp')
             email: 'powell@gmail.com'
         } ];
 
+        $scope.cancel = function (){
+          console.log('resetting form')
+          $scope.editEmp = {};
+          $scope.editEmp.email = '';
+          $scope.editForm.$setPristine();
+          $scope.newEmp = {};
+          $scope.newEmp.email = '';
+          $scope.inviteForm.$setPristine();
+        };
+
+        $scope.newEmp = {};
+        /*  if(!$cookies.get('employees')){
+            UserService.getEmployees(
+                $cookies.get('token'),
+                $cookies.getObject('user').employee,
+
+                  data.forEach(function(empObj) {
+                  console.log("Employee " + empObj);
+                  $scope.employees.push({
+                    "name": user.name,
+                    "email": user.email,
+                    "phone": user.phone,
+                    "avatar": user.avatar
+                  });
+                },
+                function (err){
+                console.log(err);
+              }
+            );
+          };*/
+
+
       /*  $scope.submit = function (form) {
         $http.post('/api/employee',
               {
