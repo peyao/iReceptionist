@@ -32,15 +32,56 @@ angular.module('iReceptionistApp')
     }];
     $scope.emp = '';
 
-    $scope.inviteEmployee = function() {
-      if ($scope.emp.name && $scope.emp.email && $scope.emp.number) {
-        $scope.employees.push({
-          "name": $scope.emp.name,
-          "email": $scope.emp.email,
-          "phone": $scope.emp.phone
-        });
-      }
+    $scope.cancel = function() {
+      console.log('resetting form')
+      $scope.editEmp = {};
+      $scope.editEmp.email = '';
+      $scope.editForm.$setPristine();
+      $scope.newEmp = {};
+      $scope.newEmp.email = '';
+      $scope.inviteForm.$setPristine();
     };
+
+    $scope.newEmp = {};
+    /*  if(!$cookies.get('employees')){
+        UserService.getEmployees(
+            $cookies.get('token'),
+            $cookies.getObject('user').employee,
+
+              data.forEach(function(empObj) {
+              console.log("Employee " + empObj);
+              $scope.employees.push({
+                "name": user.name,
+                "email": user.email,
+                "phone": user.phone,
+                "avatar": user.avatar
+              });
+            },
+            function (err){
+            console.log(err);
+          }
+        );
+      };*/
+
+
+    /*  $scope.submit = function (form) {
+      $http.post('/api/employee',
+            {
+              name: form.name,
+              email: form.email,
+              number: form.number
+              })
+    };*/
+
+    /*  $scope.inviteEmployee = function() {
+        if ($scope.emp.name && $scope.emp.email && $scope.emp.number) {
+          $scope.employees.push({
+            "name": $scope.emp.name,
+            "email": $scope.emp.email,
+            "phone": $scope.emp.phone
+          });
+        }
+      };*/
 
     /*  $scope.submit = function (form) {
       $http.post('/api/employee',
