@@ -31,6 +31,16 @@ angular.module('iReceptionistApp')
             };
             this.apiCall(req, success, error);
         },
+        getVisited: function(page, per_page, visitDate, token, success, error) {
+            var req = {
+                method: 'GET',
+                url: '/visitor/visited?page=' + page + '&per_page=' + per_page + '&date=' + visitDate,
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            };
+            this.apiCall(req, success, error);
+        },
         checkOff: function(visId, token, success, error){
             var req = {
                 method: 'PUT',
@@ -49,6 +59,7 @@ angular.module('iReceptionistApp')
             }).error(function(data, status) {
                 error(data, status);
             });
-        }
+        },
+
     };
 });
