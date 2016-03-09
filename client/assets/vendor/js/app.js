@@ -607,6 +607,71 @@ var App = function() {
         "oPaginate": {
           "sPrevious": "",
           "sNext": ""
+    };
+
+    /* Print functionality - Hides all sidebars, prints the page and then restores them (To fix an issue with CSS print styles in webkit browsers)  */
+    var handlePrint = function() {
+        // Store all #page-container classes
+        var pageCls = page.prop('class');
+
+        // Remove all classes from #page-container
+        page.prop('class', '');
+
+        // Print the page
+        window.print();
+
+        // Restore all #page-container classes
+        page.prop('class', pageCls);
+    };
+
+    /* Show an alert */
+    var showAlert = function(page) {
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "timeOut": "2500"
+        };
+        if (page === "account") {
+            toastr.success("Your settings have been updated!");
+        }
+        else if (page === "billing") {
+            toastr.success("Your plan has been updated!");
+        }
+        else if (page === "forms-themes") {
+            toastr.success("Your form has been saved!");
+        }
+        else if (page === "edit-emp"){
+            toastr.success("Employee has been edited!")
+        }
+        else if (page === "invite-emp"){
+            toastr.success("Employee has been invited!")
+        }
+        else if (page === "promote-admin"){
+            toastr.success("Employee has been promoted to admin")
+        }
+        else if (page === "delete-emp"){
+            toastr.success("Employee has been deleted")
+        }
+    };
+
+    return {
+        init: function() {
+            uiInit(); // Initialize UI
+            //pageLoading(); // Start and Stop Page Loading
+        },
+        togglePageLoading: function() {
+            pageLoading(); // Start and Stop Page Loading
+        },
+        sidebar: function(mode, extra) {
+            handleSidebar(mode, extra); // Handle sidebars - access functionality from everywhere
+        },
+        datatables: function() {
+            dtIntegration(); // Datatables Bootstrap integration
+        },
+        pagePrint: function() {
+            handlePrint(); // Print functionality
+        },
+        alert: function(page) {
+            showAlert(page);  // Show alert
         }
       }
     });
