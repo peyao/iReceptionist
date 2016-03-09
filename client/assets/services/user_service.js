@@ -18,6 +18,17 @@ angular.module('iReceptionistApp')
                 };
                 this.apiCall(req, success, error);
             },
+            updateUser: function(token, userObj, success, error){
+               var req = {
+                   method: 'PUT',
+                   url: '/user',
+                   headers: {
+                       'Authorization': 'Bearer ' + token
+                   },
+                   data: userObj
+                };
+                this.apiCall(req, success, error);
+            },
             apiCall: function(req, success, error) {
                 req.url = API_URL + req.url;
                 $http(req)

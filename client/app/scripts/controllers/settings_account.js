@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, BusinessService) {
+    .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, BusinessService, UserService) {
         $rootScope.currentState = 'settings-account';
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
@@ -30,6 +30,20 @@ angular.module('iReceptionistApp')
         //    },
         //    function (err) {
         //        console.log("update fail");
+        //    }
+        //);
+
+        //UserService.updateUser(
+        //    $cookies.get('token'),
+        //    {
+        //        'phone': '0192837465'
+        //    },
+        //    function (userObj) {
+        //        console.log("user update success");
+        //        console.log(userObj);
+        //    },
+        //    function (err) {
+        //        console.log("user update fail");
         //    }
         //);
 
