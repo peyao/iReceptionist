@@ -19,16 +19,17 @@ angular.module('iReceptionistApp')
         $scope.step--;
         registerWizard.formwizard('show', 'register-step' + $scope.step);
     };
-    $scope.nextStep = function (skip) {
-        if ($scope.step === REGISTRATION_STEPS || skip){
+    $scope.nextStep = function () {
+        if ($scope.step === REGISTRATION_STEPS){
             submitRegistration();
             console.log('got in');
-        } else {
+        }
+        else {
             $scope.step++;
             registerWizard.formwizard('show', 'register-step' + $scope.step);
-            console.log('next');
         }
     };
+
 
     $scope.alert = {
         success: 'Registration',
@@ -236,4 +237,5 @@ angular.module('iReceptionistApp')
             $scope.disableNextButton = true;
         }
     };
+
 });
