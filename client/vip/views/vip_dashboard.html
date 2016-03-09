@@ -11,54 +11,50 @@
 <!-- Stats Widgets -->
 <div class="row">
     <div class="col-sm-6 col-lg-3">
-        <a href="javascript:void(0)" class="widget">
+        <a href="javascript:void(0)" class="widget" onclick="plotNewData('total_clients')">
             <div class="widget-content widget-content-mini text-right clearfix">
-                <div class="widget-icon pull-left themed-background">
-                    <i class="gi gi-cardio text-light-op"></i>
+                <div class="widget-icon pull-left themed-background-success">
+                    <i class="gi gi-user text-light-op"></i>
                 </div>
-                <h2 class="widget-heading h3">
-                    <strong><span data-toggle="counter" data-to="2835"></span></strong>
+                <h2 class="widget-heading h3 text-success" style="font-size:160%;">
+                    <strong>Total Clients</strong>
                 </h2>
-                <span class="text-muted">SALES</span>
             </div>
         </a>
     </div>
     <div class="col-sm-6 col-lg-3">
-        <a href="javascript:void(0)" class="widget">
+        <a href="javascript:void(0)" class="widget" onclick="plotNewData('employees_client')">
             <div class="widget-content widget-content-mini text-right clearfix">
-                <div class="widget-icon pull-left themed-background">
-                    <i class="gi gi-cardio text-light-op"></i>
+                <div class="widget-icon pull-left themed-background-warning">
+                    <i class="gi gi-briefcase text-light-op"></i>
                 </div>
-                <h2 class="widget-heading h3">
-                    <strong><span data-toggle="counter" data-to="2835"></span></strong>
+                <h2 class="widget-heading h3 text-warning" style="font-size:160%;">
+                    <strong>Employees per Client</strong>
                 </h2>
-                <span class="text-muted">SALES</span>
             </div>
         </a>
     </div>
     <div class="col-sm-6 col-lg-3">
-        <a href="javascript:void(0)" class="widget">
+        <a href="javascript:void(0)" class="widget" onclick="plotNewData('new_clients')">
             <div class="widget-content widget-content-mini text-right clearfix">
                 <div class="widget-icon pull-left themed-background">
                     <i class="gi gi-cardio text-light-op"></i>
                 </div>
-                <h2 class="widget-heading h3">
-                    <strong><span data-toggle="counter" data-to="2835"></span></strong>
+                <h2 class="widget-heading h3" style="font-size:160%;">
+                    <strong>New Clients<span data-toggle="counter" data-to="2835"></span></strong>
                 </h2>
-                <span class="text-muted">SALES</span>
             </div>
         </a>
     </div>
     <div class="col-sm-6 col-lg-3">
-        <a href="javascript:void(0)" class="widget">
+        <a href="javascript:void(0)" class="widget" onclick="plotNewData('total_income')">
             <div class="widget-content widget-content-mini text-right clearfix">
-                <div class="widget-icon pull-left themed-background">
-                    <i class="gi gi-cardio text-light-op"></i>
+                <div class="widget-icon pull-left themed-background-danger">
+                    <i class="gi gi-wallet text-light-op"></i>
                 </div>
-                <h2 class="widget-heading h3">
-                    <strong><span data-toggle="counter" data-to="2835"></span></strong>
+                <h2 class="widget-heading h3 text-danger" style="font-size:160%;">
+                    <strong>Total Income<span data-toggle="counter" data-to="5820"></span></strong>
                 </h2>
-                <span class="text-muted">SALES</span>
             </div>
         </a>
     </div>
@@ -70,7 +66,7 @@
         <!-- Chart Widget -->
         <div class="widget">
             <div class="widget-content border-bottom">
-                <span class="pull-right text-muted">2013</span>
+                <span class="pull-right text-muted">2015</span>
                 Last Year's Data
             </div>
             <div class="widget-content border-bottom themed-background-muted">
@@ -93,46 +89,29 @@
         </div>
     </div>
         <div class="">
-        <!-- Project Widget -->
-        <div class="widget">
-            <div class="widget-content border-bottom">
-                <span class="pull-right text-muted">As of 2/26/2016</span>
-                Client Levels
-            </div>
-            <a href="javascript:void(0)" class="widget-content themed-background-muted text-right clearfix">
-                <img src="/assets/vendor/img/placeholders/avatars/avatar6.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar pull-left">
-                <h2 class="widget-heading h3 text-muted">Level 1</h2>
-                <div class="progress progress-striped progress-mini active">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
-                </div>
-            </a>
-            <a href="javascript:void(0)" class="widget-content themed-background-muted border-top text-right clearfix">
-                <img src="/assets/vendor/img/placeholders/avatars/avatar2.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar pull-left">
-                <h2 class="widget-heading h3 text-muted">Level 2</h2>
-                <div class="progress progress-striped progress-mini active">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%"></div>
-                </div>
-            </a>
-            <a href="javascript:void(0)" class="widget-content themed-background-muted border-top text-right clearfix">
-                <img src="/assets/vendor/img/placeholders/avatars/avatar11.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar pull-left">
-                <h2 class="widget-heading h3 text-muted">Level 3</h2>
-                <div class="progress progress-striped progress-mini active">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%"></div>
-                </div>
-            </a>
-            <div class="widget-content widget-content-full border-top">
-                <div class="row text-center">
-                    <div class="col-xs-6 push-inner-top-bottom border-right">
-                        <i class="fa fa-check-circle-o"></i> On Time
+            <!-- Project Widget -->
+            <div class="col-lg-16">
+                <div class="widget">
+                    <div class="widget-content widget-content-mini themed-background-dark-default text-light text-center">
+                        <i class="fa fa-bar-chart-o"></i> <strong>Client Account Levels</strong>
                     </div>
-                    <div class="col-xs-6 push-inner-top-bottom">
-                        <i class="fa fa-clock-o"></i> 17 Days
+                    <div class="widget-content themed-background-muted">
+                        <div class="row text-center">
+                            <div class="col-xs-6">
+                                <h3 class="widget-heading"><i class="gi gi-up_arrow text-muted push"></i> <br><small>22% Conversion Rate</small></h3>
+                            </div>
+                            <div class="col-xs-6">
+                                <h3 class="widget-heading"><i class="gi gi-user text-muted push"></i> <br><small>659 Total Clients</small></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div id="widget-chart-pie" style="height: 380px;"></div>
                     </div>
                 </div>
             </div>
+            <!-- END Project Widget -->
         </div>
-        <!-- END Project Widget -->
-    </div>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">

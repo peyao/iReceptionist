@@ -122,40 +122,83 @@ angular.module('iReceptionistApp')
      * Plugins included in this template: pie, resize, stack, time
      */
 
-    // Get the element where we will attach the chart
-    var chartClassicDash    = $('#chart-classic-dash');
+    var initialPlot = 'total_clients';
+    //initially plot total_clients
+    plotNewData(initialPlot);
+    
+    
 
-    // Data for the chart
-    var dataEarnings        = [[1, 1900], [2, 2300], [3, 3200], [4, 2500], [5, 4200], [6, 3100], [7, 3600], [8, 2500], [9, 4600], [10, 3700], [11, 4200], [12, 5200]];
-    var dataSales           = [[1, 850], [2, 750], [3, 1500], [4, 900], [5, 1500], [6, 1150], [7, 1500], [8, 900], [9, 1800], [10, 1700], [11, 1900], [12, 2550]];
-    var dataTickets         = [[1, 130], [2, 330], [3, 220], [4, 350], [5, 150], [6, 275], [7, 280], [8, 380], [9, 120], [10, 330], [11, 190], [12, 410]];
+    var widgetChartPie = $('#widget-chart-pie');
+    $.plot(widgetChartPie,
+        [
+            {label: 'Free', data: 20},
+            {label: 'Basic', data: 10},
+            {label: 'Premium', data: 60},
+            {label: 'Enterprise', data: 10}
+        ],
+        {
+            colors: ['#454e59', '#5cafde', '#5ccdde', '#fac42e'],
+            legend: {show: false},
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    label: {
+                        show: true,
+                        radius: 2/3,
+                        formatter: function(label, pieSeries) {
+                            console.log(label);
+                            return '<div class="chart-pie-label">' + label + '<br>' + Math.round(pieSeries.percent) + '%</div>';
+                        },
+                        background: {opacity: .75, color: '#000000'}
+                    }
+                }
+            }
+        }
+    );
+    
+    
+    
+});
 
-    var dataMonths          = [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']];
-
-    // Classic Chart
+function plotNewData(whichData) {
+    
+        var dataMonths = [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']];
+        var dataToPlot = [];
+        var updateData = function(whichData) {
+            // hard coded for now until get routes from backend
+            switch(whichData) {
+                case 'total_clients':
+                    return ['Total Clients','#afde5c', [1, 1900], [2, 2300], [3, 3200], [4, 2500], [5, 4200], [6, 3100], [7, 3600], [8, 2500], [9, 4600], [10, 3700], [11, 4200], [12, 5200]];
+                case 'employees_client':
+                    return ['Employees per Client','#deb25c', [1, 850], [2, 750], [3, 1500], [4, 900], [5, 1500], [6, 1150], [7, 1500], [8, 900], [9, 1800], [10, 1700], [11, 1900], [12, 2550]];
+                case 'new_clients':
+                    return ['New Clients','rgb(222,75,57)', [1, 130], [2, 330], [3, 220], [4, 350], [5, 150], [6, 275], [7, 280], [8, 380], [9, 120], [10, 330], [11, 190], [12, 410]];
+                case 'total_income':
+                    return ['Total Income','#de815c', [1, 1530], [2, 2330], [3, 3220], [4, 4330], [5, 5510], [6, 6765], [7, 7780], [8, 8380], [9, 9120], [10, 9330], [11, 10090], [12, 10410]];
+                default:
+                    return ['Total Clients','#afde5c', [1, 1900], [2, 2300], [3, 3200], [4, 2500], [5, 4200], [6, 3100], [7, 3600], [8, 2500], [9, 4600], [10, 3700], [11, 4200], [12, 5200]]; //clients by default
+            }
+        };
+    
+    dataToPlot = updateData(whichData);
+    
+    var categoryPlotted = dataToPlot.shift();
+    var colorToPlot = dataToPlot.shift();
+    
+    var chartClassicDash = $('#chart-classic-dash');
+    
     $.plot(chartClassicDash,
         [
             {
-                label: 'Earnings',
-                data: dataEarnings,
+                label: categoryPlotted,
+                data: dataToPlot,
                 lines: {show: true, fill: true, fillColor: {colors: [{opacity: .6}, {opacity: .6}]}},
                 points: {show: true, radius: 5}
             },
-            {
-                label: 'Sales',
-                data: dataSales,
-                lines: {show: true, fill: true, fillColor: {colors: [{opacity: .6}, {opacity: .6}]}},
-                points: {show: true, radius: 5}
-            },
-            {
-                label: 'Tickets',
-                data: dataTickets,
-                lines: {show: true, fill: true, fillColor: {colors: [{opacity: .6}, {opacity: .6}]}},
-                points: {show: true, radius: 5}
-            }
         ],
         {
-            colors: ['#5ccdde', '#454e59', '#ffffff'],
+            colors: [colorToPlot],
             legend: {show: true, position: 'nw', backgroundOpacity: 0},
             grid: {borderWidth: 0, hoverable: true, clickable: true},
             yaxis: {show: false, tickColor: '#f5f5f5', ticks: 3},
@@ -175,7 +218,7 @@ angular.module('iReceptionistApp')
                 var x = item.datapoint[0], y = item.datapoint[1];
 
                 if (item.seriesIndex === 0) {
-                    ttlabel = '$ <strong>' + y + '</strong>';
+                    ttlabel = '<strong>' + y + '</strong>';
                 } else if (item.seriesIndex === 1) {
                     ttlabel = '<strong>' + y + '</strong> sales';
                 } else {
@@ -191,6 +234,5 @@ angular.module('iReceptionistApp')
             previousPoint = null;
         }
     });
-
     
-});
+}
