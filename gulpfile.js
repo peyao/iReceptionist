@@ -112,5 +112,6 @@ gulp.task('default', [
  */
 gulp.task('prod', [
     'sass-all',
-    'bower-all']
+    'bower-all',
+    'node app.js']
 );
