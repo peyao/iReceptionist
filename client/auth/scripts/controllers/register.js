@@ -97,7 +97,8 @@ angular.module('iReceptionistApp')
             }
         );
     };
-    //
+
+    // Initialize Dropzones
     $scope.logoUpload = DropZone.createNew('#logoUpload');
     $scope.bgUpload = DropZone.createNew('#bgUpload');
 
@@ -111,6 +112,7 @@ angular.module('iReceptionistApp')
         inDuration: 0,
         outDuration: 0
     };
+
     /* Initialize Register Wizard */
     var registerWizard = $('#register-wizard');
 
@@ -216,8 +218,6 @@ angular.module('iReceptionistApp')
         inDuration: 0,
         outDuration: 0
     });
-
-
 
     $scope.termsHandler = function(isChecked) {
         if (isChecked) {
