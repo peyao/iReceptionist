@@ -21,19 +21,47 @@ angular.module('iReceptionistApp')
         $scope.user = $cookies.getObject('user');
         $scope.business = $cookies.getObject('business').business;
 
+        // Object that holds the fields to update in the user.
+        var userFields = {};
+
         // Object that holds the fields to update in the business. Must also include businessId.
-        $scope.businessFields = {
+        var businessFields = {
             "businessId": $scope.user.business
         };
 
+        $scope.userFieldChanged = function(field) {
+            userFields[field] = $scope.user[field];
+        };
+
+        var checkFieldsUser = function() {
+            // Make sure we only send fields that have changed
+            for (var key in userFields) {
+                if (userFields[key] === $cookies.getObject('user')[key]) {
+                    delete userFields[key];
+                }
+            }
+        };
+
         $scope.updateUser = function() {
-            // User service call
+            checkFieldsUser();
 
-            // Update the user cookie
-            $cookies.putObject('user', $scope.user);
+            UserService.updateUser(
+                $cookies.get('token'),
+                userFields,
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
 
-            // Show alert
-            toastr.success("Your settings have been updated!");
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                    console.log(userObj);
+                },
+                function (err) {
+                    console.log("Error updating user settings");
+                }
+            );
+
+            // Reset the changed fields
+            userFields = {};
         };
 
         $scope.updateEmailNotifications = function() {
@@ -50,14 +78,24 @@ angular.module('iReceptionistApp')
         };*/
 
         $scope.businessFieldChanged = function(field) {
-            // Add the changed field to the object that will be sent to backend
-            $scope.businessFields[field] = $scope.business[field];
+            businessFields[field] = $scope.business[field];
+        };
+
+        var checkFieldsBusiness = function() {
+            // Make sure we only send fields that have changed
+            for (var key in businessFields) {
+                if (businessFields[key] === $cookies.getObject('business').business[key]) {
+                    delete businessFields[key];
+                }
+            }
         };
 
         $scope.updateBusiness = function() {
+            checkFieldsBusiness();
+
             BusinessService.updateBusiness(
                 $cookies.get('token'),
-                $scope.businessFields,
+                businessFields,
                 function (busObj){
                     toastr.success("Your settings were updated!");
 
@@ -70,21 +108,12 @@ angular.module('iReceptionistApp')
                     console.log("Error updating business settings");
                 }
             );
-        };
 
-        //UserService.updateUser(
-        //    $cookies.get('token'),
-        //    {
-        //        'phone': '0192837465'
-        //    },
-        //    function (userObj) {
-        //        console.log("user update success");
-        //        console.log(userObj);
-        //    },
-        //    function (err) {
-        //        console.log("user update fail");
-        //    }
-        //);
+            // Reset the changed fields
+            businessFields = {
+                "businessId": $scope.user.business
+            };
+        };
 
         //UserService.changePassword(
         //    $cookies.get('token'),
