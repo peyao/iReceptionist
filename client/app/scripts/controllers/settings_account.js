@@ -65,11 +65,45 @@ angular.module('iReceptionistApp')
         };
 
         $scope.updateEmailNotifications = function() {
-            // User service call
+            var receiveEmail = $scope.user.settings.receiveEmail === true ? "true" : "false";
+
+            UserService.updateUser(
+                $cookies.get('token'),
+                {
+                    "receiveEmail": receiveEmail
+                },
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                    console.log(userObj);
+                },
+                function (err) {
+                    console.log("Error updating user settings");
+                }
+            );
         };
 
         $scope.updateSMSNotifications = function() {
-            // User service call
+            var receiveSMS = $scope.user.settings.receiveSMS === true ? "true" : "false";
+
+            UserService.updateUser(
+                $cookies.get('token'),
+                {
+                    "receiveSMS": receiveSMS
+                },
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                    console.log(userObj);
+                },
+                function (err) {
+                    console.log("Error updating user settings");
+                }
+            );
         };
 
         // Need browser notifications field in user settings
