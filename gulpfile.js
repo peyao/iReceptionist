@@ -112,6 +112,5 @@ gulp.task('default', [
  */
 gulp.task('prod', [
     'sass-all',
-    'bower-all',
-    'nodemon',
-]);
+    'bower-all']
+);
