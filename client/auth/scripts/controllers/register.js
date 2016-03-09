@@ -39,6 +39,7 @@ angular.module('iReceptionistApp')
     $scope.register.step2 = {};
     $scope.register.step1.fullName = '';
     $scope.register.step1.email = '';
+    $scope.register.step1.phone = '';
     $scope.register.step1.password = '';
     $scope.register.step2.businessName = '';
 
@@ -48,6 +49,7 @@ angular.module('iReceptionistApp')
                 'name': $scope.register.step1.fullName,
                 'email': $scope.register.step1.email,
                 'password': $scope.register.step1.password,
+                'phone': $scope.register.step1.phone,
                 'businessName': $scope.register.step2.businessName
             },
 
@@ -82,9 +84,9 @@ angular.module('iReceptionistApp')
                         if (userObj.user.role === -1) {
                             path = '/vip';
                         }
-                        $cookies.put('user', userObj.user, {'path': '/auth'});
+                        $cookies.putObject('user', userObj.user, {'path': '/auth'});
                         $cookies.put('token', userObj.token, {'path': '/auth'});
-                        $cookies.put('user', userObj.user, {'path': path});
+                        $cookies.putObject('user', userObj.user, {'path': path});
                         $cookies.put('token', userObj.token, {'path': path});
                         $window.location.href = path; // Redirect
                     },
