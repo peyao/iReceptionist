@@ -594,18 +594,6 @@ var App = function() {
         else if (page === "forms-themes") {
             toastr.success("Your form has been saved!");
         }
-        else if (page === "edit-emp"){
-            toastr.success("Employee has been edited!")
-        }
-        else if (page === "invite-emp"){
-            toastr.success("Employee has been invited!")
-        }
-        else if (page === "promote-admin"){
-            toastr.success("Employee has been promoted to admin")
-        }
-        else if (page === "delete-emp"){
-            toastr.success("Employee has been deleted")
-        }
     };
 
     return {

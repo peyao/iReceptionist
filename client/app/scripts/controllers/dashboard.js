@@ -13,8 +13,7 @@ angular.module('iReceptionistApp')
             $('#page-content').height($rootScope.pageContentHeight());
         });
 
-        $scope.user = $cookies.getObject('user');
-		    $scope.showMine = false;
+		$scope.showMine = false;
         $scope.showActive = null;
         $scope.visitors = [];
 
@@ -32,12 +31,24 @@ angular.module('iReceptionistApp')
             }
         );
 
-        //console.log('Authorization:' + 'Bearer ' + $cookies.get('token'));
+        console.log('Authorization:' + 'Bearer ' + $cookies.get('token'));
         var pusher = new Pusher('7c84af4dd6941414d752', {
             encrypted: true
         });
 
-        var channel = pusher.subscribe($scope.user.business);
+        var businessId;
+        UserService.getUserByToken(
+            $cookies.get('token'),
+            function (userObj){
+                console.log("user: " + userObj);
+                businessId = userObj.business;
+            },
+            function (err) {
+                $scope.alert.danger = err.errorMsg;
+            }
+        );
+        var channelName = $cookies.get('businessId');
+        var channel = pusher.subscribe(channelName);
         channel.bind('newVisitor', function(data){
             VisitorService.getVisitorQueue(
                 1,

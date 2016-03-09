@@ -35,10 +35,10 @@ angular.module('iReceptionistApp')
                 if (userObj.user.role === -1) {
                     path = '/vip';
                 }
-                $cookies.putObject('user', userObj.user, {'path': '/auth'});
+                $cookies.put('user', userObj.user, {'path': '/auth'});
                 $cookies.put('token', userObj.token, {'path': '/auth'});
                 $cookies.put('token', userObj.token, {'path': '/checkin'});
-                $cookies.putObject('user', userObj.user, {'path': path});
+                $cookies.put('user', userObj.user, {'path': path});
                 $cookies.put('token', userObj.token, {'path': path});
                 $window.location.href = path; // Redirect
             },
