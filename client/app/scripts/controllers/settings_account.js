@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsAccountCtrl', function($rootScope, $scope, DropZone, $cookies) {
+    .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, BusinessService) {
         $rootScope.currentState = 'settings-account';
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
@@ -19,13 +19,7 @@ angular.module('iReceptionistApp')
         };
 
         $scope.user = $cookies.getObject('user');
-
-        if ($scope.user.settings.receiveEmail === null) {
-            $scope.user.settings.receiveEmail = true;
-        }
-        if ($scope.user.settings.receiveSMS === null) {
-            $scope.user.settings.receiveSMS = true;
-        }
+        $scope.business = $cookies.getObject('business');
 
         $scope.updateUser = function() {
             // User service call
@@ -35,6 +29,25 @@ angular.module('iReceptionistApp')
 
             // Show alert
             toastr.success("Your settings have been updated!");
+        };
+
+        $scope.updateBusiness = function() {
+            /* This is how you'll want to call update -- the second argument will need to be an object with ONLY the info
+             *  want to change.  So you'll want to check for changes and only include those that are different.
+             *  The object MUST include businessId, so don't remove that part
+             */
+            //BusinessService.updateBusiness(
+            //    $cookies.get('token'),
+            //    {
+            //      "businessId": $scope.user.business
+            //    },
+            //    function (busObj){
+            //        console.log("update success");
+            //    },
+            //    function (err) {
+            //        console.log("update fail");
+            //    }
+            //);
         };
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
