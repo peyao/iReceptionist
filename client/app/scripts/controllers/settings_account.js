@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, BusinessService) {
+    .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, BusinessService, UserService) {
         $rootScope.currentState = 'settings-account';
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
@@ -71,6 +71,34 @@ angular.module('iReceptionistApp')
                 }
             );
         };
+
+        //UserService.updateUser(
+        //    $cookies.get('token'),
+        //    {
+        //        'phone': '0192837465'
+        //    },
+        //    function (userObj) {
+        //        console.log("user update success");
+        //        console.log(userObj);
+        //    },
+        //    function (err) {
+        //        console.log("user update fail");
+        //    }
+        //);
+
+        //UserService.changePassword(
+        //    $cookies.get('token'),
+        //    {
+        //        'oldPassword': 'oldValue',
+        //        'newPassword': 'newValue'
+        //    },
+        //    function (userObj) {
+        //        console.log("change password success: " + userObj);
+        //    },
+        //    function (err) {
+        //        console.log("change password fail");
+        //    }
+        //);
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
         $scope.logoUpload = DropZone.createNew('#logoUpload');
