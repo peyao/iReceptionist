@@ -58,19 +58,26 @@
                             </div>
                         </form>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-4">
-                            <label for="email-notifications">Enable Email Notifications</label>
-                            <label class="switch switch-success"><input type="checkbox" id="email-notifications" ng-model="user.settings.receiveEmail"><span></span></label>
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Update Notification Settings</h2>
                         </div>
-                        <div class="col-xs-4">
-                            <label for="sms-notifications">Enable SMS Notifications</label>
-                            <label class="switch switch-success"><input type="checkbox" id="sms-notifications" ng-model="user.settings.receiveSMS"><span></span></label>
-                        </div>
-                        <div class="col-xs-4">
-                            <label for="browser-notifications">Enable In-Browser Notifications</label>
-                            <label class="switch switch-success"><input type="checkbox" id="browser-notifications" ng-model="user.settings.receiveSMS"><span></span></label>
-                        </div>
+                        <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <div class="col-xs-4">
+                                    <label for="email-notifications">Enable Email Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" ng-model="user.settings.receiveEmail"><span></span></label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="sms-notifications">Enable SMS Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" ng-model="user.settings.receiveSMS"><span></span></label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="browser-notifications">Enable In-Browser Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="browser-notifications" ng-model="user.settings.receiveSMS"><span></span></label>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-sm-6">
