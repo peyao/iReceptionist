@@ -29,6 +29,7 @@ angular.module('iReceptionistApp')
                 },
                 data: busObj
             };
+            console.log(busObj);
             this.apiCall(req, success, error);
         },
         apiCall: function(req, success, error) {

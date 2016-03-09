@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsBillingCtrl', function($rootScope, $scope) {
+    .controller('SettingsBillingCtrl', function($rootScope, $scope, $cookies, BusinessService) {
         $rootScope.currentState = 'settings-billing';
 
         $('#page-content-ui-view').resize(function() {
@@ -14,12 +14,38 @@ angular.module('iReceptionistApp')
             $('#page-content').height($rootScope.pageContentHeight());
         });
 
-        $scope.currentPlan = "Free";
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "timeOut": "2500"
+        };
+
+        $scope.user = $cookies.getObject('user');
+        $scope.business = $cookies.getObject('business').business;
+        $scope.currentPlan = $scope.business.planLevel;
         $scope.planClicked = "";
         $scope.planInfo = "";
 
         $scope.updatePlan = function() {
             // Credit card validation
-            $scope.currentPlan = $scope.planClicked;
+
+            BusinessService.updateBusiness(
+                $cookies.get('token'),
+                {
+                    "businessId": $scope.user.business,
+                    "planLevel": $scope.planClicked
+                },
+                function (busObj){
+                    toastr.success("Your plan was updated!");
+                    $scope.currentPlan = $scope.planClicked;
+
+                    $scope.business = busObj;
+                    var businessCookie = $cookies.getObject('business');
+                    businessCookie.business = busObj;
+                    $cookies.putObject('business', businessCookie);
+                },
+                function (err) {
+                    console.log("Error updating business plan level");
+                }
+            );
         }
     });
