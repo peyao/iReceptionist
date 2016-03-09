@@ -117,10 +117,18 @@ gulp.task('default', [
 ]);
 
 /**
- * 'gulp prod' : Runs the prod environment. TODO: Run without nodemon.
+ * Do the sass and bower tasks
+ */
+gulp.task('setup', [
+    'sass-all',
+    'bower-all']
+);
+
+
+/**
+ * 'gulp prod' : Runs the production environment.
  */
 gulp.task('prod', [
-    'sass-all',
-    'bower-all',
+    'setup',
     'start-server']
 );
