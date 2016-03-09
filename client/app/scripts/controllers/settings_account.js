@@ -47,6 +47,20 @@ angular.module('iReceptionistApp')
         //    }
         //);
 
+        //UserService.changePassword(
+        //    $cookies.get('token'),
+        //    {
+        //        'oldPassword': 'oldValue',
+        //        'newPassword': 'newValue'
+        //    },
+        //    function (userObj) {
+        //        console.log("change password success: " + userObj);
+        //    },
+        //    function (err) {
+        //        console.log("change password fail");
+        //    }
+        //);
+
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
         $scope.logoUpload = DropZone.createNew('#logoUpload');
         $scope.bgUpload = DropZone.createNew('#bgUpload');

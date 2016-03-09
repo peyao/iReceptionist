@@ -18,27 +18,7 @@ angular.module('iReceptionistApp')
         $scope.showActive = null;
         $scope.visitors = [];
 
-        VisitorService.getVisitorQueue(
-            1,
-            10,
-            $cookies.get('token'),
-            function (visObj) {
-                $scope.visitors = visObj;
-                console.log(visObj);
-                console.log("Grabbing them visitors");
-            },
-            function (err) {
-                $scope.alert.danger = err.errorMsg;
-            }
-        );
-
-        //console.log('Authorization:' + 'Bearer ' + $cookies.get('token'));
-        var pusher = new Pusher('7c84af4dd6941414d752', {
-            encrypted: true
-        });
-
-        var channel = pusher.subscribe($scope.user.business);
-        channel.bind('newVisitor', function(data){
+        var getVisitors = function(){
             VisitorService.getVisitorQueue(
                 1,
                 10,
@@ -52,6 +32,16 @@ angular.module('iReceptionistApp')
                     $scope.alert.danger = err.errorMsg;
                 }
             );
+        };
+
+        getVisitors();
+        var pusher = new Pusher('7c84af4dd6941414d752', {
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe($scope.user.business);
+        channel.bind('newVisitor', function(data){
+            getVisitors();
         });
 
         $scope.doCheckOff = function (data){
@@ -61,19 +51,7 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (visObj){
                     console.log("Checked off: " + visObj);
-                    VisitorService.getVisitorQueue(
-                        1,
-                        10,
-                        $cookies.get('token'),
-                        function (visObj) {
-                            $scope.visitors = visObj;
-                            console.log(visObj);
-                            console.log("Grabbing them visitors");
-                        },
-                        function (err) {
-                            $scope.alert.danger = err.errorMsg;
-                        }
-                    );
+                    getVisitors();
                 },
                 function (err) {
                     $scope.alert.danger = err.errorMsg;
