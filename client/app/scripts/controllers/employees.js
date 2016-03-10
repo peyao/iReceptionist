@@ -87,16 +87,13 @@ angular.module('iReceptionistApp')
     $scope.deleteUser = function () {
        UserService.deleteEmployee(
          $cookies.get('token'),
-         {
-            "deleteUserId": $scope.userID
-        },
+            $scope.userID,
          function (empObj) {
              console.log("Deleted employee: " + empObj);
          },
          function (err) {
              console.log("Delete employee error");
              console.log("Curr ID " + $scope.userID );
-
          }
      );
    };

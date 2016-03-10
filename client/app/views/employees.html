@@ -110,7 +110,7 @@
           <h2 class="widget-heading h3 text-muted">{{e.name}}</h2>
         </div>
         <div class="widget-content themed-background-muted text-dark text-center">
-          <strong>Employee
+          <strong><div ng-if = "e.role == 2 ">Manager</div><div ng-if = "e.role == 3 ">Employee</div>
           </div>
           <div class="widget-content">
             <div class="row text-center">
