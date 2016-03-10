@@ -55,13 +55,13 @@ angular.module('iReceptionistApp')
       };
 
       //UserService.addEmployee(
-      //    $cookies.get('token'),
       //    {
       //        "name": "required",
       //        "phone": "required",
       //        "email": "required",
       //        "avatar": "optional"
       //    },
+      //    $cookies.get('token'),
       //    function (empObj) {
       //        console.log("Invited employee: " + empObj);
       //    },
@@ -71,8 +71,8 @@ angular.module('iReceptionistApp')
       //);
       //
       //UserService.deleteEmployee(
-      //    $cookies.get('token'),
       //    'userIdToDelete',
+      //    $cookies.get('token'),
       //    function (empObj) {
       //        console.log("Deleted employee: " + empObj);
       //    },
@@ -82,11 +82,11 @@ angular.module('iReceptionistApp')
       //);
       //
       //UserService.updateUser(
-      //    $cookies.get('token'),
       //    {
       //        "field": "value",
       //        "field": "value"
       //    },
+      //    $cookies.get('token'),
       //    function (userObj) {
       //        console.log("Update employee: " + userObj);
       //    },

@@ -13,53 +13,188 @@ angular.module('iReceptionistApp')
             $('#page-content').height($rootScope.pageContentHeight());
         });
 
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "timeOut": "2500"
+        };
+
         $scope.user = $cookies.getObject('user');
-        $scope.business = $cookies.getObject('business');
+        $scope.business = $cookies.getObject('business').business;
+        $scope.oldPassword = '';
+        $scope.password = '';
+        $scope.confirmPassword = '';
 
-        /* This is how you'll want to call update -- the second argument will need to be an object with ONLY the info
-        *  want to change.  So you'll want to check for changes and only include those that are different.
-        *  The object MUST include businessId, so don't remove that part
-        */
-        //BusinessService.updateBusiness(
-        //    $cookies.get('token'),
-        //    {
-        //      "businessId": $scope.user.business
-        //    },
-        //    function (busObj){
-        //        console.log("update success");
-        //    },
-        //    function (err) {
-        //        console.log("update fail");
-        //    }
-        //);
+        // Object that holds the fields to update in the user.
+        var userFields = {};
 
-        //UserService.updateUser(
-        //    $cookies.get('token'),
-        //    {
-        //        'phone': '0192837465'
-        //    },
-        //    function (userObj) {
-        //        console.log("user update success");
-        //        console.log(userObj);
-        //    },
-        //    function (err) {
-        //        console.log("user update fail");
-        //    }
-        //);
+        // Object that holds the fields to update in the business. Must also include businessId.
+        var businessFields = {
+            "businessId": $scope.user.business
+        };
 
-        //UserService.changePassword(
-        //    $cookies.get('token'),
-        //    {
-        //        'oldPassword': 'oldValue',
-        //        'newPassword': 'newValue'
-        //    },
-        //    function (userObj) {
-        //        console.log("change password success: " + userObj);
-        //    },
-        //    function (err) {
-        //        console.log("change password fail");
-        //    }
-        //);
+        $scope.userFieldChanged = function(field) {
+            userFields[field] = $scope.user[field];
+        };
+
+        var checkFieldsUser = function() {
+            // Make sure we only send fields that have changed
+            for (var key in userFields) {
+                if (userFields[key] === $cookies.getObject('user')[key]) {
+                    delete userFields[key];
+                }
+            }
+        };
+
+        $scope.updateUser = function() {
+            checkFieldsUser();
+
+            UserService.updateUser(
+                userFields,
+                $cookies.get('token'),
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                },
+                function (err) {
+                    toastr.error("Error updating settings.");
+                    console.log(err);
+                }
+            );
+
+            // Reset the changed fields
+            userFields = {};
+        };
+
+        $('.password-field').focus(function() {
+            // Hide error message when a password field is clicked on
+            $('#password-error').text('').addClass('hidden');
+        });
+
+        $scope.updatePassword = function() {
+            // Validation
+            if ($scope.oldPassword === '' || $scope.password === '' || $scope.confirmPassword === '') {
+                $('#password-error').text("All fields are required.").removeClass('hidden');
+                return;
+            }
+
+            if ($scope.password !== $scope.confirmPassword) {
+                $('#password-error').text("New password and confirm password do not match.").removeClass('hidden');
+                return;
+            }
+
+            UserService.changePassword(
+                {
+                    "oldPassword": $scope.oldPassword,
+                    "newPassword": $scope.password
+                },
+                $cookies.get('token'),
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                },
+                function (err) {
+                    toastr.error("Error updating password.");
+                    console.log(err);
+                }
+            );
+
+            // Reset the changed fields
+            $scope.oldPassword = '';
+            $scope.password = '';
+            $scope.confirmPassword = '';
+        };
+
+        $scope.updateEmailNotifications = function() {
+            var receiveEmail = $scope.user.settings.receiveEmail === true ? "true" : "false";
+
+            UserService.updateUser(
+                {
+                    "receiveEmail": receiveEmail
+                },
+                $cookies.get('token'),
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                    console.log(userObj);
+                },
+                function (err) {
+                    toastr.error("Error updating notification settings.");
+                    console.log(err);
+                }
+            );
+        };
+
+        $scope.updateSMSNotifications = function() {
+            var receiveSMS = $scope.user.settings.receiveSMS === true ? "true" : "false";
+
+            UserService.updateUser(
+                {
+                    "receiveSMS": receiveSMS
+                },
+                $cookies.get('token'),
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                    console.log(userObj);
+                },
+                function (err) {
+                    toastr.error("Error updating notification settings.");
+                    console.log(err);
+                }
+            );
+        };
+
+        // Need browser notifications field in user settings
+        /*$scope.updateBrowserNotifications = function() {
+            // User service call
+        };*/
+
+        $scope.businessFieldChanged = function(field) {
+            businessFields[field] = $scope.business[field];
+        };
+
+        var checkFieldsBusiness = function() {
+            // Make sure we only send fields that have changed
+            for (var key in businessFields) {
+                if (businessFields[key] === $cookies.getObject('business').business[key]) {
+                    delete businessFields[key];
+                }
+            }
+        };
+
+        $scope.updateBusiness = function() {
+            checkFieldsBusiness();
+
+            BusinessService.updateBusiness(
+                businessFields,
+                $cookies.get('token'),
+                function (busObj){
+                    toastr.success("Your settings were updated!");
+
+                    // Update the business cookie
+                    var businessCookie = $cookies.getObject('business');
+                    businessCookie.business = busObj;
+                    $cookies.putObject('business', businessCookie);
+                },
+                function (err) {
+                    toastr.error("Error updating settings.");
+                    console.log(err);
+                }
+            );
+
+            // Reset the changed fields
+            businessFields = {
+                "businessId": $scope.user.business
+            };
+        };
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
         $scope.logoUpload = DropZone.createNew('#logoUpload');
