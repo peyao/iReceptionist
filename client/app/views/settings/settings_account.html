@@ -24,29 +24,11 @@
                         <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
                             <div class="form-group">
                                 <label for="email">Change Email Address</label>
-                                <input type="text" id="email" name="email" class="form-control input-lg" placeholder="example@example.com">
+                                <input type="text" id="email" name="email" class="form-control input-lg" ng-model="user.email" ng-change="userFieldChanged('email');">
                             </div>
                             <div class="form-group">
                                 <label for="phone-number">Change Phone Number</label>
-                                <input type="text" id="phone-number" name="phone-number" class="form-control input-lg" placeholder="Phone Number">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Change Password</label>
-                                <input type="text" id="password" name="password" class="form-control input-lg" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label for="confirm-password">Confirm Password</label>
-                                <input type="text" id="confirm-password" name="confirm-password" class="form-control input-lg" placeholder="Confirm Password">
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <label for="email-notifications">Enable Email Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" checked><span></span></label>
-                                </div>
-                                <div class="col-xs-6">
-                                    <label for="sms-notifications">Enable SMS Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" checked><span></span></label>
-                                </div>
+                                <input type="text" id="phone-number" name="phone-number" class="form-control input-lg" ng-model="user.phone" ng-change="userFieldChanged('phone');">
                             </div>
                             <div class="form-group">
                                 <label for="avatarUpload" class="text-left">Avatar</label>
@@ -63,11 +45,38 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-effect-ripple btn-primary" onclick="App.alert('account');">Submit</button>
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updateUser();">Submit</button>
                                 </div>
                             </div>
                         </form>
                     </div>
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Update Password</h2>
+                        </div>
+                        <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <label for="oldPassword">Old Password</label>
+                                <input type="text" id="oldPassword" name="oldPassword" class="form-control input-lg password-field" placeholder="Old Password" required ng-model="oldPassword" ng-change="passwordFieldChanged('oldPassword');">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">New Password</label>
+                                <input type="text" id="password" name="password" class="form-control input-lg password-field" placeholder="Password" required ng-model="password" ng-change="passwordFieldChanged('password');">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="text" id="confirm-password" name="confirm-password" class="form-control input-lg password-field" placeholder="Confirm Password" required ng-model="confirmPassword" ng-change="passwordFieldChanged('confirmPassword');">
+                            </div>
+                            <div class="alert alert-danger hidden" id="password-error">
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updatePassword();">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
                 <div class="col-sm-6">
                     <div class="block">
@@ -80,15 +89,11 @@
                         <form action="" method="post" class="form-horizontal form-bordered settings-form" onsubmit="return false;">
                             <div class="form-group">
                                 <label for="company-name">Change Company Name</label>
-                                <input type="text" id="company-name" name="company-name" class="form-control input-lg" placeholder="Company Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="company-email">Change Email Address</label>
-                                <input type="text" id="company-email" name="company-email" class="form-control input-lg" placeholder="Email Address">
+                                <input type="text" id="company-name" name="company-name" class="form-control input-lg" ng-model="business.name" ng-change="businessFieldChanged('name');">
                             </div>
                             <div class="form-group">
                                 <label for="company-phone">Change Phone Number </label>
-                                <input type="text" id="company-phone" name="company-phone" class="form-control input-lg" placeholder="Phone Number">
+                                <input type="text" id="company-phone" name="company-phone" class="form-control input-lg" ng-model="business.phone" ng-change="businessFieldChanged('phone');">
                             </div>
                             <div class="form-group">
                                 <label for="logoUpload" class="text-left">Logo</label>
@@ -119,18 +124,32 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-effect-ripple btn-primary" onclick="App.alert('account');">Submit</button>
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updateBusiness();">Submit</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="alert alert-success alert-dismissable display-none">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <h4><strong>Success</strong></h4>
-                    <p>Settings were updated successfully!</p>
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Update Notification Settings</h2>
+                        </div>
+                        <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <div class="col-xs-4">
+                                    <label for="email-notifications">Enable Email Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" ng-model="user.settings.receiveEmail" ng-change="updateEmailNotifications();"><span></span></label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="sms-notifications">Enable SMS Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" ng-model="user.settings.receiveSMS" ng-change="updateSMSNotifications();"><span></span></label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="browser-notifications">Enable In-Browser Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="browser-notifications"><span></span></label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

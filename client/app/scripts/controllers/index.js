@@ -27,7 +27,7 @@ angular.module('iReceptionistApp')
         console.log("business cookie");
         BusinessService.getBusiness(
             $cookies.get('token'),
-            $scope.user.business,
+            $cookies.getObject('user').business,
             function (busObj){
                 console.log("Business: " + busObj);
                 console.log(busObj.business.name);
