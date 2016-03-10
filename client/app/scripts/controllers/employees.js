@@ -21,12 +21,26 @@ angular.module('iReceptionistApp')
               $cookies.get('token'),
               function (empObj) {
                   $scope.employees = empObj;
-                  console.log("Grabbing them employees: " + empObj);
+                  console.log("Grabbing them employees: " + empObj.name);
               },
               function (err) {
                   //$scope.alert.danger = err.errorMsg;
               }
           );
+      };
+
+      $scope.cancel = function() {
+        console.log('resetting form')
+        $scope.editEmp = {};
+        $scope.newEmp = {};
+        $scope.editEmp.phone = '';
+        $scope.editEmp.name = '';
+        $scope.editEmp.email = '';
+        $scope.editForm.$setPristine();
+        $scope.newEmp.number = '';
+        $scope.newEmp.name = '';
+        $scope.newEmp.email = '';
+        $scope.inviteForm.$setPristine();
       };
 
       getEmployeeList();
