@@ -54,14 +54,16 @@ angular.module('iReceptionistApp')
 
         $scope.addEmployee = function () {
             UserService.addEmployee(
-                $cookies.get('token'),
                 {
                     "name": $scope.newEmp.name,
                     "phone": $scope.newEmp.phone,
                     "email": $scope.newEmp.email,
                 },
+                $cookies.get('token'),
                 function (empObj) {
                     console.log("Added employee " + empObj.name);
+                    //TODO: PUSHER
+                    getEmployeeList();
                 },
                 function (err) {
                     console.log("Add employee error");
@@ -85,12 +87,12 @@ angular.module('iReceptionistApp')
 
         $scope.editEmployee = function (emp) {
             UserService.updateUser(
-                $cookies.get('token'),
                 {
                     "name": $scope.editEmp.name,
                     "email": $scope.editEmp.email,
                     "phone": $scope.editEmp.phone
                 },
+                $cookies.get('token'),
                 function (userObj) {
                     console.log("Update employee: " + userObj);
                     console.log("cookies token " + $cookies.get('token'));
@@ -105,10 +107,12 @@ angular.module('iReceptionistApp')
         $scope.deleteUser = function () {
             console.log($scope.userID);
             UserService.deleteEmployee(
-                $cookies.get('token'),
                 $scope.userID,
+                $cookies.get('token'),
                 function (empObj) {
                     console.log("Deleted employee: " + empObj);
+                    //TODO: PUSHER
+                    getEmployeeList();
                 },
                 function (err) {
                     console.log("Delete employee error");
