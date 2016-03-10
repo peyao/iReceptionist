@@ -12,7 +12,10 @@ angular.module('iReceptionistApp')
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
             $('#page-content').height($rootScope.pageContentHeight());
         });
-
+		
+		// Initialize Datepicker
+        $('.input-datepicker, .input-daterange').datepicker({weekStart: 1}).on('changeDate', function(e){ $(this).datepicker('hide'); });
+		
         $scope.user = $cookies.getObject('user');
 		    $scope.showMine = false;
         $scope.showActive = null;
