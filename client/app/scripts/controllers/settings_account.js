@@ -20,6 +20,9 @@ angular.module('iReceptionistApp')
 
         $scope.user = $cookies.getObject('user');
         $scope.business = $cookies.getObject('business').business;
+        $scope.oldPassword = '';
+        $scope.password = '';
+        $scope.confirmPassword = '';
 
         // Object that holds the fields to update in the user.
         var userFields = {};
@@ -56,12 +59,54 @@ angular.module('iReceptionistApp')
                     console.log(userObj);
                 },
                 function (err) {
-                    console.log("Error updating user settings");
+                    toastr.error("Error updating settings.");
+                    console.log(err);
                 }
             );
 
             // Reset the changed fields
             userFields = {};
+        };
+
+        $('.password-field').focus(function() {
+            // Hide error message when a password field is clicked on
+            $('#password-error').text('').addClass('hidden');
+        });
+
+        $scope.updatePassword = function() {
+            // Validation
+            if ($scope.oldPassword === '' || $scope.password === '' || $scope.confirmPassword === '') {
+                $('#password-error').text("All fields are required.").removeClass('hidden');
+                return;
+            }
+
+            if ($scope.password !== $scope.confirmPassword) {
+                $('#password-error').text("New password and confirm password do not match.").removeClass('hidden');
+                return;
+            }
+
+            UserService.changePassword(
+                $cookies.get('token'),
+                {
+                    "oldPassword": $scope.oldPassword,
+                    "newPassword": $scope.password
+                },
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                },
+                function (err) {
+                    toastr.error("Error updating password.");
+                    console.log(err);
+                }
+            );
+
+            // Reset the changed fields
+            $scope.oldPassword = '';
+            $scope.password = '';
+            $scope.confirmPassword = '';
         };
 
         $scope.updateEmailNotifications = function() {
@@ -80,7 +125,8 @@ angular.module('iReceptionistApp')
                     console.log(userObj);
                 },
                 function (err) {
-                    console.log("Error updating user settings");
+                    toastr.error("Error updating notification settings.");
+                    console.log(err);
                 }
             );
         };
@@ -101,7 +147,8 @@ angular.module('iReceptionistApp')
                     console.log(userObj);
                 },
                 function (err) {
-                    console.log("Error updating user settings");
+                    toastr.error("Error updating notification settings.");
+                    console.log(err);
                 }
             );
         };
@@ -139,7 +186,8 @@ angular.module('iReceptionistApp')
                     $cookies.putObject('business', businessCookie);
                 },
                 function (err) {
-                    console.log("Error updating business settings");
+                    toastr.error("Error updating settings.");
+                    console.log(err);
                 }
             );
 
@@ -148,20 +196,6 @@ angular.module('iReceptionistApp')
                 "businessId": $scope.user.business
             };
         };
-
-        //UserService.changePassword(
-        //    $cookies.get('token'),
-        //    {
-        //        'oldPassword': 'oldValue',
-        //        'newPassword': 'newValue'
-        //    },
-        //    function (userObj) {
-        //        console.log("change password success: " + userObj);
-        //    },
-        //    function (err) {
-        //        console.log("change password fail");
-        //    }
-        //);
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
         $scope.logoUpload = DropZone.createNew('#logoUpload');
