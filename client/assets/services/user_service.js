@@ -61,7 +61,8 @@ angular.module('iReceptionistApp')
           method: 'DELETE',
           url: '/user',
           headers: {
-            'Authorization': 'Bearer ' + token
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json;charset=utf-8'
           },
           data: {
             'deleteUserId': userId
