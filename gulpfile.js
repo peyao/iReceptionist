@@ -124,6 +124,13 @@ gulp.task('setup', [
     'bower-all']
 );
 
+/**
+ * 'gulp prod' : Runs the production environment.
+ */
+gulp.task('dev', [
+    'setup',
+    'start-server']
+);
 
 /**
  * 'gulp prod' : Runs the production environment.
