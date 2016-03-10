@@ -8,6 +8,7 @@
 angular.module('iReceptionistApp')
 .controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies, BusinessService) {
 
+
     $scope.doLogout = function() {
         $cookies.remove('user');
         $cookies.remove('token');
@@ -21,13 +22,15 @@ angular.module('iReceptionistApp')
         App.togglePageLoading(); // Stop Page Loading
     }
 
+    $scope.user = $cookies.getObject('user');
     if (!$cookies.get('business')){
+        console.log("business cookie");
         BusinessService.getBusiness(
             $cookies.get('token'),
             $scope.user.business,
             function (busObj){
                 console.log("Business: " + busObj);
-                console.log(busObj.name);
+                console.log(busObj.business.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
