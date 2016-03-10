@@ -32,6 +32,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- ng-click="doCheckOff(v)" -->
 			<button ng-class="active" title="Set Inactive" class="btn btn-effect-ripple btn-block btn-danger"><i class="fa fa-check"></i></button>
 		</div>
 		<!-- END Statistics Widget -->
@@ -77,6 +78,12 @@
 				<div class="block-options pull-right">
 					<button ng-class="{'active': showMine == false}" class="btn btn-effect-ripple btn-success" ng-click="showMine = false;">All</button>
 					<button ng-class="{'active': showMine == true}" class="btn btn-effect-ripple btn-danger" ng-click="showMine = true;">Mine</button>
+				</div>
+				<div class="block-options pull-right">
+					<i class="fa fa-calendar"></i>
+				</div>
+				<div class="form-group pull-right">
+					<input type="text" id="example-datepicker3" name="example-datepicker3" class="form-control input-datepicker" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy">
 				</div>
 				<h2>Past Visitors</h2>
 			</div>
