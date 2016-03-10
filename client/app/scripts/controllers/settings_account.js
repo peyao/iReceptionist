@@ -21,10 +21,10 @@ angular.module('iReceptionistApp')
         *  The object MUST include businessId, so don't remove that part
         */
         //BusinessService.updateBusiness(
-        //    $cookies.get('token'),
         //    {
         //      "businessId": $scope.user.business
         //    },
+        //    $cookies.get('token') ,
         //    function (busObj){
         //        console.log("update success");
         //    },
@@ -34,10 +34,10 @@ angular.module('iReceptionistApp')
         //);
 
         //UserService.updateUser(
-        //    $cookies.get('token'),
         //    {
         //        'phone': '0192837465'
         //    },
+        //    $cookies.get('token'),
         //    function (userObj) {
         //        console.log("user update success");
         //        console.log(userObj);
@@ -48,11 +48,11 @@ angular.module('iReceptionistApp')
         //);
 
         //UserService.changePassword(
-        //    $cookies.get('token'),
         //    {
         //        'oldPassword': 'oldValue',
         //        'newPassword': 'newValue'
         //    },
+        //    $cookies.get('token'),
         //    function (userObj) {
         //        console.log("change password success: " + userObj);
         //    },

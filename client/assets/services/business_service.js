@@ -10,7 +10,7 @@ angular.module('iReceptionistApp')
     var API_URL = 'http://52.86.89.63:3000';
 
     return {
-        getBusiness: function(token, busId, success, error) {
+        getBusiness: function(busId, token, success, error) {
             var req = {
                 method: 'GET',
                 url: '/business?businessId=' + busId,
@@ -20,7 +20,7 @@ angular.module('iReceptionistApp')
             };
             this.apiCall(req, success, error);
         },
-        updateBusiness: function(token, busObj, success, error){
+        updateBusiness: function(busObj, token, success, error){
             var req = {
                 method: 'PUT',
                 url: '/business',
