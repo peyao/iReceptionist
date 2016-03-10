@@ -42,7 +42,7 @@
           </div>
         </p>
         <div class="form-group form-actions">
-          <button type="submit" class="btn btn-block btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="cancel()">Invite</button>
+          <button type="submit" class="btn btn-block btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee(); cancel()">Invite</button>
         </div>
       </form>
     </div>
@@ -52,9 +52,9 @@
         <h2>Edit Employee</h2>
         <button type="submit" class="btn hi hi-trash" data-toggle="modal" style="float:right; padding-top: 15px; padding-right:25px; background-color : transparent;" data-target="#delete"></button>
       </div>
-      <form name="editForm">
+      <form name="editForm" novalidate>
         <p>
-          <div class="form-group row" novalidate>
+          <div class="form-group row" >
             <label class="col-md-4 control-label" for="name">Name</label>
             <div class="col-sm-12">
               <input type="name" id="name" ng-model="editEmp.name" name="name" placeholder="John Smith" class="form-control" ng-pattern="/^[^0-9][A-Za-z,.'-]+\s[A-Za-z,.'-\s]+$/" required>
