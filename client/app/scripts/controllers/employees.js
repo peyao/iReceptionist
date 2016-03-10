@@ -106,9 +106,7 @@ angular.module('iReceptionistApp')
             console.log($scope.userID);
             UserService.deleteEmployee(
                 $cookies.get('token'),
-                {
-                    "deleteUserId": $scope.userID
-                },
+                $scope.userID,
                 function (empObj) {
                     console.log("Deleted employee: " + empObj);
                 },
