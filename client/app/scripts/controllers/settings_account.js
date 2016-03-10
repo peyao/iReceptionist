@@ -56,7 +56,6 @@ angular.module('iReceptionistApp')
 
                     // Update the user cookie
                     $cookies.putObject('user', userObj);
-                    console.log(userObj);
                 },
                 function (err) {
                     toastr.error("Error updating settings.");
