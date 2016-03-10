@@ -15,7 +15,9 @@ angular.module('iReceptionistApp')
     $scope.showEmployeesMore = false;
     $scope.employees = [];
     $scope.emp = '';
-
+    $scope.name = '';
+    $scope.email = '';
+    $scope.phone = '';
     $scope.cancel = function() {
       console.log('resetting form')
       $scope.editEmp = {};
@@ -30,7 +32,7 @@ angular.module('iReceptionistApp')
         $cookies.get('token'),
         function(empObj) {
           $scope.employees = empObj;
-          console.log("Grabbing them employees: " + empObj.name);
+          console.log("Grabbing them employees: " + empObj);
         },
         function(err) {
           console.log("employee list error");
@@ -54,20 +56,51 @@ angular.module('iReceptionistApp')
       );
       $scope.newEmp = {};
     };
-/*
+
+    $scope.saveEmp = function (e) {
+      $scope.name = e.name;
+      $scope.email = e.email;
+      $scope.phone = e.phone;
+      $scope.userID = e._id;
+      console.log("Curr Emp " + $scope.name );
+      console.log("Curr ID " + $scope.userID )
+    };
+    $scope.editEmployee = function (emp) {
+      UserService.updateUser(
+          $cookies.get('token'),
+          {
+              "name": $scope.editEmp.name,
+              "email": $scope.editEmp.email,
+              "phone": $scope.editEmp.phone
+          },
+          function (userObj) {
+              console.log("Update employee: " + userObj);
+              console.log( "cookies token " + $cookies.get('token'));
+
+          },
+          function (err) {
+              console.log("Update employee error");
+          }
+      );
+    };
+
     $scope.deleteUser = function () {
        UserService.deleteEmployee(
          $cookies.get('token'),
-         "deleteUserId":  ,
+         {
+            "deleteUserId": $scope.userID
+        },
          function (empObj) {
              console.log("Deleted employee: " + empObj);
          },
          function (err) {
              console.log("Delete employee error");
+             console.log("Curr ID " + $scope.userID );
+
          }
      );
    };
-*/
+
     $scope.cancel = function() {
       console.log('resetting form')
       $scope.editEmp = {};

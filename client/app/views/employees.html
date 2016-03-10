@@ -95,7 +95,7 @@
               <button type="button" class="btn btn-block btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel(); option=0">Cancel</button>
             </div>
             <div class="col-xs-6">
-              <button type="submit" class="btn btn-block  btn-primary" ng-disabled="editForm.$invalid" onclick="App.alert('edit-emp');" ng-click="cancel();option=0">Save</button>
+              <button type="submit" class="btn btn-block  btn-primary" ng-disabled="editForm.$invalid" onclick="App.alert('edit-emp');" ng-click="editEmployee(); cancel();option=0">Save</button>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@
     </div>
   </div>
   <div class="col-xs-12 col-sm-6 col-md-8" ng-init="option=0" ng-click="cancel(); option=1">
-    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="e in employees">
+    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="e in employees" ng-click = "saveEmp(e)">
       <a href="javascript:void(0)" class="widget">
         <div class="widget-content text-center">
           <img src="/assets/vendor/img/placeholders/avatars/avatar6@2x.jpg" alt="avatar" class="img-circle img-thumbnail gi gi-picture">
@@ -147,7 +147,7 @@
             Are you sure you want to delete this employee ?
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-effect-ripple btn-primary" data-dismiss="modal" onclick="App.alert('delete-emp');" ng-click="option=0">Yes</button>
+            <button type="button" class="btn btn-effect-ripple btn-primary" data-dismiss="modal" onclick="App.alert('delete-emp');" ng-click="deleteUser(); option=0">Yes</button>
             <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="option=1">No</button>
           </div>
         </div>
