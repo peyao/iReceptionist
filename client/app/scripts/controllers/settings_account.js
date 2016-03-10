@@ -173,6 +173,7 @@ angular.module('iReceptionistApp')
 
         $scope.updateBusiness = function() {
             checkFieldsBusiness();
+            console.log(businessFields);
 
             BusinessService.updateBusiness(
                 $cookies.get('token'),
@@ -184,6 +185,8 @@ angular.module('iReceptionistApp')
                     var businessCookie = $cookies.getObject('business');
                     businessCookie.business = busObj;
                     $cookies.putObject('business', businessCookie);
+
+                    console.log(busObj);
                 },
                 function (err) {
                     toastr.error("Error updating settings.");
