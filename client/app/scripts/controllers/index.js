@@ -7,8 +7,6 @@
  */
 angular.module('iReceptionistApp')
 .controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies, BusinessService) {
-
-
     $scope.doLogout = function() {
         $cookies.remove('user');
         $cookies.remove('token');
@@ -38,20 +36,6 @@ angular.module('iReceptionistApp')
             }
         );
     }
-
-    /**
-    * Set up for anim-in-out because it requires a position: absolute element.
-    */
-    $rootScope.pageContentWidth = function() {
-        return $('#page-content').width();
-    };
-    $rootScope.pageContentHeight = function() {
-        return $('#page-content-ui-view').innerHeight();
-    };
-    $('#page-content').resize(function() {
-        $('#page-content-ui-view').width($rootScope.pageContentWidth());
-        $('#page-content').height($rootScope.pageContentHeight());
-    });
 
     /**
     * Clock Functionality

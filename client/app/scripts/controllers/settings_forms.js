@@ -8,13 +8,6 @@
 angular.module('iReceptionistApp')
     .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService) {
         $rootScope.currentState = 'settings-forms';
-
-
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
-
         $scope.defaultValue = {};
         $scope.user = $cookies.getObject('user');
 
