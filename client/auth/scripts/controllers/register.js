@@ -9,9 +9,11 @@ angular.module('iReceptionistApp')
 .controller('RegisterCtrl', function($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
 
     var REGISTRATION_STEPS = 4;
+    $scope.max = 4;
     $scope.step = 1;
     $scope.register = {};
-    $scope.disableNextButton = false;
+    $scope.disableNextButton = true;
+    $scope.inputType = 'password';
 
     $('.select-select2').select2({
             minimumResultsForSearch: Infinity
@@ -27,6 +29,37 @@ angular.module('iReceptionistApp')
         } else {
             $scope.step++;
             registerWizard.formwizard('show', 'register-step' + $scope.step);
+        }
+    };
+
+    $scope.togglePassword = function (){
+        if ($scope.inputType == 'password')
+            $scope.inputType = 'text';
+        else
+            $scope.inputType = 'password';
+    };
+
+    $scope.backText = function(){
+        if ($scope.step === 2){
+            return "Your Account";
+        }
+        else if ($scope.step === 3){
+            return "Your Business";
+        }
+        else if ($scope.step === 4){
+            return "Tablet Images";
+        }
+    };
+
+    $scope.nextText = function(){
+        if ($scope.step === 2){
+            return "Tablet Images";
+        }
+        else if ($scope.step === 3){
+            return "First Employee";
+        }
+        else if ($scope.step === 4){
+            return "Enter the Site";
         }
     };
 
@@ -152,13 +185,6 @@ angular.module('iReceptionistApp')
                 .removeClass('progress-bar-danger progress-bar-warning progress-bar-info')
                 .addClass('progress-bar-success');
         }
-    });
-
-
-    $('.clickable-steps a').on('click', function(){
-        var gotostep = $(this).data('gotostep');
-
-        registerWizard.formwizard('show', gotostep);
     });
 
     // Docs: http://jqueryvalidation.org/documentation/
