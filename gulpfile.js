@@ -141,8 +141,8 @@ gulp.task('default', [
  */
 gulp.task('setup', [
     'sass-all',
-    'bower-all',
-    'minify']
+    'bower-all']
+    //'minify']
 );
 
 /**
