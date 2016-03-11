@@ -79,9 +79,10 @@ gulp.task('bower-all', [
     'bower-marketing',
 ]);
 
-// paths
-var jsFiles = './client/**/*.js',
-    jsDest = './dist/';
+// path
+var jsFiles    = ['./client/**/*.js', '!./client/**/bower_components/'],
+    jsAllFiles = './client/**/*.js',
+    jsDest     = './dist/';
 
 /**
  * Concat
