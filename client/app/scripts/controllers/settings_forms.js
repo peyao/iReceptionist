@@ -18,7 +18,7 @@ angular.module('iReceptionistApp')
         $scope.defaultValue = {};
         $scope.user = $cookies.getObject('user');
 
-        FormService.create(
+        FormService.createForm(
             $scope.user.business,
             {
                 "some": "stuff"
