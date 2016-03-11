@@ -49,8 +49,8 @@ angular.module('iReceptionistApp')
             checkFieldsUser();
 
             UserService.updateUser(
-                $cookies.get('token'),
                 userFields,
+                $cookies.get('token'),
                 function (userObj) {
                     toastr.success("Your settings have been updated!");
 
@@ -85,11 +85,11 @@ angular.module('iReceptionistApp')
             }
 
             UserService.changePassword(
-                $cookies.get('token'),
                 {
                     "oldPassword": $scope.oldPassword,
                     "newPassword": $scope.password
                 },
+                $cookies.get('token'),
                 function (userObj) {
                     toastr.success("Your settings have been updated!");
 
@@ -112,10 +112,10 @@ angular.module('iReceptionistApp')
             var receiveEmail = $scope.user.settings.receiveEmail === true ? "true" : "false";
 
             UserService.updateUser(
-                $cookies.get('token'),
                 {
                     "receiveEmail": receiveEmail
                 },
+                $cookies.get('token'),
                 function (userObj) {
                     toastr.success("Your settings have been updated!");
 
@@ -134,10 +134,10 @@ angular.module('iReceptionistApp')
             var receiveSMS = $scope.user.settings.receiveSMS === true ? "true" : "false";
 
             UserService.updateUser(
-                $cookies.get('token'),
                 {
                     "receiveSMS": receiveSMS
                 },
+                $cookies.get('token'),
                 function (userObj) {
                     toastr.success("Your settings have been updated!");
 
@@ -174,8 +174,8 @@ angular.module('iReceptionistApp')
             checkFieldsBusiness();
 
             BusinessService.updateBusiness(
-                $cookies.get('token'),
                 businessFields,
+                $cookies.get('token'),
                 function (busObj){
                     toastr.success("Your settings were updated!");
 

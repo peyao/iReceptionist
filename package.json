@@ -5,7 +5,7 @@
   "title": "iReceptionist Client",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "gulp dev"
   },
   "dependencies": {
     "dotenv": "^2.0.0",

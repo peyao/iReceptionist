@@ -18,6 +18,6 @@ app.use('/assets', express.static(__dirname + '/client/assets'));
 console.log(__dirname + '/client/assets');
 
 
-app.listen(3000, function() {
-    console.log('[iReceptionist Client listening on port 3000]');
+app.listen(process.env.PORT || 3000, function() {
+    console.log('[iReceptionist Client listening on port process.env.PORT or 3000]');
 });

@@ -6,8 +6,9 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope) {
+    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService) {
         $rootScope.currentState = 'settings-forms';
+
 
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
@@ -15,6 +16,22 @@ angular.module('iReceptionistApp')
         });
 
         $scope.defaultValue = {};
+        $scope.user = $cookies.getObject('user');
+
+        FormService.create(
+            $scope.user.business,
+            {
+                "some": "stuff"
+            },
+            $cookies.get('token'),
+            function (formObj) {
+                $scope.employees = formObj;
+                console.log("Create form: " + formObj.form.form.some);
+            },
+            function (err) {
+                console.log("Create form fail");
+            }
+        );
 
         /* Add default name field if it hasn't been added already */
         var name;

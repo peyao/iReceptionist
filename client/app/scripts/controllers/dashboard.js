@@ -18,15 +18,15 @@ angular.module('iReceptionistApp')
         $scope.showActive = null;
         $scope.visitors = [];
 
-        var getVisitors = function(){
+        var getActive = function(){
             VisitorService.getVisitorQueue(
                 1,
                 10,
                 $cookies.get('token'),
                 function (visObj) {
                     $scope.visitors = visObj;
+                    console.log("Grabbing them visitors: ");
                     console.log(visObj);
-                    console.log("Grabbing them visitors");
                 },
                 function (err) {
                     $scope.alert.danger = err.errorMsg;
@@ -34,14 +34,34 @@ angular.module('iReceptionistApp')
             );
         };
 
-        getVisitors();
+        var getInactive = function(){
+            //TODO: remove date for final - this is for testing - should get date from picker
+            var today = new Date();
+            console.log(today.getDay() + "-" + today.getDate() + "-" + today.getFullYear());
+            VisitorService.getVisited(
+                1,
+                10,
+                today.getDay() + "-" + today.getDate() + "-" + today.getFullYear(),
+                $cookies.get('token'),
+                function (visObj) {
+                    console.log("Grabbing them inactive visitors: ");
+                    console.log(visObj);
+                },
+                function (err) {
+                    console.log("inactive fail");
+                }
+            );
+        };
+
+        getActive();
+        getInactive();
         var pusher = new Pusher('7c84af4dd6941414d752', {
             encrypted: true
         });
 
         var channel = pusher.subscribe($scope.user.business);
         channel.bind('newVisitor', function(data){
-            getVisitors();
+            getActive();
         });
 
         $scope.doCheckOff = function (data){
@@ -51,7 +71,7 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (visObj){
                     console.log("Checked off: " + visObj);
-                    getVisitors();
+                    getActive();
                 },
                 function (err) {
                     $scope.alert.danger = err.errorMsg;
