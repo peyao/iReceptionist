@@ -45,29 +45,24 @@ angular.module('iReceptionistApp')
             var nameValid = $scope.name !== "";
             var cardValid = $.payment.validateCardNumber($scope.card);
             var securityCodeValid = $.payment.validateCardCVC($scope.securityCode);
-            console.log($scope.expirationDate);
             var date = $scope.expirationDate.split("/");
             var expirationMonth = date[0].trim();
             var expirationYear = date[1].trim();
             var expirationDateValid = $.payment.validateCardExpiry(expirationMonth, expirationYear);
 
             if (!nameValid) {
-                console.log("name not valid");
                 $('.credit-card-error').text("Please enter the name on your card.").removeClass('hidden');
                 return;
             }
             if (!cardValid) {
-                console.log("card not valid");
                 $('.credit-card-error').text("Invalid credit card.").removeClass('hidden');
                 return;
             }
             if (!securityCodeValid) {
-                console.log("code not valid");
                 $('.credit-card-error').text("Invalid security code.").removeClass('hidden');
                 return;
             }
             if (!expirationDateValid) {
-                console.log("date not valid");
                 $('.credit-card-error').text("Invalid expiration date.").removeClass('hidden');
                 return;
             }
