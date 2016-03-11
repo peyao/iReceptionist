@@ -102,11 +102,11 @@ angular.module('iReceptionistApp')
             }
 
             BusinessService.updateBusiness(
-                $cookies.get('token'),
                 {
                     "businessId": $scope.user.business,
                     "planLevel": $scope.planClicked
                 },
+                $cookies.get('token'),
                 function (busObj){
                     toastr.success("Your plan was updated!");
                     $scope.currentPlan = $scope.planClicked;
