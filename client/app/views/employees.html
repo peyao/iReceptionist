@@ -83,8 +83,8 @@
             <label class="col-md-8 control-label" for="example-select">Role</label>
             <div class="col-sm-12">
               <select id="example-select" name="example-select" class="form-control" size="1">
-                <option value="0"><div>{{role == 2 ? 'Admin' : 'Employee'}}</div></option>
-                <option value="1"><div>{{role == 3 ? 'Admin' : 'Employee'}}</div></option>
+                <option value="0"><div>{{role==2 ? 'Admin' : 'Employee'}}</div></option>
+                <option value="1"><div>{{role==3 ? 'Admin' : 'Employee'}}</div></option>
               </select>
             </div>
           </div>
@@ -144,7 +144,7 @@
             </h3>
           </div>
           <div class="modal-body">
-            Are you sure you want to delete {{name}}?
+            <center>Are you sure you want to delete <br> {{name}}? </center>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-effect-ripple btn-primary" data-dismiss="modal" onclick="App.alert('delete-emp');" ng-click="deleteUser(); option=0">Yes</button>
