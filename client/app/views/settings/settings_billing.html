@@ -18,7 +18,7 @@
                         <div class="block-title">
                             <h2>Current Plan</h2>
                         </div>
-                        <table id="general-table" class="table table-borderless table-vcenter">
+                        <table class="table table-borderless table-vcenter">
                             <thead>
                             <tr>
                                 <th>Plan</th>
@@ -30,7 +30,7 @@
                             <tr>
                                 <td><h4>{{currentPlan}}</h4></td>
                                 <td><h4>2 Employees</h4></td>
-                                <td><h4>{{currentPlan === 'Free' ? 'N/A' : '4/1/16'}}</h4></td>
+                                <td><h4>{{currentPlan === 'Free' ? 'N/A' : dueDate}}</h4></td>
                             </tr>
                             </tbody>
                         </table>
@@ -41,7 +41,24 @@
                         <div class="block-title">
                             <h2>Account Transactions</h2>
                         </div>
-                        <table id="general-table" class="table table-bordered table-striped table-condensed table-vcenter">
+                        <h4 id="free-transaction">No recent transactions</h4>
+                        <table id="basic-transaction" class="table table-bordered table-striped table-condensed table-vcenter">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Paid Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><h4>Basic Plan</h4></td>
+                                    <td><h4 class="transaction-date"></h4></td>
+                                    <td><h4>$10</h4></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table id="premium-transaction" class="table table-bordered table-striped table-condensed table-vcenter">
                             <thead>
                             <tr>
                                 <th>Description</th>
@@ -50,21 +67,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td><h4>Basic Plan</h4></td>
-                                <td><h4>3/1/16</h4></td>
-                                <td><h4>$10</h4></td>
-                            </tr>
-                            <tr>
-                                <td><h4>Basic Plan</h4></td>
-                                <td><h4>2/1/16</h4></td>
-                                <td><h4>$10</h4></td>
-                            </tr>
-                            <tr>
-                                <td><h4>Basic Plan</h4></td>
-                                <td><h4>1/1/16</h4></td>
-                                <td><h4>$10</h4></td>
-                            </tr>
+                                <tr >
+                                    <td><h4>Premium Plan</h4></td>
+                                    <td><h4 class="transaction-date"></h4></td>
+                                    <td><h4>$20</h4></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -206,8 +213,9 @@
                                 </table>
                             </div>
                         <!-- END Mini Pricing Tables Content -->
+                        </div>
+                    <!-- END Mini Pricing Tables Block -->
                     </div>
-                <!-- END Mini Pricing Tables Block -->
                 </div>
             </div>
         </div>
