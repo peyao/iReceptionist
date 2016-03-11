@@ -226,26 +226,28 @@
                 <form class="form-horizontal form-bordered settings-form" onsubmit="return false;" ng-hide="planClicked === 'Free'">
                     <div class="form-group">
                         <label for="card-name">Name on Card</label>
-                        <input type="text" id="card-name" name="card-name" class="form-control input-lg" required>
+                        <input type="tel" id="card-name" name="card-name" class="form-control input-lg credit-card-input" placeholder="Name" ng-model="name">
                     </div>
                     <div class="form-group">
                         <label for="credit-card">Credit Card</label>
-                        <input type="text" id="credit-card" name="credit-card" class="form-control input-lg" required>
+                        <input type="tel" id="credit-card" name="credit-card" class="form-control input-lg credit-card-input" placeholder="•••• •••• •••• ••••" ng-model="card">
                     </div>
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label for="security-code">Security Code</label>
-                            <input type="text" id="security-code" name="security-code" class="form-control input-lg" required>
+                            <input type="tel" id="security-code" name="security-code" class="form-control input-lg credit-card-input" placeholder="•••" ng-model="securityCode">
                         </div>
                         <div class="col-xs-6">
-                            <label for="expiration-date">Expiration Date</label>
-                            <input type="text" id="expiration-date" name="expiration-date" class="form-control input-lg" required>
+                            <label for="expiration-date">Expiration Date (MM/YYYY)</label>
+                            <input type="tel" id="expiration-date" name="expiration-date" class="form-control input-lg credit-card-input" placeholder="•• / ••" ng-model="expirationDate">
                         </div>
                     </div>
                 </form>
+                <div class="alert alert-danger hidden credit-card-error">
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="updatePlan();">Submit</button>
+                <button type="button" class="btn btn-effect-ripple btn-danger" ng-click="updatePlan();">Submit</button>
                 <button type="button" class="btn btn-effect-ripple" data-dismiss="modal">Cancel</button>
             </div>
         </div>
