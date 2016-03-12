@@ -15,7 +15,6 @@ angular.module('iReceptionistApp')
             $('#page-content').height($rootScope.pageContentHeight());
         });
 
-        $scope.defaultValue = {};
         $scope.user = $cookies.getObject('user');
 
         FormService.createForm(
@@ -52,7 +51,6 @@ angular.module('iReceptionistApp')
                 required: true,
                 editable: false
             });
-            $scope.defaultValue[name.id] = 'default value';
         }
 
         $scope.form = $builder.forms['default'];
