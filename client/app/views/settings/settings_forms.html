@@ -10,31 +10,27 @@
 
 <div class="container" ng-controller="SettingsFormsCtrl">
     <div class="row">
-        <h1>Customize Your Form</h1>
-        <p>Drag and drop form elements on the right into the Form Builder. Click on a form element in the Form Builder
-        to edit it.</p>
-
         <div class="col-md-6">
             <div class="block">
                 <div class="block-title">
-                    <h2>Form Builder</h2>
+                    <h2>Drop Here</h2>
                 </div>
                 <div fb-builder="default"></div>
                 <div class="text-center">
                     <button class="btn btn-primary save-form-button" onclick="App.alert('forms-themes');">Save Form</button>
                 </div>
             </div>
-            <div class="alert alert-success alert-dismissable display-none">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h4><strong>Success</strong></h4>
-                <p>Your form has been saved!</p>
-            </div>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary form-builder-arrow">
+                <i class="fa fa-chevron-left fa-fw"></i>
+            </button>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="block">
                 <div class="block-title">
-                    <h2>Form Elements</h2>
+                    <h2>Drag From Here</h2>
                 </div>
                 <div fb-components></div>
             </div>
