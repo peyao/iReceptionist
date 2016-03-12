@@ -8,10 +8,6 @@
 angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService, UserService) {
         $rootScope.currentState = 'dashboard';
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
 
         $scope.user = $cookies.getObject('user');
 		    $scope.showMine = false;
@@ -59,10 +55,13 @@ angular.module('iReceptionistApp')
             encrypted: true
         });
 
-        var channel = pusher.subscribe($scope.user.business);
-        channel.bind('newVisitor', function(data){
-            getActive();
-        });
+        var channel;
+        if ($scope.user) {
+            channel = pusher.subscribe($scope.user.business);
+            channel.bind('newVisitor', function(data){
+                getActive();
+            });
+        }
 
         $scope.doCheckOff = function (data){
             console.log(data);
