@@ -13,7 +13,9 @@ angular.module('iReceptionistApp')
     $scope.register = {};
     $scope.disableNextButton = true;
 
-    $('.select-select2').select2();
+    $('.select-select2').select2({
+            minimumResultsForSearch: Infinity
+    });
 
     $scope.backStep = function () {
         $scope.step--;
@@ -42,6 +44,7 @@ angular.module('iReceptionistApp')
     $scope.register.step2 = {};
     $scope.register.step1.fullName = '';
     $scope.register.step1.email = '';
+    $scope.register.step1.phone = '';
     $scope.register.step1.password = '';
     $scope.register.step2.businessName = '';
 
@@ -51,6 +54,7 @@ angular.module('iReceptionistApp')
                 'name': $scope.register.step1.fullName,
                 'email': $scope.register.step1.email,
                 'password': $scope.register.step1.password,
+                'phone': $scope.register.step1.phone,
                 'businessName': $scope.register.step2.businessName
             },
 
@@ -85,9 +89,9 @@ angular.module('iReceptionistApp')
                         if (userObj.user.role === -1) {
                             path = '/vip';
                         }
-                        $cookies.put('user', userObj.user, {'path': '/auth'});
+                        $cookies.putObject('user', userObj.user, {'path': '/auth'});
                         $cookies.put('token', userObj.token, {'path': '/auth'});
-                        $cookies.put('user', userObj.user, {'path': path});
+                        $cookies.putObject('user', userObj.user, {'path': path});
                         $cookies.put('token', userObj.token, {'path': path});
                         $window.location.href = path; // Redirect
                     },
@@ -163,11 +167,43 @@ angular.module('iReceptionistApp')
 
     registerWizard.formwizard(wizardOptions);
 
-    $('.clickable-steps a').on('click', function(){
-        var gotostep = $(this).data('gotostep');
+    // Get the progress bar and change its width when a step is shown
+    var progressBar = $('#progress-bar-wizard');
+    progressBar
+        .css('width', '33%')
+        .attr('aria-valuenow', '33');
 
-        registerWizard.formwizard('show', gotostep);
+    $("#register-wizard").bind('step_shown', function(event, data){
+        if (data.currentStep === 'register-step1') {
+            progressBar
+                .css('width', '25%')
+                .attr('aria-valuenow', '25')
+                .removeClass('progress-bar-warning progress-bar-info progress-bar-success')
+                .addClass('progress-bar-danger');
+        }
+        else if (data.currentStep === 'register-step2') {
+            progressBar
+                .css('width', '50%')
+                .attr('aria-valuenow', '50')
+                .removeClass('progress-bar-danger progress-bar-info progress-bar-success')
+                .addClass('progress-bar-warning');
+        }
+        else if (data.currentStep === 'register-step3') {
+            progressBar
+                .css('width', '75%')
+                .attr('aria-valuenow', '75')
+                .removeClass('progress-bar-warning progress-bar-danger progress-bar-success')
+                .addClass('progress-bar-info');
+        }else if (data.currentStep === 'register-step4') {
+            progressBar
+                .css('width', '100%')
+                .attr('aria-valuenow', '100')
+                .removeClass('progress-bar-danger progress-bar-warning progress-bar-info')
+                .addClass('progress-bar-success');
+        }
     });
+
+
 
     // Docs: http://jqueryvalidation.org/documentation/
     $('#register-wizard').formwizard({
@@ -197,6 +233,10 @@ angular.module('iReceptionistApp')
                     required: true,
                     minlength: 3
                 },
+                'register-step1-phone': {
+                    required: true,
+                    minlength: 7
+                },
                 'register-step1-terms': {
                     required: true
                 },
@@ -219,7 +259,6 @@ angular.module('iReceptionistApp')
             },
             messages: {
                 'register-step1-email': 'Please enter a valid email address',
-                'register-step1-fullname': 'Please enter a valid name',
                 'register-step1-terms': 'Please accept the terms to continue',
                 'register-step2-business-phone': 'Please enter a valid phone number'
             }
@@ -228,8 +267,6 @@ angular.module('iReceptionistApp')
         outDuration: 0
     });
 
-
-
     $scope.termsHandler = function(isChecked) {
         if (isChecked) {
             $scope.disableNextButton = false;
@@ -237,5 +274,4 @@ angular.module('iReceptionistApp')
             $scope.disableNextButton = true;
         }
     };
-
 });
