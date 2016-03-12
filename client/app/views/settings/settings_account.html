@@ -100,33 +100,6 @@
                                 <input type="text" id="slackHook" name="slackHook" class="form-control input-lg" placeholder="Webhook URL" ng-model="business.slackHook" ng-change="businessFieldChanged('slackHook');">
                             </div>
                             <div class="form-group">
-                                <label for="logoUpload" class="text-left">Logo</label>
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <cl-image public-id="tablet_icon" class="tablet-image"></cl-image>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div id="logoUpload" class="dropzone">
-                                            <div class="dz-default dz-message"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="bgUpload" class="text-left">Visitor Background</label>
-                                <div class="row">
-                                    <div class="col-xs-4">
-                                        <cl-image public-id="tablet_icon" class="tablet-image"></cl-image>
-
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div id="bgUpload" class="dropzone">
-                                            <div class="dz-default dz-message"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updateBusiness();">Submit</button>
                                 </div>

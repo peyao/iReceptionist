@@ -197,6 +197,4 @@ angular.module('iReceptionistApp')
         };
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');
     });
