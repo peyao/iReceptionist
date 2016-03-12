@@ -36,7 +36,9 @@
         <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
         <link rel="stylesheet" href="/assets/vendor/css/main.css">
         <link rel="stylesheet" href="styles/ireceptionist.css">
+        <link rel="stylesheet" href="/assets/styles/ireceptionist-common.css">
 
+        <link rel="stylesheet" href="/assets/vendor/js/angular-loading-bar/loading-bar.css"/>
         <link rel="stylesheet" href="/assets/vendor/css/angular-form-builder.css"/>
         <link rel="stylesheet" href="/assets/bower_components/toastr/toastr.css"/>
 
@@ -239,7 +241,8 @@
                             <!-- Search Form -->
                             <li>
                                 <form action="javascript:void(0);" class="navbar-form-custom" role="search">
-                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control" placeholder="Search" ng-change="search(searchString)">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control hidden-sm hidden-xs" placeholder="Search for visitors and employees..." ng-change="search(searchString)">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control visible-sm visible-xs" placeholder="Search..." ng-change="search(searchString)">
                                 </form>
                             </li>
                             <!-- END Search Form -->
@@ -278,8 +281,8 @@
                     <!-- END Header -->
 
                     <!-- Page content -->
-                    <div id="page-content" style="min-height: {{pageContentHeight()}}px">
-                        <div ui-view id="page-content-ui-view" class="anim-in-out anim-fade anim-slide-below" data-anim-speed="500" style="position: absolute; width: {{pageContentWidth()}}px;"></div>
+                    <div id="page-content">
+                        <div ui-view></div>
                     </div>
                     <!-- END Page Content -->
                 </div>
@@ -311,6 +314,7 @@
         <script src="/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
         <script src="/assets/bower_components/toastr/toastr.min.js"></script>
         <script src="/assets/bower_components/pusher/dist/pusher.min.js"></script>
+        <script src="/assets/vendor/js/angular-loading-bar/loading-bar.js"></script>
 
         <!-- Cloudinary -->
         <script src="/assets/bower_components/lodash/lodash.js"></script>

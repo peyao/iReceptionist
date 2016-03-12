@@ -8,10 +8,6 @@
 angular.module('iReceptionistApp')
     .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, UserService) {
         $rootScope.currentState = 'settings-account';
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
 
         toastr.options = {
             "positionClass": "toast-top-right",
