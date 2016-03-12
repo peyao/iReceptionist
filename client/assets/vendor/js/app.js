@@ -126,7 +126,7 @@ var App = function() {
     // Initialize Slider for Bootstrap
     $('.input-slider').slider();
 
-    // Initialize Tags Input [REMOVED]
+    // [REMOVED] Initialize Tags Input
     /*
     $('.input-tags').tagsInput({
       width: 'auto',
@@ -153,13 +153,15 @@ var App = function() {
       $(this).datepicker('hide');
     });
 
-    // Initialize Bootstrap Colorpicker
+    // [REMOVED] Initialize Bootstrap Colorpicker
+    /*
     $('.input-colorpicker').colorpicker({
       format: 'hex'
     });
     $('.input-colorpicker-rgba').colorpicker({
       format: 'rgba'
     });
+    */
 
     // Easy Pie Chart
     $('.pie-chart').easyPieChart({
