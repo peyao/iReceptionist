@@ -25,9 +25,9 @@ angular.module('iReceptionistApp')
     * Clock Functionality
     */
     $scope.clock = '';
-    $scope.tickInterval = 10000; //ms (1000ms = 1s)
+    $scope.tickInterval = 1000; //ms (1000ms = 1s)
     var tick = function() {
-        $scope.clock = moment().format('LT');
+        $scope.clock = moment().format('LTS');
         $timeout(tick, $scope.tickInterval); // Reset Timer
     };
     // Start the timer

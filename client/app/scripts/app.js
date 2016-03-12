@@ -25,7 +25,7 @@ angular
 .config(function($stateProvider, $urlRouterProvider, cloudinaryProvider, cfpLoadingBarProvider) {
 
     cfpLoadingBarProvider.includeSpinner = false;
-    cfpLoadingBarProvider.latencyThreshold = 500; // Only display after 500ms.
+    cfpLoadingBarProvider.latencyThreshold = 250; // Only display after 500ms.
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
