@@ -17,7 +17,7 @@
                 <button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!">Log In <i class="fa fa-sign-in"></i></button>
             </div>
             <div class="block-options pull-right" ng-if="step > 2">
-                <a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip to Dashboard <i class="fa fa-sign-in"></i></a>
+                <button type="button" class="btn btn-effect-ripple btn-primary" ng-click="submitRegistration()" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip to Dashboard <i class="fa fa-sign-in"></i></button>
             </div>
             <h2>Register</h2>
         </div>

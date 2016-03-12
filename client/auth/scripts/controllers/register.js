@@ -9,7 +9,7 @@ angular.module('iReceptionistApp')
 .controller('RegisterCtrl', function($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
 
     var REGISTRATION_STEPS = 4;
-    $scope.max = 4;
+    $scope.max = REGISTRATION_STEPS;
     $scope.step = 1;
     $scope.register = {};
     $scope.disableNextButton = true;
@@ -25,7 +25,7 @@ angular.module('iReceptionistApp')
     };
     $scope.nextStep = function () {
         if ($scope.step === REGISTRATION_STEPS) {
-            submitRegistration();
+            $scope.submitRegistration();
         } else {
             $scope.step++;
             registerWizard.formwizard('show', 'register-step' + $scope.step);
@@ -78,7 +78,7 @@ angular.module('iReceptionistApp')
     $scope.register.step1.password = '';
     $scope.register.step2.businessName = '';
 
-    var submitRegistration = function() {
+    $scope.submitRegistration = function() {
         AuthenticationService.register({
                 'role': '2',
                 'name': $scope.register.step1.fullName,
@@ -111,8 +111,10 @@ angular.module('iReceptionistApp')
                         if (userObj.user.role === -1) {
                             path = '/vip';
                         }
+                        console.log(userObj);
                         $cookies.putObject('user', userObj.user, {'path': '/auth'});
                         $cookies.put('token', userObj.token, {'path': '/auth'});
+                        $cookies.put('token', userObj.token, {'path': '/checkin'});
                         $cookies.putObject('user', userObj.user, {'path': path});
                         $cookies.put('token', userObj.token, {'path': path});
                         $window.location.href = path; // Redirect
