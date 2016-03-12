@@ -19,9 +19,13 @@ angular
     'cloudinary',
     'builder',
     'builder.components',
-    'validator.rules'
+    'validator.rules',
+    'angular-loading-bar',
 ])
-.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
+.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider, cfpLoadingBarProvider) {
+
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 500; // Only display after 500ms.
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
