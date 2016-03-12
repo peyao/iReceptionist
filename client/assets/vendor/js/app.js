@@ -126,11 +126,13 @@ var App = function() {
     // Initialize Slider for Bootstrap
     $('.input-slider').slider();
 
-    // Initialize Tags Input
+    // Initialize Tags Input [REMOVED]
+    /*
     $('.input-tags').tagsInput({
       width: 'auto',
       height: 'auto'
     });
+    */
 
     // Initialize Timepicker
     $('.input-timepicker').timepicker({
