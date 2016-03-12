@@ -37,11 +37,11 @@ angular.module('iReceptionistApp')
         var getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var today = new Date();
-            console.log(today.getDay() + "-" + today.getDate() + "-" + today.getFullYear());
+            console.log((today.getMonth() +1) + "-" + today.getDate() + "-" + today.getFullYear());
             VisitorService.getVisited(
                 1,
                 10,
-                today.getDay() + "-" + today.getDate() + "-" + today.getFullYear(),
+                (today.getMonth()+1) + "-" + today.getDate() + "-" + today.getFullYear(),
                 $cookies.get('token'),
                 function (visObj) {
                     console.log("Grabbing them inactive visitors: ");
