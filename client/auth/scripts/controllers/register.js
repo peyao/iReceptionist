@@ -61,6 +61,7 @@ angular.module('iReceptionistApp')
             // Success
             function (regObj) {
                 console.log('register success');
+<<<<<<< HEAD
 
 
                 //
@@ -70,6 +71,8 @@ angular.module('iReceptionistApp')
                 //$window.location.href = path; // Redirect
 
 
+=======
+>>>>>>> 94b874ee6cf46a9fe50b2eac06d4a6fed5be62bf
                 //
                 // Automatically log-in after registration
                 //
@@ -97,7 +100,6 @@ angular.module('iReceptionistApp')
                     },
                     // Failure
                     function(err) {
-                        //$scope.alert.danger = err.errorMsg;
                         console.log('log in fail');
 
                     }
@@ -107,47 +109,11 @@ angular.module('iReceptionistApp')
             // Error
             function (err) {
                 console.log('register fail');
-                //$scope.alert.danger = err.errorMsg;
-
-                //
-                // Force re-direct back to log-in screen
-                //
-                //var path = '/app'
-                //$window.location.href = path; // Redirect
             }
         );
-
-        //AuthenticationService.login(
-        //    {
-        //        'email': $scope.register.step1.email,
-        //        'password': $scope.register.step1.password
-        //    },
-        //
-        //    // Success
-        //    function(userObj) {
-        //        // Need to set path because we are going from '/auth' to '/app' or '/vip'
-        //        // TODO: On VIP side, need to use token to reverify the user has the correct role
-        //        // or else log them off because they don't belong there.
-        //        // TODO: For now, just do local role level check here and redirect.
-        //
-        //        var path = '/app';
-        //        if (userObj.user.role === -1) {
-        //            path = '/vip';
-        //        }
-        //        $cookies.put('user', userObj.user, {'path': '/auth'});
-        //        $cookies.put('token', userObj.token, {'path': '/auth'});
-        //        $cookies.put('user', userObj.user, {'path': path});
-        //        $cookies.put('token', userObj.token, {'path': path});
-        //        $window.location.href = path; // Redirect
-        //    },
-        //    // Failure
-        //    function(err) {
-        //        //$scope.alert.danger = err.errorMsg;
-        //        console.log('log in fail');
-        //    }
-        //);
     };
 
+    // Initialize Dropzones
     $scope.logoUpload = DropZone.createNew('#logoUpload');
     $scope.bgUpload = DropZone.createNew('#bgUpload');
 
@@ -172,6 +138,43 @@ angular.module('iReceptionistApp')
     progressBar
         .css('width', '33%')
         .attr('aria-valuenow', '33');
+<<<<<<< HEAD
+=======
+
+    $("#register-wizard").bind('step_shown', function(event, data){
+        if (data.currentStep === 'register-step1') {
+            progressBar
+                .css('width', '25%')
+                .attr('aria-valuenow', '25')
+                .removeClass('progress-bar-warning progress-bar-info progress-bar-success')
+                .addClass('progress-bar-danger');
+        }
+        else if (data.currentStep === 'register-step2') {
+            progressBar
+                .css('width', '50%')
+                .attr('aria-valuenow', '50')
+                .removeClass('progress-bar-danger progress-bar-info progress-bar-success')
+                .addClass('progress-bar-warning');
+        }
+        else if (data.currentStep === 'register-step3') {
+            progressBar
+                .css('width', '75%')
+                .attr('aria-valuenow', '75')
+                .removeClass('progress-bar-warning progress-bar-danger progress-bar-success')
+                .addClass('progress-bar-info');
+        }else if (data.currentStep === 'register-step4') {
+            progressBar
+                .css('width', '100%')
+                .attr('aria-valuenow', '100')
+                .removeClass('progress-bar-danger progress-bar-warning progress-bar-info')
+                .addClass('progress-bar-success');
+        }
+    });
+
+
+    $('.clickable-steps a').on('click', function(){
+        var gotostep = $(this).data('gotostep');
+>>>>>>> 94b874ee6cf46a9fe50b2eac06d4a6fed5be62bf
 
     $("#register-wizard").bind('step_shown', function(event, data){
         if (data.currentStep === 'register-step1') {

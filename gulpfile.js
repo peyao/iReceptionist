@@ -1,14 +1,23 @@
 // gulpfile.js
-var gulp = require('gulp');
+var gulp        = require('gulp');
 var browserSync = require('browser-sync');
-var sass = require('gulp-sass');
-var bower = require('gulp-bower');
-var nodemon = require('gulp-nodemon');
+var sass        = require('gulp-sass');
+var bower       = require('gulp-bower');
+var nodemon     = require('gulp-nodemon');
+var exec        = require('child_process').exec;
 
 gulp.task('nodemon', function(cb) {
     nodemon({
         script: 'app.js',
         ext: 'js',
+    });
+});
+
+gulp.task('start-server', function(cb) {
+    exec('node app.js', function(err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
     });
 });
 
@@ -108,11 +117,32 @@ gulp.task('default', [
 ]);
 
 /**
- * 'gulp prod' : Runs the prod environment. TODO: Run without nodemon.
+ * Do the sass and bower tasks
  */
-gulp.task('prod', [
+gulp.task('setup', [
     'sass-all',
+<<<<<<< HEAD
     'bower-all',
     'nodemon',
 ]);
 
+=======
+    'bower-all']
+);
+
+/**
+ * 'gulp prod' : Runs the production environment.
+ */
+gulp.task('dev', [
+    'setup',
+    'start-server']
+);
+
+/**
+ * 'gulp prod' : Runs the production environment.
+ */
+gulp.task('prod', [
+    'setup',
+    'start-server']
+);
+>>>>>>> 94b874ee6cf46a9fe50b2eac06d4a6fed5be62bf
