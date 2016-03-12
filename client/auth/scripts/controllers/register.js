@@ -9,9 +9,11 @@ angular.module('iReceptionistApp')
 .controller('RegisterCtrl', function($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
 
     var REGISTRATION_STEPS = 4;
+    $scope.max = REGISTRATION_STEPS;
     $scope.step = 1;
     $scope.register = {};
-    $scope.disableNextButton = false;
+    $scope.disableNextButton = true;
+    $scope.inputType = 'password';
 
     $('.select-select2').select2({
             minimumResultsForSearch: Infinity
@@ -23,10 +25,41 @@ angular.module('iReceptionistApp')
     };
     $scope.nextStep = function () {
         if ($scope.step === REGISTRATION_STEPS) {
-            submitRegistration();
+            $scope.submitRegistration();
         } else {
             $scope.step++;
             registerWizard.formwizard('show', 'register-step' + $scope.step);
+        }
+    };
+
+    $scope.togglePassword = function (){
+        if ($scope.inputType == 'password')
+            $scope.inputType = 'text';
+        else
+            $scope.inputType = 'password';
+    };
+
+    $scope.backText = function(){
+        if ($scope.step === 2){
+            return "Your Account";
+        }
+        else if ($scope.step === 3){
+            return "Your Business";
+        }
+        else if ($scope.step === 4){
+            return "Tablet Images";
+        }
+    };
+
+    $scope.nextText = function(){
+        if ($scope.step === 2){
+            return "Tablet Images";
+        }
+        else if ($scope.step === 3){
+            return "First Employee";
+        }
+        else if ($scope.step === 4){
+            return "Enter the Site";
         }
     };
 
@@ -45,7 +78,7 @@ angular.module('iReceptionistApp')
     $scope.register.step1.password = '';
     $scope.register.step2.businessName = '';
 
-    var submitRegistration = function() {
+    $scope.submitRegistration = function() {
         AuthenticationService.register({
                 'role': '2',
                 'name': $scope.register.step1.fullName,
@@ -78,8 +111,10 @@ angular.module('iReceptionistApp')
                         if (userObj.user.role === -1) {
                             path = '/vip';
                         }
+                        console.log(userObj);
                         $cookies.putObject('user', userObj.user, {'path': '/auth'});
                         $cookies.put('token', userObj.token, {'path': '/auth'});
+                        $cookies.put('token', userObj.token, {'path': '/checkin'});
                         $cookies.putObject('user', userObj.user, {'path': path});
                         $cookies.put('token', userObj.token, {'path': path});
                         $window.location.href = path; // Redirect
@@ -152,13 +187,6 @@ angular.module('iReceptionistApp')
                 .removeClass('progress-bar-danger progress-bar-warning progress-bar-info')
                 .addClass('progress-bar-success');
         }
-    });
-
-
-    $('.clickable-steps a').on('click', function(){
-        var gotostep = $(this).data('gotostep');
-
-        registerWizard.formwizard('show', gotostep);
     });
 
     // Docs: http://jqueryvalidation.org/documentation/
