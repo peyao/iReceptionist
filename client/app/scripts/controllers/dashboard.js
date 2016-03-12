@@ -55,10 +55,13 @@ angular.module('iReceptionistApp')
             encrypted: true
         });
 
-        var channel = pusher.subscribe($scope.user.business);
-        channel.bind('newVisitor', function(data){
-            getActive();
-        });
+        var channel;
+        if ($scope.user) {
+            channel = pusher.subscribe($scope.user.business);
+            channel.bind('newVisitor', function(data){
+                getActive();
+            });
+        }
 
         $scope.doCheckOff = function (data){
             console.log(data);
