@@ -84,51 +84,66 @@ var jsApp      = './client/app/**/*.js',
     jsAuth     = './client/auth/**/*.js',
     jsCheckIn  = './client/checkin/**/*.js',
     jsVIP      = './client/vip/**/*.js',
-    jsAssets   = ['./client/assets/**/*.min.js', './client/assets/services/*.js'],
+    jsAssets   = './client/assets/services/*.js',
+    jsMins     = './client/**/*.min.js',
     jsDest     = './dist/';
 
 /**
  * Concat
  */
-gulp.task('minify-app', function() {
-    return gulp.src(jsApp, jsAssets)
-        .pipe(concat('dist.app.js'))
-        .pipe(gulp.dest(jsDest+'app'))
-        .pipe(rename('dist.js'))
+gulp.task('uglify-app', function() {
+    return gulp.src([jsApp, jsAssets])
         .pipe(uglify())
         .pipe(gulp.dest(jsDest+'app'));
 })
-gulp.task('minify-auth', function() {
-    return gulp.src(jsAuth, jsAssets)
-        .pipe(concat('dist.auth.js'))
-        .pipe(gulp.dest(jsDest+'auth'))
-        .pipe(rename('dist.js'))
+gulp.task('concat-app', function() {
+    return gulp.src([jsDest+'app', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'app'));
+})
+
+gulp.task('uglify-auth', function() {
+    return gulp.src([jsAuth, jsAssets])
         .pipe(uglify())
         .pipe(gulp.dest(jsDest+'auth'));
 })
-gulp.task('minify-checkin', function() {
-    return gulp.src(jsCheckIn, jsAssets)
-        .pipe(concat('dist.checkin.js'))
-        .pipe(gulp.dest(jsDest+'checkin'))
-        .pipe(rename('dist.js'))
+gulp.task('concat-auth', function() {
+    return gulp.src([jsDest+'auth', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'auth'));
+})
+
+gulp.task('uglify-checkin', function() {
+    return gulp.src([jsCheckIn, jsAssets])
         .pipe(uglify())
         .pipe(gulp.dest(jsDest+'checkin'));
 })
-gulp.task('minify-vip', function() {
-    return gulp.src(jsVIP, jsAssets)
-        .pipe(concat('dist.vip.js'))
-        .pipe(gulp.dest(jsDest+'vip'))
-        .pipe(rename('dist.js'))
+gulp.task('concat-checkin', function() {
+    return gulp.src([jsDest+'checkin', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'checkin'));
+})
+
+gulp.task('uglify-vip', function() {
+    return gulp.src([jsVIP, jsAssets])
         .pipe(uglify())
         .pipe(gulp.dest(jsDest+'vip'));
 })
-
+gulp.task('concat-vip', function() {
+    return gulp.src([jsDest+'vip', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'vip'));
+})
 
 gulp.task('minify-all', [
-    'minify-app',
-    'minify-auth',
-    'minify-checkin',
-    'minify-vip']
+    'uglify-app',
+    'concat-app',
+    'uglify-auth',
+    'concat-auth',
+    'uglify-checkin',
+    'concat-checkin',
+    'uglify-vip',
+    'concat-vip']
 );
 
 
@@ -176,8 +191,8 @@ gulp.task('default', [
  */
 gulp.task('setup', [
     'sass-all',
-    'bower-all']
-    //'minify']
+    'bower-all',
+    'minify-all']
 );
 
 /**
