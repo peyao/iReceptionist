@@ -6,7 +6,10 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('SearchCtrl', function($scope, $rootScope, $timeout, $state) {
+.controller('SearchCtrl', function($scope, $rootScope, $timeout, $state, $cookies, SearchService) {
+
+    $scope.user = $cookies.getObject('user');
+    var token = $cookies.get('token');
 
     $scope.returnState = function() {
         $state.go($rootScope.currentState || 'dashboard');
@@ -26,6 +29,31 @@ angular.module('iReceptionistApp')
         $scope.activeEmployee = $scope.employees[index];
     };
 
+    $scope.$watch('searchString', function() {
+        console.log('searchString changed!');
+        SearchService.searchEmployees(
+            $rootScope.searchString,
+            token,
+            function(searchResults) {
+                $scope.employees = searchResults;
+            },
+            function(err) {
+                console.log(err.errorMsg);
+            }
+        );
+        SearchService.searchVisitors(
+            $rootScope.searchString,
+            token,
+            function(searchResults) {
+                $scope.visitors = searchResults;
+            },
+            function(err) {
+                console.log(err.errorMsg);
+            }
+        );
+    });
+
+    /*
     $scope.employees = [{
         name: 'Amanda',
         phone: '(123) 456-7890',
@@ -69,4 +97,5 @@ angular.module('iReceptionistApp')
         email: 'valeriel@gmail.com',
         timesVisited: 12
     }];
+    */
 });
