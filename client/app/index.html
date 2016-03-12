@@ -44,6 +44,7 @@
 
 
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" ng-if="user.settings.theme" ng-href="/assets/vendor/css/themes/{{user.settings.theme}}.css">
         <link rel="stylesheet" href="/assets/vendor/css/themes.css">
         <!-- END Stylesheets -->
 
@@ -151,6 +152,12 @@
                                         <li>
                                             <a ui-sref="settings-account" ng-class="{active: currentState === 'settings-account'}">
                                                 Account
+                                            </a>
+                                            <a ui-sref="settings-company" ng-class="{active: currentState === 'settings-company'}">
+                                                Company
+                                            </a>
+                                            <a ui-sref="settings-notifications" ng-class="{active: currentState === 'settings-notifications'}">
+                                                Notifications
                                             </a>
                                             <a ui-sref="settings-forms" ng-class="{active: currentState === 'settings-forms'}">
                                                 Forms
@@ -322,6 +329,8 @@
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/controllers/settings_billing.js"></script>
         <script src="scripts/controllers/settings_forms.js"></script>
+        <script src="scripts/controllers/settings_company.js"></script>
+        <script src="scripts/controllers/settings_notifications.js"></script>
         <script src="/assets/services/authentication_service.js"></script>
         <script src="/assets/services/visitor_service.js"></script>
         <script src="/assets/services/form_service.js"></script>

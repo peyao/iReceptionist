@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <div class="block">
                         <div class="block-title">
-                            <h2>Update User Information</h2>
+                            <h2>User Information</h2>
                         </div>
                         <!-- END Horizontal Form Title -->
 
@@ -44,15 +44,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
+                                <div class="text-center">
                                     <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updateUser();">Submit</button>
                                 </div>
                             </div>
                         </form>
                     </div>
+                </div>
+                <div class="col-sm-6">
                     <div class="block">
                         <div class="block-title">
-                            <h2>Update Password</h2>
+                            <h2>Password</h2>
                         </div>
                         <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
                             <div class="form-group">
@@ -70,59 +72,8 @@
                             <div class="alert alert-danger hidden" id="password-error">
                             </div>
                             <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
+                                <div class="text-center">
                                     <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updatePassword();">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-                <div class="col-sm-6">
-                    <div class="block">
-                        <div class="block-title">
-                            <h2>Update Company Information</h2>
-                        </div>
-                        <!-- END Horizontal Form Title -->
-
-                        <!-- Horizontal Form Content -->
-                        <form action="" method="post" class="form-horizontal form-bordered settings-form" onsubmit="return false;">
-                            <div class="form-group">
-                                <label for="company-name">Change Company Name</label>
-                                <input type="text" id="company-name" name="company-name" class="form-control input-lg" ng-model="business.name" ng-change="businessFieldChanged('name');">
-                            </div>
-                            <div class="form-group">
-                                <label for="company-phone">Change Phone Number </label>
-                                <input type="text" id="company-phone" name="company-phone" class="form-control input-lg" ng-model="business.phone" ng-change="businessFieldChanged('phone');">
-                            </div>
-                            <div class="form-group">
-                                <label for="slackHook">Slack Integration</label>
-                                <input type="text" id="slackHook" name="slackHook" class="form-control input-lg" placeholder="Webhook URL" ng-model="business.slackHook" ng-change="businessFieldChanged('slackHook');">
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updateBusiness();">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="block">
-                        <div class="block-title">
-                            <h2>Update Notification Settings</h2>
-                        </div>
-                        <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
-                            <div class="form-group">
-                                <div class="col-xs-4">
-                                    <label for="email-notifications">Enable Email Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" ng-model="user.settings.receiveEmail" ng-change="updateEmailNotifications();"><span></span></label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <label for="sms-notifications">Enable SMS Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" ng-model="user.settings.receiveSMS" ng-change="updateSMSNotifications();"><span></span></label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <label for="browser-notifications">Enable In-Browser Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="browser-notifications"><span></span></label>
                                 </div>
                             </div>
                         </form>

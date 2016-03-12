@@ -1,0 +1,42 @@
+<div class="content-header">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="header-section">
+                <h1>Notifications</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Horizontal Form -->
+<section class="site-content site-section">
+    <div class="container">
+        <div class="site-block">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Notification Settings</h2>
+                        </div>
+                        <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <div class="col-xs-4">
+                                    <label for="email-notifications">Email Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="email-notifications" ng-model="user.settings.receiveEmail" ng-change="updateEmailNotifications();"><span></span></label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="sms-notifications">SMS Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="sms-notifications" ng-model="user.settings.receiveSMS" ng-change="updateSMSNotifications();"><span></span></label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="browser-notifications">Browser Notifications</label>
+                                    <label class="switch switch-success"><input type="checkbox" id="browser-notifications"><span></span></label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
