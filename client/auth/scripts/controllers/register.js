@@ -224,6 +224,10 @@ angular.module('iReceptionistApp')
                         required: true,
                         minlength: 5
                     },
+                    'register-step1-phone': {
+                        required: true,
+                        minlength: 7
+                    },
                     'register-step1-confirm-password': {
                         required: true,
                         equalTo: '#register-step1-password'
@@ -240,12 +244,27 @@ angular.module('iReceptionistApp')
                 messages: {
                     'register-step1-email': 'Please enter a valid email address',
                     'register-step1-terms': 'Please accept the terms to continue',
+                    'register-step1-phone': 'Please enter a valid phone number',
                     'register-step2-business-phone': 'Please enter a valid phone number'
+
                 }
             },
             inDuration: 0,
             outDuration: 0
         });
+
+
+        //return true if everythign wasn't filled
+        //function for ng-disable to go to next pages
+
+
+
+
+
+
+
+
+
 
         $scope.termsHandler = function(isChecked) {
             if (isChecked) {
