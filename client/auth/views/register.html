@@ -17,7 +17,7 @@
                 <button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!">Log In <i class="fa fa-sign-in"></i></button>
             </div>
             <div class="block-options pull-right" ng-if="step > 2">
-                <a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip to Log In <i class="fa fa-sign-in"></i></a>
+                <a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip to Dashboard <i class="fa fa-sign-in"></i></a>
             </div>
             <h2>Register</h2>
         </div>
@@ -63,7 +63,7 @@
                             <div class="input-group">
                                 <input ng-model="register.step1.password" type="{{inputType}}" id="register-step1-password" name="register-step1-password" class="form-control" placeholder="Password">
                                 <span class="input-group-btn" ng-if="inputType == 'password'">
-                                    <button class="btn btn-block btn-default btn-effect-ripple btn-password-toggle" type="button" ng-click="togglePassword()">Show</button>
+                                    <button class="btn btn-block btn-default btn-effect-ripple btn-password-toggle" ng-disabled="!(register.step1.password)" type="button" ng-click="togglePassword()">Show</button>
                                 </span>
                                 <span class="input-group-btn" ng-if="inputType != 'password'">
                                     <button class="btn btn-block btn-default btn-effect-ripple btn-password-toggle" type="button" ng-click="togglePassword()">Hide</button>
@@ -133,7 +133,7 @@
                             <div id="bgUpload" class="dropzone">
                                 <div class="dz-default dz-message"></div>
                             </div>
-                            <h5 class="text-center">Visitor Background Image</h5>
+                            <h5 class="text-center">Tablet Background Image</h5>
                         </div>
                     </div>
                 </fieldset>
@@ -172,11 +172,11 @@
             <!-- END STEP 4 -->
 
             <!-- BUTTONS -->
-            <div class="form-group form-actions">
-                <label for="register-arrow-left" class="col-xs-6" ng-hide="step === 1">Back: {{backText()}}</label>
-                <label for="register-arrow-right" class="col-xs-6 col-xs-offset-6" ng-show="step === 1">Next: Your Business</label>
-                <label for="register-arrow-right" class="col-xs-6" ng-show="step != 1">Next: {{nextText()}}</label>
-                <div class="col-xs-6">
+            <div class="form-group form-actions" align="center">
+                <label for="register-arrow-left" class="col-xs-6" ng-hide="step === 1">Back: <strong style="color: #02aac4;">{{backText()}}</strong></label>
+                <label for="register-arrow-right" class="col-xs-6 col-xs-offset-6" ng-show="step === 1">Next: <strong style="color: #02aac4;">Your Business</strong></label>
+                <label for="register-arrow-right" class="col-xs-6" ng-show="step != 1">Next: <strong style="color: #02aac4;">{{nextText()}}</strong></label>
+                <div class="col-xs-6" >
                     <button type="button" class="btn btn-block btn-effect-ripple btn-default" id="register-arrow-left" ng-hide="step === 1" ng-click="backStep()"><i class="fa fa-arrow-left"></i></button>
                 </div>
 
