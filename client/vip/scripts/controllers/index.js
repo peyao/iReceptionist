@@ -9,8 +9,8 @@ angular.module('iReceptionistApp')
 .controller('IndexCtrl', function($scope, $rootScope, $timeout, $cookies, $window) {
 
     $scope.doLogout = function() {
-        $cookies.remove('user');
-        $cookies.remove('token');
+        $cookies.remove('user', {'path': '/'});
+        $cookies.remove('token', {'path': '/'});
         $window.location.href = '/auth';
     };
 
