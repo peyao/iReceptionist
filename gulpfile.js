@@ -80,21 +80,56 @@ gulp.task('bower-all', [
 ]);
 
 // path
-var jsFiles    = ['./client/**/*.js', '!./client/**/bower_components/'],
-    jsAllFiles = './client/**/*.js',
+var jsApp      = './client/app/**/*.js',
+    jsAuth     = './client/auth/**/*.js',
+    jsCheckIn  = './client/checkin/**/*.js',
+    jsVIP      = './client/vip/**/*.js',
+    jsAssets   = ['./client/assets/**/*.min.js', './client/assets/services/*.js'],
     jsDest     = './dist/';
 
 /**
  * Concat
  */
-gulp.task('minify', function() {
-    return gulp.src(jsFiles)
-        .pipe(concat('dist.concat.js'))
-        .pipe(gulp.dest(jsDest))
+gulp.task('minify-app', function() {
+    return gulp.src(jsApp, jsAssets)
+        .pipe(concat('dist.app.js'))
+        .pipe(gulp.dest(jsDest+'app'))
         .pipe(rename('dist.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(jsDest));
+        .pipe(gulp.dest(jsDest+'app'));
 })
+gulp.task('minify-auth', function() {
+    return gulp.src(jsAuth, jsAssets)
+        .pipe(concat('dist.auth.js'))
+        .pipe(gulp.dest(jsDest+'auth'))
+        .pipe(rename('dist.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'auth'));
+})
+gulp.task('minify-checkin', function() {
+    return gulp.src(jsCheckIn, jsAssets)
+        .pipe(concat('dist.checkin.js'))
+        .pipe(gulp.dest(jsDest+'checkin'))
+        .pipe(rename('dist.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'checkin'));
+})
+gulp.task('minify-vip', function() {
+    return gulp.src(jsVIP, jsAssets)
+        .pipe(concat('dist.vip.js'))
+        .pipe(gulp.dest(jsDest+'vip'))
+        .pipe(rename('dist.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'vip'));
+})
+
+
+gulp.task('minify-all', [
+    'minify-app',
+    'minify-auth',
+    'minify-checkin',
+    'minify-vip']
+);
 
 
 gulp.task('browser-sync', [], function() {
