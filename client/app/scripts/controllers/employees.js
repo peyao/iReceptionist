@@ -8,10 +8,6 @@
 angular.module('iReceptionistApp')
     .controller('EmployeesCtrl', function ($rootScope, $scope, $cookies, UserService) {
         $rootScope.currentState = 'employees';
-        $('#page-content-ui-view').resize(function () {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
         $scope.showEmployeesMore = false;
         $scope.employees = [];
         $scope.emp = '';

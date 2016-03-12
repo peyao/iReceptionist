@@ -49,12 +49,18 @@ gulp.task('sass-checkin', function() {
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./client/checkin/styles'));
 });
+gulp.task('sass-assets', function() {
+    return gulp.src('./client/assets/styles/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./client/assets/styles'));
+});
 gulp.task('sass-all', [
     'sass-app',
     'sass-marketing',
     'sass-vip',
     'sass-auth',
-    'sass-checkin'
+    'sass-checkin',
+    'sass-assets',
 ]);
 
 
@@ -103,6 +109,7 @@ gulp.task('browser-sync', [], function() {
 	gulp.watch('./client/marketing/styles/*.scss', ['sass-marketing']);
 	gulp.watch('./client/vip/styles/*.scss', ['sass-vip']);
 	gulp.watch('./client/auth/styles/*.scss', ['sass-auth']);
+	gulp.watch('./client/assets/styles/*.scss', ['sass-assets']);
 });
 
 

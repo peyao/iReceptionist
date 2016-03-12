@@ -89,8 +89,7 @@ angular.module('iReceptionistApp')
             },
 
             // Success
-            function (regObj) {
-                console.log('register success');
+            function () {
                 //
                 // Automatically log-in after registration
                 //
@@ -102,33 +101,24 @@ angular.module('iReceptionistApp')
 
                     // Success
                     function(userObj) {
-                        // Need to set path because we are going from '/auth' to '/app' or '/vip'
-                        // TODO: On VIP side, need to use token to reverify the user has the correct role
-                        // or else log them off because they don't belong there.
-                        // TODO: For now, just do local role level check here and redirect.
-
                         var path = '/app';
-                        if (userObj.user.role === -1) {
+                        if (userObj.user.role < 0) {
                             path = '/vip';
                         }
-                        console.log(userObj);
-                        $cookies.putObject('user', userObj.user, {'path': '/auth'});
-                        $cookies.put('token', userObj.token, {'path': '/auth'});
-                        $cookies.put('token', userObj.token, {'path': '/checkin'});
-                        $cookies.putObject('user', userObj.user, {'path': path});
-                        $cookies.put('token', userObj.token, {'path': path});
+                        $cookies.putObject('user', userObj.user, {'path': '/'});
+                        $cookies.put('token', userObj.token, {'path': '/'});
                         $window.location.href = path; // Redirect
                     },
                     // Failure
                     function(err) {
-                        console.log('log in fail');
+                        console.log('Login failed: ', err);
                     }
                 );
             },
 
             // Error
             function (err) {
-                console.log('register fail');
+                console.log('Register failed: ', err);
             }
         );
     };
