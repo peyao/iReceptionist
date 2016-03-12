@@ -61,7 +61,6 @@ angular.module('iReceptionistApp')
             // Success
             function (regObj) {
                 console.log('register success');
-<<<<<<< HEAD
 
 
                 //
@@ -71,8 +70,6 @@ angular.module('iReceptionistApp')
                 //$window.location.href = path; // Redirect
 
 
-=======
->>>>>>> 94b874ee6cf46a9fe50b2eac06d4a6fed5be62bf
                 //
                 // Automatically log-in after registration
                 //
@@ -138,8 +135,6 @@ angular.module('iReceptionistApp')
     progressBar
         .css('width', '33%')
         .attr('aria-valuenow', '33');
-<<<<<<< HEAD
-=======
 
     $("#register-wizard").bind('step_shown', function(event, data){
         if (data.currentStep === 'register-step1') {
@@ -172,9 +167,6 @@ angular.module('iReceptionistApp')
     });
 
 
-    $('.clickable-steps a').on('click', function(){
-        var gotostep = $(this).data('gotostep');
->>>>>>> 94b874ee6cf46a9fe50b2eac06d4a6fed5be62bf
 
     $("#register-wizard").bind('step_shown', function(event, data){
         if (data.currentStep === 'register-step1') {
