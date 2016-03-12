@@ -234,7 +234,8 @@
                             <!-- Search Form -->
                             <li>
                                 <form action="javascript:void(0);" class="navbar-form-custom" role="search">
-                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control" placeholder="Search for visitors and employees..." ng-change="search(searchString)">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control hidden-sm hidden-xs" placeholder="Search for visitors and employees..." ng-change="search(searchString)">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control visible-sm visible-xs" placeholder="Search..." ng-change="search(searchString)">
                                 </form>
                             </li>
                             <!-- END Search Form -->
