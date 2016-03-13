@@ -90,7 +90,7 @@ angular.module('iReceptionistApp')
       UserService.updateUser({
           "name": $scope.editEmp.name,
           "email": $scope.editEmp.email,
-          "phone": $scope.editEmp.phone
+          "phone": $scope.editEmp.phone,
         },
         $cookies.get('token'),
         function(userObj) {
@@ -99,6 +99,8 @@ angular.module('iReceptionistApp')
         },
         function(err) {
           console.log("Update employee error");
+          console.log("ID" + $scope.userID);
+
         }
       );
     };

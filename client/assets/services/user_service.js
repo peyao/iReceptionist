@@ -88,18 +88,6 @@ angular.module('iReceptionistApp')
                     headers: {
                         'Authorization': 'Bearer ' + token
                     },
-                    data: userObj,
-                };
-                this.apiCall(req, success, error);
-            },
-            // userObj should contain name, email, phone, and userId
-            updateEmployee: function (userObj, token, success, error){
-                var req = {
-                    method: 'PUT',
-                    url: '/employee/edit',
-                    headers: {
-                        'Authorization': 'Bearer ' + token
-                    },
                     data: userObj
                 };
                 this.apiCall(req, success, error);
