@@ -9,10 +9,6 @@ angular.module('iReceptionistApp')
     .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService, DropZone) {
         $rootScope.currentState = 'settings-forms';
 
-        /*
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');*/
-
         $scope.user = $cookies.getObject('user');
 
         FormService.createForm(

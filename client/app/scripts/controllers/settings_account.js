@@ -107,8 +107,8 @@ angular.module('iReceptionistApp')
                 },
                 $cookies.get('token'),
                 function (userObj) {
-                    toastr.success("Your theme has been updated!");
                     toastr.info("Please reload the page for your theme to take effect.");
+                    toastr.success("Your theme has been updated!");
 
                     // Update the user cookie
                     $cookies.putObject('user', userObj);
@@ -121,4 +121,6 @@ angular.module('iReceptionistApp')
         };
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
+        $scope.logoUpload = DropZone.createNew('#logoUpload');
+        $scope.bgUpload = DropZone.createNew('#bgUpload');
     });
