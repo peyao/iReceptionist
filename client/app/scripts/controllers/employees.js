@@ -91,7 +91,7 @@ angular.module('iReceptionistApp')
           "name": $scope.editEmp.name,
           "email": $scope.editEmp.email,
           "phone": $scope.editEmp.phone,
-          "userId": $scope.userID
+          "userId": $scope.userID,
         },
         $cookies.get('token'),
         function(userObj) {
@@ -101,6 +101,8 @@ angular.module('iReceptionistApp')
         },
         function(err) {
           console.log("Update employee error");
+          console.log("ID" + $scope.userID);
+
         }
       );
       $('#editEmp').modal('hide');
