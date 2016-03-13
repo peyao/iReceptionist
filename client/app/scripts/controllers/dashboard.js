@@ -10,7 +10,7 @@ angular.module('iReceptionistApp')
         $rootScope.currentState = 'dashboard';
 
         $scope.user = $cookies.getObject('user');
-		    $scope.showMine = false;
+        $scope.showMine = false;
         $scope.showActive = null;
         $scope.visitors = [];
 
