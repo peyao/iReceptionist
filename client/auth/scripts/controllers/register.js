@@ -16,7 +16,6 @@ angular.module('iReceptionistApp')
         $scope.inputType = 'password';
 
 
-
         $scope.register = {};
         $scope.register.step1 = {};
         $scope.register.step2 = {};
@@ -32,33 +31,30 @@ angular.module('iReceptionistApp')
         });
 
 
-
         $scope.disableNext = function () {
 
             // if on step1 and you don't have valid fields then the next button is disabled
-            if($scope.step ===1)
-            {
-                if($scope.register.step1.email && $scope.register.step1.fullName && $scope.register.step1.phone && $scope.register.step1.password)
-                {
-                    return false;
+            if ($scope.step === 1) {
+                if ($scope.register.step1.email && $scope.register.step1.fullName && $scope.register.step1.phone && $scope.register.step1.password) {
+                    if (!($scope.disableNextButton)) {
+                        return false;
+                    }
+
                 }
                 return true;
             }
-            if($scope.step ===2)
-            {
+            if ($scope.step === 2) {
 
                 // if on step 2 and fields not filled out disable button
-                if($scope.register.step2.businessName && $scope.register.step2.phone)
-                {
-                    return false;
+                if ($scope.register.step2.businessName && $scope.register.step2.phone) {
+                       return false;
                 }
                 return true;
             }
 
-            return true;
+            return false;
 
         };
-
 
 
         $scope.backStep = function () {
@@ -74,33 +70,33 @@ angular.module('iReceptionistApp')
             }
         };
 
-        $scope.togglePassword = function (){
+        $scope.togglePassword = function () {
             if ($scope.inputType == 'password')
                 $scope.inputType = 'text';
             else
                 $scope.inputType = 'password';
         };
 
-        $scope.backText = function(){
-            if ($scope.step === 2){
+        $scope.backText = function () {
+            if ($scope.step === 2) {
                 return "Your Account";
             }
-            else if ($scope.step === 3){
+            else if ($scope.step === 3) {
                 return "Your Business";
             }
-            else if ($scope.step === 4){
+            else if ($scope.step === 4) {
                 return "Tablet Images";
             }
         };
 
-        $scope.nextText = function(){
-            if ($scope.step === 2){
+        $scope.nextText = function () {
+            if ($scope.step === 2) {
                 return "Tablet Images";
             }
-            else if ($scope.step === 3){
+            else if ($scope.step === 3) {
                 return "First Employee";
             }
-            else if ($scope.step === 4){
+            else if ($scope.step === 4) {
                 return "Enter the Site";
             }
         };
@@ -112,8 +108,7 @@ angular.module('iReceptionistApp')
         };
 
 
-
-        $scope.submitRegistration = function() {
+        $scope.submitRegistration = function () {
             AuthenticationService.register({
                     'role': '2',
                     'name': $scope.register.step1.fullName,
@@ -136,7 +131,7 @@ angular.module('iReceptionistApp')
                         },
 
                         // Success
-                        function(userObj) {
+                        function (userObj) {
                             // Need to set path because we are going from '/auth' to '/app' or '/vip'
                             // TODO: On VIP side, need to use token to reverify the user has the correct role
                             // or else log them off because they don't belong there.
@@ -155,7 +150,7 @@ angular.module('iReceptionistApp')
                             $window.location.href = path; // Redirect
                         },
                         // Failure
-                        function(err) {
+                        function (err) {
                             console.log('log in fail');
                         }
                     );
@@ -194,7 +189,7 @@ angular.module('iReceptionistApp')
             .css('width', '33%')
             .attr('aria-valuenow', '33');
 
-        $("#register-wizard").bind('step_shown', function(event, data){
+        $("#register-wizard").bind('step_shown', function (event, data) {
             if (data.currentStep === 'register-step1') {
                 progressBar
                     .css('width', '25%')
@@ -215,7 +210,7 @@ angular.module('iReceptionistApp')
                     .attr('aria-valuenow', '75')
                     .removeClass('progress-bar-warning progress-bar-danger progress-bar-success')
                     .addClass('progress-bar-info');
-            }else if (data.currentStep === 'register-step4') {
+            } else if (data.currentStep === 'register-step4') {
                 progressBar
                     .css('width', '100%')
                     .attr('aria-valuenow', '100')
@@ -231,14 +226,14 @@ angular.module('iReceptionistApp')
             validationOptions: {
                 errorClass: 'help-block animation-slideDown', // You can change the animation class for a different entrance animation - check animations page
                 errorElement: 'span',
-                errorPlacement: function(error, e) {
+                errorPlacement: function (error, e) {
                     e.parents('.form-group > div').append(error);
                 },
-                highlight: function(e) {
+                highlight: function (e) {
                     $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
                     $(e).closest('.help-block').remove();
                 },
-                success: function(e) {
+                success: function (e) {
                     // You can use the following if you would like to highlight with green color the input after successful validation!
                     e.closest('.form-group').removeClass('has-success has-error'); // e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
                     e.closest('.help-block').remove();
@@ -289,10 +284,15 @@ angular.module('iReceptionistApp')
         });
 
 
+        $scope.typeHandler = function (isSelected) {
+            if (isSelected) {
+                $scope.disableNextButton = false;
+            }
+            else {
+                $scope.disableNextButton = true;
+            }
 
-
-
-
+        };
 
 
 
