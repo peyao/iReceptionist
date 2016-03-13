@@ -6,9 +6,9 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService) {
+    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService, DropZone) {
         $rootScope.currentState = 'settings-forms';
-        $scope.defaultValue = {};
+
         $scope.user = $cookies.getObject('user');
 
         FormService.createForm(
@@ -45,7 +45,6 @@ angular.module('iReceptionistApp')
                 required: true,
                 editable: false
             });
-            $scope.defaultValue[name.id] = 'default value';
         }
 
         $scope.form = $builder.forms['default'];
