@@ -6,11 +6,10 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies) {
-
+.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies, BusinessService) {
     $scope.doLogout = function() {
-        $cookies.remove('user');
-        $cookies.remove('token');
+        $cookies.remove('user', {'path': '/'});
+        $cookies.remove('token', {'path': '/'});
         $window.location.href = '/auth';
     };
 
@@ -21,27 +20,30 @@ angular.module('iReceptionistApp')
         App.togglePageLoading(); // Stop Page Loading
     }
 
-    /**
-    * Set up for anim-in-out because it requires a position: absolute element.
-    */
-    $rootScope.pageContentWidth = function() {
-        return $('#page-content').width();
-    };
-    $rootScope.pageContentHeight = function() {
-        return $('#page-content-ui-view').innerHeight();
-    };
-    $('#page-content').resize(function() {
-        $('#page-content-ui-view').width($rootScope.pageContentWidth());
-        $('#page-content').height($rootScope.pageContentHeight());
-    });
+    $scope.user = $cookies.getObject('user');
+    if (!$cookies.get('business')){
+        console.log("business cookie");
+        BusinessService.getBusiness(
+            $scope.user.business,
+            $cookies.get('token'),
+            function (busObj){
+                console.log("Business: " + busObj);
+                console.log(busObj.business.name);
+                $cookies.putObject('business', busObj);
+            },
+            function (err) {
+                //$scope.alert.danger = err.errorMsg;
+            }
+        );
+    }
 
     /**
     * Clock Functionality
     */
     $scope.clock = '';
-    $scope.tickInterval = 10000; //ms
+    $scope.tickInterval = 1000; //ms
     var tick = function() {
-        $scope.clock = moment().format('LT');
+        $scope.clock = moment().format('LTS');
         $timeout(tick, $scope.tickInterval); // Reset Timer
     };
     // Start the timer

@@ -12,26 +12,31 @@
 </div>
 <div class="container">
     <div class="row">
-        <h1>Visitors</h1>
+        <div class="col-xs-12">
+            <h1 class="sub-header">Visitors <small>&nbsp;{{ searchVisitorsHeader || 'found ' + visitors.length || 0}}</small></h1>
+        </div>
         <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="v in visitors">
             <a href="javascript:void(0)" class="widget" ng-click="activateVisitor($index)">
                 <div class="widget-content text-left clearfix">
-                    <h2 class="widget-heading h3"><strong>{{v.name}}</strong></h2>
-                    <span class="text-muted">{{v.phone}}</span>
+                    <h2 class="widget-heading h3"><strong>{{v.name || 'No name'}}</strong></h2>
+                    <span class="text-muted">{{v.phone || 'No phone number'}}</span>
                 </div>
             </a>
         </div>
     </div>
+
     <div class="row">
-        <h1>Employees</h1>
+        <div class="col-xs-12">
+            <h1 class="sub-header">Employees <small>&nbsp;{{ searchEmployeesHeader || 'found ' + employees.length || 0}}</small></h1>
+        </div>
         <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="e in employees">
             <a href="javascript:void(0)" class="widget" ng-click="activateEmployee($index)">
                 <div class="widget-content text-left clearfix" ng-class="{'themed-background-danger': e.role === 'admin'}">
                     <img src="/assets/vendor/img/placeholders/avatars/avatar12.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar pull-right">
-                    <h2 class="widget-heading h3" ng-class="{'text-light': e.role === 'admin'}"><strong>{{e.name}}</strong></h2>
-                    <span class="text-muted" ng-class="{'text-light': e.role === 'admin'}">{{e.email}}</span>
+                    <h2 class="widget-heading h3" ng-class="{'text-light': e.role === 'admin'}"><strong>{{e.name || 'No name'}}</strong></h2>
+                    <span class="text-muted" ng-class="{'text-light': e.role === 'admin'}">{{e.email || 'No email'}}</span>
                     <br>
-                    <span class="text-muted" ng-class="{'text-light': e.role === 'admin'}">{{e.phone}}</span>
+                    <span class="text-muted" ng-class="{'text-light': e.role === 'admin'}">{{e.phone || 'No phone number'}}</span>
                 </div>
             </a>
         </div>
