@@ -330,6 +330,25 @@ angular.module('iReceptionistApp')
     };
     
     
+    //search the list of clients
+    $('#chartSearch').keyup(function() {
+        var searchVal = $('#chartSearch').val().toLowerCase();
+        if (searchVal == '') {
+            $scope.clientsToShow=$scope.clients;
+        }
+        else {
+            var clientList = [];
+            for (var i=0; i<$scope.clients.length; i++) {
+                var clientName = $scope.clients[i].name.toLowerCase();
+                if (clientName.includes(searchVal)) {
+                    clientList.push($scope.clients[i]);
+                }
+            }
+            $scope.clientsToShow=clientList;
+        }
+        $scope.$digest();
+    });
+    
     // ALL INITIAL VALUES SET HERE //
     var lastSort = '';
     var initialPlot = 'total_clients';
@@ -339,6 +358,10 @@ angular.module('iReceptionistApp')
     
     //initially sort by name
     $scope.sortBy('name');
+    
+    //initally show all clients
+    $scope.clientsToShow=$scope.clients;
+    
     
 });
 
