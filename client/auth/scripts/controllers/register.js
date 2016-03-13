@@ -25,6 +25,7 @@ angular.module('iReceptionistApp')
         $scope.register.step1.password = '';
         $scope.register.step2.businessName = '';
         $scope.register.step2.phone = '';
+        $scope.register.step2.type = '';
 
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
@@ -46,7 +47,7 @@ angular.module('iReceptionistApp')
             if ($scope.step === 2) {
 
                 // if on step 2 and fields not filled out disable button
-                if ($scope.register.step2.businessName && $scope.register.step2.phone) {
+                if ($scope.register.step2.businessName && $scope.register.step2.phone && $scope.register.step2.type) {
                        return false;
                 }
                 return true;
@@ -282,17 +283,6 @@ angular.module('iReceptionistApp')
             inDuration: 0,
             outDuration: 0
         });
-
-
-        $scope.typeHandler = function (isSelected) {
-            if (isSelected) {
-                $scope.disableNextButton = false;
-            }
-            else {
-                $scope.disableNextButton = true;
-            }
-
-        };
 
 
 
