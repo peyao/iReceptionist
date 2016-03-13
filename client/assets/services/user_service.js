@@ -88,7 +88,7 @@ angular.module('iReceptionistApp')
                     headers: {
                         'Authorization': 'Bearer ' + token
                     },
-                    data: userObj,
+                    data: userObj
                 };
                 this.apiCall(req, success, error);
             },
