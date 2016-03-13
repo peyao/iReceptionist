@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsCompanyCtrl', function($rootScope, $scope, $cookies, BusinessService) {
+    .controller('SettingsCompanyCtrl', function($rootScope, $scope, $cookies, BusinessService, DropZone) {
         $rootScope.currentState = 'settings-company';
 
         $('#page-content-ui-view').resize(function() {
@@ -64,4 +64,7 @@ angular.module('iReceptionistApp')
                 "businessId": $scope.user.business
             };
         };
+
+        $scope.logoUpload = DropZone.createNew('#logoUpload');
+        $scope.bgUpload = DropZone.createNew('#bgUpload');
     });

@@ -18,6 +18,16 @@ angular.module('iReceptionistApp')
         $scope.oldPassword = '';
         $scope.password = '';
         $scope.confirmPassword = '';
+        $scope.selectedTheme = $scope.user.settings.theme;
+        console.log($scope.selectedTheme);
+
+        // Highlight the selected theme or the first one if a theme hasn't been chosen yet
+        if ($scope.selectedTheme) {
+            $('#' + $scope.selectedTheme).removeClass('site-theme');
+        }
+        else {
+            $('#default-inverse-default').removeClass('site-theme');
+        }
 
         // Object that holds the fields to update in the user.
         var userFields = {};
@@ -100,15 +110,25 @@ angular.module('iReceptionistApp')
 
         // Update the site color theme. The theme will be stored in the db as a string in the
         // format color.header.sidebar
-        $scope.updateTheme = function(theme) {
+        $scope.updateTheme = function($event) {
+            var theme = $($event.currentTarget);
+
             UserService.updateUser(
                 {
-                    "theme": theme
+                    "theme": theme.attr('id')
                 },
                 $cookies.get('token'),
                 function (userObj) {
                     toastr.info("Please reload the page for your theme to take effect.");
                     toastr.success("Your theme has been updated!");
+
+                    // Remove highlight from the previously selected theme
+                    $('#' + $scope.selectedTheme).addClass('site-theme');
+
+                    // Highlight the currently selected theme
+                    theme.removeClass('site-theme');
+
+                    $scope.selectedTheme = theme.attr('id');
 
                     // Update the user cookie
                     $cookies.putObject('user', userObj);
@@ -121,6 +141,4 @@ angular.module('iReceptionistApp')
         };
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');
     });

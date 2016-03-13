@@ -46,7 +46,7 @@
 
 
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
-        <link rel="stylesheet" ng-if="user.settings.theme && user.settings.theme.split('.')[0] !== 'default'" ng-href="/assets/vendor/css/themes/{{user.settings.theme.split('.')[0]}}.css">
+        <link rel="stylesheet" ng-if="user.settings.theme && user.settings.theme.split('-')[0] !== 'default'" ng-href="/assets/vendor/css/themes/{{user.settings.theme.split('-')[0]}}.css">
         <link rel="stylesheet" href="/assets/vendor/css/themes.css">
         <!-- END Stylesheets -->
 
@@ -93,7 +93,7 @@
 
                 'enable-cookies'                                enables cookies for remembering active color theme when changed from the sidebar links (You can add it along with any other class)
             -->
-            <div id="page-container" class="header-fixed-top sidebar-visible-lg-full" ng-class="(user.settings.theme.split('.')[2] === 'light') ? 'sidebar-light' : ''">
+            <div id="page-container" class="header-fixed-top sidebar-visible-lg-full" ng-class="(user.settings.theme.split('-')[2] === 'light') ? 'sidebar-light' : ''">
                 <!-- Alternative Sidebar -->
                 <div id="sidebar-alt" tabindex="-1" aria-hidden="true">
                     <!-- Toggle Alternative Sidebar Button (visible only in static layout) -->
@@ -216,7 +216,7 @@
                         'navbar-fixed-bottom'       for a bottom fixed header (fixed main sidebar with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar()))
                             'header-fixed-bottom'   has to be added on #page-container only if the class 'navbar-fixed-bottom' was added
                     -->
-                    <header class="navbar navbar-fixed-top" ng-class="(user.settings.theme.split('.')[1] === 'default') ? 'navbar-default' : 'navbar-inverse'">
+                    <header class="navbar navbar-fixed-top" ng-class="(user.settings.theme.split('-')[1] === 'default') ? 'navbar-default' : 'navbar-inverse'">
                         <!-- Left Header Navigation -->
                         <ul class="nav navbar-nav-custom">
                             <!-- Main Sidebar Toggle Button -->
