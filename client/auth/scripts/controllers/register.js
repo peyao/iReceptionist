@@ -9,6 +9,14 @@ angular.module('iReceptionistApp')
     .controller('RegisterCtrl', function($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
 
         var REGISTRATION_STEPS = 4;
+        var ONE = 1;
+        var TWO = 2;
+        var THREE = 3;
+        var FOUR = 4;
+
+
+
+
         $scope.max = REGISTRATION_STEPS;
         $scope.step = 1;
         $scope.register = {};
@@ -46,7 +54,7 @@ angular.module('iReceptionistApp')
         $scope.disableNext = function () {
 
             // if on step1 and you don't have valid fields then the next button is disabled
-            if ($scope.step === 1) {
+            if ($scope.step === ONE) {
                 if ($scope.register.step1.email && $scope.register.step1.fullName && $scope.register.step1.phone && $scope.register.step1.password) {
                     if (!($scope.disableNextButton)) {
                         return false;
@@ -55,7 +63,7 @@ angular.module('iReceptionistApp')
                 }
                 return true;
             }
-            if ($scope.step === 2) {
+            if ($scope.step === TWO) {
 
                 // if on step 2 and fields not filled out disable button
                 if ($scope.register.step2.businessName && $scope.register.step2.phone && $scope.register.step2.type) {
@@ -64,7 +72,7 @@ angular.module('iReceptionistApp')
                 return true;
             }
 
-            if($scope.step === 4) {
+            if($scope.step === FOUR) {
                 // if on step 4 and fill out name, then finish rest before moving on
                 if($scope.register.step4.name)
                 {
@@ -104,25 +112,25 @@ angular.module('iReceptionistApp')
         };
 
         $scope.backText = function () {
-            if ($scope.step === 2) {
+            if ($scope.step === TWO) {
                 return "Your Account";
             }
-            else if ($scope.step === 3) {
+            else if ($scope.step === THREE) {
                 return "Your Business";
             }
-            else if ($scope.step === 4) {
+            else if ($scope.step === FOUR) {
                 return "Tablet Images";
             }
         };
 
         $scope.nextText = function () {
-            if ($scope.step === 2) {
+            if ($scope.step === TWO) {
                 return "Tablet Images";
             }
-            else if ($scope.step === 3) {
+            else if ($scope.step === THREE) {
                 return "First Employee";
             }
-            else if ($scope.step === 4) {
+            else if ($scope.step === FOUR) {
                 return "Enter the Site";
             }
         };
