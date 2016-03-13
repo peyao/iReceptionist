@@ -22,7 +22,7 @@ angular.module('iReceptionistApp')
                     'businessId': busId,
                     'description': 'Garbage',
                     'form': formObj
-                }
+                },
             };
             this.apiCall(req, success, error);
         },
