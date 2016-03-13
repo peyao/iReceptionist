@@ -6,9 +6,24 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('VipDashboardCtrl', function($scope, $rootScope) {
+.controller('VipDashboardCtrl', function($scope, $rootScope, $cookies, BusinessService) {
     $rootScope.currentState = 'vip-dashboard';
-    
+
+    /* Here's an example of how to call suspendBusiness -- when you click on the suspend button for the business, you'll
+    need to capture that data and store it somewhere in scope - then you can access it
+     */
+    //BusinessService.suspendBusiness(
+    //    $scope.clickedBusiness.businessId,
+    //    !$scope.clickedBusiness.suspended, // Toggle the current suspension -- if true, send false, if false, send true
+    //    $cookies.get('token'),
+    //    function (busObj) {
+    //        $trace("Suspended business: " + busObj);
+    //    },
+    //    function (err) {
+    //        $trace("Suspend business fail: " + busObj);
+    //    }
+    //);
+
     $scope.clients = [
         {
             'name': 'Alfred',

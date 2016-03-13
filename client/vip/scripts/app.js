@@ -35,3 +35,7 @@ angular
             controller: 'VipEmployeesCtrl'
         });
 });
+
+function $trace(message) {
+    console.log("(DEBUG) " + message);
+}
