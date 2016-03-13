@@ -723,13 +723,13 @@ a.sidebar-title:focus {
     margin: 0;
     padding: 0;
     text-align: center;
-    opacity: .35;
-    transition: opacity .15s ease-out;
+    /*opacity: .35;
+    transition: opacity .15s ease-out;*/
 }
 
-.sidebar-themes:hover {
+/*.sidebar-themes:hover {
     opacity: 1;
-}
+}*/
 
 .sidebar-themes li {
     float: left;

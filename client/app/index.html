@@ -46,6 +46,7 @@
 
 
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" ng-if="user.settings.theme && user.settings.theme.split('-')[0] !== 'default'" ng-href="/assets/vendor/css/themes/{{user.settings.theme.split('-')[0]}}.css">
         <link rel="stylesheet" href="/assets/vendor/css/themes.css">
         <!-- END Stylesheets -->
 
@@ -92,7 +93,7 @@
 
                 'enable-cookies'                                enables cookies for remembering active color theme when changed from the sidebar links (You can add it along with any other class)
             -->
-            <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
+            <div id="page-container" class="header-fixed-top sidebar-visible-lg-full" ng-class="(user.settings.theme.split('-')[2] === 'light') ? 'sidebar-light' : ''">
                 <!-- Alternative Sidebar -->
                 <div id="sidebar-alt" tabindex="-1" aria-hidden="true">
                     <!-- Toggle Alternative Sidebar Button (visible only in static layout) -->
@@ -154,6 +155,12 @@
                                             <a ui-sref="settings-account" ng-class="{active: currentState === 'settings-account'}">
                                                 Account
                                             </a>
+                                            <a ui-sref="settings-company" ng-class="{active: currentState === 'settings-company'}">
+                                                Company
+                                            </a>
+                                            <a ui-sref="settings-notifications" ng-class="{active: currentState === 'settings-notifications'}">
+                                                Notifications
+                                            </a>
                                             <a ui-sref="settings-forms" ng-class="{active: currentState === 'settings-forms'}">
                                                 Forms
                                             </a>
@@ -209,7 +216,7 @@
                         'navbar-fixed-bottom'       for a bottom fixed header (fixed main sidebar with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar()))
                             'header-fixed-bottom'   has to be added on #page-container only if the class 'navbar-fixed-bottom' was added
                     -->
-                    <header class="navbar navbar-inverse navbar-fixed-top">
+                    <header class="navbar navbar-fixed-top" ng-class="(user.settings.theme.split('-')[1] === 'default') ? 'navbar-default' : 'navbar-inverse'">
                         <!-- Left Header Navigation -->
                         <ul class="nav navbar-nav-custom">
                             <!-- Main Sidebar Toggle Button -->
@@ -326,6 +333,8 @@
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/controllers/settings_billing.js"></script>
         <script src="scripts/controllers/settings_forms.js"></script>
+        <script src="scripts/controllers/settings_company.js"></script>
+        <script src="scripts/controllers/settings_notifications.js"></script>
         <script src="/assets/services/authentication_service.js"></script>
         <script src="/assets/services/visitor_service.js"></script>
         <script src="/assets/services/form_service.js"></script>

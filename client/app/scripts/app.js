@@ -44,6 +44,16 @@ angular
             templateUrl: 'views/settings/settings_account.html',
             controller: 'SettingsAccountCtrl'
         })
+        .state('settings-company', {
+            url: '/settings/company',
+            templateUrl: 'views/settings/settings_company.html',
+            controller: 'SettingsCompanyCtrl'
+        })
+        .state('settings-notifications', {
+            url: '/settings/notifications',
+            templateUrl: 'views/settings/settings_notifications.html',
+            controller: 'SettingsNotificationsCtrl'
+        })
         .state('settings-forms', {
             url: '/settings/forms',
             templateUrl: 'views/settings/settings_forms.html',
@@ -54,6 +64,7 @@ angular
             templateUrl: 'views/settings/settings_billing.html',
             controller: 'SettingsBillingCtrl'
         })
+
 
         // .state('checkin', {
             // url: '/checkin',
