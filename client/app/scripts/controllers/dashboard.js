@@ -80,4 +80,24 @@ angular.module('iReceptionistApp')
                 }
             );
         };
+
+        var chartClassicDash = $('#chart-classic-dash');
+
+        $.plot(chartClassicDash,
+            [
+                {
+                    label: 'Number of Visitors',
+                    data: [[1, 130], [2, 330], [3, 220], [4, 350], [5, 150], [6, 275], [7, 280], [8, 380], [9, 120], [10, 330], [11, 190], [12, 410]],
+                    lines: {show: true, fill: true, fillColor: {colors: [{opacity: .6}, {opacity: .6}]}},
+                    points: {show: true, radius: 5}
+                },
+            ],
+            {
+                colors: ['#5ccdde'],
+                legend: {show: true, position: 'nw', backgroundOpacity: 0},
+                grid: {borderWidth: 0, hoverable: true, clickable: true},
+                yaxis: {show: false, tickColor: '#f5f5f5', ticks: 3},
+                xaxis: {ticks: [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']], tickColor: '#f9f9f9'}
+            }
+        );
     });

@@ -9,106 +9,111 @@
 </div>
 
 <div class="row">
-	<!-- START analytics -->
-	<div class="col-sm-6 col-sm-push-6 col-md-4 col-md-push-8">
-		<!-- Statistics Widget -->
-		<div class="widget">
-			<div class="widget-content border-bottom">
-				<span class="pull-right text-muted"><i class="fa fa-check"></i></span>
-				Visitor Analytics
-			</div>
-			<div class="widget-content border-bottom themed-background-muted">
-				<div id="chart-classic-dash" style="height: 280px;">
+    <!-- START analytics -->
+    <div class="col-sm-6 col-sm-push-6 col-md-4 col-md-push-8">
+        <!-- Statistics Widget -->
+        <div class="widget">
+            <div class="widget-content border-bottom">
+                <span class="pull-right text-muted"><i class="fa fa-check"></i></span>
+                Visitor Analytics
+            </div>
+            <div class="widget-content border-bottom themed-background-muted">
+                <div id="chart-classic-dash" style="height: 280px;">
+                </div>
+            </div>
+            <div class="widget-content widget-content-full-top-bottom border-bottom">
+                <div class="row text-center">
+                    <div class="col-xs-6 push-inner-top-bottom border-right">
+                        <h3 class="widget-heading"><i class="gi gi-book_open text-dark push"></i> <br>
+                            <small>123 Total Visitors</small>
+                        </h3>
+                    </div>
+                    <div class="col-xs-6 push-inner-top-bottom">
+                        <h3 class="widget-heading"><i class="gi gi-user_add text-dark push"></i> <br>
+                            <small>+10% Today</small>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- ng-click="doCheckOff(v)" -->
+            <button ng-class="active" title="Set Inactive" class="btn btn-effect-ripple btn-block btn-danger"><i
+                    class="fa fa-check"></i></button>
+        </div>
+        <!-- END Statistics Widget -->
+    </div>
+    <!-- END analytics -->
 
-				</div>
-			</div>
-			<div class="widget-content widget-content-full-top-bottom border-bottom">
-				<div class="row text-center">
-					<div class="col-xs-6 push-inner-top-bottom border-right">
-						<h3 class="widget-heading"><i class="gi gi-book_open text-dark push"></i> <br><small>123 Total Visitors</small></h3>
-					</div>
-					<div class="col-xs-6 push-inner-top-bottom">
-						<h3 class="widget-heading"><i class="gi gi-user_add text-dark push"></i> <br><small>+10% Today</small></h3>
-					</div>
-				</div>
-			</div>
-			<!-- ng-click="doCheckOff(v)" -->
-			<button ng-class="active" title="Set Inactive" class="btn btn-effect-ripple btn-block btn-danger"><i class="fa fa-check"></i></button>
-		</div>
-		<!-- END Statistics Widget -->
-	</div>
-	<!-- END analytics -->
+    <!-- START visitor table -->
+    <div class="col-sm-6 col-sm-pull-6 col-md-8 col-md-pull-4">
+        <div class="block">
+            <div class="block-title clearfix">
+                <!-- TODO These buttons shold only appear if employee is a field name-->
+                    <div class="btn-group pull-right col-md-3">
+                        <button class="btn btn-primary col-md-6" ng-class="{'active': showMine == false}" ng-click="showMine = false;">All</button>
+                        <button class="btn btn-primary col-md-6" ng-class="{'active': showMine == true}" ng-click="showMine = true;">Mine</button>
+                    </div>
+                    <!--<button ng-class="{'active': showMine == false}" class="btn btn-effect-ripple btn-success" ng-click="showMine = false;">All</button>-->
+                    <!--<button ng-class="{'active': showMine == true}" class="btn btn-effect-ripple btn-danger" ng-click="showMine = true;">Mine</button>-->
 
-	<!-- START visitor table -->
-	<div class="col-sm-6 col-sm-pull-6 col-md-8 col-md-pull-4">
-		<div class="block">
-			<div class="block-title clearfix">
-				<!-- TODO These buttons shold only appear if employee is a field name-->
-				<div class="block-options pull-right">
-					<button ng-class="{'active': showMine == false}" class="btn btn-effect-ripple btn-success" ng-click="showMine = false;">All</button>
-					<button ng-class="{'active': showMine == true}" class="btn btn-effect-ripple btn-danger" ng-click="showMine = true;">Mine</button>
-				</div>
-				<h2>Current Visitors</h2>
-			</div>
-			<div class="table-responsive">
-				<table id="visitor-table" class="table table-striped table-bordered table-vcenter">
-					<thead>
-						<!-- TODO Backend do your stuff -->
-						<th>Name</th>
-						<th>Employee</th>
-						<th>Notes</th>
-						<th>Phone</th>
-					</thead>
-					<tbody>
-						<!-- TODO filter by employee -->
-						<tr ng-repeat="v in visitors | filter :{active : showActive}">
-							<!-- TODO Backend do your stuff.... -->
-							<td><strong>{{v.name}}</strong></td>
-							<td>{{v.employee}}</td>
-							<td>{{v.notes}}</td>
-							<td>{{v.phone}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div class="block">
-			<div class="block-title clearfix">
-				<!-- TODO These buttons shold only appear if employee is a field name-->
-				<div class="block-options pull-right">
-					<button ng-class="{'active': showMine == false}" class="btn btn-effect-ripple btn-success" ng-click="showMine = false;">All</button>
-					<button ng-class="{'active': showMine == true}" class="btn btn-effect-ripple btn-danger" ng-click="showMine = true;">Mine</button>
-				</div>
-				<div class="block-options pull-right">
-					<i class="fa fa-calendar"></i>
-				</div>
-				<div class="form-group pull-right">
-					<input type="text" id="example-datepicker3" name="example-datepicker3" class="form-control input-datepicker" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy">
-				</div>
-				<h2>Past Visitors</h2>
-			</div>
-			<div class="table-responsive">
-				<table id="visitor-table" class="table table-striped table-bordered table-vcenter">
-					<thead>
-						<!-- TODO Backend do your stuff -->
-						<th>Name</th>
-						<th>Employee</th>
-						<th>Notes</th>
-						<th>Phone</th>
-					</thead>
-					<tbody>
-						<!-- TODO filter by employee -->
-						<tr ng-repeat="v in visitors | filter :{active : showActive}">
-							<!-- TODO Backend do your stuff.... -->
-							<td><strong>{{v.name}}</strong></td>
-							<td>{{v.employee}}</td>
-							<td>{{v.notes}}</td>
-							<td>{{v.phone}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<!-- END visitor table -->
+                <h2>Current Visitors</h2>
+            </div>
+            <div class="table-responsive">
+                <table id="visitor-table" class="table table-striped table-bordered table-vcenter">
+                    <thead>
+                    <!-- TODO Backend do your stuff -->
+                    <th>Name</th>
+                    <th>Employee</th>
+                    <th>Notes</th>
+                    <th>Phone</th>
+                    </thead>
+                    <tbody>
+                    <!-- TODO filter by employee -->
+                    <tr ng-repeat="v in visitors">
+                        <td><strong>{{v.name}}</strong></td>
+                        <td>{{v.employee}}</td>
+                        <td>{{v.notes}}</td>
+                        <td>{{v.phone}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="block">
+            <div class="block-title clearfix">
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-4 pull-right">
+                    <div class="input-group date">
+                        <input type="text" id="example-datepicker3" name="example-datepicker3"
+                               class="form-control input-datepicker" data-date-format="dd-mm-yyyy"
+                               placeholder="dd-mm-yyyy" data-date-today-highlight="true">
+                        <div class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+                <h2>Past Visitors</h2>
+            </div>
+            <div class="table-responsive">
+                <table id="visitor-table" class="table table-striped table-bordered table-vcenter">
+                    <thead>
+                    <!-- TODO Backend do your stuff -->
+                    <th>Name</th>
+                    <th>Employee</th>
+                    <th>Notes</th>
+                    <th>Phone</th>
+                    </thead>
+                    <tbody>
+                    <!-- TODO filter by employee -->
+                    <tr ng-repeat="v in visitors | filter :{active : showActive}">
+                        <!-- TODO Backend do your stuff.... -->
+                        <td><strong>{{v.name}}</strong></td>
+                        <td>{{v.employee}}</td>
+                        <td>{{v.notes}}</td>
+                        <td>{{v.phone}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- END visitor table -->
 </div>
