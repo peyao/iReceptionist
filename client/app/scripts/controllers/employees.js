@@ -141,3 +141,5 @@ angular.module('iReceptionistApp')
 
     console.log('EmployeesCtrl loaded.');
   });
+
+  
