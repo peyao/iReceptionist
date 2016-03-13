@@ -17,10 +17,9 @@
         <!-- Login Title -->
         <div class="block-title">
             <div class="block-options pull-right">
-                <button ui-sref="reset-password" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Reset your password"><i class="fa fa-question"></i></button>
-                <button ui-sref="register" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Create a new account"><i class="fa fa-plus"></i></button>
+                <button ui-sref="register" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Create a new account">Create Account <i class="fa fa-plus"></i></button>
             </div>
-            <h2>Login</h2>
+            <h2>Log in</h2>
         </div>
         <!-- END Login Title -->
 
@@ -45,14 +44,21 @@
                     <input ng-model="password" type="password" id="login-password" name="login-password" class="form-control" placeholder="Your password">
                 </div>
             </div>
-            <div class="form-group form-actions">
-                <div class="col-xs-8">
-                    <label class="csscheckbox csscheckbox-primary">
-                        <input ng-model="rememberMe" type="checkbox" id="login-remember-me" name="login-remember-me"><span></span> Remember Me!
-                    </label>
+            <div class="form-group form-actions container-fluid">
+                <div class="row">
+                    <div class="col-xs-4 text-left">
+                        <button type="submit" class="btn btn-effect-ripple btn-md btn-primary" ng-click="doLogin()">LOG IN</button>
+                    </div>
+                    <div class="col-xs-6 col-xs-offset-2 text-right">
+                        <label class="csscheckbox csscheckbox-primary">
+                            <input ng-model="rememberMe" type="checkbox" id="login-remember-me" name="login-remember-me"><span></span> Remember Me
+                        </label>
+                    </div>
                 </div>
-                <div class="col-xs-4 text-right">
-                    <button type="submit" class="btn btn-effect-ripple btn-sm btn-success" ng-click="doLogin()">Log In</button>
+                <div class="row">
+                    <div class="col-xs-12 block-options text-right">
+                        <button ui-sref="reset-password" class="btn">Forgot Password?</button>
+                    </div>
                 </div>
             </div>
         </form>
