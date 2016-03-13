@@ -8,13 +8,9 @@
 angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService, UserService) {
         $rootScope.currentState = 'dashboard';
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
 
         $scope.user = $cookies.getObject('user');
-		    $scope.showMine = false;
+        $scope.showMine = false;
         $scope.showActive = null;
         $scope.visitors = [];
 
@@ -37,11 +33,11 @@ angular.module('iReceptionistApp')
         var getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var today = new Date();
-            console.log(today.getDay() + "-" + today.getDate() + "-" + today.getFullYear());
+            console.log((today.getMonth() +1) + "-" + today.getDate() + "-" + today.getFullYear());
             VisitorService.getVisited(
                 1,
                 10,
-                today.getDay() + "-" + today.getDate() + "-" + today.getFullYear(),
+                (today.getMonth()+1) + "-" + today.getDate() + "-" + today.getFullYear(),
                 $cookies.get('token'),
                 function (visObj) {
                     console.log("Grabbing them inactive visitors: ");
@@ -59,10 +55,13 @@ angular.module('iReceptionistApp')
             encrypted: true
         });
 
-        var channel = pusher.subscribe($scope.user.business);
-        channel.bind('newVisitor', function(data){
-            getActive();
-        });
+        var channel;
+        if ($scope.user) {
+            channel = pusher.subscribe($scope.user.business);
+            channel.bind('newVisitor', function(data){
+                getActive();
+            });
+        }
 
         $scope.doCheckOff = function (data){
             console.log(data);

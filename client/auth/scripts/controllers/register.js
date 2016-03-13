@@ -6,15 +6,13 @@
  * Controller for the registration page
  */
 angular.module('iReceptionistApp')
-    .controller('RegisterCtrl', function($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
+    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
 
         var REGISTRATION_STEPS = 4;
         var ONE = 1;
         var TWO = 2;
         var THREE = 3;
         var FOUR = 4;
-
-
 
 
         $scope.max = REGISTRATION_STEPS;
@@ -43,13 +41,9 @@ angular.module('iReceptionistApp')
         $scope.register.step4.phone = '';
 
 
-
-
-
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
         });
-
 
         $scope.disableNext = function () {
 
@@ -67,29 +61,24 @@ angular.module('iReceptionistApp')
 
                 // if on step 2 and fields not filled out disable button
                 if ($scope.register.step2.businessName && $scope.register.step2.phone && $scope.register.step2.type) {
-                       return false;
+                    return false;
                 }
                 return true;
             }
 
-            if($scope.step === FOUR) {
+            if ($scope.step === FOUR) {
                 // if on step 4 and fill out name, then finish rest before moving on
-                if($scope.register.step4.name)
-                {
-                    if(!($scope.register.step4.email && $scope.register.step4.phone))
-                    {
-                         return true;
+                if ($scope.register.step4.name) {
+                    if (!($scope.register.step4.email && $scope.register.step4.phone)) {
+                        return true;
                     }
                 }
                 else {
                     return false;
                 }
             }
-
             return false;
-
         };
-
 
         $scope.backStep = function () {
             $scope.step--;
@@ -329,11 +318,7 @@ angular.module('iReceptionistApp')
             outDuration: 0
         });
 
-
-
-
-
-        $scope.termsHandler = function(isChecked) {
+        $scope.termsHandler = function (isChecked) {
             if (isChecked) {
                 $scope.disableNextButton = false;
             } else {

@@ -3,6 +3,10 @@
  */
 angular.module('iReceptionistApp')
 .controller('CheckinCtrl', function($scope, $rootScope, $cookies, VisitorService) {
+        $scope.showFirst=true;
+        $scope.showSecond=false;
+
+
     var working = false;
     $('.login').on('submit', function (e) {
         console.log('submitted checkin');
@@ -46,6 +50,9 @@ angular.module('iReceptionistApp')
                 $scope.alert.danger = err.errorMsg;
             }
         );
+
+        $scope.showFirst=false;
+        $scope.showSecond=true;
     };
 });
 
