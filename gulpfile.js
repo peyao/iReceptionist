@@ -1,14 +1,24 @@
 // gulpfile.js
-var gulp = require('gulp');
+var gulp        = require('gulp');
 var browserSync = require('browser-sync');
-var sass = require('gulp-sass');
-var bower = require('gulp-bower');
-var nodemon = require('gulp-nodemon');
+var sass        = require('gulp-sass');
+var bower       = require('gulp-bower');
+var nodemon     = require('gulp-nodemon');
+var exec        = require('child_process').exec;
+var karmaServer = require('karma').Server;
 
 gulp.task('nodemon', function(cb) {
     nodemon({
         script: 'app.js',
         ext: 'js',
+    });
+});
+
+gulp.task('start-server', function(cb) {
+    exec('node app.js', function(err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
     });
 });
 
@@ -40,12 +50,18 @@ gulp.task('sass-checkin', function() {
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./client/checkin/styles'));
 });
+gulp.task('sass-assets', function() {
+    return gulp.src('./client/assets/styles/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./client/assets/styles'));
+});
 gulp.task('sass-all', [
     'sass-app',
     'sass-marketing',
     'sass-vip',
     'sass-auth',
-    'sass-checkin'
+    'sass-checkin',
+    'sass-assets',
 ]);
 
 
@@ -94,6 +110,7 @@ gulp.task('browser-sync', [], function() {
 	gulp.watch('./client/marketing/styles/*.scss', ['sass-marketing']);
 	gulp.watch('./client/vip/styles/*.scss', ['sass-vip']);
 	gulp.watch('./client/auth/styles/*.scss', ['sass-auth']);
+	gulp.watch('./client/assets/styles/*.scss', ['sass-assets']);
 });
 
 
@@ -108,10 +125,35 @@ gulp.task('default', [
 ]);
 
 /**
- * 'gulp prod' : Runs the prod environment. TODO: Run without nodemon.
+ * 'gulp setup' : Do the sass and bower tasks
+ */
+gulp.task('setup', [
+    'sass-all',
+    'bower-all']
+);
+
+/**
+ * 'gulp test' : Run Karma tests.
+ */
+ gulp.task('test', function(done) {
+     new karmaServer({
+         configFile: __dirname + '/karma.conf.js',
+         singleRun: false
+     }, done).start();
+ });
+
+/**
+ * 'gulp dev' : Runs the production environment.
+ */
+gulp.task('dev', [
+    'setup',
+    'start-server']
+);
+
+/**
+ * 'gulp prod' : Runs the production environment.
  */
 gulp.task('prod', [
-    'sass-all',
-    'bower-all',
-    'nodemon',
-]);
+    'setup',
+    'start-server']
+);

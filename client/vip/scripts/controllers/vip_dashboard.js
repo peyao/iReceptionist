@@ -7,13 +7,8 @@
  */
 angular.module('iReceptionistApp')
 .controller('VipDashboardCtrl', function($scope, $rootScope) {
-
     $rootScope.currentState = 'vip-dashboard';
-    $('#page-content-ui-view').resize(function() {
-        $('#page-content-ui-view').width($rootScope.pageContentWidth());
-        $('#page-content').height($rootScope.pageContentHeight());
-    });
-
+    
     $scope.clients = [
         {
             'name': 'Alfred',
@@ -114,8 +109,7 @@ angular.module('iReceptionistApp')
             'plan': 1
         },
     ];
-    
-    
+
     
     /*
      * Flot Charts Jquery plugin is used for charts
@@ -361,8 +355,7 @@ angular.module('iReceptionistApp')
     
     //initally show all clients
     $scope.clientsToShow=$scope.clients;
-    
-    
+
 });
 
 

@@ -15,14 +15,17 @@ angular
     'ngAria',
     'ui.router',
     'ui.bootstrap',
-    'anim-in-out',
     'ngRoute',
     'cloudinary',
     'builder',
     'builder.components',
-    'validator.rules'
+    'validator.rules',
+    'angular-loading-bar',
 ])
-.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
+.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider, cfpLoadingBarProvider) {
+
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 250; // Only display after 500ms.
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -41,10 +44,10 @@ angular
             templateUrl: 'views/settings/settings_account.html',
             controller: 'SettingsAccountCtrl'
         })
-        .state('settings-forms-themes', {
-            url: '/settings/forms-themes',
-            templateUrl: 'views/settings/settings_forms_themes.html',
-            controller: 'SettingsFormsThemesCtrl'
+        .state('settings-forms', {
+            url: '/settings/forms',
+            templateUrl: 'views/settings/settings_forms.html',
+            controller: 'SettingsFormsCtrl'
         })
         .state('settings-billing', {
             url: '/settings/billing',

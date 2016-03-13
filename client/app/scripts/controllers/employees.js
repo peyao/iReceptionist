@@ -6,50 +6,140 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-  .controller('EmployeesCtrl', function($rootScope, $scope) {
+  .controller('EmployeesCtrl', function($rootScope, $scope, $cookies, UserService) {
     $rootScope.currentState = 'employees';
     $('#page-content-ui-view').resize(function() {
       $('#page-content-ui-view').width($rootScope.pageContentWidth());
       $('#page-content').height($rootScope.pageContentHeight());
     });
     $scope.showEmployeesMore = false;
-    $scope.employees = [{
-      name: 'Amanda',
-      phone: '(123) 456-7890',
-      email: 'amanda@gmail.com'
-    }, {
-      name: 'Marco Botton',
-      phone: '(123) 456-7890',
-      email: 'marco@gmail.com'
-    }, {
-      name: 'Peter Venkman',
-      phone: '(123) 456-7890',
-      email: 'venkman@gmail.com'
-    }, {
-      name: 'Powell',
-      phone: '(123) 456-7890',
-      email: 'powell@gmail.com'
-    }];
+    $scope.employees = [];
     $scope.emp = '';
+    $scope.name = '';
+    $scope.email = '';
+    $scope.phone = '';
+    $scope.editEmp = {};
+    $scope.newEmp = {};
 
-    $scope.inviteEmployee = function() {
-      if ($scope.emp.name && $scope.emp.email && $scope.emp.number) {
-        $scope.employees.push({
-          "name": $scope.emp.name,
-          "email": $scope.emp.email,
-          "phone": $scope.emp.phone
-        });
-      }
+    var getEmployeeList = function() {
+      UserService.getEmployees(
+        $cookies.get('token'),
+        function(empObj) {
+          $scope.employees = empObj;
+          console.log("Grabbing them employees: " + empObj);
+        },
+        function(err) {
+          console.log("Employee list error");
+        }
+      );
     };
 
-    /*  $scope.submit = function (form) {
-      $http.post('/api/employee',
-            {
-              name: form.name,
-              email: form.email,
-              number: form.number
-              })
-    };*/
+    getEmployeeList();
+
+
+    $scope.cancel = function() {
+      console.log('resetting form')
+      $scope.editEmp = {};
+      $scope.newEmp = {};
+      $scope.editEmp.phone = '';
+      $scope.editEmp.name = '';
+      $scope.editEmp.email = '';
+      $scope.editForm.$setPristine();
+      $scope.newEmp.number = '';
+      $scope.newEmp.name = '';
+      $scope.newEmp.email = '';
+      $scope.inviteForm.$setPristine();
+    };
+
+
+    $scope.addEmployee = function() {
+      UserService.addEmployee({
+          "name": $scope.newEmp.name,
+          "phone": $scope.newEmp.phone,
+          "email": $scope.newEmp.email,
+        },
+        $cookies.get('token'),
+        function(empObj) {
+          console.log("Added employee " + empObj.name);
+          //TODO: PUSHER
+          getEmployeeList();
+        },
+        function(err) {
+          console.log("Add employee error");
+        }
+      );
+      $scope.newEmp = {};
+      $('#inviteEmp').modal('hide');
+
+    };
+
+    $scope.saveEmp = function(e) {
+      $scope.name = e.name;
+      $scope.email = e.email;
+      $scope.phone = e.phone;
+      $scope.userID = e._id;
+      $scope.role = e.role;
+      $scope.editEmp.name = e.name;
+      $scope.editEmp.email = e.email;
+      $scope.editEmp.phone = e.phone;
+      $scope.editEmp.userID = e._id;
+      console.log("Employee" + $scope.name + "Role" + $scope.role);
+    };
+
+    $scope.editEmployee = function(emp) {
+      UserService.updateEmployee({
+          "name": $scope.editEmp.name,
+          "email": $scope.editEmp.email,
+          "phone": $scope.editEmp.phone,
+          "userId": $scope.userID,
+        },
+        $cookies.get('token'),
+        function(userObj) {
+          getEmployeeList();
+          console.log("Update employee: " + userObj);
+
+        },
+        function(err) {
+          console.log("Update employee error");
+          console.log("ID" + $scope.userID);
+
+        }
+      );
+      $('#editEmp').modal('hide');
+
+    };
+
+    $scope.deleteUser = function() {
+      console.log($scope.userID);
+      UserService.deleteEmployee(
+        $scope.userID,
+        $cookies.get('token'),
+        function(empObj) {
+          console.log("Deleted employee: " + empObj);
+          //TODO: PUSHER
+          getEmployeeList();
+
+        },
+        function(err) {
+          console.log("Delete employee error");
+        }
+      );
+    };
+
+    //UserService.updateUser(
+    //    $cookies.get('token'),
+    //    {
+    //        "field": "value",
+    //        "field": "value"
+    //    },
+    //    function (userObj) {
+    //        console.log("Update employee: " + userObj);
+    //    },
+    //    function (err) {
+    //        console.log("Update employee error");
+    //    }
+    //);
+
 
     console.log('EmployeesCtrl loaded.');
   });
