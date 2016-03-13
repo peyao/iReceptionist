@@ -69,6 +69,8 @@ angular.module('iReceptionistApp')
         }
       );
       $scope.newEmp = {};
+      $('#inviteEmp').modal('hide');
+
     };
 
     $scope.saveEmp = function(e) {
@@ -81,6 +83,7 @@ angular.module('iReceptionistApp')
       $scope.editEmp.email = e.email;
       $scope.editEmp.phone = e.phone;
       $scope.editEmp.userID = e._id;
+      console.log("Employee" + $scope.name + "Role" + $scope.role);
     };
 
     $scope.editEmployee = function(emp) {
@@ -109,6 +112,7 @@ angular.module('iReceptionistApp')
           console.log("Deleted employee: " + empObj);
           //TODO: PUSHER
           getEmployeeList();
+
         },
         function(err) {
           console.log("Delete employee error");
