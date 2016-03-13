@@ -92,6 +92,35 @@ angular.module('iReceptionistApp')
                 };
                 this.apiCall(req, success, error);
             },
+            changeRole: function (userId, role, token, success, error){
+                var req = {
+                    method: 'PUT',
+                    url: '/employee/changeRole',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    data: {
+                        'userId': userId,
+                        'role': role,
+                    }
+                };
+                this.apiCall(req, success, error);
+            },
+            addStaff: function (name, phone, email, token, success, error){
+                var req = {
+                    method: 'POST',
+                    url: '/vip/signUp',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    data: {
+                        "name": name,
+                        "phone": phone,
+                        "email": email
+                    }
+                };
+                this.apiCall(req, success, error);
+            },
             apiCall: function (req, success, error) {
                 req.url = API_URL + req.url;
                 $http(req)
