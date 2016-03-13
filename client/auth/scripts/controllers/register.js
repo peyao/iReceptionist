@@ -68,10 +68,11 @@ angular.module('iReceptionistApp')
 
             if ($scope.step === FOUR) {
                 // if on step 4 and fill out name, then finish rest before moving on
-                if ($scope.register.step4.name) {
-                    if (!($scope.register.step4.email && $scope.register.step4.phone)) {
-                        return true;
+                if ($scope.register.step4.name || $scope.register.step4.email || $scope.register.step4.phone) {
+                    if ($scope.register.step4.name && $scope.register.step4.email && $scope.register.step4.phone) {
+                        return false;
                     }
+                    return true;
                 }
                 else {
                     return false;
