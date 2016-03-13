@@ -15,9 +15,12 @@ angular
     'ngAria',
     'ui.router',
     'ui.bootstrap',
-    'anim-in-out',
+    'angular-loading-bar',
 ])
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 250; // Only display after 500ms.
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
