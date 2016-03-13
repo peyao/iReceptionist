@@ -14,7 +14,7 @@ angular.module('iReceptionistApp')
                     url: '/user',
                     headers: {
                         'Authorization': 'Bearer ' + token
-                    }
+                    },
                 };
                 this.apiCall(req, success, error);
             },
@@ -26,7 +26,7 @@ angular.module('iReceptionistApp')
                    headers: {
                        'Authorization': 'Bearer ' + token
                    },
-                   data: userObj
+                   data: userObj,
                 };
                 this.apiCall(req, success, error);
             },
@@ -40,19 +40,19 @@ angular.module('iReceptionistApp')
                     headers: {
                         'Authorization': 'Bearer ' + token
                     },
-                    data: userObj
+                    data: userObj,
                 };
                 this.apiCall(req, success, error);
             },
             // visObj should contain name, email, phone (all required) and avatar (optional)
-            addEmployee: function(visObj, token, success, error){
+            addEmployee: function(userObj, token, success, error){
                 var req = {
                     method: 'POST',
                     url: '/employee/signUp',
                     headers: {
                         'Authorization': 'Bearer ' + token
                     },
-                    data: visObj
+                    data: userObj,
                 };
                 this.apiCall(req, success, error);
             },
@@ -66,7 +66,7 @@ angular.module('iReceptionistApp')
                     },
                     data: {
                         'deleteUserId': userId
-                    }
+                    },
                 };
                 this.apiCall(req, success, error);
             },
@@ -76,7 +76,19 @@ angular.module('iReceptionistApp')
                     url: '/employee/list',
                     headers: {
                         'Authorization': 'Bearer ' + token
-                    }
+                    },
+                };
+                this.apiCall(req, success, error);
+            },
+            // userObj should contain name, email, phone, and userId
+            updateEmployee: function (userObj, token, success, error){
+                var req = {
+                    method: 'PUT',
+                    url: '/employee/edit',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    data: userObj
                 };
                 this.apiCall(req, success, error);
             },
