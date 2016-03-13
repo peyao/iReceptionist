@@ -87,15 +87,17 @@ angular.module('iReceptionistApp')
     };
 
     $scope.editEmployee = function(emp) {
-      UserService.updateUser({
+      UserService.updateEmployee({
           "name": $scope.editEmp.name,
           "email": $scope.editEmp.email,
           "phone": $scope.editEmp.phone,
+          "userId": $scope.userID,
         },
         $cookies.get('token'),
         function(userObj) {
           getEmployeeList();
           console.log("Update employee: " + userObj);
+
         },
         function(err) {
           console.log("Update employee error");
@@ -103,6 +105,8 @@ angular.module('iReceptionistApp')
 
         }
       );
+      $('#editEmp').modal('hide');
+
     };
 
     $scope.deleteUser = function() {
