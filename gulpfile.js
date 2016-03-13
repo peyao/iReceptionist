@@ -1,5 +1,5 @@
 // gulpfile.js
-var gulp        = require('gulp');
+var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var bower       = require('gulp-bower');
@@ -11,14 +11,6 @@ gulp.task('nodemon', function(cb) {
     nodemon({
         script: 'app.js',
         ext: 'js',
-    });
-});
-
-gulp.task('start-server', function(cb) {
-    exec('node app.js', function(err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
     });
 });
 
@@ -154,6 +146,7 @@ gulp.task('dev', [
  * 'gulp prod' : Runs the production environment.
  */
 gulp.task('prod', [
-    'setup',
-    'start-server']
-);
+    'sass-all',
+    'bower-all',
+    'nodemon',
+]);
