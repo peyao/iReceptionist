@@ -19,13 +19,24 @@ angular.module('iReceptionistApp')
         $scope.register = {};
         $scope.register.step1 = {};
         $scope.register.step2 = {};
+        $scope.register.step4 = {};
+
         $scope.register.step1.fullName = '';
         $scope.register.step1.email = '';
         $scope.register.step1.phone = '';
         $scope.register.step1.password = '';
+
         $scope.register.step2.businessName = '';
         $scope.register.step2.phone = '';
         $scope.register.step2.type = '';
+
+        $scope.register.step4.name = '';
+        $scope.register.step4.email = '';
+        $scope.register.step4.phone = '';
+
+
+
+
 
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
@@ -51,6 +62,20 @@ angular.module('iReceptionistApp')
                        return false;
                 }
                 return true;
+            }
+
+            if($scope.step === 4) {
+                // if on step 4 and fill out name, then finish rest before moving on
+                if($scope.register.step4.name)
+                {
+                    if(!($scope.register.step4.email && $scope.register.step4.phone))
+                    {
+                         return true;
+                    }
+                }
+                else {
+                    return false;
+                }
             }
 
             return false;
@@ -264,13 +289,25 @@ angular.module('iReceptionistApp')
                         equalTo: '#register-step1-password'
                     },
                     'register-step2-business-name': {
-                        required: false,
+                        required: true,
                         minlength: 2
                     },
                     'register-step2-business-phone': {
-                        required: false,
+                        required: true,
                         minlength: 7
                     },
+                    'register-step4-name': {
+                        required: false,
+                        minlength: 2
+                    },
+                    'register-step4-email': {
+                        required: false,
+                        email: true
+                    },
+                    'register-step4-phone': {
+                        required: false,
+                        minlength: 7
+                    }
                 },
                 messages: {
                     'register-step1-email': 'Please enter a valid email address',
