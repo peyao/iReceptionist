@@ -98,5 +98,27 @@ angular.module('iReceptionistApp')
             $scope.confirmPassword = '';
         };
 
+        // Update the site color theme. The theme will be stored in the db as a string in the
+        // format color.header.sidebar
+        $scope.updateTheme = function(theme) {
+            UserService.updateUser(
+                {
+                    "theme": theme
+                },
+                $cookies.get('token'),
+                function (userObj) {
+                    toastr.success("Your theme has been updated!");
+                    toastr.info("Please reload the page for your theme to take effect.");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                },
+                function (err) {
+                    toastr.error("Error updating theme.");
+                    console.log(err);
+                }
+            );
+        };
+
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
     });
