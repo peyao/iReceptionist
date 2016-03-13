@@ -8,3 +8,7 @@ http://ireceptionist.cf
 
     npm install
     gulp
+
+### How to Run Tests
+
+    gulp test

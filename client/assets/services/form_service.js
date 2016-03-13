@@ -11,7 +11,7 @@ angular.module('iReceptionistApp')
 
     return {
         // I don't know what description is for, but it's required so give it some garbage.
-        create: function(busId, formObj, token, success, error){
+        createForm: function(busId, formObj, token, success, error){
             var req = {
                 method: 'POST',
                 url: '/form',
@@ -22,6 +22,20 @@ angular.module('iReceptionistApp')
                     'businessId': busId,
                     'description': 'Garbage',
                     'form': formObj
+                },
+            };
+            this.apiCall(req, success, error);
+        },
+        deleteForm: function(formId, token, success, error){
+            var req = {
+                method: 'DELETE',
+                url: '/form',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                data: {
+                    'id': formId,
                 }
             };
             this.apiCall(req, success, error);

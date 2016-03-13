@@ -17,27 +17,36 @@ angular.module('iReceptionistApp')
                 headers: {
                     'Authorization': 'Bearer ' + token
                 },
-                data: visObj
+                data: visObj,
             };
             this.apiCall(req, success, error);
         },
         getVisitorQueue: function(page, per_page, token, success, error) {
             var req = {
                 method: 'GET',
-                url: '/visitor/queue?page=' + page + '&per_page=' + per_page,
+                url: '/visitor/queue',
                 headers: {
                     'Authorization': 'Bearer ' + token
-                }
+                },
+                params:{
+                    page: page,
+                    per_page: per_page,
+                },
             };
             this.apiCall(req, success, error);
         },
         getVisited: function(page, per_page, visitDate, token, success, error) {
             var req = {
                 method: 'GET',
-                url: '/visitor/visited?page=' + page + '&per_page=' + per_page + '&date=' + visitDate,
+                url: '/visitor/visited' ,
                 headers: {
                     'Authorization': 'Bearer ' + token
-                }
+                },
+                params: {
+                    page: page,
+                    per_page: per_page,
+                    date: visitDate,
+                },
             };
             this.apiCall(req, success, error);
         },
@@ -47,7 +56,17 @@ angular.module('iReceptionistApp')
                 url: '/visitor/' + visId,
                 headers: {
                     'Authorization': 'Bearer ' + token
-                }
+                },
+            };
+            this.apiCall(req, success, error);
+        },
+        deleteVisitor: function(visId, token, success, error){
+            var req = {
+                method: 'DELETE',
+                url: '/visitor/' + visId,
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
             };
             this.apiCall(req, success, error);
         },
@@ -60,6 +79,5 @@ angular.module('iReceptionistApp')
                 error(data, status);
             });
         },
-
     };
 });

@@ -6,12 +6,8 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, BusinessService, UserService) {
+    .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, UserService) {
         $rootScope.currentState = 'settings-account';
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
 
         toastr.options = {
             "positionClass": "toast-top-right",
@@ -19,18 +15,21 @@ angular.module('iReceptionistApp')
         };
 
         $scope.user = $cookies.getObject('user');
-        $scope.business = $cookies.getObject('business').business;
         $scope.oldPassword = '';
         $scope.password = '';
         $scope.confirmPassword = '';
+        $scope.selectedTheme = $scope.user.settings.theme;
+
+        // Highlight the selected theme or the first one if a theme hasn't been chosen yet
+        if ($scope.selectedTheme) {
+            $('#' + $scope.selectedTheme).removeClass('site-theme');
+        }
+        else {
+            $('#default-inverse-default').removeClass('site-theme');
+        }
 
         // Object that holds the fields to update in the user.
         var userFields = {};
-
-        // Object that holds the fields to update in the business. Must also include businessId.
-        var businessFields = {
-            "businessId": $scope.user.business
-        };
 
         $scope.userFieldChanged = function(field) {
             userFields[field] = $scope.user[field];
@@ -108,95 +107,37 @@ angular.module('iReceptionistApp')
             $scope.confirmPassword = '';
         };
 
-        $scope.updateEmailNotifications = function() {
-            var receiveEmail = $scope.user.settings.receiveEmail === true ? "true" : "false";
+        // Update the site color theme. The theme will be stored in the db as a string in the
+        // format color.header.sidebar
+        $scope.updateTheme = function($event) {
+            var theme = $($event.currentTarget);
 
             UserService.updateUser(
                 {
-                    "receiveEmail": receiveEmail
+                    "theme": theme.attr('id')
                 },
                 $cookies.get('token'),
                 function (userObj) {
-                    toastr.success("Your settings have been updated!");
+                    toastr.info("Please reload the page for your theme to take effect.");
+                    toastr.success("Your theme has been updated!");
+
+                    // Remove highlight from the previously selected theme
+                    $('#' + $scope.selectedTheme).addClass('site-theme');
+
+                    // Highlight the currently selected theme
+                    theme.removeClass('site-theme');
+
+                    $scope.selectedTheme = theme.attr('id');
 
                     // Update the user cookie
                     $cookies.putObject('user', userObj);
-                    console.log(userObj);
                 },
                 function (err) {
-                    toastr.error("Error updating notification settings.");
+                    toastr.error("Error updating theme.");
                     console.log(err);
                 }
             );
-        };
-
-        $scope.updateSMSNotifications = function() {
-            var receiveSMS = $scope.user.settings.receiveSMS === true ? "true" : "false";
-
-            UserService.updateUser(
-                {
-                    "receiveSMS": receiveSMS
-                },
-                $cookies.get('token'),
-                function (userObj) {
-                    toastr.success("Your settings have been updated!");
-
-                    // Update the user cookie
-                    $cookies.putObject('user', userObj);
-                    console.log(userObj);
-                },
-                function (err) {
-                    toastr.error("Error updating notification settings.");
-                    console.log(err);
-                }
-            );
-        };
-
-        // Need browser notifications field in user settings
-        /*$scope.updateBrowserNotifications = function() {
-            // User service call
-        };*/
-
-        $scope.businessFieldChanged = function(field) {
-            businessFields[field] = $scope.business[field];
-        };
-
-        var checkFieldsBusiness = function() {
-            // Make sure we only send fields that have changed
-            for (var key in businessFields) {
-                if (businessFields[key] === $cookies.getObject('business').business[key]) {
-                    delete businessFields[key];
-                }
-            }
-        };
-
-        $scope.updateBusiness = function() {
-            checkFieldsBusiness();
-
-            BusinessService.updateBusiness(
-                businessFields,
-                $cookies.get('token'),
-                function (busObj){
-                    toastr.success("Your settings were updated!");
-
-                    // Update the business cookie
-                    var businessCookie = $cookies.getObject('business');
-                    businessCookie.business = busObj;
-                    $cookies.putObject('business', businessCookie);
-                },
-                function (err) {
-                    toastr.error("Error updating settings.");
-                    console.log(err);
-                }
-            );
-
-            // Reset the changed fields
-            businessFields = {
-                "businessId": $scope.user.business
-            };
         };
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');
     });

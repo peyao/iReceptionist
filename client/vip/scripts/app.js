@@ -15,9 +15,12 @@ angular
     'ngAria',
     'ui.router',
     'ui.bootstrap',
-    'anim-in-out',
+    'angular-loading-bar',
 ])
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 250; // Only display after 500ms.
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -26,9 +29,13 @@ angular
             templateUrl: 'views/vip_dashboard.html',
             controller: 'VipDashboardCtrl'
         })
-        .state('vip-settings', {
-            url: '/settings',
-            templateUrl: 'views/vip_settings.html',
-            controller: 'VipSettingsCtrl'
+        .state('vip-employees', {
+            url: '/employees',
+            templateUrl: 'views/vip_employees.html',
+            controller: 'VipEmployeesCtrl'
         });
 });
+
+function $trace(message) {
+    console.log("(DEBUG) " + message);
+}

@@ -6,19 +6,12 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService) {
+    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService, DropZone) {
         $rootScope.currentState = 'settings-forms';
 
-
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
-
-        $scope.defaultValue = {};
         $scope.user = $cookies.getObject('user');
 
-        FormService.create(
+        FormService.createForm(
             $scope.user.business,
             {
                 "some": "stuff"
@@ -52,7 +45,6 @@ angular.module('iReceptionistApp')
                 required: true,
                 editable: false
             });
-            $scope.defaultValue[name.id] = 'default value';
         }
 
         $scope.form = $builder.forms['default'];
