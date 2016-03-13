@@ -29,11 +29,11 @@ angular.module('iReceptionistApp')
 
                     // Update the user cookie
                     $cookies.putObject('user', userObj);
-                    console.log(userObj);
+                    $trace(userObj);
                 },
                 function (err) {
                     toastr.error("Error updating notification settings.");
-                    console.log(err);
+                    $trace(err);
                 }
             );
         };
@@ -51,11 +51,11 @@ angular.module('iReceptionistApp')
 
                     // Update the user cookie
                     $cookies.putObject('user', userObj);
-                    console.log(userObj);
+                    $trace(userObj);
                 },
                 function (err) {
                     toastr.error("Error updating notification settings.");
-                    console.log(err);
+                    $trace(err);
                 }
             );
         };

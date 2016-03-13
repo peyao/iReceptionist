@@ -144,7 +144,7 @@ angular.module('iReceptionistApp')
 
                 // Success
                 function (regObj) {
-                    console.log('register success');
+                    $trace('register success');
                     //
                     // Automatically log-in after registration
                     //
@@ -165,7 +165,7 @@ angular.module('iReceptionistApp')
                             if (userObj.user.role === -1) {
                                 path = '/vip';
                             }
-                            console.log(userObj);
+                            $trace(userObj);
                             $cookies.putObject('user', userObj.user, {'path': '/auth'});
                             $cookies.put('token', userObj.token, {'path': '/auth'});
                             $cookies.put('token', userObj.token, {'path': '/checkin'});
@@ -175,14 +175,14 @@ angular.module('iReceptionistApp')
                         },
                         // Failure
                         function (err) {
-                            console.log('log in fail');
+                            $trace('log in fail');
                         }
                     );
                 },
 
                 // Error
                 function (err) {
-                    console.log('register fail');
+                    $trace('register fail');
                 }
             );
         };

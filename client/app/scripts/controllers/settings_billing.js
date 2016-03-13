@@ -119,7 +119,7 @@ angular.module('iReceptionistApp')
                 },
                 function (err) {
                     toastr.error("Error updating plan.");
-                    console.log("Error updating business plan level");
+                    $trace("Error updating business plan level");
                 }
             );
 

@@ -24,10 +24,10 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (empObj) {
                     $scope.employees = empObj;
-                    console.log("Grabbing them employees: " + empObj);
+                    $trace("Grabbing employees: " + empObj);
                 },
                 function (err) {
-                    console.log("Employee list error");
+                    $trace("Employee list error");
                 }
             );
         };
@@ -35,7 +35,7 @@ angular.module('iReceptionistApp')
         getEmployeeList();
 
         $scope.cancel = function () {
-            console.log('resetting form')
+            $trace('resetting form')
             $scope.editEmp = {};
             $scope.newEmp = {};
             $scope.editEmp.phone = '';
@@ -57,12 +57,12 @@ angular.module('iReceptionistApp')
                 },
                 $cookies.get('token'),
                 function (empObj) {
-                    console.log("Added employee " + empObj.name);
+                    $trace("Added employee " + empObj.name);
                     //TODO: PUSHER
                     getEmployeeList();
                 },
                 function (err) {
-                    console.log("Add employee error");
+                    $trace("Add employee error");
                 }
             );
             $scope.newEmp = {};
@@ -80,7 +80,7 @@ angular.module('iReceptionistApp')
             $scope.editEmp.email = e.email;
             $scope.editEmp.phone = e.phone;
             $scope.editEmp.userID = e._id;
-            console.log("Employee" + $scope.name + "Role" + $scope.role);
+            $trace("Employee" + $scope.name + "Role" + $scope.role);
         };
 
         $scope.editEmployee = function (emp) {
@@ -93,12 +93,12 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (userObj) {
                     getEmployeeList();
-                    console.log("Update employee: " + userObj);
+                    $trace("Update employee: " + userObj);
 
                 },
                 function (err) {
-                    console.log("Update employee error");
-                    console.log("ID" + $scope.userID);
+                    $trace("Update employee error");
+                    $trace("ID" + $scope.userID);
 
                 }
             );
@@ -107,18 +107,18 @@ angular.module('iReceptionistApp')
         };
 
         $scope.deleteUser = function () {
-            console.log($scope.userID);
+            $trace($scope.userID);
             UserService.deleteEmployee(
                 $scope.userID,
                 $cookies.get('token'),
                 function (empObj) {
-                    console.log("Deleted employee: " + empObj);
+                    $trace("Deleted employee: " + empObj);
                     //TODO: PUSHER
                     getEmployeeList();
 
                 },
                 function (err) {
-                    console.log("Delete employee error");
+                    $trace("Delete employee error");
                 }
             );
         };
@@ -138,7 +138,7 @@ angular.module('iReceptionistApp')
         //);
 
 
-        console.log('EmployeesCtrl loaded.');
+        $trace('EmployeesCtrl loaded.');
     })
     .filter('tel', function () {
         return function (tel) {

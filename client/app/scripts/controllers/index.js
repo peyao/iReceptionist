@@ -22,13 +22,13 @@ angular.module('iReceptionistApp')
 
     $scope.user = $cookies.getObject('user');
     if (!$cookies.get('business')){
-        console.log("business cookie");
+        $trace("business cookie");
         BusinessService.getBusiness(
             $scope.user.business,
             $cookies.get('token'),
             function (busObj){
-                console.log("Business: " + busObj);
-                console.log(busObj.business.name);
+                $trace("Business: " + busObj);
+                $trace(busObj.business.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
