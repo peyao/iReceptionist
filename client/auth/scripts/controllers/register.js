@@ -15,9 +15,51 @@ angular.module('iReceptionistApp')
         $scope.disableNextButton = true;
         $scope.inputType = 'password';
 
+
+
+        $scope.register = {};
+        $scope.register.step1 = {};
+        $scope.register.step2 = {};
+        $scope.register.step1.fullName = '';
+        $scope.register.step1.email = '';
+        $scope.register.step1.phone = '';
+        $scope.register.step1.password = '';
+        $scope.register.step2.businessName = '';
+        $scope.register.step2.phone = '';
+
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
         });
+
+
+
+        $scope.disableNext = function () {
+
+            // if on step1 and you don't have valid fields then the next button is disabled
+            if($scope.step ===1)
+            {
+                if($scope.register.step1.email && $scope.register.step1.fullName && $scope.register.step1.phone && $scope.register.step1.password)
+                {
+                    return false;
+                }
+                return true;
+            }
+            if($scope.step ===2)
+            {
+
+                // if on step 2 and fields not filled out disable button
+                if($scope.register.step2.businessName && $scope.register.step2.phone)
+                {
+                    return false;
+                }
+                return true;
+            }
+
+            return true;
+
+        };
+
+
 
         $scope.backStep = function () {
             $scope.step--;
@@ -69,14 +111,7 @@ angular.module('iReceptionistApp')
             danger: 'Danger'
         };
 
-        $scope.register = {};
-        $scope.register.step1 = {};
-        $scope.register.step2 = {};
-        $scope.register.step1.fullName = '';
-        $scope.register.step1.email = '';
-        $scope.register.step1.phone = '';
-        $scope.register.step1.password = '';
-        $scope.register.step2.businessName = '';
+
 
         $scope.submitRegistration = function() {
             AuthenticationService.register({
@@ -253,9 +288,6 @@ angular.module('iReceptionistApp')
             outDuration: 0
         });
 
-
-        //return true if everythign wasn't filled
-        //function for ng-disable to go to next pages
 
 
 
