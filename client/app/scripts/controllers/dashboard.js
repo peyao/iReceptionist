@@ -21,8 +21,8 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (visObj) {
                     $scope.visitors = visObj;
-                    console.log("Grabbing them visitors: ");
-                    console.log(visObj);
+                    $trace("Grabbing active visitors: ");
+                    $trace(visObj);
                 },
                 function (err) {
                     $scope.alert.danger = err.errorMsg;
@@ -33,18 +33,18 @@ angular.module('iReceptionistApp')
         var getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var today = new Date();
-            console.log((today.getMonth() +1) + "-" + today.getDate() + "-" + today.getFullYear());
+            $trace((today.getMonth() +1) + "-" + today.getDate() + "-" + today.getFullYear());
             VisitorService.getVisited(
                 1,
                 10,
                 (today.getMonth()+1) + "-" + today.getDate() + "-" + today.getFullYear(),
                 $cookies.get('token'),
                 function (visObj) {
-                    console.log("Grabbing them inactive visitors: ");
-                    console.log(visObj);
+                    $trace("Grabbing inactive visitors: ");
+                    $trace(visObj);
                 },
                 function (err) {
-                    console.log("inactive fail");
+                    $trace("inactive fail");
                 }
             );
         };
@@ -64,12 +64,12 @@ angular.module('iReceptionistApp')
         }
 
         $scope.doCheckOff = function (data){
-            console.log(data);
+            $trace(data);
             VisitorService.checkOff(
                 data._id,
                 $cookies.get('token'),
                 function (visObj){
-                    console.log("Checked off: " + visObj);
+                    $trace("Checked off: " + visObj);
                     getActive();
                 },
                 function (err) {
@@ -77,6 +77,20 @@ angular.module('iReceptionistApp')
                 }
             );
         };
+
+        $scope.doDelete = function (data){
+            VisitorService.deleteVisitor(
+                data._id,
+                $cookies.get('token'),
+                function (visObj){
+                    $trace("Deleted: " + visObj);
+                    getActive();
+                },
+                function (err) {
+                    $trace("Delete Visitor Failed: " + visObj);
+                }
+            );
+        }
 
 
     });
