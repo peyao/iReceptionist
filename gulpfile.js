@@ -87,21 +87,72 @@ gulp.task('bower-all', [
 ]);
 
 // path
-var jsFiles    = ['./client/**/*.js', '!./client/**/bower_components/'],
-    jsAllFiles = './client/**/*.js',
+var jsApp      = './client/app/**/*.js',
+    jsAuth     = './client/auth/**/*.js',
+    jsCheckIn  = './client/checkin/**/*.js',
+    jsVIP      = './client/vip/**/*.js',
+    jsAssets   = './client/assets/services/*.js',
+    jsMins     = './client/**/*.min.js',
     jsDest     = './dist/';
 
 /**
  * Concat
  */
-gulp.task('minify', function() {
-    return gulp.src(jsFiles)
-        .pipe(concat('dist.concat.js'))
-        .pipe(gulp.dest(jsDest))
-        .pipe(rename('dist.js'))
+gulp.task('uglify-app', function() {
+    return gulp.src([jsApp, jsAssets])
         .pipe(uglify())
-        .pipe(gulp.dest(jsDest));
+        .pipe(gulp.dest(jsDest+'app'));
 })
+gulp.task('concat-app', function() {
+    return gulp.src([jsDest+'app', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'app'));
+})
+
+gulp.task('uglify-auth', function() {
+    return gulp.src([jsAuth, jsAssets])
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'auth'));
+})
+gulp.task('concat-auth', function() {
+    return gulp.src([jsDest+'auth', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'auth'));
+})
+
+gulp.task('uglify-checkin', function() {
+    return gulp.src([jsCheckIn, jsAssets])
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'checkin'));
+})
+gulp.task('concat-checkin', function() {
+    return gulp.src([jsDest+'checkin', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'checkin'));
+})
+
+gulp.task('uglify-vip', function() {
+    return gulp.src([jsVIP, jsAssets])
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'vip'));
+})
+gulp.task('concat-vip', function() {
+    return gulp.src([jsDest+'vip', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'vip'));
+})
+
+gulp.task('minify-all', [
+    'uglify-app',
+    'concat-app',
+    'uglify-auth',
+    'concat-auth',
+    'uglify-checkin',
+    'concat-checkin',
+    'uglify-vip',
+    'concat-vip']
+);
+
 
 gulp.task('browser-sync', [], function() {
 
@@ -149,7 +200,7 @@ gulp.task('default', [
 gulp.task('setup', [
     'sass-all',
     'bower-all']
-    //'minify']
+    //'minify-all']
 );
 
 /**
