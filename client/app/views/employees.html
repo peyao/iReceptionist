@@ -16,13 +16,13 @@
                       class="caret"></i></button>
               <ul class="dropdown-menu dropdown-menu-right">
                   <li>
-                    <a href="javascript:void(0)" data-toggle="modal" data-target="#editEmp">
+                    <a href="" data-toggle="modal" data-target="#editEmp">
                     <i class="gi gi-edit pull-right"></i>
                     Edit </a>
 
                   </li>
                   <li>
-                      <a href="javascript:void(0)" data-toggle="modal" data-target="#delete">
+                      <a href="" data-toggle="modal" data-target="#delete">
                       <i class="hi hi-trash pull-right"></i>
                       Delete </a>
                   </li>
@@ -36,7 +36,8 @@
               </div>
               <div class="widget-content themed-background-muted text-dark text-center">
                   <strong>
-                      <div ng-if="e.role==2">Manager</div>
+                    <div ng-if="e.role==1">Manager</div>
+                      <div ng-if="e.role==2">Owner</div>
                       <div ng-if="e.role==0">Employee</div>
                   </strong>
               </div>
@@ -145,16 +146,18 @@
               </span>
             </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row" ng-hide="role==2">
             <label class="col-md-8 control-label" for="example-select">Role</label>
             <div class="col-sm-12">
-              <select id="example-select" name="example-select" class="form-control" size="1">
-                <option value="0">
-                  <div>{{role==2 ? 'Manager' : 'Employee'}}</div>
+              <select id="example-select" name="{{role}}" name="example-select" ng-model="editEmp.role" class="form-control" ng-change="changeRole()" size="1">
+               <option value="">{{role==1 ? 'Manager' : 'Employee'}}</option>
+                <option ng-hide="role==1" value="1">
+                  <div>Manager<div>
                 </option>
-                <option value="1">
-                  <div>{{role==0 ? 'Manager' : 'Employee'}}</div>
+                <option ng-hide="role==0" value="0">
+                  <div>Employee</div>
                 </option>
+
               </select>
             </div>
           </div>
