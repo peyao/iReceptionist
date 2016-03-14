@@ -6,18 +6,18 @@
 <div id="login-container">
     <!-- Register Header -->
     <h1 class="h2 text-light text-center push-top-bottom animation-slideDown">
-        <i class="fa fa-plus"></i> <strong>Create Account</strong>
+        <strong>Create Account</strong>
     </h1>
     <!-- END Register Header -->
 
     <div class="block animation-fadeInQuickInv" id="register-block">
         <!-- Register Title -->
         <div class="block-title">
-            <div class="block-options pull-right" ng-if="step <= 2">
-                <button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!"><i class="fa fa-user"></i></button>
+            <div class="block-options pull-right" ng-if="step === 1">
+                <button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!">Log In <i class="fa fa-sign-in"></i></button>
             </div>
             <div class="block-options pull-right" ng-if="step > 2">
-                <a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip the rest <i class="fa fa-arrow-circle-right"></i></a>
+                <button type="button" class="btn btn-effect-ripple btn-primary" ng-click="submitRegistration()" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip to Dashboard <i class="fa fa-sign-in"></i></button>
             </div>
             <h2>Register</h2>
         </div>
@@ -30,8 +30,9 @@
             <!-- START STEP 1 -->
             <div class="form-group">
                 <div class="col-xs-12">
-                    <div class="progress progress-mini remove-margin">
-                        <div id="progress-bar-wizard" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>
+                    <div class="progress remove-margin">
+                        <uib-progressbar max="max" value="step" type="info"><span style="color:white; white-space:nowrap;">Step {{step}} of {{max}}</span></uib-progressbar>
+                        <!--<div id="progress-bar-wizard" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>-->
                     </div>
                 </div>
             </div>
@@ -39,28 +40,35 @@
                 <fieldset class="register-field-set">
                     <legend>Your Account</legend>
                     <div class="form-group">
+                        <label for="register-step1-email" class="col-xs-12">Email</label>
                         <div class="col-xs-12">
                             <input ng-model="register.step1.email" type="email" id="register-step1-email" name="register-step1-email" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="register-step1-fullname" class="col-xs-12">Name</label>
                         <div class="col-xs-12">
-                            <input ng-model="register.step1.fullName" type="text" id="register-step1-fullname" name="register-step1-fullname" class="form-control" placeholder="Full Name">
+                            <input ng-model="register.step1.fullName" type="text" id="register-step1-fullname" name="register-step1-fullname" class="form-control" placeholder="First Last">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="register-step1-phone" class="col-xs-12">Phone</label>
                         <div class="col-xs-12">
                             <input ng-model="register.step1.phone" type="tel" id="register-step1-phone" name="register-step1-phone" class="form-control" placeholder="Phone Number">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="register-step1-password" class="col-xs-12">Password</label>
                         <div class="col-xs-12">
-                            <input ng-model="register.step1.password" type="password" id="register-step1-password" name="register-step1-password" class="form-control" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <input ng-model="register.step1.confirmPassword" type="password" id="register-step1-confirm-password" name="register-step1-confirm-password" class="form-control" placeholder="Confirm Password">
+                            <div class="input-group">
+                                <input ng-model="register.step1.password" type="{{inputType}}" id="register-step1-password" name="register-step1-password" class="form-control" placeholder="Password">
+                                <span class="input-group-btn" ng-if="inputType == 'password'">
+                                    <button class="btn btn-block btn-default btn-effect-ripple btn-password-toggle" ng-disabled="!(register.step1.password)" type="button" ng-click="togglePassword()">Show</button>
+                                </span>
+                                <span class="input-group-btn" ng-if="inputType != 'password'">
+                                    <button class="btn btn-block btn-default btn-effect-ripple btn-password-toggle" type="button" ng-click="togglePassword()">Hide</button>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -70,7 +78,7 @@
                                 <span></span>
                             </label>
                             &nbsp;I agree with the
-                            <a ng-href="/register#modal-terms" data-toggle="modal">terms</a>!
+                            <a ng-href="/register#modal-terms" data-toggle="modal">terms</a>
                         </div>
                     </div>
                 </fieldset>
@@ -82,16 +90,19 @@
                 <fieldset class="register-field-set">
                     <legend>Your Business</legend>
                     <div class="form-group">
+                        <label for="register-step2-business-name" class="col-xs-12">Name</label>
                         <div class="col-xs-12">
                             <input ng-model="register.step2.businessName" type="text" id="register-step2-business-name" name="register-step2-business-name" class="form-control" placeholder="Business Name">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="register-step2-business-phone" class="col-xs-12">Phone</label>
                         <div class="col-xs-12">
-                            <input ng-model="register.step2.phone" type="text" id="register-step2-business-phone" name="register-step2-business-phone" class="form-control" placeholder="Business Phone Number">
+                            <input ng-model="register.step2.phone" type="tel" id="register-step2-business-phone" name="register-step2-business-phone" class="form-control" placeholder="Business Phone Number">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="register-step2-type" class="col-xs-12">Type of Business</label>
                         <div class="col-xs-12">
                             <select ng-model="register.step2.type" id="register-step2-type" name="register-step2-type" class="select-select2" style="width: 100%;" data-placeholder="Type of Business">
                                 <option></option>
@@ -109,19 +120,19 @@
             <div id="register-step3" class="step">
                 <!-- Dropzone Upload -->
                 <fieldset class="register-field-set">
-                    <legend>Upload Images</legend>
+                    <legend>Upload Images for Tablet  (Optional)</legend>
                     <div class="row reg-upload">
                         <div class="col-xs-6">
                             <div id="logoUpload" class="dropzone">
                                 <div class="dz-default dz-message"></div>
                             </div>
-                            <h5 class="text-center">Logo</h5>
+                            <h5 class="text-center">Your Logo</h5>
                         </div>
                         <div class="col-xs-6">
                             <div id="bgUpload" class="dropzone">
                                 <div class="dz-default dz-message"></div>
                             </div>
-                            <h5 class="text-center">Visitor Background</h5>
+                            <h5 class="text-center">Tablet Background Image</h5>
                         </div>
                     </div>
                 </fieldset>
@@ -136,20 +147,23 @@
             <!-- START STEP 4 -->
             <div id="register-step4" class="step">
                 <fieldset class="register-field-set">
-                    <legend>Invite an Employee</legend>
+                    <legend>Invite Your First Employee  (Optional)</legend>
                     <div class="form-group">
+                        <label for="register-step4-name" class="col-xs-12">Name</label>
                         <div class="col-xs-12">
                             <input ng-model="register.step4.name" type="text" id="register-step4-name" name="register-step4-name" class="form-control" placeholder="Employee Name">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="register-step4-email" class="col-xs-12">Email</label>
                         <div class="col-xs-12">
-                            <input ng-model="register.step4.email" type="text" id="register-step4-email" name="register-step4-email" class="form-control" placeholder="Employee Email">
+                            <input ng-model="register.step4.email" type="email" id="register-step4-email" name="register-step4-email" class="form-control" placeholder="Employee Email">
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="register-step4-phone" class="col-xs-12">Phone</label>
                         <div class="col-xs-12">
-                            <input ng-model="register.step4.phone" type="text" id="register-step4-phone" name="register-step4-phone" class="form-control" placeholder="Employee Phone Number">
+                            <input ng-model="register.step4.phone" type="tel" id="register-step4-phone" name="register-step4-phone" class="form-control" placeholder="Employee Phone Number">
                         </div>
                     </div>
                 </fieldset>
@@ -157,12 +171,16 @@
             <!-- END STEP 4 -->
 
             <!-- BUTTONS -->
-            <div class="form-group form-actions">
-                <div class="col-xs-6">
-                    <button type="button" class="btn btn-block btn-effect-ripple btn-default" ng-disabled="step === 1" ng-click="backStep()"><i class="fa fa-arrow-left"></i></button>
+            <div class="form-group form-actions" align="center">
+                <label for="register-arrow-left" class="col-xs-6" ng-hide="step === 1">Back: <strong style="color: #02aac4;">{{backText()}}</strong></label>
+                <label for="register-arrow-right" class="col-xs-6 col-xs-offset-6" ng-show="step === 1">Next: <strong style="color: #02aac4;">Your Business</strong></label>
+                <label for="register-arrow-right" class="col-xs-6" ng-show="step != 1">Next: <strong style="color: #02aac4;">{{nextText()}}</strong></label>
+                <div class="col-xs-6" >
+                    <button type="button" class="btn btn-block btn-effect-ripple btn-default" id="register-arrow-left" ng-hide="step === 1" ng-click="backStep()"><i class="fa fa-arrow-left"></i></button>
                 </div>
+
                 <div class="col-xs-6">
-                    <button type="button" class="btn btn-block btn-effect-ripple btn-primary" ng-disabled="disableNextButton" ng-click="nextStep()"><i class="fa fa-arrow-right"></i></button>
+                    <button type="button" class="btn btn-block btn-effect-ripple btn-primary" id="register-arrow-right" ng-disabled="disableNext()" ng-click="nextStep()"><i class="fa fa-arrow-right"></i></button>
                 </div>
             </div>
             <!-- END BUTTONS -->
@@ -182,7 +200,143 @@
 
 
 
+        <!--<div class="block">-->
+        <!--<div class="block-title">-->
+        <!--<div class="block-options pull-right" ng-if="step === 1">-->
+        <!--<button ui-sref="login" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Back to Login!"><i class="fa fa-user"></i></button>-->
+        <!--</div>-->
+        <!--<div class="block-options pull-right" ng-if="step > 1">-->
+        <!--<a ng-href="/app" type="button" class="btn btn-effect-ripple btn-primary" tooltip-placement="left-top" uib-tooltip="You can change these options later.">Skip the rest <i class="fa fa-arrow-circle-right"></i></a>-->
+        <!--</div>-->
+        <!--<h2>Register</h2>-->
+        <!--</div>-->
 
+        <!--<form id="progress-wizard" action="javascript:void(0)" class="form-horizontal form-bordered">-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<div class="progress progress-mini remove-margin">-->
+        <!--<div id="progress-bar-wizard" class="progress-bar progress-bar-danger" role="progressbar"-->
+        <!--aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div id="progress-first" class="step">-->
+        <!--<legend align="center">Your Account</legend>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step1.email" type="email" id="register-step1-email"-->
+        <!--name="register-step1-email" class="form-control" placeholder="Email">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step1.fullName" type="text" id="register-step1-fullname"-->
+        <!--name="register-step1-fullname" class="form-control" placeholder="Full Name">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step1.phone" type="tel" id="register-step1-phone"-->
+        <!--name="register-step1-phone" class="form-control" placeholder="Phone Number">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step1.password" type="password" id="register-step1-password"-->
+        <!--name="register-step1-password" class="form-control" placeholder="Password">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step1.confirmPassword" type="password" id="register-step1-confirm-password"-->
+        <!--name="register-step1-confirm-password" class="form-control" placeholder="Confirm Password">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<label class="csscheckbox csscheckbox-primary" data-toggle="tooltip" title="Agree to the terms">-->
+        <!--<input ng-model="register.step1.terms" ng-change="termsHandler(register.step1.terms)"-->
+        <!--type="checkbox" id="register-terms" name="register-terms">-->
+        <!--<span></span>-->
+        <!--</label>-->
+        <!--&nbsp;I agree with the-->
+        <!--<a ng-href="/register#modal-terms" data-toggle="modal">terms</a>!-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div id="progress-second" class="step">-->
+        <!--<legend align="center">Your Business</legend>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step2.businessName" type="text" id="register-step2-business-name"-->
+        <!--name="register-step2-business-name" class="form-control" placeholder="Business Name">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step2.phone" type="text" id="register-step2-business-phone"-->
+        <!--name="register-step2-business-phone" class="form-control"-->
+        <!--placeholder="Business Phone Number">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<select ng-model="register.step2.type" id="register-step2-type" name="register-step2-type"-->
+        <!--class="select-select2" style="width: 100%;" data-placeholder="Type of Business">-->
+        <!--<option></option>-->
+        <!--<option value="health_care">Health Care</option>-->
+        <!--<option value="fitness">Fitness</option>-->
+        <!--<option value="other">Other</option>-->
+        <!--</select>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div id="progress-third" class="step">-->
+        <!--<legend align="center">Upload Images</legend>-->
+        <!--<div class="row reg-upload">-->
+        <!--<div class="col-xs-6">-->
+        <!--<div id="logoUpload" class="dropzone">-->
+        <!--<div class="dz-default dz-message"></div>-->
+        <!--</div>-->
+        <!--<h5 class="text-center">Logo</h5>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6">-->
+        <!--<div id="bgUpload" class="dropzone">-->
+        <!--<div class="dz-default dz-message"></div>-->
+        <!--</div>-->
+        <!--<h5 class="text-center">Visitor Background</h5>-->
+        <!--</div>-->
+        <!--</div>-->
+
+
+        <!--</div>-->
+        <!--<div id="progress-fourth" class="step">-->
+        <!--<legend align="center">Invite an Employee</legend>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step4.name" type="text" id="register-step4-name"-->
+        <!--name="register-step4-name" class="form-control" placeholder="Employee Name">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step4.email" type="text" id="register-step4-email"-->
+        <!--name="register-step4-email" class="form-control" placeholder="Employee Email">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+        <!--<div class="col-xs-12">-->
+        <!--<input ng-model="register.step4.phone" type="text" id="register-step4-phone"-->
+        <!--name="register-step4-phone" class="form-control" placeholder="Employee Phone Number">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group form-actions">-->
+        <!--<div class="col-md-8 col-md-offset-4">-->
+        <!--<button type="reset" class="btn btn-effect-ripple btn-danger" id="back2">Back</button>-->
+        <!--<button type="submit" class="btn btn-effect-ripple btn-primary" id="next2">Next</button>-->
+        <!--</div>-->
+        <!--</div>-->
 
     <!--<div class="block">-->
         <!--<div class="block-title">-->
@@ -328,13 +482,19 @@
 
 
 
+
+    <!-- Register Form -->
+
+    <!--&lt;!&ndash; END FORM &ndash;&gt;-->
+
         <!-- Register Form -->
 
         <!--&lt;!&ndash; END FORM &ndash;&gt;-->
 
     <!--</div>-->
+        <!-- END FORM -->
+    </div>
     <!-- END Register Block -->
-
 </div>
 <!-- END Login Container -->
 

@@ -3,9 +3,13 @@
  */
 angular.module('iReceptionistApp')
 .controller('CheckinCtrl', function($scope, $rootScope, $cookies, VisitorService) {
+        $scope.showFirst=true;
+        $scope.showSecond=false;
+
+
     var working = false;
     $('.login').on('submit', function (e) {
-        console.log('submitted checkin');
+        $trace('submitted checkin');
         e.preventDefault();
         if (working) return;
         working = true;
@@ -28,8 +32,8 @@ angular.module('iReceptionistApp')
     });
 
     $scope.doCheckIn = function(){
-        console.log($scope.fstname + " " + $scope.lstname);
-        console.log($cookies.get('token'));
+        $trace($scope.fstname + " " + $scope.lstname);
+        $trace($cookies.get('token'));
         VisitorService.checkin(
             {
                 'name' : $scope.fstname + " " + $scope.lstname,
@@ -37,7 +41,7 @@ angular.module('iReceptionistApp')
             },
             $cookies.get('token'),
             function(){
-                console.log("Success new visitor");
+                $trace("Success new visitor");
                 $scope.fstname = null;
                 $scope.lstname = null;
                 $scope.phonenum = null;
@@ -46,6 +50,9 @@ angular.module('iReceptionistApp')
                 $scope.alert.danger = err.errorMsg;
             }
         );
+
+        $scope.showFirst=false;
+        $scope.showSecond=true;
     };
 });
 

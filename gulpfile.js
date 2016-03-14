@@ -1,5 +1,5 @@
 // gulpfile.js
-var gulp        = require('gulp');
+var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var bower       = require('gulp-bower');
@@ -8,6 +8,7 @@ var uglify      = require('gulp-uglify');
 var concat      = require('gulp-concat');
 var rename      = require('gulp-rename');
 var exec        = require('child_process').exec;
+var karmaServer = require('karma').Server;
 
 gulp.task('nodemon', function(cb) {
     nodemon({
@@ -52,12 +53,18 @@ gulp.task('sass-checkin', function() {
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('./client/checkin/styles'));
 });
+gulp.task('sass-assets', function() {
+    return gulp.src('./client/assets/styles/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(gulp.dest('./client/assets/styles'));
+});
 gulp.task('sass-all', [
     'sass-app',
     'sass-marketing',
     'sass-vip',
     'sass-auth',
-    'sass-checkin'
+    'sass-checkin',
+    'sass-assets',
 ]);
 
 
@@ -80,17 +87,23 @@ gulp.task('bower-all', [
 ]);
 
 // path
+<<<<<<< HEAD
 var jsApp      = './client/app/**/*.js',
     jsAuth     = './client/auth/**/*.js',
     jsCheckIn  = './client/checkin/**/*.js',
     jsVIP      = './client/vip/**/*.js',
     jsAssets   = './client/assets/services/*.js',
     jsMins     = './client/**/*.min.js',
+=======
+var jsFiles    = ['./client/**/*.js', '!./client/**/bower_components/'],
+    jsAllFiles = './client/**/*.js',
+>>>>>>> d4a93bdaabcb0d000f99342e0af6efaadabe7208
     jsDest     = './dist/';
 
 /**
  * Concat
  */
+<<<<<<< HEAD
 gulp.task('uglify-app', function() {
     return gulp.src([jsApp, jsAssets])
         .pipe(uglify())
@@ -146,6 +159,16 @@ gulp.task('minify-all', [
     'concat-vip']
 );
 
+=======
+gulp.task('minify', function() {
+    return gulp.src(jsFiles)
+        .pipe(concat('dist.concat.js'))
+        .pipe(gulp.dest(jsDest))
+        .pipe(rename('dist.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest));
+})
+>>>>>>> d4a93bdaabcb0d000f99342e0af6efaadabe7208
 
 gulp.task('browser-sync', [], function() {
 
@@ -173,6 +196,7 @@ gulp.task('browser-sync', [], function() {
 	gulp.watch('./client/marketing/styles/*.scss', ['sass-marketing']);
 	gulp.watch('./client/vip/styles/*.scss', ['sass-vip']);
 	gulp.watch('./client/auth/styles/*.scss', ['sass-auth']);
+	gulp.watch('./client/assets/styles/*.scss', ['sass-assets']);
 });
 
 
@@ -187,16 +211,31 @@ gulp.task('default', [
 ]);
 
 /**
- * Do the sass and bower tasks
+ * 'gulp setup' : Do the sass and bower tasks
  */
 gulp.task('setup', [
     'sass-all',
+<<<<<<< HEAD
     'bower-all',
     'minify-all']
+=======
+    'bower-all']
+    //'minify']
+>>>>>>> d4a93bdaabcb0d000f99342e0af6efaadabe7208
 );
 
 /**
- * 'gulp prod' : Runs the production environment.
+ * 'gulp test' : Run Karma tests.
+ */
+ gulp.task('test', function(done) {
+     new karmaServer({
+         configFile: __dirname + '/karma.conf.js',
+         singleRun: false
+     }, done).start();
+ });
+
+/**
+ * 'gulp dev' : Runs the production environment.
  */
 gulp.task('dev', [
     'setup',

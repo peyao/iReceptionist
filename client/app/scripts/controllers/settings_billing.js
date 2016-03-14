@@ -9,11 +9,6 @@ angular.module('iReceptionistApp')
     .controller('SettingsBillingCtrl', function($rootScope, $scope, $cookies, BusinessService) {
         $rootScope.currentState = 'settings-billing';
 
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
-
         toastr.options = {
             "positionClass": "toast-top-right",
             "timeOut": "2500"
@@ -124,7 +119,7 @@ angular.module('iReceptionistApp')
                 },
                 function (err) {
                     toastr.error("Error updating plan.");
-                    console.log("Error updating business plan level");
+                    $trace("Error updating business plan level");
                 }
             );
 

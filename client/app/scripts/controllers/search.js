@@ -6,7 +6,10 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('SearchCtrl', function($scope, $rootScope, $timeout, $state) {
+.controller('SearchCtrl', function($scope, $rootScope, $timeout, $state, $cookies, SearchService) {
+
+    $scope.user = $cookies.getObject('user');
+    var token = $cookies.get('token');
 
     $scope.returnState = function() {
         $state.go($rootScope.currentState || 'dashboard');
@@ -26,47 +29,31 @@ angular.module('iReceptionistApp')
         $scope.activeEmployee = $scope.employees[index];
     };
 
-    $scope.employees = [{
-        name: 'Amanda',
-        phone: '(123) 456-7890',
-        email: 'amanda@gmail.com',
-        role: 'employee',
-    }, {
-        name: 'Marco Botton',
-        phone: '(123) 456-7890',
-        email: 'marco@gmail.com',
-        role: 'employee',
-    }, {
-        name: 'Venkman',
-        phone: '(123) 456-7890',
-        email: 'venkman@gmail.com',
-        role: 'admin',
-    }, {
-        name: 'Powell',
-        phone: '(123) 456-7890',
-        email: 'powell@gmail.com',
-        role: 'employee',
-    }];
-
-    $scope.visitors = [{
-        phone: '(123) 456-7890',
-        name: 'Giacomo Guilizzoni',
-        email: 'giacomog@gmail.com',
-        timesVisited: 5
-    }, {
-        phone: '(123) 456-7890',
-        name: 'Marco Botton',
-        email: 'marcob@gmail.com',
-        timesVisited: 3
-    }, {
-        phone: '(123) 456-7890',
-        name: 'Mariah Maclachlan',
-        email: 'mariahm@gmail.com',
-        timesVisited: 1
-    }, {
-        phone: '(123) 456-7890',
-        name: 'Valerie Liberty',
-        email: 'valeriel@gmail.com',
-        timesVisited: 12
-    }];
+    // Runs whenever $rootScope.searchString changes.
+    $scope.$watch('searchString', function() {
+        $scope.searchEmployeesHeader = 'searching...';
+        $scope.searchVisitorsHeader = 'searching...';
+        SearchService.searchEmployees(
+            $rootScope.searchString,
+            token,
+            function(searchResults) {
+                $scope.employees = searchResults;
+                $scope.searchEmployeesHeader = '';
+            },
+            function(err) {
+                $trace(err.errorMsg);
+            }
+        );
+        SearchService.searchVisitors(
+            $rootScope.searchString,
+            token,
+            function(searchResults) {
+                $scope.visitors = searchResults;
+                $scope.searchVisitorsHeader = '';
+            },
+            function(err) {
+                $trace(err.errorMsg);
+            }
+        );
+    });
 });

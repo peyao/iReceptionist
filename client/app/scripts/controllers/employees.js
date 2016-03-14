@@ -8,10 +8,8 @@
 angular.module('iReceptionistApp')
     .controller('EmployeesCtrl', function ($rootScope, $scope, $cookies, UserService) {
         $rootScope.currentState = 'employees';
-        $('#page-content-ui-view').resize(function () {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
+        
+
         $scope.showEmployeesMore = false;
         $scope.employees = [];
         $scope.emp = '';
@@ -26,19 +24,18 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (empObj) {
                     $scope.employees = empObj;
-                    console.log("Grabbing them employees: " + empObj);
+                    $trace("Grabbing employees: " + empObj);
                 },
                 function (err) {
-                    console.log("employee list error");
+                    $trace("Employee list error");
                 }
             );
         };
 
         getEmployeeList();
 
-
         $scope.cancel = function () {
-            console.log('resetting form')
+            $trace('resetting form')
             $scope.editEmp = {};
             $scope.newEmp = {};
             $scope.editEmp.phone = '';
@@ -53,23 +50,24 @@ angular.module('iReceptionistApp')
 
 
         $scope.addEmployee = function () {
-            UserService.addEmployee(
-                {
+            UserService.addEmployee({
                     "name": $scope.newEmp.name,
                     "phone": $scope.newEmp.phone,
                     "email": $scope.newEmp.email,
                 },
                 $cookies.get('token'),
                 function (empObj) {
-                    console.log("Added employee " + empObj.name);
+                    $trace("Added employee " + empObj.name);
                     //TODO: PUSHER
                     getEmployeeList();
                 },
                 function (err) {
-                    console.log("Add employee error");
+                    $trace("Add employee error");
                 }
             );
             $scope.newEmp = {};
+            $('#inviteEmp').modal('hide');
+
         };
 
         $scope.saveEmp = function (e) {
@@ -77,78 +75,54 @@ angular.module('iReceptionistApp')
             $scope.email = e.email;
             $scope.phone = e.phone;
             $scope.userID = e._id;
+            $scope.role = e.role;
             $scope.editEmp.name = e.name;
             $scope.editEmp.email = e.email;
             $scope.editEmp.phone = e.phone;
             $scope.editEmp.userID = e._id;
-            console.log("Curr Emp " + $scope.name);
-            console.log("Curr ID " + $scope.userID)
+            $trace("Employee" + $scope.name + "Role" + $scope.role);
         };
 
         $scope.editEmployee = function (emp) {
-            UserService.updateUser(
-                {
+            UserService.updateEmployee({
                     "name": $scope.editEmp.name,
                     "email": $scope.editEmp.email,
-                    "phone": $scope.editEmp.phone
+                    "phone": $scope.editEmp.phone,
+                    "userId": $scope.userID,
                 },
                 $cookies.get('token'),
                 function (userObj) {
-                    console.log("Update employee: " + userObj);
-                    console.log("cookies token " + $cookies.get('token'));
+                    getEmployeeList();
+                    $trace("Update employee: " + userObj);
 
                 },
                 function (err) {
-                    console.log("Update employee error");
+                    $trace("Update employee error");
+                    $trace("ID" + $scope.userID);
+
                 }
             );
+            $('#editEmp').modal('hide');
+
         };
 
         $scope.deleteUser = function () {
-            console.log($scope.userID);
+            $trace($scope.userID);
             UserService.deleteEmployee(
                 $scope.userID,
                 $cookies.get('token'),
                 function (empObj) {
-                    console.log("Deleted employee: " + empObj);
+                    $trace("Deleted employee: " + empObj);
                     //TODO: PUSHER
                     getEmployeeList();
+
                 },
                 function (err) {
-                    console.log("Delete employee error");
-                    console.log("Curr ID " + $scope.userID);
+                    $trace("Delete employee error");
                 }
             );
         };
 
-
-        //UserService.addEmployee(
-        //    $cookies.get('token'),
-        //    {
-        //        "name": "required",
-        //        "phone": "required",
-        //        "email": "required",
-        //        "avatar": "optional"
-        //    },
-        //    function (empObj) {
-        //        console.log("Invited employee: " + empObj);
-        //    },
-        //    function (err) {
-        //        console.log("Invite employee error");
-        //    }
-        //);
-        //
-        //UserService.deleteEmployee(
-        //    $cookies.get('token'),
-        //    'userIdToDelete',
-        //    function (empObj) {
-        //        console.log("Deleted employee: " + empObj);
-        //    },
-        //    function (err) {
-        //        console.log("Delete employee error");
-        //    }
-        //);
-        //
         //UserService.updateUser(
         //    $cookies.get('token'),
         //    {
@@ -163,54 +137,52 @@ angular.module('iReceptionistApp')
         //    }
         //);
 
-        /*  if(!$cookies.get('employees')){
-         UserService.getEmployees(
-         $cookies.get('token'),
-         $cookies.getObject('user').employee,
 
-         data.forEach(function(empObj) {
-         console.log("Employee " + empObj);
-         $scope.employees.push({
-         "name": user.name,
-         "email": user.email,
-         "phone": user.phone,
-         "avatar": user.avatar
-         });
-         },
-         function (err){
-         console.log(err);
-         }
-         );
-         };*/
+        $trace('EmployeesCtrl loaded.');
+    })
+    .filter('tel', function () {
+        return function (tel) {
+            if (!tel) {
+                return '';
+            }
 
+            var value = tel.toString().trim().replace(/^\+/, '');
 
-        /*  $scope.submit = function (form) {
-         $http.post('/api/employee',
-         {
-         name: form.name,
-         email: form.email,
-         number: form.number
-         })
-         };*/
+            if (value.match(/[^0-9]/)) {
+                return tel;
+            }
 
-        /*  $scope.inviteEmployee = function() {
-         if ($scope.emp.name && $scope.emp.email && $scope.emp.number) {
-         $scope.employees.push({
-         "name": $scope.emp.name,
-         "email": $scope.emp.email,
-         "phone": $scope.emp.phone
-         });
-         }
-         };*/
+            var country, city, number;
 
-        /*  $scope.submit = function (form) {
-         $http.post('/api/employee',
-         {
-         name: form.name,
-         email: form.email,
-         number: form.number
-         })
-         };*/
+            switch (value.length) {
+                case 10: // +1PPP####### -> C (PPP) ###-####
+                    country = 1;
+                    city = value.slice(0, 3);
+                    number = value.slice(3);
+                    break;
 
-        console.log('EmployeesCtrl loaded.');
+                case 11: // +CPPP####### -> CCC (PP) ###-####
+                    country = value[0];
+                    city = value.slice(1, 4);
+                    number = value.slice(4);
+                    break;
+
+                case 12: // +CCCPP####### -> CCC (PP) ###-####
+                    country = value.slice(0, 3);
+                    city = value.slice(3, 5);
+                    number = value.slice(5);
+                    break;
+
+                default:
+                    return tel;
+            }
+
+            if (country == 1) {
+                country = "";
+            }
+
+            number = number.slice(0, 3) + '-' + number.slice(3);
+
+            return (country + " (" + city + ") " + number).trim();
+        };
     });
