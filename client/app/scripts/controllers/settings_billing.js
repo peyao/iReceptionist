@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsBillingCtrl', function($rootScope, $scope, $cookies, BusinessService) {
+    .controller('SettingsBillingCtrl', function($rootScope, $scope, $cookies, BusinessService, UserService) {
         $rootScope.currentState = 'settings-billing';
 
         toastr.options = {
@@ -21,6 +21,17 @@ angular.module('iReceptionistApp')
         $scope.planClicked = "";
         $scope.planInfo = "";
 
+        UserService.getEmployees(
+            $cookies.get('token'),
+            function (empObj) {
+                $scope.numEmployees = empObj.length;
+                $trace("Grabbing employees: " + empObj);
+            },
+            function (err) {
+                $trace("Employee list error");
+            }
+        );
+        
         // Restrict input for credit card fields
         $('[data-numeric]').payment('restrictNumeric');
         $('#credit-card').payment('formatCardNumber');
