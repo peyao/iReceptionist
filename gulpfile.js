@@ -4,6 +4,9 @@ var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var bower       = require('gulp-bower');
 var nodemon     = require('gulp-nodemon');
+var uglify      = require('gulp-uglify');
+var concat      = require('gulp-concat');
+var rename      = require('gulp-rename');
 var exec        = require('child_process').exec;
 var karmaServer = require('karma').Server;
 
@@ -11,6 +14,14 @@ gulp.task('nodemon', function(cb) {
     nodemon({
         script: 'app.js',
         ext: 'js',
+    });
+});
+
+gulp.task('start-server', function(cb) {
+    exec('node app.js', function(err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
     });
 });
 
@@ -75,6 +86,22 @@ gulp.task('bower-all', [
     'bower-marketing',
 ]);
 
+// path
+var jsFiles    = ['./client/**/*.js', '!./client/**/bower_components/'],
+    jsAllFiles = './client/**/*.js',
+    jsDest     = './dist/';
+
+/**
+ * Concat
+ */
+gulp.task('minify', function() {
+    return gulp.src(jsFiles)
+        .pipe(concat('dist.concat.js'))
+        .pipe(gulp.dest(jsDest))
+        .pipe(rename('dist.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest));
+})
 
 gulp.task('browser-sync', [], function() {
 
@@ -122,6 +149,7 @@ gulp.task('default', [
 gulp.task('setup', [
     'sass-all',
     'bower-all']
+    //'minify']
 );
 
 /**
@@ -146,7 +174,6 @@ gulp.task('dev', [
  * 'gulp prod' : Runs the production environment.
  */
 gulp.task('prod', [
-    'sass-all',
-    'bower-all',
-    'nodemon',
-]);
+    'setup',
+    'start-server']
+);
