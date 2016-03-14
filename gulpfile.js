@@ -87,23 +87,17 @@ gulp.task('bower-all', [
 ]);
 
 // path
-<<<<<<< HEAD
 var jsApp      = './client/app/**/*.js',
     jsAuth     = './client/auth/**/*.js',
     jsCheckIn  = './client/checkin/**/*.js',
     jsVIP      = './client/vip/**/*.js',
     jsAssets   = './client/assets/services/*.js',
     jsMins     = './client/**/*.min.js',
-=======
-var jsFiles    = ['./client/**/*.js', '!./client/**/bower_components/'],
-    jsAllFiles = './client/**/*.js',
->>>>>>> d4a93bdaabcb0d000f99342e0af6efaadabe7208
     jsDest     = './dist/';
 
 /**
  * Concat
  */
-<<<<<<< HEAD
 gulp.task('uglify-app', function() {
     return gulp.src([jsApp, jsAssets])
         .pipe(uglify())
@@ -159,16 +153,6 @@ gulp.task('minify-all', [
     'concat-vip']
 );
 
-=======
-gulp.task('minify', function() {
-    return gulp.src(jsFiles)
-        .pipe(concat('dist.concat.js'))
-        .pipe(gulp.dest(jsDest))
-        .pipe(rename('dist.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(jsDest));
-})
->>>>>>> d4a93bdaabcb0d000f99342e0af6efaadabe7208
 
 gulp.task('browser-sync', [], function() {
 
@@ -215,13 +199,8 @@ gulp.task('default', [
  */
 gulp.task('setup', [
     'sass-all',
-<<<<<<< HEAD
-    'bower-all',
-    'minify-all']
-=======
     'bower-all']
-    //'minify']
->>>>>>> d4a93bdaabcb0d000f99342e0af6efaadabe7208
+    //'minify-all']
 );
 
 /**
