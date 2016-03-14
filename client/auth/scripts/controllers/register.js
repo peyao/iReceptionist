@@ -14,6 +14,12 @@ angular.module('iReceptionistApp')
         var THREE = 3;
         var FOUR = 4;
 
+        var logoId = '';
+        var bgId = '';
+
+        // Initialize Dropzones
+        $scope.logoUpload = DropZone.createNew('#logoUpload');
+        $scope.bgUpload = DropZone.createNew('#bgUpload');
 
         $scope.max = REGISTRATION_STEPS;
         $scope.step = 1;
@@ -40,9 +46,21 @@ angular.module('iReceptionistApp')
         $scope.register.step4.email = '';
         $scope.register.step4.phone = '';
 
+        var localLogoId = '';
+        var localBgId = '';
 
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
+        });
+
+        $scope.logoUpload.on("success", function (file) {
+            localLogoId = DropZone.getId();
+            $trace("logo pic: " + localLogoId);
+        });
+
+        $scope.bgUpload.on("success", function (file) {
+            localBgId = DropZone.getId();
+            $trace("Bg pic:" + localBgId);
         });
 
         $scope.disableNext = function () {
@@ -88,7 +106,12 @@ angular.module('iReceptionistApp')
         $scope.nextStep = function () {
             if ($scope.step === REGISTRATION_STEPS) {
                 $scope.submitRegistration();
-            } else {
+            }
+            else if ($scope.step === THREE) {
+                $scope.step++;
+                registerWizard.formwizard('show', 'register-step' + $scope.step);
+            }
+            else {
                 $scope.step++;
                 registerWizard.formwizard('show', 'register-step' + $scope.step);
             }
@@ -139,7 +162,7 @@ angular.module('iReceptionistApp')
                     'email': $scope.register.step1.email,
                     'password': $scope.register.step1.password,
                     'phone': $scope.register.step1.phone,
-                    'businessName': $scope.register.step2.businessName
+                    'businessName': $scope.register.step2.businessName,
                 },
 
                 // Success
@@ -187,9 +210,7 @@ angular.module('iReceptionistApp')
             );
         };
 
-        // Initialize Dropzones
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');
+
 
         /**
          *  Jquery Wizard

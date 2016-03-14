@@ -21,6 +21,8 @@ angular.module('iReceptionistApp')
     }
 
     $scope.user = $cookies.getObject('user');
+    $scope.publicId = $scope.user.avatar;
+
     if (!$cookies.get('business')){
         $trace("business cookie");
         BusinessService.getBusiness(

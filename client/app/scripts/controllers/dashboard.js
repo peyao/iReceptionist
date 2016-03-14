@@ -15,6 +15,8 @@ angular.module('iReceptionistApp')
                 $trace("Change Date");
                 $scope.getInactive();
             });
+
+
         var PAGE_DEFAULT = 1;
         var ACTIVE_PER_DEFAULT = 500;
         $scope.totalItems = 0;
@@ -35,10 +37,6 @@ angular.module('iReceptionistApp')
             ],
             perPage : {id: '10', name: '10'},
         };
-
-        $trace($scope.data.perPage);
-
-
 
         var getActive = function(){
             VisitorService.getVisitorQueue(

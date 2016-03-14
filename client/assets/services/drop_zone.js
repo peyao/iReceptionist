@@ -14,6 +14,8 @@
 
 angular.module('iReceptionistApp')
     .factory('DropZone', function() {
+        var publicId = '';
+
         return {
             createNew: function(click){
                 var newDropZone = new Dropzone(click, {
@@ -40,7 +42,9 @@ angular.module('iReceptionistApp')
                     formData.append('upload_preset', 'phtsmngp');
                 });
                 newDropZone.on('success', function (file, response) {
+                    console.log(file);
                     console.log('Success! Cloudinary public ID is', response.public_id);
+                    publicId = response.public_id;
                 });
                 newDropZone.on('maxfilesexceeded', function(file){
                     newDropZone.removeAllFiles();
@@ -52,6 +56,9 @@ angular.module('iReceptionistApp')
                     });
                 });
                 return newDropZone;
+            },
+            getId: function () {
+                return publicId;
             }
         };
     });

@@ -19,7 +19,11 @@ angular.module('iReceptionistApp')
         $scope.password = '';
         $scope.confirmPassword = '';
         $scope.selectedTheme = $scope.user.settings.theme;
+        $scope.publicId = $scope.user.avatar;
 
+        $scope.avatarUpload = DropZone.createNew('#avatarUpload');
+
+        var avatarId = '';
         // Highlight the selected theme or the first one if a theme hasn't been chosen yet
         if ($scope.selectedTheme) {
             $('#' + $scope.selectedTheme).removeClass('site-theme');
@@ -46,6 +50,9 @@ angular.module('iReceptionistApp')
 
         $scope.updateUser = function() {
             checkFieldsUser();
+            userFields['avatar'] = DropZone.getId()
+            $trace(DropZone.getId());
+            $trace("avatar: " + userFields['avatar']);
 
             UserService.updateUser(
                 userFields,
@@ -139,5 +146,4 @@ angular.module('iReceptionistApp')
             );
         };
 
-        $scope.avatarUpload = DropZone.createNew('#avatarUpload');
     });
