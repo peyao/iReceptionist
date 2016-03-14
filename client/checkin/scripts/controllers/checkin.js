@@ -2,9 +2,13 @@
  * Created by Amanda on 3/3/2016.
  */
 angular.module('iReceptionistApp')
-.controller('CheckinCtrl', function($scope, $rootScope, $cookies, VisitorService) {
-        $scope.showFirst=true;
-        $scope.showSecond=false;
+.controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService) {
+    $scope.showFirst=true;
+    $scope.showSecond=false;
+
+    
+    $builder.forms=JSON.parse(sessionStorage.builderJson);
+    console.log($builder);
 
 
     var working = false;
@@ -26,10 +30,22 @@ angular.module('iReceptionistApp')
                 $this.removeClass('ok loading');
                 working = false;
                 $('.spinner').hide();
+                $scope.showFirst=true;
+                $scope.showSecond=false;
+                console.log("asdf");
+                
             }, 4000);
+            console.log('hide');
         }, 3000);
-
+        
     });
+
+
+    $scope.gotoCheckIn = function(){
+        $scope.showFirst=false;
+        $scope.showSecond=true;
+        console.log('go to checkin page');
+    };
 
     $scope.doCheckIn = function(){
         console.log($scope.fstname + " " + $scope.lstname);
