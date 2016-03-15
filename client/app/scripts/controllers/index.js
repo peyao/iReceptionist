@@ -37,6 +37,22 @@ angular.module('iReceptionistApp')
         );
     }
 
+    var pusher = new Pusher('7c84af4dd6941414d752', {
+        encrypted: true
+    });
+
+    var channel;
+    if ($scope.user) {
+        channel = pusher.subscribe($scope.user.business);
+        channel.bind('newVisitor', function(data){
+            toastr.options = {
+                "positionClass": "toast-bottom-right",
+                "timeOut": "2500"
+            };
+            toastr.info('New visitor added to queue');
+        });
+    }
+
     /**
     * Clock Functionality
     */
