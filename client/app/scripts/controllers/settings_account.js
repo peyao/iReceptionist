@@ -58,7 +58,7 @@ angular.module('iReceptionistApp')
                 },
                 function (err) {
                     toastr.error("Error updating settings.");
-                    console.log(err);
+                    $trace(err);
                 }
             );
 
@@ -97,7 +97,7 @@ angular.module('iReceptionistApp')
                 },
                 function (err) {
                     toastr.error("Error updating password.");
-                    console.log(err);
+                    $trace(err);
                 }
             );
 
@@ -134,7 +134,7 @@ angular.module('iReceptionistApp')
                 },
                 function (err) {
                     toastr.error("Error updating theme.");
-                    console.log(err);
+                    $trace(err);
                 }
             );
         };

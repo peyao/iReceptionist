@@ -24,6 +24,16 @@ angular.module('iReceptionistApp')
     //    }
     //);
 
+    //BusinessService.getBusinessList(
+    //    $cookies.get('token'),
+    //    function (busObj) {
+    //        $trace("Business List " + busObj);
+    //    },
+    //    function (err) {
+    //        $trace("Business List error");
+    //    }
+    //);
+
     $scope.clients = [
         {
             'name': 'Alfred',
@@ -152,7 +162,7 @@ angular.module('iReceptionistApp')
                         show: true,
                         radius: 2/3,
                         formatter: function(label, pieSeries) {
-                            console.log(label);
+                            $trace(label);
                             return '<div class="chart-pie-label">' + label + '<br>' + Math.round(pieSeries.percent) + '%</div>';
                         },
                         background: {opacity: .75, color: '#000000'}
