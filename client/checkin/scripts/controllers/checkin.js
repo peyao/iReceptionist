@@ -5,11 +5,9 @@ angular.module('iReceptionistApp')
 .controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService) {
     $scope.showFirst=true;
     $scope.showSecond=false;
-
-    
+   
     $builder.forms=JSON.parse(sessionStorage.builderJson);
     console.log($builder);
-
 
     var working = false;
     $('.login').on('submit', function (e) {
@@ -30,16 +28,12 @@ angular.module('iReceptionistApp')
                 $this.removeClass('ok loading');
                 working = false;
                 $('.spinner').hide();
-                $scope.showFirst=true;
-                $scope.showSecond=false;
-                console.log("asdf");
-                
             }, 4000);
-            console.log('hide');
         }, 3000);
+        //$scope.showFirst=true;
+        //$scope.showSecond=false;
         
     });
-
 
     $scope.gotoCheckIn = function(){
         $scope.showFirst=false;
