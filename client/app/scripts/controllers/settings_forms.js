@@ -19,10 +19,10 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function (formObj) {
                 $scope.employees = formObj;
-                console.log("Create form: " + formObj.form.form.some);
+                $trace("Create form: " + formObj.form.form.some);
             },
             function (err) {
-                console.log("Create form fail");
+                $trace("Create form fail");
             }
         );
 
@@ -51,9 +51,9 @@ angular.module('iReceptionistApp')
         $scope.input = [];
         return $scope.submit = function() {
             return $validator.validate($scope, 'default').success(function() {
-                return console.log('success');
+                return $trace('success');
             }).error(function() {
-                return console.log('error');
+                return $trace('error');
             });
         };
     });

@@ -83,3 +83,32 @@
   color: black;
   border-color: transparent;
 }
+
+.grid-btn {
+  padding: 0 !important;
+}
+
+.btn-del{
+  background-color: transparent;
+  display: none;
+}
+
+tr:hover .btn-del{
+  display: block;
+}
+.inactive-widget{
+  padding: 0;
+}
+
+//.dropdown-menu {
+//  display: none;
+//  position: absolute;
+//}
+//
+//ul.dropmenu {
+//  z-index: 5000;
+//}
+//
+//.active-table{
+//  overflow-x: visible;
+//}

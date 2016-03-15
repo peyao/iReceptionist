@@ -41,7 +41,7 @@ angular.module('iReceptionistApp')
                 $scope.searchEmployeesHeader = '';
             },
             function(err) {
-                console.log(err.errorMsg);
+                $trace(err.errorMsg);
             }
         );
         SearchService.searchVisitors(
@@ -52,7 +52,7 @@ angular.module('iReceptionistApp')
                 $scope.searchVisitorsHeader = '';
             },
             function(err) {
-                console.log(err.errorMsg);
+                $trace(err.errorMsg);
             }
         );
     });

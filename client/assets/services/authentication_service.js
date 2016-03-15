@@ -13,6 +13,7 @@ angular.module('iReceptionistApp')
     return {
         // User - Create new Manager and Business
         register: function(regObj, success, error) {
+            console.log(regObj);
             var req = {
                 method: 'POST',
                 url: '/user/signUp',
