@@ -24,6 +24,16 @@ angular.module('iReceptionistApp')
     //    }
     //);
 
+    //BusinessService.getBusinessList(
+    //    $cookies.get('token'),
+    //    function (busObj) {
+    //        $trace("Business List " + busObj);
+    //    },
+    //    function (err) {
+    //        $trace("Business List error");
+    //    }
+    //);
+
     $scope.clients = [
         {
             'name': 'Alfred',
