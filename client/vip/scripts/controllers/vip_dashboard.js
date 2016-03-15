@@ -324,7 +324,7 @@ angular.module('iReceptionistApp')
                     } else if (item.seriesIndex === 1) {
                         ttlabel = '<strong>' + y + '</strong> sales';
                     } else {
-                        ttlabel = '<strong>' + y + '</strong> tickets';
+                        ttlabel = '<strong>' + y + '</strong> vtickets';
                     }
 
                     $('<div id="chart-tooltip" class="chart-tooltip">' + ttlabel + '</div>')
