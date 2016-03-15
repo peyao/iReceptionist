@@ -6,183 +6,150 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-    .controller('EmployeesCtrl', function ($rootScope, $scope, $cookies, UserService) {
-        $rootScope.currentState = 'employees';
-        
+  .controller('EmployeesCtrl', function($rootScope, $scope, $cookies, UserService) {
+    $rootScope.currentState = 'employees';
 
-        $scope.showEmployeesMore = false;
-        $scope.employees = [];
-        $scope.emp = '';
-        $scope.name = '';
-        $scope.email = '';
-        $scope.phone = '';
-        $scope.editEmp = {};
-        $scope.newEmp = {};
+    $scope.showEmployeesMore = false;
+    $scope.employees = [];
+    $scope.emp = '';
+    $scope.name = '';
+    $scope.email = '';
+    $scope.phone = '';
+    $scope.editEmp = {};
+    $scope.newEmp = {};
 
-        var getEmployeeList = function () {
-            UserService.getEmployees(
-                $cookies.get('token'),
-                function (empObj) {
-                    $scope.employees = empObj;
-                    $trace("Grabbing employees: " + empObj);
-                },
-                function (err) {
-                    $trace("Employee list error");
-                }
-            );
-        };
+    var getEmployeeList = function() {
+      UserService.getEmployees(
+        $cookies.get('token'),
+        function(empObj) {
+          $scope.employees = empObj;
+          $trace("Grabbing employees");
+        },
+        function(err) {
+          $trace("Employee list error");
+        }
+      );
+    };
 
-        getEmployeeList();
+    getEmployeeList();
 
-        $scope.cancel = function () {
-            $trace('resetting form')
-            $scope.editEmp = {};
-            $scope.newEmp = {};
-            $scope.editEmp.phone = '';
-            $scope.editEmp.name = '';
-            $scope.editEmp.email = '';
-            $scope.editForm.$setPristine();
-            $scope.newEmp.number = '';
-            $scope.newEmp.name = '';
-            $scope.newEmp.email = '';
-            $scope.inviteForm.$setPristine();
-        };
-
-
-        $scope.addEmployee = function () {
-            UserService.addEmployee({
-                    "name": $scope.newEmp.name,
-                    "phone": $scope.newEmp.phone,
-                    "email": $scope.newEmp.email,
-                },
-                $cookies.get('token'),
-                function (empObj) {
-                    $trace("Added employee " + empObj.name);
-                    //TODO: PUSHER
-                    getEmployeeList();
-                },
-                function (err) {
-                    $trace("Add employee error");
-                }
-            );
-            $scope.newEmp = {};
-            $('#inviteEmp').modal('hide');
-
-        };
-
-        $scope.saveEmp = function (e) {
-            $scope.name = e.name;
-            $scope.email = e.email;
-            $scope.phone = e.phone;
-            $scope.userID = e._id;
-            $scope.role = e.role;
-            $scope.editEmp.name = e.name;
-            $scope.editEmp.email = e.email;
-            $scope.editEmp.phone = e.phone;
-            $scope.editEmp.userID = e._id;
-            $trace("Employee" + $scope.name + "Role" + $scope.role);
-        };
-
-        $scope.editEmployee = function (emp) {
-            UserService.updateEmployee({
-                    "name": $scope.editEmp.name,
-                    "email": $scope.editEmp.email,
-                    "phone": $scope.editEmp.phone,
-                    "userId": $scope.userID,
-                },
-                $cookies.get('token'),
-                function (userObj) {
-                    getEmployeeList();
-                    $trace("Update employee: " + userObj);
-
-                },
-                function (err) {
-                    $trace("Update employee error");
-                    $trace("ID" + $scope.userID);
-
-                }
-            );
-            $('#editEmp').modal('hide');
-
-        };
-
-        $scope.deleteUser = function () {
-            $trace($scope.userID);
-            UserService.deleteEmployee(
-                $scope.userID,
-                $cookies.get('token'),
-                function (empObj) {
-                    $trace("Deleted employee: " + empObj);
-                    //TODO: PUSHER
-                    getEmployeeList();
-
-                },
-                function (err) {
-                    $trace("Delete employee error");
-                }
-            );
-        };
-
-        //UserService.updateUser(
-        //    $cookies.get('token'),
-        //    {
-        //        "field": "value",
-        //        "field": "value"
-        //    },
-        //    function (userObj) {
-        //        console.log("Update employee: " + userObj);
-        //    },
-        //    function (err) {
-        //        console.log("Update employee error");
-        //    }
-        //);
+    $scope.cancel = function() {
+      $trace('resetting form')
+      $scope.editEmp = {};
+      $scope.newEmp = {};
+      $scope.editEmp.phone = '';
+      $scope.editEmp.name = '';
+      $scope.editEmp.email = '';
+      $scope.editForm.$setPristine();
+      $scope.newEmp.number = '';
+      $scope.newEmp.name = '';
+      $scope.newEmp.email = '';
+      $scope.inviteForm.$setPristine();
+    };
 
 
-        $trace('EmployeesCtrl loaded.');
-    })
-    .filter('tel', function () {
-        return function (tel) {
-            if (!tel) {
-                return '';
-            }
+    $scope.addEmployee = function() {
+      UserService.addEmployee({
+          "name": $scope.newEmp.name,
+          "phone": $scope.newEmp.phone,
+          "email": $scope.newEmp.email,
+        },
+        $cookies.get('token'),
+        function(empObj) {
+          $trace("Added employee " + empObj.name);
+          //TODO: PUSHER
+          getEmployeeList();
+        },
+        function(err) {
+          $trace("Add employee error");
+        }
+      );
+      $scope.newEmp = {};
+      $('#inviteEmp').modal('hide');
 
-            var value = tel.toString().trim().replace(/^\+/, '');
+    };
 
-            if (value.match(/[^0-9]/)) {
-                return tel;
-            }
+    $scope.saveEmp = function(e) {
+      $scope.name = e.name;
+      $scope.email = e.email;
+      $scope.phone = e.phone;
+      $scope.userID = e._id;
+      $scope.role = e.role;
+      $scope.editEmp.name = e.name;
+      $scope.editEmp.email = e.email;
+      $scope.editEmp.phone = e.phone;
+      $scope.editEmp.userID = e._id;
+    };
 
-            var country, city, number;
+    $scope.editEmployee = function(emp) {
+      UserService.updateEmployee({
+          "name": $scope.editEmp.name,
+          "email": $scope.editEmp.email,
+          "phone": $scope.editEmp.phone,
+          "userId": $scope.userID,
+        },
+        $cookies.get('token'),
+        function(userObj) {
+          getEmployeeList();
+          $trace("Update employee: " + userObj);
+        },
+        function(err) {
+          $trace("Update employee error");
+        }
+      );
+      $('#editEmp').modal('hide');
 
-            switch (value.length) {
-                case 10: // +1PPP####### -> C (PPP) ###-####
-                    country = 1;
-                    city = value.slice(0, 3);
-                    number = value.slice(3);
-                    break;
+    };
+    $scope.changeRole = function() {
 
-                case 11: // +CPPP####### -> CCC (PP) ###-####
-                    country = value[0];
-                    city = value.slice(1, 4);
-                    number = value.slice(4);
-                    break;
+      UserService.changeRole(
+        $scope.userID,
+        $scope.editEmp.role,
+        $cookies.get('token'),
+        function(userID, role) {
+          $trace("Promoted user to " + $scope.editEmp.role);
+        },
+        function(err) {
+          $trace("Change Role error");
+        }
+      );
+    };
+    $scope.deleteUser = function() {
+      UserService.deleteEmployee(
+        $scope.userID,
+        $cookies.get('token'),
+        function(empObj) {
+          $trace("Deleted employee: " + empObj);
+          //TODO: PUSHER
+          getEmployeeList();
 
-                case 12: // +CCCPP####### -> CCC (PP) ###-####
-                    country = value.slice(0, 3);
-                    city = value.slice(3, 5);
-                    number = value.slice(5);
-                    break;
+        },
+        function(err) {
+          $trace("Delete employee error");
+        }
+      );
+    };
+    $trace('EmployeesCtrl loaded.');
+  })
+  .filter('tel', function() {
+    return function(tel) {
+      if (!tel) {
+        return '';
+      }
 
-                default:
-                    return tel;
-            }
+      var value = tel.toString().trim().replace(/^\+/, '');
 
-            if (country == 1) {
-                country = "";
-            }
+      if (value.match(/[^0-9]/)) {
+        return tel;
+      }
 
-            number = number.slice(0, 3) + '-' + number.slice(3);
+      var city, number;
 
-            return (country + " (" + city + ") " + number).trim();
-        };
-    });
+          city = value.slice(0, 3);
+          number = value.slice(3);
+
+      number = number.slice(0, 3) + '-' + number.slice(3);
+
+      return (" (" + city + ") " + number).trim();
+    };
+  });
