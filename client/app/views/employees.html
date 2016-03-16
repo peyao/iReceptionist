@@ -20,7 +20,7 @@
                     <i class="gi gi-edit pull-right"></i>
                     Edit </a>
                   </li>
-                  <li>
+                  <li ng-hide="role==2">
                       <a href="" data-toggle="modal" data-target="#delete">
                       <i class="hi hi-trash pull-right"></i>
                       Delete </a>
@@ -99,8 +99,11 @@
           </div>
         </div>
         <div class="modal-footer form-group form-actions">
-          <button type="submit" class="btn btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee()">Invite</button>
-          <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+          <div class="col-xs-6">
+          <button type="button" class="btn btn-block btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+          </div>
+          <div class="col-xs-6">
+          <button type="submit" class="btn btn-block btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee()">Invite</button>
         </div>
       </form>
     </div>
@@ -132,7 +135,6 @@
             <div class="col-sm-12">
               <input type="email" id="email" ng-model="editEmp.email" placeholder="jsmith@email.com" name="email" class="form-control" required>
               <span class="help-block" ng-show="editForm.email.$invalid && !editForm.email.$pristine">Please enter a valid email address</span>
-
             </div>
           </div>
           <div class="form-group row">
