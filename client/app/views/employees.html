@@ -1,199 +1,195 @@
 <div class="content-header">
-  <div class="row">
-    <button type="submit" class="btn btn-primary invite-emp"  data-toggle="modal" data-target="#inviteEmp">Invite Employee</button>
-    <div class="col-sm-6">
-      <div class="header-section">
-        <h1>Employees</h1>
+   <div class="row">
+      <button type="submit" id="tip1" class="btn btn-primary invite-emp" data-toggle="modal" data-target="#inviteEmp">Invite Employee</button>
+      <div class="col-sm-6">
+         <div class="header-section">
+            <h1>Employees</h1>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </div>
 
 <div class="col-xs-12">
-      <div class="col-xs-10 col-sm-6 col-md-4 col-lg-3" ng-repeat="e in employees | orderBy:'name'"ng-click="saveEmp(e);">
-          <div class="btn-group edit-emp">
-              <button class="btn btn-sm btn-primary edit-emp dropdown-toggle" data-toggle="dropdown"><i
-                      class="caret"></i></button>
-              <ul class="dropdown-menu dropdown-menu-right">
-                  <li>
-                    <a href="" data-toggle="modal" data-target="#editEmp">
-                    <i class="gi gi-edit pull-right"></i>
-                    Edit </a>
-                  </li>
-                  <li ng-hide="role==2">
-                      <a href="" data-toggle="modal" data-target="#delete">
-                      <i class="hi hi-trash pull-right"></i>
-                      Delete </a>
-                  </li>
-              </ul>
-          </div>
-          <a href="javascript:void(0)" class="widget" style="height:360px;">
-              <div class="widget-content text-center">
-                <img src="/assets/vendor/img/placeholders/avatars/avatar6@2x.jpg" class="img-circle img-thumbnail img-thumbnail-avatar-2x" alt="avatar"
-                     class="img-circle img-thumbnail gi gi-picture">
-                  <h2 class="widget-heading h3 text-muted">{{e.name}}</h2>
-              </div>
-              <div class="widget-content themed-background-muted text-dark text-center">
-                  <strong>
-                    <div ng-if="e.role==1">Manager</div>
-                      <div ng-if="e.role==2">Owner</div>
-                      <div ng-if="e.role==0">Employee</div>
-                  </strong>
-              </div>
-              <div class="widget-content" style="padding-top:10px;">
-                  <div class="row text-center">
-                      <div class="col-xs-6">
-                          <h3 class="widget-heading">
-                              <i class="gi gi-envelope"></i>
-                              <br>
-                              <div class="widget-emp"> {{e.email}}</div>
-                          </h3>
-                      </div>
-                      <div class="col-xs-6 grid-btn">
-                          <h3 class="widget-heading">
-                              <i class="gi gi-earphone"></i>
-                              <br>
-                              <div class="widget-emp" ng-bind="e.phone | tel"> </div>
-                          </h3>
-                      </div>
-                  </div>
-              </div>
-          </a>
+   <div class="col-xs-10 col-sm-6 col-md-4 col-lg-3" ng-repeat="e in employees | orderBy:'name'" ng-click="saveEmp(e);">
+      <div class="btn-group edit-emp">
+         <button class="btn btn-sm btn-primary edit-emp dropdown-toggle" id="tip2" data-toggle="dropdown">
+            <i class="caret"></i>
+         </button>
+         <ul class="dropdown-menu dropdown-menu-right">
+            <li>
+               <a href="" data-toggle="modal" data-target="#editEmp">
+                  <i class="gi gi-edit pull-right"></i>
+                  Edit
+               </a>
+            </li>
+            <li ng-hide="role==2">
+               <a href="" data-toggle="modal" data-target="#delete">
+                  <i class="hi hi-trash pull-right"></i>
+                  Delete
+               </a>
+            </li>
+         </ul>
       </div>
-  </div>
-
+      <a href="javascript:void(0)" class="widget">
+         <div class="widget-content text-center">
+            <img src="/assets/vendor/img/placeholders/avatars/avatar6@2x.jpg" class="img-circle img-thumbnail img-thumbnail-avatar-2x" alt="avatar">
+            <h2 class="widget-heading h3 text-muted">{{e.name}}</h2>
+         </div>
+         <div class="widget-content themed-background-muted text-dark text-center">
+            <strong>
+               <span ng-if="e.role==1">Manager</span>
+               <span ng-if="e.role==2">Owner</span>
+               <span ng-if="e.role==0">Employee</span>
+            </strong>
+         </div>
+         <div class="widget-content">
+            <div class="row text-center">
+               <div class="col-xs-6">
+                  <h3 class="widget-heading">
+                     <i class="gi gi-envelope"></i><br>
+                     <span class="widget-emp">
+                        {{e.email}}</span>
+                  </h3>
+               </div>
+               <div class="col-xs-6 grid-btn">
+                  <h3 class="widget-heading">
+                     <i class="gi gi-earphone"></i>
+                     <br>
+                     <span class="widget-emp" ng-bind="e.phone | tel"></span>
+                  </h3>
+               </div>
+            </div>
+         </div>
+      </a>
+   </div>
+</div>
 
 <div id="inviteEmp" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog ">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
-        <h3 class="modal-title">
-          <strong>Invite Employee</strong>
-        </h3>
+   <div class="modal-dialog ">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+            <h3 class="modal-title">
+               <strong>Invite Employee</strong>
+            </h3>
+         </div>
+         <form name="inviteForm" role="form" novalidate>
+            <div class="modal-body">
+               <div class="form-group row " ng-class="{'has-error': modalForm.name.$invalid && !modalForm.name.$pristine }">
+                  <label class="col-md-4 control-label" for="name">Name</label>
+                  <div class="col-sm-12">
+                     <input type="name" id="name" name="name" placeholder="Employee's Name" class="form-control" ng-model="newEmp.name" ng-pattern="/^[^0-9][A-Za-z,.'-]+\s[A-Za-z,.'-\s]+$/" required>
+                     <span class="help-block" ng-show="inviteForm.name.$invalid && !inviteForm.name.$pristine">Please enter the employee's first and last name
+                     </span>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-md-4 control-label" for="email">Email</label>
+                  <div class="col-sm-12">
+                     <input type="email" id="email" name="email" placeholder="Employee's Email" class="form-control" ng-model="newEmp.email" required>
+                     <span class="help-block" ng-show="inviteForm.email.$invalid && !inviteForm.email.$pristine">Please enter a valid email address</span>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-md-8 control-label" for="phone">Phone Number</label>
+                  <div class="col-sm-12">
+                     <input type="phone" id="phone" name="phone" placeholder="Employee's Phone Number" class="form-control" ng-model="newEmp.phone" ng-pattern="/^[0-9]{10}$/" format-phone required>
+                     <span class="help-block" ng-show="inviteForm.phone.$invalid && !inviteForm.phone.$pristine">Please enter a valid phone number
+                     </span>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer form-group form-actions">
+               <div class="col-xs-6">
+                  <button type="button" class="btn btn-block btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+               </div>
+               <div class="col-xs-6">
+                  <button type="submit" class="btn btn-block btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee()">Invite</button>
+               </div>
+            </div>
+         </form>
+
       </div>
-      <form name="inviteForm" role="form" novalidate>
-        <div class="modal-body">
-          <div class="form-group row " ng-class="{'has-error': modalForm.name.$invalid && !modalForm.name.$pristine }">
-            <label class="col-md-4 control-label" for="name">Name</label>
-            <div class="col-sm-12">
-              <input type="name" id="name" name="name" placeholder="Employee's Name" class="form-control" ng-model="newEmp.name" ng-pattern="/^[^0-9][A-Za-z,.'-]+\s[A-Za-z,.'-\s]+$/" required>
-              <span class="help-block" ng-show="inviteForm.name.$invalid && !inviteForm.name.$pristine">Please enter the employee's first and last name
-              </span>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-4 control-label" for="email">Email</label>
-            <div class="col-sm-12">
-              <input type="email" id="email" name="email" placeholder="Employee's Email" class="form-control" ng-model="newEmp.email" required>
-              <span class="help-block" ng-show="inviteForm.email.$invalid && !inviteForm.email.$pristine">Please enter a valid email address</span>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-8 control-label" for="phone">Phone Number</label>
-            <div class="col-sm-12">
-              <input type="phone" id="phone" name="phone" placeholder="Employee's Phone Number" class="form-control" ng-model="newEmp.phone" ng-pattern="/^[0-9]{10}$/" format-phone required>
-              <span class="help-block" ng-show="inviteForm.phone.$invalid && !inviteForm.phone.$pristine">Please enter a valid phone number
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer form-group form-actions">
-          <div class="col-xs-6">
-          <button type="button" class="btn btn-block btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
-          </div>
-          <div class="col-xs-6">
-          <button type="submit" class="btn btn-block btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee()">Invite</button>
-        </div>
-      </form>
-    </div>
-  </div>
+   </div>
 </div>
 
 <div id="editEmp" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 class="modal-title">
-          <strong>Edit Employee</strong>
-        </h3>
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title">
+               <strong>Edit Employee</strong>
+            </h3>
+         </div>
+         <form name="editForm" role="form" novalidate>
+            <div class="modal-body">
+               <div class="form-group row">
+                  <label class="col-md-4 control-label" for="name">Name</label>
+                  <div class="col-sm-12">
+                     <input type="name" id="name" ng-model="editEmp.name" name="name" placeholder="John Smith" class="form-control" ng-pattern="/^[^0-9][A-Za-z,.'-]+\s[A-Za-z,.'-\s]+$/" required>
+                     <span class="help-block" ng-show="editForm.name.$invalid && !editForm.name.$pristine">Please enter the employee's first and last name</span>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-md-4 control-label" for="email">Email</label>
+                  <div class="col-sm-12">
+                     <input type="email" id="email" ng-model="editEmp.email" placeholder="jsmith@email.com" name="email" class="form-control" required>
+                     <span class="help-block" ng-show="editForm.email.$invalid && !editForm.email.$pristine">Please enter a valid email address</span>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <label class="col-md-8 control-label" for="phone">Phone Number</label>
+                  <div class="col-sm-12">
+                     <input type="phone" id="phone" ng-model="editEmp.phone" placeholder="(123) 456-7890" name="phone" class="form-control" ng-pattern="/^[0-9]{10}$/" required>
+                     <span class="help-block" ng-show="editForm.phone.$invalid && !editForm.phone.$pristine">Please enter a valid phone number
+                     </span>
+                  </div>
+               </div>
+               <div class="form-group row" ng-hide="role==2">
+                  <label class="col-md-8 control-label" for="example-select">Role</label>
+                  <div class="col-sm-12">
+                     <select id="example-select" name="{{role}}" name="example-select" ng-model="editEmp.role" class="form-control" ng-change="changeRole()" size="1">
+                        <option value="">{{role==1 ? 'Manager' : 'Employee'}}</option>
+                        <option ng-hide="role==1" value="1">
+                           Manager
+                        </option>
+                        <option ng-hide="role==0" value="0">
+                           Employee
+                        </option>
+                     </select>
+                  </div>
+               </div>
+               <div class="modal-footer form-group form-actions">
+                  <div class="col-xs-6">
+                     <button type="button" class="btn btn-block btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+                  </div>
+                  <div class="col-xs-6">
+                     <button type="submit" class="btn btn-block  btn-primary" ng-disabled="editForm.$invalid" onclick="App.alert('edit-emp');" ng-click="editEmployee(); cancel()">Save</button>
+                  </div>
+               </div>
+            </div>
+         </form>
       </div>
-      <form name="editForm" role="form" novalidate>
-        <div class="modal-body">
-          <div class="form-group row">
-            <label class="col-md-4 control-label" for="name">Name</label>
-            <div class="col-sm-12">
-              <input type="name" id="name" ng-model="editEmp.name" name="name" placeholder="John Smith" class="form-control" ng-pattern="/^[^0-9][A-Za-z,.'-]+\s[A-Za-z,.'-\s]+$/" required>
-              <span class="help-block" ng-show="editForm.name.$invalid && !editForm.name.$pristine">Please enter the employee's first and last name
-              </span>
-
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-4 control-label" for="email">Email</label>
-            <div class="col-sm-12">
-              <input type="email" id="email" ng-model="editEmp.email" placeholder="jsmith@email.com" name="email" class="form-control" required>
-              <span class="help-block" ng-show="editForm.email.$invalid && !editForm.email.$pristine">Please enter a valid email address</span>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-8 control-label" for="phone">Phone Number</label>
-            <div class="col-sm-12">
-              <input type="phone" id="phone" ng-model="editEmp.phone" placeholder="(123) 456-7890" name="phone" class="form-control" ng-pattern="/^[0-9]{10}$/" required>
-              <span class="help-block" ng-show="editForm.phone.$invalid && !editForm.phone.$pristine">Please enter a valid phone number
-              </span>
-            </div>
-          </div>
-          <div class="form-group row" ng-hide="role==2">
-            <label class="col-md-8 control-label" for="example-select">Role</label>
-            <div class="col-sm-12">
-              <select id="example-select" name="{{role}}" name="example-select" ng-model="editEmp.role" class="form-control" ng-change="changeRole()" size="1">
-               <option value="">{{role==1 ? 'Manager' : 'Employee'}}</option>
-                <option ng-hide="role==1" value="1">
-                  <div>Manager<div>
-                </option>
-                <option ng-hide="role==0" value="0">
-                  <div>Employee</div>
-                </option>
-
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer form-group form-actions">
-          <div class="col-xs-6">
-            <button type="button" class="btn btn-block btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
-          </div>
-          <div class="col-xs-6">
-            <button type="submit" class="btn btn-block  btn-primary" ng-disabled="editForm.$invalid" onclick="App.alert('edit-emp');" ng-click="editEmployee(); cancel()">Save</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+   </div>
 </div>
 
-
 <div id="delete" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 class="modal-title">
-          <strong>Delete Employee</strong>
-        </h3>
+   <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title">
+               <strong>Delete Employee</strong>
+            </h3>
+         </div>
+         <div class="modal-body">
+            <center>Are you sure you want to delete<br>{{name}}?</center>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-effect-ripple btn-primary" data-dismiss="modal" onclick="App.alert('delete-emp');" ng-click="deleteUser()">Yes</button>
+            <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">No</button>
+         </div>
       </div>
-      <div class="modal-body">
-        <center>Are you sure you want to delete
-          <br>
-          {{name}}?
-        </center>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-effect-ripple btn-primary" data-dismiss="modal" onclick="App.alert('delete-emp');" ng-click="deleteUser()">Yes</button>
-        <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">No</button>
-      </div>
-    </div>
-  </div>
+   </div>
 </div>
