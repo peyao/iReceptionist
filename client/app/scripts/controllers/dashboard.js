@@ -38,7 +38,7 @@ angular.module('iReceptionistApp')
 
         $trace($scope.data.perPage);
 
-
+        $scope.currentStep = 0;
 
         var getActive = function(){
             VisitorService.getVisitorQueue(

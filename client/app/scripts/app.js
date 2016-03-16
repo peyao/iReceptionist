@@ -21,6 +21,7 @@ angular
     'builder.components',
     'validator.rules',
     'angular-loading-bar',
+    'angular-tour'
 ])
 .config(function($stateProvider, $urlRouterProvider, cloudinaryProvider, cfpLoadingBarProvider) {
 
