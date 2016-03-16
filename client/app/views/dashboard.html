@@ -77,14 +77,14 @@
                         <td><strong>{{v.name}}</strong></td>
                         <td>{{v.employee}}</td>
                         <td>{{v.notes}}</td>
-                        <td>{{v.phone}}</td>
+                        <td>{{v.phone | tel}}</td>
                         <td class="grid-btn container-fluid">
                             <div class="col-xs-offset-1">
                                 <button class="col-xs-5 btn btn-primary btn-sm" ng-click="doCheckOff(v)"><i
                                         class="hi hi-ok"></i></button>
                             </div>
                             <div class="col-xs-4 btn-del">
-                                <button class="btn btn-danger btn-sm" ng-click="doDelete(v)"><i class="hi hi-trash"></i>
+                                <button class="btn btn-danger btn-sm" ng-click="saveVis(v)" data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
                                 </button>
                             </div>
                         </td>
@@ -139,16 +139,16 @@
                     <tbody>
                     <!-- TODO filter by employee -->
                     <!-- TODO revisit Inactive toggle - an "active" visitor has a checkOff field of null so inactive would be not null -->
-                    <tr ng-repeat="v in inactive">
+                    <tr ng-repeat="v in inactive" >
                         <!-- TODO Backend do your stuff.... -->
                         <!-- TODO modal popup?? -->
                         <td><strong>{{v.name}}</strong></td>
                         <td>{{v.employee}}</td>
                         <td>{{v.email}}</td>
-                        <td>{{v.phone}}</td>
+                        <td>{{v.phone | tel}}</td>
                         <td class="grid-btn container-fluid">
                             <div class="col-xs-12 btn-del">
-                                <button class="btn btn-danger btn-sm" ng-click="doDelete(v)"><i class="hi hi-trash"></i>
+                                <button class="btn btn-danger btn-sm" ng-click=saveVis(v) data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
                                 </button>
                             </div>
                         </td>
@@ -191,4 +191,27 @@
         </div>
     </div>
     <!-- END visitor table -->
+</div>
+
+<div id="delete" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">
+          <strong>Delete</strong>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <center>Are you sure you want to delete
+          <br>
+          {{vname}}?
+        </center>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-effect-ripple btn-primary" data-dismiss="modal" onclick="App.alert('delete-vis');" ng-click="doDelete()">Yes</button>
+        <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
 </div>
