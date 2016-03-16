@@ -12,7 +12,7 @@
     <!-- START analytics -->
     <div class="col-sm-6 col-sm-push-6 col-md-4 col-md-push-8">
         <!-- Statistics Widget -->
-        <div class="widget">
+        <div class="widget" ng-show="user.role">
             <div class="widget-content border-bottom">
                 <span class="pull-right text-muted"><i class="fa fa-check"></i></span>
                 Visitor Analytics
@@ -95,7 +95,7 @@
         </div>
 
         <!-- START inactive table -->
-        <div class="block">
+        <div class="block" ng-show="user.role > 0">
             <div class="block-title clearfix">
                 <h2>Past Visitors</h2>
             </div>
