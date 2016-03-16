@@ -33,8 +33,26 @@ angular.module('iReceptionistApp')
     //        $trace("Business List error");
     //    }
     //);
-
-    $scope.clients = [
+    
+    //test with fake data if true or fetch data from db
+    var getClientsDB = function() {
+        BusinessService.getBusinessList(
+                    $cookies.get('token'), 
+                    function (busObj) {
+                        $scope.clients = busObj;
+                        console.log("first");
+                        console.log($scope.clients);
+                        $trace("Grabbing active clients: ");
+                        $trace(busObj);
+                    },
+                    function (err) {
+                        $scope.alert.danger = err.errorMsg;
+                    });
+    }
+    
+    var testMode = true;
+    if (testMode) {
+        $scope.clients = [
         {
             'name': 'Alfred',
             'numEmployees': 15,
@@ -134,7 +152,13 @@ angular.module('iReceptionistApp')
             'plan': 1
         },
     ];
-
+    }
+    else {
+        getClientsDB();
+        console.log('scope');
+        console.log($scope.clients);
+    }
+    
     
     /*
      * Flot Charts Jquery plugin is used for charts
@@ -201,40 +225,6 @@ angular.module('iReceptionistApp')
                 $scope.currSorted.addClass('activeCategory');
                 
                 break;
-            case 'employees':
-                if (lastSort==='employees') {
-                    $scope.clients.reverse();
-                    lastSort='employees';
-                }
-                else {
-                    $scope.clients.sort(function(a,b) {
-                        return a.numEmployees-b.numEmployees;
-                    });
-                    lastSort='employees';
-                }
-                
-                $scope.currSorted.removeClass('activeCategory');
-                $scope.currSorted = $('#empl_categ');
-                $scope.currSorted.addClass('activeCategory');
-                
-                break;
-            case 'visitors':
-                if (lastSort==='visitors') {
-                    $scope.clients.reverse();
-                    lastSort='visitors';
-                }
-                else {
-                    $scope.clients.sort(function(a,b) {
-                        return a.numVisitors-b.numVisitors;
-                    });
-                    lastSort='visitors';
-                }
-                
-                $scope.currSorted.removeClass('activeCategory');
-                $scope.currSorted = $('#visi_categ');
-                $scope.currSorted.addClass('activeCategory');
-                
-                break;
             case 'joined':
                 if (lastSort==='joined') {
                     $scope.clients.reverse();
@@ -264,8 +254,7 @@ angular.module('iReceptionistApp')
                 
                 $scope.currSorted.removeClass('activeCategory');
                 $scope.currSorted = $('#plan_categ');
-                $scope.currSorted.addClass('activeCategory');
-                
+                $scope.currSorted.addClass('activeCategory');       
                 break;
             default:
                 break;
