@@ -9,22 +9,8 @@ angular.module('iReceptionistApp')
     .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService, DropZone) {
         $rootScope.currentState = 'settings-forms';
 
-        $scope.user = $cookies.getObject('user');
-
-        FormService.createForm(
-            $scope.user.business,
-            {
-                "some": "stuff"
-            },
-            $cookies.get('token'),
-            function (formObj) {
-                $scope.employees = formObj;
-                $trace("Create form: " + formObj.form.form.some);
-            },
-            function (err) {
-                $trace("Create form fail");
-            }
-        );
+        $scope.business = $cookies.getObject('business');
+        console.log($scope.business);
 
         /* Add default name field if it hasn't been added already */
         var name;
