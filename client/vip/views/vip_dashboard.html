@@ -116,11 +116,7 @@
                     <div class="col-sm-6 col-xs-5">
                         <div class="dataTables_length" id="example-datatable_length">
                             <label>
-                                <select name="example-datatable_length" aria-controls="example-datatable" class="form-control">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                </select>
+                                <h4>Search Business By Name:</h4>
                             </label>
                         </div>
                     </div>
@@ -140,16 +136,16 @@
                 <br>
                 <table id="employee-table" class="table table-striped table-bordered table-vcenter">
                     <thead>
-                        <th id="name_categ" ng-click="sortBy('name');">Name</th>
-                        <th id="join_categ" ng-click="sortBy('joined');">Joined</th>
-                        <th id="plan_categ" ng-click="sortBy('plan');">Plan</th>
+                        <th id="name_categ" ng-click="sortBy('name');">Name <i id="name_icon" style="padding-top:4px;" class="pull-right hi hi-sort"></i></th>
+                        <th id="join_categ" ng-click="sortBy('joined');">Joined <i id="join_icon" style="padding-top:4px;" class="pull-right hi hi-sort"></th>
+                        <th id="plan_categ" ng-click="sortBy('plan');">Plan <i id="plan_icon" style="padding-top:4px;" class="pull-right hi hi-sort"></th>
                         <th id="phone_categ">Phone</th>
                         <th style="width: 80px;" class="text-center"></th>
                     </thead>
                     <tbody>
                         <tr ng-repeat="c in clientsToShow">
                             <td><strong>{{c.name}}</strong></td>
-                            <td>{{c.timestamp.created}}</td>
+                            <td id="dateJoined{{$index}}">{{c.dateJoined}}</td>
                             <td>{{c.planLevel}}</td>
                             <td>{{c.phone}}</td>
                             <td class="text-center">
@@ -161,7 +157,7 @@
                                         </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <a href="javascript:void(0)">Suspend Business</a>
+                                            <a ng-click="suspendBusiness();">Suspend Business</a>
                                         </li>
                                     </ul>
                                 </div>
