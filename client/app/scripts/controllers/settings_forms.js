@@ -6,7 +6,17 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService, DropZone) {
+    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService) {
+        console.log('builder');
+        console.log($builder);
+
+        //$scope.saveNewForm = function() {
+        //    App.alert('forms-themes');
+        //    console.log($builder);
+        //    console.log(JSON.stringify($builder));
+        //    sessionStorage.builderJson = JSON.stringify($builder.forms);
+        //};
+
         $rootScope.currentState = 'settings-forms';
 
         $scope.user = $cookies.getObject('user');
@@ -56,4 +66,5 @@ angular.module('iReceptionistApp')
                 return $trace('error');
             });
         };
+
     });

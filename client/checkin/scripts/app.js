@@ -16,6 +16,8 @@ angular
         'ui.router',
         'ui.bootstrap',
         'ngRoute',
+        'builder',
+        'builder.components',
         'cloudinary'
     ])
     .config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
