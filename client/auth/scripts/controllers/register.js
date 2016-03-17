@@ -6,7 +6,8 @@
  * Controller for the registration page
  */
 angular.module('iReceptionistApp')
-    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone, BusinessService) {
+    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window,
+        $cookies, $location, AuthenticationService, BusinessService, DropZone) {
 
         var REGISTRATION_STEPS = 4;
         var ONE = 1;
@@ -48,10 +49,6 @@ angular.module('iReceptionistApp')
 
         var lastUploadedLogo = null;
         var lastUploadedBg = null;
-        var fitnessForm = JSON.stringify([{"id":"name","component":"textInput","editable":false,"index":0,"label":"Name","description":"Your full name, or your nickname.","placeholder":"Jane Doe","options":[],"required":true,"validation":"/.*/","$$hashKey":"object:59"},{"id":"email","component":"textInput","editable":true,"index":1,"label":"Email","description":"Your private email, we won't spam you!","placeholder":"janedoe@gmail.com","options":[],"required":false,"validation":"[email]","$$hashKey":"object:60"},{"id":"phone","component":"textInput","editable":true,"index":2,"label":"Phone","description":"Your phone number.","placeholder":"8581234567","options":[],"required":false,"validation":"/.*/","$$hashKey":"object:158"},{"id":"employee","component":"select","editable":true,"index":3,"label":"Fitness Instructor","description":"Who are you seeing today?","placeholder":"placeholder","options":["Any instructor is fine"],"required":false,"validation":"/.*/","$$hashKey":"object:61"}]);
-        var healthForm = JSON.stringify([{"id":"name","component":"textInput","editable":false,"index":0,"label":"Name","description":"Your full name, or your nickname.","placeholder":"Jane Doe","options":[],"required":true,"validation":"/.*/","$$hashKey":"object:59"},{"id":"email","component":"textInput","editable":true,"index":1,"label":"Email","description":"Your private email, we won't spam you!","placeholder":"janedoe@gmail.com","options":[],"required":false,"validation":"[email]","$$hashKey":"object:60"},{"id":"phone","component":"textInput","editable":true,"index":2,"label":"Phone","description":"Your phone number.","placeholder":"8581234567","options":[],"required":false,"validation":"/.*/","$$hashKey":"object:158"},{"id":"employee","component":"select","editable":true,"index":3,"label":"Physician","description":"Who are you seeing today?","placeholder":"placeholder","options":["Anyone is fine"],"required":false,"validation":"/.*/","$$hashKey":"object:61"}]);
-        var otherForm = JSON.stringify([{"id":"name","component":"textInput","editable":false,"index":0,"label":"Name","description":"Your full name, or your nickname.","placeholder":"Jane Doe","options":[],"required":true,"validation":"/.*/","$$hashKey":"object:59"},{"id":"email","component":"textInput","editable":true,"index":1,"label":"Email","description":"Your private email, we won't spam you!","placeholder":"janedoe@gmail.com","options":[],"required":false,"validation":"[email]","$$hashKey":"object:60"},{"id":"phone","component":"textInput","editable":true,"index":2,"label":"Phone","description":"Your phone number.","placeholder":"8581234567","options":[],"required":false,"validation":"/.*/","$$hashKey":"object:158"},{"id":"employee","component":"select","editable":true,"index":3,"label":"Employee","description":"Who are you seeing today?","placeholder":"placeholder","options":["Anyone is fine"],"required":false,"validation":"/.*/","$$hashKey":"object:61"}]);
-
 
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
@@ -160,29 +157,51 @@ angular.module('iReceptionistApp')
             danger: 'Danger'
         };
 
-        var createForm = function (regObj) {
-            var form;
-            if ($scope.register.step2.type === 'health_care') {
-                form = healthForm;
-            }
-            else if ($scope.register.step2.type === 'fitness') {
-                form = fitnessForm;
-            }
-            else if ($scope.register.step2.type === 'other') {
-                form = otherForm;
-            }
-
-            BusinessService.updateBusiness(
+        $scope.doLogin = function() {
+            AuthenticationService.login(
                 {
-                    "businessId": regObj.user.business,
-                    "form": form
+                    'email': $scope.register.step1.email,
+                    'password': $scope.register.step1.password,
                 },
-                regObj.token,
-                function (busObj){
-                    $trace(busObj);
+                // Success
+                function(userObj) {
+                    BusinessService.getBusinessSubdomain(
+                        userObj.user.business,
+                        userObj.token,
+                        function(subdomain) {
+                            var domain = $location.host();
+                            if (domain === 'localhost') {
+                                // localhost is not a valid domain; it cannot handle subdomains,
+                                // so we leave out subdomains when working locally.
+                                subdomain = '';
+                            } else {
+                                subdomain += '.';
+                            }
+                            var cookieDefaults = {
+                                'path': '/',
+                                'domain': domain
+                            };
+
+                            var path = '/app';
+                            if (userObj.user.role < 0) {
+                                path = '/vip';
+                                subdomain = '';
+                            }
+
+                            userObj.user.rememberMe = $scope.rememberMe;
+                            $cookies.putObject('user', userObj.user, cookieDefaults);
+                            $cookies.put('token', userObj.token, cookieDefaults);
+
+                            $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
+                        },
+                        function(err) {
+                            $trace('Log in fail: ', err);
+                        }
+                    );
                 },
-                function (err) {
-                    $trace(err);
+                // Failure
+                function(err) {
+                    $scope.alert.danger = err.errorMsg;
                 }
             );
         };
@@ -206,39 +225,9 @@ angular.module('iReceptionistApp')
                 // Success
                 function (regObj) {
                     $trace('register success');
-                    createForm(regObj);
 
-                    //
                     // Automatically log-in after registration
-                    //
-                    AuthenticationService.login(
-                        {
-                            'email': $scope.register.step1.email,
-                            'password': $scope.register.step1.password
-                        },
-
-                        // Success
-                        function (userObj) {
-                            // Need to set path because we are going from '/auth' to '/app' or '/vip'
-                            // TODO: On VIP side, need to use token to reverify the user has the correct role
-                            // or else log them off because they don't belong there.
-                            // TODO: For now, just do local role level check here and redirect.
-
-                            var path = '/app';
-                            if (userObj.user.role === -1) {
-                                path = '/vip';
-                            }
-                            $trace(userObj);
-                            $cookies.put('token', userObj.token, {'path': '/checkin'});
-                            $cookies.putObject('user', userObj.user, {'path': path});
-                            $cookies.put('token', userObj.token, {'path': path});
-                            $window.location.href = path; // Redirect
-                        },
-                        // Failure
-                        function (err) {
-                            $trace('log in fail');
-                        }
-                    );
+                    $scope.doLogin();
                 },
 
                 // Error

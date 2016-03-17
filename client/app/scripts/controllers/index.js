@@ -6,12 +6,20 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies, BusinessService) {
+.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window,
+    $cookies, $location, BusinessService) {
+
     $scope.doLogout = function() {
-        $cookies.remove('user', {'path': '/'});
-        $cookies.remove('token', {'path': '/'});
-        $cookies.remove('business', {'path': '/'});
-        $window.location.href = '/auth';
+        var domain = $location.host();
+        var urlParts = domain.split('.');
+        var tld = '';
+        if (urlParts[0] === 'localhost') {
+            domain = urlParts[0];
+        } else {
+            domain = urlParts[1];
+            tld = '.' + urlParts[2];
+        }
+        $window.location.href = 'http://' + domain + tld + ':' + $location.port() + '/auth/#/logout';
     };
 
     // If user has no token, they are not authorized.
@@ -24,7 +32,7 @@ angular.module('iReceptionistApp')
     $scope.user = $cookies.getObject('user');
     $scope.publicId = $scope.user.avatar;
 
-    if (!$cookies.get('business')){
+    if (!$cookies.get('business')) {
         $trace("business cookie");
         BusinessService.getBusiness(
             $scope.user.business,
