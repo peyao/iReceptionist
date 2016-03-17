@@ -2,10 +2,11 @@
  * Created by Amanda on 3/3/2016.
  */
 angular.module('iReceptionistApp')
-.controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService) {
+.controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService, BusinessService) {
     $scope.showFirst=true;
     $scope.showSecond=false;
    
+
     $builder.forms=JSON.parse(sessionStorage.builderJson);
     console.log($builder);
 
@@ -28,10 +29,13 @@ angular.module('iReceptionistApp')
                 $this.removeClass('ok loading');
                 working = false;
                 $('.spinner').hide();
+                $scope.$apply(function(){
+                   $scope.showFirst=true;
+                   $scope.showSecond=false;
+                });
             }, 4000);
         }, 3000);
-        //$scope.showFirst=true;
-        //$scope.showSecond=false;
+
         
     });
 
@@ -64,5 +68,26 @@ angular.module('iReceptionistApp')
         $scope.showFirst=false;
         $scope.showSecond=true;
     };
+
+    //Business id of person logged in
+    $scope.getBusiness = function() {
+        var businessID = $scope.clientsToShow[this.$index]._id;
+        console.log(businessID);
+        $scope.indexToChange=this.$index;
+        BusinessService.getBusiness(
+            businessID,
+            $cookies.get('token'),
+            function (busObj) {
+                $trace("Success: " + busObj);
+            },
+            function (err) {
+                $trace("Failure: " + err.errorMsg);
+            }
+        );
+    };
+
+
 });
+
+
 

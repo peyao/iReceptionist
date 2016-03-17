@@ -25,6 +25,8 @@ background-size: cover;
 	background-color:rgba(13, 59, 95, 0.75);
 	text-align: center;
 	box-shadow: 0px 0px 200px 1px #000000;
+	-moz-box-shadow: 0px 0px 200px 1px #000000;
+	//overflow-y: scroll;
 }
 
 .firstwrapper {
