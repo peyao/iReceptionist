@@ -10,6 +10,7 @@ angular.module('iReceptionistApp')
     $cookies, $location, BusinessService) {
 
     $scope.doLogout = function() {
+        $cookies.remove('business', {'path': '/app'});
         var domain = $location.host();
         var urlParts = domain.split('.');
         var tld = '';
@@ -42,7 +43,6 @@ angular.module('iReceptionistApp')
                 $cookies.putObject('business', busObj);
             },
             function (err) {
-                //$scope.alert.danger = err.errorMsg;
             }
         );
     }

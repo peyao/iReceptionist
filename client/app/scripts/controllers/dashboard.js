@@ -50,7 +50,6 @@ angular.module('iReceptionistApp')
                     $trace(visObj);
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
                 }
             );
         };
