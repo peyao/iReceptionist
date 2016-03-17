@@ -19,7 +19,6 @@ angular.module('iReceptionistApp')
         $scope.step = 1;
         $scope.register = {};
         $scope.disableNextButton = true;
-        $scope.disabled = true;
         $scope.inputType = 'password';
 
 
@@ -176,18 +175,18 @@ angular.module('iReceptionistApp')
                         },
                         // Failure
                         function (err) {
-                            //$trace('log in fail'); // commented out for now
+                            //$trace('log in fail');
                             $scope.alert.danger = err.Error;
-                            console.log(err);
+                            //console.log(err);
                         }
                     );
                 },
 
                 // Error
                 function (err) {
-                    //$trace('register fail'); // commented out for now
+                    //$trace('register fail');
                     $scope.alert.danger = err.Error;
-                    console.log(err);
+                    //console.log(err);
                 }
             );
         };
