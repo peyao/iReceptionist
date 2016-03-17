@@ -15,8 +15,9 @@ angular
         'ngAria',
         'ui.router',
         'ui.bootstrap',
-        'anim-in-out',
         'ngRoute',
+        'builder',
+        'builder.components',
         'cloudinary'
     ])
     .config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
@@ -27,12 +28,15 @@ angular
                 url: '/',
                 templateUrl: 'views/checkin.html',
                 controller: 'CheckinCtrl'
-            })
+            });
         cloudinaryProvider
             .set("cloud_name", "phoenix-sol")
             .set("upload_preset", "phtsmngp");
     });
 
+var DEBUG = true;
 function $trace(message) {
-    console.log("(DEBUG) " + message);
+    if (DEBUG){
+        console.log("(DEBUG) " + message);
+    }
 }

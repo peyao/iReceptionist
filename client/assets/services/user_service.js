@@ -7,6 +7,7 @@ angular.module('iReceptionistApp')
 
         // apiDocs: https://cse112.siriolabs.com/doc/#api-User
         return {
+
             // User - Get User
             getUserByToken: function (token, success, error) {
                 var req = {

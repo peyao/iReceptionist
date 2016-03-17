@@ -7,7 +7,7 @@
  */
 angular.module('iReceptionistApp')
 .controller('LoginCtrl', function($scope, $rootScope, $timeout, $state,
-    $window, $cookies, AuthenticationService) {
+    $window, $cookies, $location, AuthenticationService, BusinessService) {
 
     $scope.email = '';
     $scope.password = '';
@@ -26,18 +26,43 @@ angular.module('iReceptionistApp')
             },
             // Success
             function(userObj) {
-                var path = '/app';
-                if (userObj.user.role < 0) {
-                    path = '/vip';
-                }
-                userObj.user.rememberMe = $scope.rememberMe;
-                $cookies.putObject('user', userObj.user, {'path': '/'});
-                $cookies.put('token', userObj.token, {'path': '/'});
-                $window.location.href = path; // Redirect
+                BusinessService.getBusinessSubdomain(
+                    userObj.user.business,
+                    userObj.token,
+                    function(subdomain) {
+                        var domain = $location.host();
+                        if (domain === 'localhost') {
+                            // localhost is not a valid domain; it cannot handle subdomains,
+                            // so we leave out subdomains when working locally.
+                            subdomain = '';
+                        } else {
+                            subdomain += '.';
+                        }
+                        var cookieDefaults = {
+                            'path': '/',
+                            'domain': domain
+                        };
+
+                        var path = '/app';
+                        if (userObj.user.role < 0) {
+                            path = '/vip';
+                            subdomain = '';
+                        }
+
+                        userObj.user.rememberMe = $scope.rememberMe;
+                        $cookies.putObject('user', userObj.user, cookieDefaults);
+                        $cookies.put('token', userObj.token, cookieDefaults);
+
+                        $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
+                    },
+                    function(err) {
+                        $scope.alert.danger = err.errorMsg;
+                    }
+                );
             },
             // Failure
             function(err) {
-                $scope.alert.danger = err.errorMsg;
+                $scope.alert.danger = err.Error;
             }
         );
     };

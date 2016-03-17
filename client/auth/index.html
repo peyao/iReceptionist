@@ -26,8 +26,7 @@
 
         <!-- Stylesheets -->
         <!-- Bootstrap is included in its original form, unaltered -->
-        <link rel="stylesheet" href="/assets/vendor/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
+        <link rel="stylesheet" href="/assets/vendor/css/bootstrap.min.css">f
 
         <!-- Related styles of various icon packs and plugins -->
         <link rel="stylesheet" href="/assets/vendor/css/plugins.css">
@@ -69,7 +68,6 @@
         <!--<script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>-->
         <!--<script src="/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>-->
         <!--<script src="/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
-        <!--<script src="/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>-->
 
         <!-- Cloudinary -->
         <!--<script src="/assets/bower_components/lodash/lodash.min.js"></script>-->
@@ -81,13 +79,16 @@
         <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="/assets/services/authentication_service.js"></script>
-        <script src="/assets/services/drop_zone.js"></script>
         <script src="scripts/controllers/index.js"></script>
         <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/logout.js"></script>
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/controllers/reset-password.js"></script>
-
+        <script src="/assets/services/authentication_service.js"></script>
+        <script src="/assets/services/business_service.js"></script>
+        <script src="/assets/services/drop_zone.js"></script>
+        <script src="/assets/services/business_service.js"></script>
+        
         <!-- endbuild -->
         <script>
             var _rollbarConfig = {

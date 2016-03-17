@@ -15,10 +15,13 @@ angular.module('iReceptionistApp')
                 $trace("Change Date");
                 $scope.getInactive();
             });
+
+
         var PAGE_DEFAULT = 1;
         var ACTIVE_PER_DEFAULT = 500;
         $scope.totalItems = 0;
         $scope.currentPage = 1;
+		$scope.avgWaitTime = "1:30";
         $scope.vname = '';
         $scope.user = $cookies.getObject('user');
         $scope.showMine = false;
@@ -36,10 +39,6 @@ angular.module('iReceptionistApp')
             perPage : {id: '10', name: '10'},
         };
 
-        $trace($scope.data.perPage);
-
-
-
         var getActive = function(){
             VisitorService.getVisitorQueue(
                 PAGE_DEFAULT,
@@ -51,14 +50,15 @@ angular.module('iReceptionistApp')
                     $trace(visObj);
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
                 }
             );
         };
+		
         $scope.saveVis = function(v){
           $scope.vname = v.name;
           $scope.vId = v._id;
         };
+		
         $scope.getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var date = $('#example-datepicker3').datepicker('getDate');
@@ -134,7 +134,7 @@ angular.module('iReceptionistApp')
                     getActive();
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
+            //        $scope.alert.danger = err.errorMsg;
                 }
             );
         };
@@ -151,14 +151,14 @@ angular.module('iReceptionistApp')
                     $trace("Delete Visitor Failed: " + visObj);
                 }
             );
-        }
+        };
 
         var chartClassicDash = $('#chart-classic-dash');
         $.plot(chartClassicDash,
             [
                 {
                     label: 'Number of Visitors',
-                    data: [[1, 130], [2, 330], [3, 220], [4, 350], [5, 150], [6, 275], [7, 280], [8, 380], [9, 120], [10, 330], [11, 190], [12, 410]],
+                    data: [[1, 130], [2, 230], [3, 220], [4, 350], [5, 450], [6, 275], [7, 280]], //[8, 380], [9, 120], [10, 330], [11, 190], [12, 410]],
                     lines: {show: true, fill: true, fillColor: {colors: [{opacity: .6}, {opacity: .6}]}},
                     points: {show: true, radius: 5}
                 },
@@ -168,7 +168,8 @@ angular.module('iReceptionistApp')
                 legend: {show: true, position: 'nw', backgroundOpacity: 0},
                 grid: {borderWidth: 0, hoverable: true, clickable: true},
                 yaxis: {show: false, tickColor: '#f5f5f5', ticks: 3},
-                xaxis: {ticks: [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']], tickColor: '#f9f9f9'}
+                xaxis: {ticks: [[1, 'Mon'], [2, 'Tues'], [3, 'Wed'], [4, 'Thurs'], [5, 'Fri'], [6, 'Sat'], [7, 'Sun']], tickColor: '#f9f9f9'}
+				//xaxis: {ticks: [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']], tickColor: '#f9f9f9'}
             }
         );
 
