@@ -129,7 +129,7 @@ angular.module('iReceptionistApp')
         $scope.alert = {
             success: 'Registration',
             warning: 'Warning',
-            danger: 'Danger'
+            danger: ''
         };
 
         $scope.doLogin = function() {
@@ -170,13 +170,14 @@ angular.module('iReceptionistApp')
                             $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
                         },
                         function(err) {
-                            $trace('Log in fail: ', err);
+                            //$trace('Log in fail: ', err);
+                            $scope.alert.danger = err. Error
                         }
                     );
                 },
                 // Failure
                 function(err) {
-                    $scope.alert.danger = err.errorMsg;
+                    $scope.alert.danger = err.Error;
                 }
             );
         };
@@ -198,12 +199,48 @@ angular.module('iReceptionistApp')
                     //
                     // Automatically log-in after registration
                     //
+                    AuthenticationService.login(
+                        {
+                            'email': $scope.register.step1.email,
+                            'password': $scope.register.step1.password
+                        },
+
+                        // Success
+                        function (userObj) {
+                            // Need to set path because we are going from '/auth' to '/app' or '/vip'
+                            // TODO: On VIP side, need to use token to reverify the user has the correct role
+                            // or else log them off because they don't belong there.
+                            // TODO: For now, just do local role level check here and redirect.
+
+                            var path = '/app';
+                            if (userObj.user.role === -1) {
+                                path = '/vip';
+                            }
+                            $trace(userObj);
+                            $cookies.putObject('user', userObj.user, {'path': '/auth'});
+                            $cookies.put('token', userObj.token, {'path': '/auth'});
+                            $cookies.put('token', userObj.token, {'path': '/checkin'});
+                            $cookies.putObject('user', userObj.user, {'path': path});
+                            $cookies.put('token', userObj.token, {'path': path});
+                            $window.location.href = path; // Redirect
+                        },
+                        // Failure
+                        function (err) {
+                            //$trace('log in fail');
+                            $scope.alert.danger = err.Error;
+                            //console.log(err);
+                        }
+                    );
+
                     $scope.doLogin();
+
                 },
 
                 // Error
                 function (err) {
-                    $trace('register fail');
+                    //$trace('register fail');
+                    $scope.alert.danger = err.Error;
+                    //console.log(err);
                 }
             );
         };
