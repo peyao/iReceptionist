@@ -171,7 +171,7 @@ angular.module('iReceptionistApp')
                         },
                         function(err) {
                             //$trace('Log in fail: ', err);
-                            $scope.alert.danger = err. Error
+                            $scope.alert.danger = err.Error
                         }
                     );
                 },
