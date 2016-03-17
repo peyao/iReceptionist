@@ -48,6 +48,7 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function (busObj){
                 $trace("Business: " + busObj);
+                $trace(busObj.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
@@ -60,6 +61,9 @@ angular.module('iReceptionistApp')
     });
 
     var channel;
+    console.log($cookies.getObject('user'));
+    console.log($cookies.getObject('user').settings);
+
     if ($scope.user && $cookies.getObject('user').settings.receiveBrowserNotification) {
         channel = pusher.subscribe($scope.user.business);
         channel.bind('newVisitor', function(data){

@@ -5,10 +5,10 @@ angular.module('iReceptionistApp')
 .controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService, BusinessService) {
     $scope.showFirst=true;
     $scope.showSecond=false;
-   
 
-    $builder.forms=JSON.parse(sessionStorage.builderJson);
-    console.log($builder);
+    $scope.business = $cookies.getObject('business');
+    var form = JSON.parse($scope.business.form);
+    $builder.forms['visitorForm'] = form;
 
     var working = false;
     $('.login').on('submit', function (e) {
@@ -44,6 +44,7 @@ angular.module('iReceptionistApp')
     };
 
     $scope.doCheckIn = function(){
+
         $trace($scope.fstname + " " + $scope.lstname);
         $trace($cookies.get('token'));
         VisitorService.checkin(
@@ -62,27 +63,11 @@ angular.module('iReceptionistApp')
                 $scope.alert.danger = err.errorMsg;
             }
         );
-
         $scope.showFirst=false;
         $scope.showSecond=true;
     };
 
-    //Business id of person logged in
-    $scope.getBusiness = function() {
-        var businessID = $scope.clientsToShow[this.$index]._id;
-        console.log(businessID);
-        $scope.indexToChange=this.$index;
-        BusinessService.getBusiness(
-            businessID,
-            $cookies.get('token'),
-            function (busObj) {
-                $trace("Success: " + busObj);
-            },
-            function (err) {
-                $trace("Failure: " + err.errorMsg);
-            }
-        );
-    };
+
 });
 
 
