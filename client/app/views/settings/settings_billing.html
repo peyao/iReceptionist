@@ -1,0 +1,263 @@
+<div class="content-header">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="header-section">
+                <h1>Billing</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plans -->
+<section class="site-content site-section">
+    <div class="container">
+        <div class="site-block">
+            <div class="column">
+                <div class="row">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Current Plan</h2>
+                        </div>
+                        <table class="table table-borderless table-vcenter">
+                            <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Usage</th>
+                                <th>Payment Due Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><h4>{{currentPlan}}</h4></td>
+                                <td><h4>{{numEmployees}} Employees</h4></td>
+                                <td><h4>{{currentPlan === 'Free' ? 'N/A' : dueDate}}</h4></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Account Transactions</h2>
+                        </div>
+                        <h4 id="free-transaction">No recent transactions</h4>
+                        <table id="basic-transaction" class="table table-bordered table-striped table-condensed table-vcenter">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Paid Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><h4>Basic Plan</h4></td>
+                                    <td><h4 class="transaction-date"></h4></td>
+                                    <td><h4>$10</h4></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table id="premium-transaction" class="table table-bordered table-striped table-condensed table-vcenter">
+                            <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Paid Date</th>
+                                <th>Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr >
+                                    <td><h4>Premium Plan</h4></td>
+                                    <td><h4 class="transaction-date"></h4></td>
+                                    <td><h4>$20</h4></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Available Plans</h2>
+                        </div>
+                        <!-- Mini Pricing Tables Content -->
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <table class="table table-pricing table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th>Free</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <h1>$<strong>0</strong><small>/month</small></h1>
+                                            <button type="submit" data-toggle="modal" data-target="#plan-modal"
+                                                    ng-click="planClicked='Free'; planInfo = 'Free Plan: $0/month';"
+                                                    ng-disabled="currentPlan === 'Free'"
+                                                    class="btn btn-effect-ripple btn-success" id="free-plan-button">
+                                                <i class="fa fa-arrow-right"></i>
+                                                {{currentPlan === 'Free Plan' ? 'Current Plan' : 'Select Plan'}}</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>
+                                            <h3>
+                                                <small>
+                                                    Feature 1<br>
+                                                    Feature 2<br>
+                                                    Feature 3
+                                                </small>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-3">
+                                <table class="table table-pricing table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th>Basic</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <h1>$<strong>10</strong><small>/month</small></h1>
+                                            <button type="submit" data-toggle="modal" data-target="#plan-modal"
+                                                    ng-click="planClicked='Basic'; planInfo = 'Basic Plan: $10/month';"
+                                                    ng-disabled="currentPlan === 'Basic'"
+                                                    class="btn btn-effect-ripple  btn-success" id="basic-plan-button">
+                                                <i class="fa fa-arrow-right"></i>
+                                                {{currentPlan === 'Basic' ? 'Current Plan' : 'Select Plan'}}</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>
+                                            <h3>
+                                                <small>
+                                                    Feature 1<br>
+                                                    Feature 2<br>
+                                                    Feature 3
+                                                </small>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-3">
+                                <table class="table table-pricing table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th>Premium</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <h1>$<strong>20</strong><small>/month</small></h1>
+                                            <button type="submit" data-toggle="modal" data-target="#plan-modal"
+                                                    ng-click="planClicked='Premium'; planInfo = 'Premium Plan: $20/month';"
+                                                    ng-disabled="currentPlan === 'Premium'"
+                                                    class="btn btn-effect-ripple  btn-success" id="premium-plan-button">
+                                                <i class="fa fa-arrow-right"></i>
+                                                {{currentPlan === 'Premium' ? 'Current Plan' : 'Select Plan'}}</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>
+                                            <h3>
+                                                <small>
+                                                    Feature 1<br>
+                                                    Feature 2<br>
+                                                    Feature 3
+                                                </small>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-3">
+                                <table class="table table-pricing table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th>Enterprise</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <h1><small>Call <strong>1-111-111-1111</strong></small></h1>
+                                            <button type="submit" class="btn btn-effect-ripple  btn-success">
+                                                <i class="fa fa-arrow-right"></i>
+                                                Contact Us</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>
+                                            <h3>
+                                                <small>
+                                                    Feature 1<br>
+                                                    Feature 2<br>
+                                                    Feature 3
+                                                </small>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <!-- END Mini Pricing Tables Content -->
+                        </div>
+                    <!-- END Mini Pricing Tables Block -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END Plans -->
+
+<div id="plan-modal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Update Your Plan
+            </div>
+            <div class="modal-body">
+                <h3>{{planInfo}}</h3>
+                <form class="form-horizontal form-bordered settings-form" onsubmit="return false;" ng-hide="planClicked === 'Free'">
+                    <div class="form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="tel" id="card-name" name="card-name" class="form-control input-lg credit-card-input" placeholder="Name" ng-model="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="credit-card">Credit Card</label>
+                        <input type="tel" id="credit-card" name="credit-card" class="form-control input-lg credit-card-input" placeholder="•••• •••• •••• ••••" ng-model="card">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="security-code">Security Code</label>
+                            <input type="tel" id="security-code" name="security-code" class="form-control input-lg credit-card-input" placeholder="•••" ng-model="securityCode">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="expiration-date">Expiration Date (MM/YYYY)</label>
+                            <input type="tel" id="expiration-date" name="expiration-date" class="form-control input-lg credit-card-input" placeholder="•• / ••" ng-model="expirationDate">
+                        </div>
+                    </div>
+                </form>
+                <div class="alert alert-danger hidden credit-card-error">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-effect-ripple btn-danger" ng-click="updatePlan();">Submit</button>
+                <button type="button" class="btn btn-effect-ripple" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

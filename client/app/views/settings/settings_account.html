@@ -1,0 +1,273 @@
+<div class="content-header">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="header-section">
+                <h1>Account</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Horizontal Form -->
+<section class="site-content site-section">
+    <div class="container">
+        <div class="site-block">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>User Information</h2>
+                        </div>
+                        <!-- END Horizontal Form Title -->
+
+                        <!-- Horizontal Form Content -->
+                        <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="text" id="email" name="email" class="form-control input-lg" ng-model="user.email" ng-change="userFieldChanged('email');">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number">Phone Number</label>
+                                <input type="text" id="phone-number" name="phone-number" class="form-control input-lg" ng-model="user.phone" ng-change="userFieldChanged('phone');">
+                            </div>
+                            <div class="form-group">
+                                <label for="avatarUpload" class="text-left">Avatar</label>
+                                <div id="user-upload-row" class="row">
+                                    <div class="col-xs-3">
+                                        <cl-image public-id="avatar" class="avatar"></cl-image>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div id="avatarUpload" class="dropzone">
+                                            <div class="dz-default dz-message"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updateUser();">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Password</h2>
+                        </div>
+                        <form class="form-horizontal form-bordered settings-form" onsubmit="return false;">
+                            <div class="form-group">
+                                <label for="oldPassword">Old Password</label>
+                                <input type="text" id="oldPassword" name="oldPassword" class="form-control input-lg password-field" placeholder="Old Password" required ng-model="oldPassword" ng-change="passwordFieldChanged('oldPassword');">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">New Password</label>
+                                <input type="text" id="password" name="password" class="form-control input-lg password-field" placeholder="Password" required ng-model="password" ng-change="passwordFieldChanged('password');">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="text" id="confirm-password" name="confirm-password" class="form-control input-lg password-field" placeholder="Confirm Password" required ng-model="confirmPassword" ng-change="passwordFieldChanged('confirmPassword');">
+                            </div>
+                            <div class="alert alert-danger hidden" id="password-error">
+                            </div>
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updatePassword();">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="block">
+                        <div class="block-title">
+                            <h2>Theme</h2>
+                        </div>
+                        <div class="themes">
+                            <ul class="sidebar-themes clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-default" data-toggle="tooltip" title="Default"
+                                       ng-click="updateTheme($event);"
+                                        id="default-inverse-default">
+                                        <span class="section-side themed-background-dark-default"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-classy" data-toggle="tooltip" title="Classy"
+                                       ng-click="updateTheme($event);"
+                                        id="classy-inverse-default">
+                                        <span class="section-side themed-background-dark-classy"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-social" data-toggle="tooltip" title="Social"
+                                       ng-click="updateTheme($event);"
+                                        id="social-inverse-default">
+                                        <span class="section-side themed-background-dark-social"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-flat" data-toggle="tooltip" title="Flat"
+                                       ng-click="updateTheme($event);"
+                                        id="flat-inverse-default">
+                                        <span class="section-side themed-background-dark-flat"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-amethyst" data-toggle="tooltip" title="Amethyst"
+                                       ng-click="updateTheme($event);"
+                                        id="amethyst-inverse-default">
+                                        <span class="section-side themed-background-dark-amethyst"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-creme" data-toggle="tooltip" title="Creme"
+                                       ng-click="updateTheme($event);"
+                                        id="creme-inverse-default">
+                                        <span class="section-side themed-background-dark-creme"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-passion" data-toggle="tooltip" title="Passion"
+                                       ng-click="updateTheme($event);"
+                                        id="passion-inverse-default">
+                                        <span class="section-side themed-background-dark-passion"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="sidebar-themes clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-default" data-toggle="tooltip" title="Default + Light Sidebar"
+                                       ng-click="updateTheme($event);"
+                                        id="default-inverse-light">
+                                        <span class="section-side"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-classy" data-toggle="tooltip" title="Classy + Light Sidebar"
+                                       ng-click="updateTheme($event);"
+                                        id="classy-inverse-light">
+                                        <span class="section-side"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-social" data-toggle="tooltip" title="Social + Light Sidebar"
+                                       ng-click="updateTheme($event);"
+                                        id="social-inverse-light">
+                                        <span class="section-side"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-flat" data-toggle="tooltip" title="Flat + Light Sidebar"
+                                       ng-click="updateTheme($event);"
+                                        id="flat-inverse-light">
+                                        <span class="section-side"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-amethyst" data-toggle="tooltip" title="Amethyst + Light Sidebar"
+                                       ng-click="updateTheme($event);"
+                                        id="amethyst-inverse-light">
+                                        <span class="section-side"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-creme" data-toggle="tooltip" title="Creme + Light Sidebar"
+                                       ng-click="updateTheme($event);"
+                                        id="creme-inverse-light">
+                                        <span class="section-side"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-passion" data-toggle="tooltip" title="Passion + Light Sidebar"
+                                       ng-click="updateTheme($event);"
+                                        id="passion-inverse-light">
+                                        <span class="section-side"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="sidebar-themes clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-default" data-toggle="tooltip" title="Default + Light Header"
+                                       ng-click="updateTheme($event);"
+                                        id="default-default-default">
+                                        <span class="section-header"></span>
+                                        <span class="section-side themed-background-dark-default"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-classy" data-toggle="tooltip" title="Classy + Light Header"
+                                       ng-click="updateTheme($event);"
+                                        id="classy-default-default">
+                                        <span class="section-header"></span>
+                                        <span class="section-side themed-background-dark-classy"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-social" data-toggle="tooltip" title="Social + Light Header"
+                                       ng-click="updateTheme($event);"
+                                        id="social-default-default">
+                                        <span class="section-header"></span>
+                                        <span class="section-side themed-background-dark-social"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-flat" data-toggle="tooltip" title="Flat + Light Header"
+                                       ng-click="updateTheme($event);"
+                                        id="flat-default-default">
+                                        <span class="section-header"></span>
+                                        <span class="section-side themed-background-dark-flat"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-amethyst" data-toggle="tooltip" title="Amethyst + Light Header"
+                                       ng-click="updateTheme($event);"
+                                        id="amethyst-default-default">
+                                        <span class="section-header"></span>
+                                        <span class="section-side themed-background-dark-amethyst"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-creme" data-toggle="tooltip" title="Creme + Light Header"
+                                       ng-click="updateTheme($event);"
+                                        id="creme-default-default">
+                                        <span class="section-header"></span>
+                                        <span class="section-side themed-background-dark-creme"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="site-theme themed-background-passion" data-toggle="tooltip" title="Passion + Light Header"
+                                       ng-click="updateTheme($event);"
+                                        id="passion-default-default">
+                                        <span class="section-header"></span>
+                                        <span class="section-side themed-background-dark-passion"></span>
+                                        <span class="section-content"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

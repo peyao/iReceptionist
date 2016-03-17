@@ -1,0 +1,70 @@
+<!-- Full Background -->
+<!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
+<img src="/assets/vendor/img/placeholders/layout/login2_full_bg.jpg" alt="Full Background" class="full-bg animation-pulseSlow">
+<!-- END Full Background -->
+
+<!-- Login Container -->
+<div id="login-container">
+    <!-- Login Header -->
+    <h1 class="h2 text-light text-center push-top-bottom animation-pullDown">
+        <strong>Welcome Back!</strong>
+        <!--<strong>iReceptionist <i class="fa fa-heart text-light"></i>s You!</strong>-->
+    </h1>
+    <!-- END Login Header -->
+
+    <!-- Login Block -->
+    <div class="block animation-fadeInQuick">
+        <!-- Login Title -->
+        <div class="block-title">
+            <div class="block-options pull-right">
+                <button ui-sref="register" class="btn btn-effect-ripple btn-primary" tooltip-placement="left" uib-tooltip="Create a new account">Create Account <i class="fa fa-plus"></i></button>
+            </div>
+            <h2>Log in</h2>
+        </div>
+        <!-- END Login Title -->
+
+        <!-- Danger Alert -->
+        <div class="alert alert-danger alert-dismissable" ng-if="alert.danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><strong>Error</strong></h4>
+            <p>{{alert.danger}}</p>
+        </div>
+        <!-- END Danger Alert -->
+        <!-- Login Form -->
+        <form id="form-login" class="form-horizontal" action="javascript:void(0);">
+            <div class="form-group">
+                <label for="login-email" class="col-xs-12">Email</label>
+                <div class="col-xs-12">
+                    <input ng-model="email" type="text" id="login-email" name="login-email" class="form-control" placeholder="Your email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="login-password" class="col-xs-12">Password</label>
+                <div class="col-xs-12">
+                    <input ng-model="password" type="password" id="login-password" name="login-password" class="form-control" placeholder="Your password">
+                </div>
+            </div>
+            <div class="form-group form-actions container-fluid">
+                <div class="row">
+                    <div class="col-xs-4 text-left">
+                        <button type="submit" class="btn btn-effect-ripple btn-md btn-primary" ng-click="doLogin()">LOG IN</button>
+                    </div>
+                    <div class="col-xs-6 col-xs-offset-2 text-right">
+                        <label class="csscheckbox csscheckbox-primary">
+                            <input ng-model="rememberMe" type="checkbox" id="login-remember-me" name="login-remember-me"><span></span> Remember Me
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 block-options text-right">
+                        <button ui-sref="reset-password" class="btn">Forgot Password?</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END Login Form -->
+    </div>
+    <!-- END Login Block -->
+
+</div>
+<!-- END Login Container -->

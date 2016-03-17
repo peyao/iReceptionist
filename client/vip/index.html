@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" ng-app="iReceptionistApp" ng-controller='IndexCtrl'> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <title>iReceptionist</title>
+
+        <meta name="description" content="iReceptionist VIP">
+        <meta name="author" content="Phoenix Solutions">
+        <meta name="robots" content="noindex, nofollow">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="/assets/vendor/img/favicon.png">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon57.png" sizes="57x57">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon72.png" sizes="72x72">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon76.png" sizes="76x76">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon114.png" sizes="114x114">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon120.png" sizes="120x120">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon144.png" sizes="144x144">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon152.png" sizes="152x152">
+        <link rel="apple-touch-icon" href="/assets/vendor/img/icon180.png" sizes="180x180">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Bootstrap is included in its original form, unaltered -->
+        <link rel="stylesheet" href="/assets/vendor/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
+
+        <!-- Related styles of various icon packs and plugins -->
+        <link rel="stylesheet" href="/assets/vendor/css/plugins.css">
+
+        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+        <link rel="stylesheet" href="/assets/vendor/css/main.css">
+        <link rel="stylesheet" href="styles/ireceptionist.css">
+        <link rel="stylesheet" href="/assets/styles/ireceptionist-common.css">
+
+        <!-- Include a specific file here from /assets/vendor/css/themes/ folder to alter the default theme of the template -->
+        <link rel="stylesheet" href="/assets/vendor/js/angular-loading-bar/loading-bar.css"/>
+
+        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" href="/assets/vendor/css/themes/passion.css">
+        <link rel="stylesheet" href="/assets/vendor/css/themes.css">
+        <!-- END Stylesheets -->
+
+        <!-- Modernizr (browser feature detection library) -->
+        <script src="/assets/vendor/js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!-- Page Wrapper -->
+        <!-- In the PHP version you can set the following options from inc/config file -->
+        <!--
+            Available classes:
+
+            'page-loading'      enables page preloader
+        -->
+        <div id="page-wrapper" class="page-loading">
+            <!-- Preloader -->
+            <!-- Preloader functionality (initialized in js/app.js) - pageLoading() -->
+            <div class="preloader">
+                <div class="inner">
+                    <!-- Animation spinner for all modern browsers -->
+                    <div class="preloader-spinner themed-background hidden-lt-ie10"></div>
+
+                    <!-- Text for IE9 -->
+                    <h3 class="text-primary visible-lt-ie10"><strong>Loading..</strong></h3>
+                </div>
+            </div>
+            <!-- END Preloader -->
+
+            <!-- Page Container -->
+            <!--
+                Available #page-container classes:
+
+                'sidebar-light'                                 for a light main sidebar (You can add it along with any other class)
+
+                'sidebar-visible-lg-mini'                       main sidebar condensed - Mini Navigation (> 991px)
+                'sidebar-visible-lg-full'                       main sidebar full - Full Navigation (> 991px)
+
+                'sidebar-alt-visible-lg'                        alternative sidebar visible by default (> 991px) (You can add it along with any other class)
+
+                'header-fixed-top'                              has to be added only if the class 'navbar-fixed-top' was added on header.navbar
+                'header-fixed-bottom'                           has to be added only if the class 'navbar-fixed-bottom' was added on header.navbar
+
+                'fixed-width'                                   for a fixed width layout (can only be used with a static header/main sidebar layout)
+
+                'enable-cookies'                                enables cookies for remembering active color theme when changed from the sidebar links (You can add it along with any other class)
+            -->
+            <div id="page-container" class="header-fixed-top sidebar-visible-lg-full sidebar-light">
+                <!-- Alternative Sidebar -->
+                <div id="sidebar-alt" tabindex="-1" aria-hidden="true">
+                    <!-- Toggle Alternative Sidebar Button (visible only in static layout) -->
+                    <a href="javascript:void(0)" id="sidebar-alt-close" onclick="App.sidebar('toggle-sidebar-alt');"><i class="fa fa-times"></i></a>
+
+                    <!-- Wrapper for scrolling functionality -->
+                    <div id="sidebar-scroll-alt">
+                        <!-- Sidebar Content -->
+                        <div class="sidebar-content">
+                            <!-- Sidebar Section -->
+                            <div class="sidebar-section">
+                                <h2 class="text-light">Header</h2>
+                                <p>Section content..</p>
+                            </div>
+                            <!-- END Sidebar Section -->
+                        </div>
+                        <!-- END Sidebar Content -->
+                    </div>
+                    <!-- END Wrapper for scrolling functionality -->
+                </div>
+                <!-- END Alternative Sidebar -->
+
+                <!-- Main Sidebar -->
+                <div id="sidebar">
+                    <!-- Sidebar Brand -->
+                    <div id="sidebar-brand" class="themed-background">
+                        <a href="/vip" class="sidebar-title">
+                            <span class="sidebar-nav-mini-hide">iReceptionist<strong>VIP</strong></span>
+                        </a>
+                    </div>
+                    <!-- END Sidebar Brand -->
+
+                    <!-- Wrapper for scrolling functionality -->
+                    <div id="sidebar-scroll">
+                        <!-- Sidebar Content -->
+                        <div class="sidebar-content">
+                            <!-- Sidebar Navigation -->
+                            <ul class="sidebar-nav">
+                                <li>
+                                    <a ui-sref="vip-dashboard" ng-class="{active: currentState === 'vip-dashboard'}">
+                                        <i class="hi hi-dashboard sidebar-nav-icon"></i>
+                                        <span class="sidebar-nav-mini-hide">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="vip-employees" ng-class="{active: currentState === 'vip-employees'}">
+                                        <i class="gi gi-group sidebar-nav-icon"></i>
+                                        <span class="sidebar-nav-mini-hide">Employees</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- END Sidebar Navigation -->
+                        </div>
+                        <!-- END Sidebar Content -->
+                    </div>
+                    <!-- END Wrapper for scrolling functionality -->
+
+                    <!-- Sidebar Extra Info -->
+                    <div id="sidebar-extra-info" class="sidebar-content sidebar-nav-mini-hide">
+                        <div class="push-bit">
+                            <span class="pull-right">
+                                <a href="javascript:void(0)" class="text-muted"><i class="fa fa-plus"></i></a>
+                            </span>
+                            <small><strong>78 GB</strong> / 100 GB</small>
+                        </div>
+                        <div class="progress progress-mini push-bit">
+                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%"></div>
+                        </div>
+                        <div class="text-center">
+                            <small><span id="year-copy"></span> &copy; <a href="#" target="_blank">iReceptionist</a></small>
+                        </div>
+                    </div>
+                    <!-- END Sidebar Extra Info -->
+                </div>
+                <!-- END Main Sidebar -->
+
+                <!-- Main Container -->
+                <div id="main-container">
+                    <!-- Header -->
+                    <!-- In the PHP version you can set the following options from inc/config file -->
+                    <!--
+                        Available header.navbar classes:
+
+                        'navbar-default'            for the default light header
+                        'navbar-inverse'            for an alternative dark header
+
+                        'navbar-fixed-top'          for a top fixed header (fixed main sidebar with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar())
+                            'header-fixed-top'      has to be added on #page-container only if the class 'navbar-fixed-top' was added
+
+                        'navbar-fixed-bottom'       for a bottom fixed header (fixed main sidebar with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar()))
+                            'header-fixed-bottom'   has to be added on #page-container only if the class 'navbar-fixed-bottom' was added
+                    -->
+                    <header class="navbar navbar-default navbar-fixed-top">
+                        <!-- Left Header Navigation -->
+                        <ul class="nav navbar-nav-custom">
+                            <!-- Main Sidebar Toggle Button -->
+                            <li>
+                                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
+                                    <i class="hi hi-chevron-left fa-fw animation-fadeInRight" id="sidebar-toggle-mini"></i>
+                                    <i class="hi hi-chevron-right animation-fadeInRight" id="sidebar-toggle-full"></i>
+                                </a>
+                            </li>
+                            <!-- END Main Sidebar Toggle Button -->
+
+                            <!-- Header Link -->
+                            <li class="hidden-xs animation-fadeInQuick">
+                                <a href="" ng-cloak><strong>{{clock}}</strong></a>
+                            </li>
+                            <!-- END Header Link -->
+                        </ul>
+                        <!-- END Left Header Navigation -->
+
+                        <!-- Right Header Navigation -->
+                        <ul class="nav navbar-nav-custom pull-right">
+                            <!-- Search Form -->
+                            <li>
+                                <form action="javascript:void(0);" class="navbar-form-custom" role="search">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control" placeholder="Search" ng-change="search(searchString)">
+                                </form>
+                            </li>
+                            <!-- END Search Form -->
+
+                            <!-- Alternative Sidebar Toggle Button -->
+                            <li>
+                                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');this.blur();">
+                                    <i class="gi gi-settings"></i>
+                                </a>
+                            </li>
+                            <!-- END Alternative Sidebar Toggle Button -->
+
+                            <!-- User Dropdown -->
+                            <li class="dropdown">
+                                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="/assets/vendor/img/placeholders/avatars/avatar.jpg" alt="avatar">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li class="dropdown-header">
+                                        <strong>USER ACTIONS</strong>
+                                    </li>
+                                    <li>
+                                        <a href="#" ng-click="doLogout()">
+                                            <i class="fa fa-sign-out fa-fw pull-right"></i>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END User Dropdown -->
+                        </ul>
+                        <!-- END Right Header Navigation -->
+                    </header>
+                    <!-- END Header -->
+
+                    <!-- Page content -->
+                    <div id="page-content">
+                        <div ui-view></div>
+                    </div>
+                    <!-- END Page Content -->
+                </div>
+                <!-- END Main Container -->
+            </div>
+            <!-- END Page Container -->
+        </div>
+        <!-- END Page Wrapper -->
+
+        <!-- jQuery, Bootstrap, jQuery plugins and Custom JS code -->
+        <script src="/assets/vendor/js/vendor/jquery-2.2.0.min.js"></script>
+        <script src="/assets/vendor/js/vendor/bootstrap.min.js"></script>
+        <script src="/assets/vendor/js/plugins.js"></script>
+        <script src="/assets/vendor/js/app.js"></script>
+        <!-- build:js(.) scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="/assets/bower_components/angular/angular.min.js"></script>
+        <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="/assets/bower_components/angular-cookies/angular-cookies.min.js"></script>
+        <script src="/assets/bower_components/angular-resource/angular-resource.min.js"></script>
+        <script src="/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>
+        <script src="/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="/assets/vendor/js/angular-loading-bar/loading-bar.js"></script>
+
+
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/index.js"></script>
+        <!-- TODO: Uncomment when search.js from app/ is complete and moved over.
+        <script src="scripts/controllers/search.js"></script>
+        -->
+        <script src="scripts/controllers/vip_dashboard.js"></script>
+        <script src="scripts/controllers/vip_employees.js"></script>
+        <script src="/assets/services/authentication_service.js"></script>
+        <script src="/assets/services/visitor_service.js"></script>
+        <script src="/assets/services/form_service.js"></script>
+        <script src="/assets/services/business_service.js"></script>
+        <script src="/assets/services/user_service.js"></script>
+        <script src="/assets/services/search_service.js"></script>
+        <!-- endbuild -->
+        <script>
+            var _rollbarConfig = {
+                accessToken: "6c5b38d40bb54375a534915ed2655b57",
+                captureUncaught: true,
+                payload: {
+                    environment: "test"
+                }
+            };
+            !function(r){function o(e){if(t[e])return t[e].exports;var n=t[e]={exports:{},id:e,loaded:!1};return r[e].call(n.exports,n,n.exports,o),n.loaded=!0,n.exports}var t={};return o.m=r,o.c=t,o.p="",o(0)}([function(r,o,t){"use strict";var e=t(1).Rollbar,n=t(2);_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||"https://d37gvrvc0wt4s1.cloudfront.net/js/v1.8/rollbar.min.js";var a=e.init(window,_rollbarConfig),i=n(a,_rollbarConfig);a.loadFull(window,document,!_rollbarConfig.async,_rollbarConfig,i)},function(r,o){"use strict";function t(r){return function(){try{return r.apply(this,arguments)}catch(o){try{console.error("[Rollbar]: Internal error",o)}catch(t){}}}}function e(r,o,t){window._rollbarWrappedError&&(t[4]||(t[4]=window._rollbarWrappedError),t[5]||(t[5]=window._rollbarWrappedError._rollbarContext),window._rollbarWrappedError=null),r.uncaughtError.apply(r,t),o&&o.apply(window,t)}function n(r){var o=function(){var o=Array.prototype.slice.call(arguments,0);e(r,r._rollbarOldOnError,o)};return o.belongsToShim=!0,o}function a(r){this.shimId=++s,this.notifier=null,this.parentShim=r,this._rollbarOldOnError=null}function i(r){var o=a;return t(function(){if(this.notifier)return this.notifier[r].apply(this.notifier,arguments);var t=this,e="scope"===r;e&&(t=new o(this));var n=Array.prototype.slice.call(arguments,0),a={shim:t,method:r,args:n,ts:new Date};return window._rollbarShimQueue.push(a),e?t:void 0})}function l(r,o){if(o.hasOwnProperty&&o.hasOwnProperty("addEventListener")){var t=o.addEventListener;o.addEventListener=function(o,e,n){t.call(this,o,r.wrap(e),n)};var e=o.removeEventListener;o.removeEventListener=function(r,o,t){e.call(this,r,o&&o._wrapped?o._wrapped:o,t)}}}var s=0;a.init=function(r,o){var e=o.globalAlias||"Rollbar";if("object"==typeof r[e])return r[e];r._rollbarShimQueue=[],r._rollbarWrappedError=null,o=o||{};var i=new a;return t(function(){if(i.configure(o),o.captureUncaught){i._rollbarOldOnError=r.onerror,r.onerror=n(i);var t,a,s="EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(",");for(t=0;t<s.length;++t)a=s[t],r[a]&&r[a].prototype&&l(i,r[a].prototype)}return r[e]=i,i})()},a.prototype.loadFull=function(r,o,e,n,a){var i=function(){var o;if(void 0===r._rollbarPayloadQueue){var t,e,n,i;for(o=new Error("rollbar.js did not load");t=r._rollbarShimQueue.shift();)for(n=t.args,i=0;i<n.length;++i)if(e=n[i],"function"==typeof e){e(o);break}}"function"==typeof a&&a(o)},l=!1,s=o.createElement("script"),u=o.getElementsByTagName("script")[0],p=u.parentNode;s.crossOrigin="",s.src=n.rollbarJsUrl,s.async=!e,s.onload=s.onreadystatechange=t(function(){if(!(l||this.readyState&&"loaded"!==this.readyState&&"complete"!==this.readyState)){s.onload=s.onreadystatechange=null;try{p.removeChild(s)}catch(r){}l=!0,i()}}),p.insertBefore(s,u)},a.prototype.wrap=function(r,o){try{var t;if(t="function"==typeof o?o:function(){return o||{}},"function"!=typeof r)return r;if(r._isWrap)return r;if(!r._wrapped){r._wrapped=function(){try{return r.apply(this,arguments)}catch(o){throw o._rollbarContext=t()||{},o._rollbarContext._wrappedSource=r.toString(),window._rollbarWrappedError=o,o}},r._wrapped._isWrap=!0;for(var e in r)r.hasOwnProperty(e)&&(r._wrapped[e]=r[e])}return r._wrapped}catch(n){return r}};for(var u="log,debug,info,warn,warning,error,critical,global,configure,scope,uncaughtError".split(","),p=0;p<u.length;++p)a.prototype[u[p]]=i(u[p]);r.exports={Rollbar:a,_rollbarWindowOnError:e}},function(r,o){"use strict";r.exports=function(r,o){return function(t){if(!t&&!window._rollbarInitialized){var e=window.RollbarNotifier,n=o||{},a=n.globalAlias||"Rollbar",i=window.Rollbar.init(n,r);i._processShimQueue(window._rollbarShimQueue||[]),window[a]=i,window._rollbarInitialized=!0,e.processPayloads()}}}}]);
+        </script>
+    </body>
+</html>

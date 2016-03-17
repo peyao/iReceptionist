@@ -1,0 +1,15 @@
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+
+.activeCategory {
+    background-color: #dddddd;
+}
+
+.table-responsive {
+    overflow-x: hidden;
+}
+
+.SUSPENDED {
+    color: red;
+    text-emphasis: bold;
+}
