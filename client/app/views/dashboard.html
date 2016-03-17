@@ -9,19 +9,19 @@
 </div>
 
 <div class="row">
+
     <!-- START analytics -->
     <div class="col-xs-12 col-sm-12 col-md-4 pull-right">
         <!-- Statistics Widget -->
-        <div class="block widget" ng-show="user.role">
-            <div class="block-title">
-                <h2>Visitor Analytics<h2>
+        <div class="block widget" ng-show="user.role" style="padding: 20px 0px 0px 0px;">
+
+            <div style="padding-left: 20px; padding-right: 20px">
+                <div class="block-title">
+                    <h2 ng-if="!showVisitorBlock">Visitor Analytics</h2>
+                    <h2 ng-if="showVisitorBlock">Visitor Information</h2>
+                </div>
             </div>
-            <!--
-            <div class="widget-content border-bottom">
-                <span class="pull-right text-muted"><i class="fa fa-check"></i></span>
-                Visitor Analytics
-            </div>
-        -->
+
             <div class="widget-content border-bottom themed-background-muted">
                 <div id="chart-classic-dash" style="height: 280px;">
                 </div>
@@ -73,23 +73,21 @@
 						<th>Name</th>
 						<th>Check-in time</th>
 						<th>Employee</th>
-						<th style="width: 100px;" class="text-center"></th>
+						<th style="width: 100px">Actions</th>
                     </thead>
                     <tbody>
 						<!-- TODO: Change phone to employee -->
-						<tr ng-repeat="v in visitors | filter: (showMine === true || '') && { phone: user.name }">
+						<tr ng-repeat="v in visitors | filter: (showMine === true || '') && { phone: user.name }"
+                            ng-mouseover="hoverVisitor(visitors[$index])" ng-mouseleave="deselectVisitor()"
+                            ng-click="selectVisitor(visitors[$index])">
 							<td><strong>{{v.name}}</strong></td>
 							<td>{{v.timeStamp.created | date:'shortTime'}}</td>
 							<td>{{v.phone}}</td>
-							<td class="grid-btn container-fluid">
-								<div class="col-xs-offset-1">
-									<button class="col-xs-5 btn btn-primary btn-sm" ng-click="doCheckOff(v)"><i
-											class="hi hi-ok"></i></button>
-								</div>
-								<div class="col-xs-4 btn-del">
-									<button class="btn btn-danger btn-sm" ng-click="saveVis(v)" data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
-									</button>
-								</div>
+							<td class="text-center">
+								<button class="btn btn-primary btn-sm" ng-click="doCheckOff(v)"><i
+										class="hi hi-ok"></i></button>
+								<button class="btn btn-danger btn-sm" ng-click="saveVis(v)" data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
+								</button>
 							</td>
 						</tr>
                     </tbody>

@@ -46,6 +46,15 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (visObj) {
                     $scope.visitors = visObj;
+        $scope.visitors = [{
+            'name': 'Peter Yao',
+            'timeStamp': {
+                'created': Date.now(),
+                'updated': Date.now()
+            },
+            'phone': '6261234567'
+        }];
+
                     $trace("Grabbing active visitors: ");
                     $trace(visObj);
                 },
@@ -53,12 +62,12 @@ angular.module('iReceptionistApp')
                 }
             );
         };
-		
+
         $scope.saveVis = function(v){
           $scope.vname = v.name;
           $scope.vId = v._id;
         };
-		
+
         $scope.getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var date = $('#example-datepicker3').datepicker('getDate');
@@ -273,7 +282,15 @@ angular.module('iReceptionistApp')
             $scope.$digest();
         });
 
-        //var lastSort = '';
-        ////initially sort by name
-        //$scope.sortBy('name');
+        $scope.showVisitorBlock = false;
+        $scope.hoverVisitor = function(i) {
+            $scope.showVisitorBlock = true;
+
+        };
+        $scope.selectVisitor = function(i) {
+            $scope.showVisitorBlock = true;
+        };
+        $scope.deselectVisitor = function() {
+            $scope.showVisitorBlock = false;
+        }
     });
