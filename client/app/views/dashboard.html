@@ -7,59 +7,205 @@
         </div>
     </div>
 </div>
+
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+    <!-- START analytics -->
+    <div class="col-sm-6 col-sm-push-6 col-md-4 col-md-push-8">
+        <!-- Statistics Widget -->
+        <div class="widget" ng-show="user.role">
+            <div class="widget-content border-bottom">
+                <span class="pull-right text-muted"><i class="fa fa-check"></i></span>
+                Visitor Analytics
+            </div>
+            <div class="widget-content border-bottom themed-background-muted">
+                <div id="chart-classic-dash" style="height: 280px;">
+                </div>
+            </div>
+            <div class="widget-content widget-content-full-top-bottom border-bottom">
+                <div class="row text-center">
+                    <div class="col-xs-6 push-inner-top-bottom border-right">
+                        <h3 class="widget-heading"><i class="gi gi-book_open text-dark push"></i> <br>
+                            <small>123 Total Visitors</small>
+                        </h3>
+                    </div>
+                    <div class="col-xs-6 push-inner-top-bottom">
+                        <h3 class="widget-heading"><i class="gi gi-user_add text-dark push"></i> <br>
+                            <small>{{avgWaitTime}} Average Wait Time</small>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!-- ng-click="doCheckOff(v)" -->
+            <button ng-class="active" title="Set Inactive" class="btn btn-effect-ripple btn-block btn-danger"><i
+                    class="fa fa-check"></i></button>
+        </div>
+        <!-- END Statistics Widget -->
+    </div>
+    <!-- END analytics -->
+
+    <!-- START active table -->
+    <div class="col-sm-6 col-sm-pull-6 col-md-8 col-md-pull-4">
         <div class="block">
             <div class="block-title clearfix">
-                <div class="block-options pull-right">
-					<button ng-class="{'active': showActive == null}" class="btn btn-effect-ripple btn-success" ng-click="showActive = null;">Active</button>
-					<button ng-class="{'active': showActive == ''}" class="btn btn-effect-ripple btn-danger" ng-click="showActive = '';">Inactive</button>
+                <!-- TODO These buttons shold only appear if employee is a field name-->
+                <div class="btn-group pull-right col-lg-3 col-md-3 col-sm-5 col-xs-4">
+                    <button class="btn btn-primary col-md-6" ng-class="{'active': showMine == false}"
+                            ng-click="showMine = false;">All
+                    </button>
+                    <button class="btn btn-primary col-md-6" ng-class="{'active': showMine == true}"
+                            ng-click="showMine = true;">Mine
+                    </button>
                 </div>
-				<!-- TODO These buttons shold only appear if employee is a field name-->
-				<div class="block-options pull-right">
-					<button ng-class="{'active': showMine == false}" class="btn btn-effect-ripple btn-success" ng-click="showMine = false;">All</button>
-					<button ng-class="{'active': showMine == true}" class="btn btn-effect-ripple btn-danger" ng-click="showMine = true;">Mine</button>
-				</div>
-                <h2>Visitors</h2>
-            </div>
 
-			<!-- START visitor table -->
-			<div class="table-responsive">
+                <h2>Current Visitors</h2>
+            </div>
+            <div class="table-responsive">
                 <table id="visitor-table" class="table table-striped table-bordered table-vcenter">
                     <thead>
-						<!-- TODO Backend do your stuff -->
-                        <th>Name</th>
-                        <th>Employee</th>
-                        <th>Notes</th>
-						<th>Phone</th>
-                        <th style="width: 120px;" class="text-center"><i class="fa fa-flash"></i></th>
+						<th>Name</th>
+						<th>Check-in time</th>
+						<th>Employee</th>
+						<th style="width: 100px;" class="text-center"></th>
                     </thead>
                     <tbody>
-						<!-- TODO filter by employee -->
-                        <!-- TODO revisit Inactive toggle - an "active" visitor has a checkOff field of null so inactive would be not null -->
-                        <tr ng-repeat="v in visitors | filter:{checkOff: showActive}">
-							<!-- TODO Backend do your stuff.... -->
-							<!-- TODO modal popup?? -->
+						<!-- TODO: Change phone to employee -->
+						<tr ng-repeat="v in visitors | filter: (showMine === true || '') && { phone: user.name }">
 							<td><strong>{{v.name}}</strong></td>
-							<td>{{v.employee}}</td>
-							<td>{{v.email}}</td>
+							<td>{{v.timeStamp.created | date:'shortTime'}}</td>
 							<td>{{v.phone}}</td>
-							<td class="text-center">
-								<!-- TODO is edit needed? -->
-								<button data-toggle="tooltip" title="Edit User" class="btn btn-effect-ripple btn-sm btn-success"><i class="fa fa-pencil"></i></button>
-								<button data-toggle="tooltip" title="Set Inactive" class="btn btn-effect-ripple btn-sm btn-danger" ng-click="doCheckOff(v)"><i class="fa fa-times"></i></button>
-							</td>
-                        </tr>
+							<td class="grid-btn container-fluid">
+								<div class="col-xs-offset-1">
+									<button class="col-xs-5 btn btn-primary btn-sm" ng-click="doCheckOff(v)"><i
+											class="hi hi-ok"></i></button>
+								</div>
+								<div class="col-xs-4 btn-del">
+									<button class="btn btn-danger btn-sm" ng-click="saveVis(v)" data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
+									</button>
+								</div>
+							</td>		
+						</tr>
                     </tbody>
                 </table>
+				<p ng-show="!visitors.length">There are no current visitors.</p>
+			</div>
+        </div>
+
+        <!-- START inactive table -->
+        <div class="block" ng-show="user.role > 0">
+            <div class="block-title clearfix">
+                <h2>Past Visitors</h2>
             </div>
-			<!-- END visitor table -->
+            <div class="row container-fluid">
+                <div class="col-sm-3 col-xs-3 inactive-widget">
+                    <div id="example-datatable_filter" class="dataTables_filter">
+                        <label>
+                            <div class="input-group">
+                                <input id="chartSearch" type="search" class="form-control" placeholder="Search"
+                                       aria-controls="example-datatable">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-5 col-xs-4 pull-right inactive-widget">
+                    <div class="input-group date">
+                        <input type="text" id="example-datepicker3" name="example-datepicker3"
+                               class="form-control input-datepicker" data-date-format="mm-dd-yyyy"
+                               data-date-today-highlight="true" data-date-autoclose="true">
+                        <div class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- START visitor table -->
+            <div class="table-responsive active-table">
+                <table id="inactive-table" class="table table-striped table-bordered table-vcenter">
+                    <thead>
+						<th id="name_categ" ng-click="sortBy('name');">Name</th>
+						<th id="emp_categ" ng-click="sortBy('employee');">Check-in time</th>
+						<th id="notes_categ" ng-click="sortBy('notes');">Check-out time</th>
+						<th id="phone_categ" ng-click="sortBy('phone');">Employee</th>
+						<th style="width: 65px;" class="text-center"></th>
+                    </thead>
+                    <tbody>
+						<!-- TODO revisit Inactive toggle - an "active" visitor has a checkOff field of null so inactive would be not null -->
+						<tr ng-repeat="v in inactive | filter: (showMine === true || '') && { phone: user.name }" >
+							<td><strong>{{v.name}}</strong></td>
+							<td>{{v.timeStamp.created | date:'shortTime'}}</td>
+							<td>{{v.timeStamp.updated | date:'shortTime'}}</td>
+							<!-- TODO change to employee -->
+							<td>{{v.phone}}</td>
+							<td class="grid-btn container-fluid">
+								<div class="col-xs-12 btn-del">
+									<button class="btn btn-danger btn-sm" ng-click=saveVis(v) data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+                    </tbody>
+                </table>
+				<p ng-show="!inactive.length">There are no past visitors for the selected date.</p>
+            </div>
 
-			<!-- statistics ???
-			current number of active
-			how many inactive today
-			-->
+            <div class="row container-fluid">
+                <div class="col-sm-3 col-xs-3 inactive-widget">
+                    <div class="dataTables_length" id="example-datatable_length">
+                        <form>
+                            <label>
+                                <select ng-model="data.perPage" ng-options="option.name for option in data.availableOptions track by option.id" ng-change="getInactive()"
+                                        id="perPage" name="perPage" aria-controls="example-datatable" class="form-control">
+                                </select>
+                            </label>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-7 col-sm-8 col-md-6 col-lg-4 col-xs-offset-2 col-sm-offset-1 col-md-offset-3 col-lg-offset-5 inactive-widget text-right">
+                    <uib-pagination boundary-links="true" total-items="totalItems" items-per-page='data.perPage.id' ng-model="currentPage" ng-change="pageChanged()"
+                                    class="pagination pagination-sm dataTables_paginate paging_bootstrap" previous-text="&lsaquo;"
+                                    next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
 
+                    <!--<ul class="pagination pagination-sm remove-margin">-->
+                        <!--<li class="prev disabled">-->
+                            <!--<a href="javascript:void(0)"><i class="fa fa-chevron-left"></i></a>-->
+                        <!--</li>-->
+                        <!--<li class="active">-->
+                            <!--<a href="javascript:void(0)">1</a>-->
+                        <!--</li>-->
+                        <!--<li><a href="javascript:void(0)">2</a></li>-->
+                        <!--<li><a href="javascript:void(0)">3</a></li>-->
+                        <!--<li class="next"><a href="javascript:void(0)"> <i class="fa fa-chevron-right"></i></a></li>-->
+                    <!--</ul>-->
+                </div>
+            </div>
+            <br>
         </div>
     </div>
+    <!-- END visitor table -->
+</div>
+
+<div id="delete" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title">
+          <strong>Delete</strong>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <center>Are you sure you want to delete
+          <br>
+          {{vname}}?
+        </center>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-effect-ripple btn-primary" data-dismiss="modal" onclick="App.alert('delete-vis');" ng-click="doDelete()">Yes</button>
+        <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
 </div>

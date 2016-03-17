@@ -642,11 +642,7 @@ var App = function() {
       "positionClass": "toast-top-right",
       "timeOut": "2500"
     };
-    if (page === "account") {
-      toastr.success("Your settings have been updated!");
-    } else if (page === "billing") {
-      toastr.success("Your plan has been updated!");
-    } else if (page === "forms-themes") {
+    if (page === "forms-themes") {
       toastr.success("Your form has been saved!");
     } else if (page === "edit-emp") {
       toastr.success("Employee has been edited!")
@@ -656,6 +652,8 @@ var App = function() {
       toastr.success("Employee has been promoted to admin")
     } else if (page === "delete-emp") {
       toastr.success("Employee has been deleted")
+    } else if (page === "delete-vis") {
+      toastr.success("Visitor has been deleted")
     }
   };
 

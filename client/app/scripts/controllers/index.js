@@ -6,11 +6,20 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies, BusinessService) {
+.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window,
+    $cookies, $location, BusinessService) {
+
     $scope.doLogout = function() {
-        $cookies.remove('user', {'path': '/'});
-        $cookies.remove('token', {'path': '/'});
-        $window.location.href = '/auth';
+        var domain = $location.host();
+        var urlParts = domain.split('.');
+        var tld = '';
+        if (urlParts[0] === 'localhost') {
+            domain = urlParts[0];
+        } else {
+            domain = urlParts[1];
+            tld = '.' + urlParts[2];
+        }
+        $window.location.href = 'http://' + domain + tld + ':' + $location.port() + '/auth/#/logout';
     };
 
     // If user has no token, they are not authorized.
@@ -21,20 +30,36 @@ angular.module('iReceptionistApp')
     }
 
     $scope.user = $cookies.getObject('user');
-    if (!$cookies.get('business')){
-        console.log("business cookie");
+    if (!$cookies.get('business')) {
+        $trace("business cookie");
         BusinessService.getBusiness(
             $scope.user.business,
             $cookies.get('token'),
             function (busObj){
-                console.log("Business: " + busObj);
-                console.log(busObj.business.name);
+                $trace("Business: " + busObj);
+                $trace(busObj.business.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
                 //$scope.alert.danger = err.errorMsg;
             }
         );
+    }
+
+    var pusher = new Pusher('7c84af4dd6941414d752', {
+        encrypted: true
+    });
+
+    var channel;
+    if ($scope.user && $cookies.getObject('user').settings.receiveBrowserNotification) {
+        channel = pusher.subscribe($scope.user.business);
+        channel.bind('newVisitor', function(data){
+            toastr.options = {
+                "positionClass": "toast-bottom-right",
+                "timeOut": "2500"
+            };
+            toastr.info('New visitor added to queue');
+        });
     }
 
     /**
