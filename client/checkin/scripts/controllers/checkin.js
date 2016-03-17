@@ -3,34 +3,12 @@
  */
 angular.module('iReceptionistApp')
 .controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService, BusinessService) {
-       
-        var getBusiness = function() {
-    
-        console.log("hi again");
-        console.log($cookies.get('token'));
-        BusinessService.getBusiness(
-            "56ea6daa9992374421d390bd",
-            $cookies.get('token'),
-            function (busObj){
-                $trace("Business: " + busObj);
-                $trace(busObj.name);
-                $cookies.putObject('business', busObj);
-            },
-            function (err) {
-                $trace("failure");
-                //$scope.alert.danger = err.errorMsg;
-            }
-        );
-             
-        }
-
     $scope.showFirst=true;
     $scope.showSecond=false;
 
-    getBusiness();
-    //$scope.business = $cookies.getObject('business');
-    //$builder.forms=JSON.parse(sessionStorage.builderJson);
-    //console.log($builder);
+    $scope.business = $cookies.getObject('business');
+    var form = JSON.parse($scope.business.form);
+    $builder.forms['visitorForm'] = form;
 
     var working = false;
     $('.login').on('submit', function (e) {
@@ -89,7 +67,6 @@ angular.module('iReceptionistApp')
         $scope.showSecond=true;
     };
 
-   
 
 });
 
