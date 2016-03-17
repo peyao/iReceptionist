@@ -8,7 +8,7 @@
 angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService, UserService) {
         $rootScope.currentState = 'dashboard';
-
+        $scope.currentStep = 0;
 		// Initialize Datepicker
         $('#example-datepicker3').datepicker('setDate', new Date())
             .on('changeDate', function(){
@@ -38,7 +38,6 @@ angular.module('iReceptionistApp')
 
         $trace($scope.data.perPage);
 
-        $scope.currentStep = 0;
 
         var getActive = function(){
             VisitorService.getVisitorQueue(

@@ -17,7 +17,7 @@ angular.module('iReceptionistApp')
     $scope.phone = '';
     $scope.editEmp = {};
     $scope.newEmp = {};
-
+    $scope.currentStep = 0;
     var getEmployeeList = function() {
       UserService.getEmployees(
         $cookies.get('token'),

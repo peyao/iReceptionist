@@ -18,6 +18,8 @@ angular.module('iReceptionistApp')
         $scope.oldPassword = '';
         $scope.password = '';
         $scope.confirmPassword = '';
+        $scope.currentStep = 0;
+
         $scope.selectedTheme = $scope.user.settings.theme;
 
         // Highlight the selected theme or the first one if a theme hasn't been chosen yet

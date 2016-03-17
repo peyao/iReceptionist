@@ -19,6 +19,7 @@ angular.module('iReceptionistApp')
     } else {
         App.togglePageLoading(); // Stop Page Loading
     }
+    $scope.currentStep = 0;
 
     $scope.user = $cookies.getObject('user');
     if (!$cookies.get('business')){

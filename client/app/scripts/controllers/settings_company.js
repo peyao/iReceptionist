@@ -8,6 +8,7 @@
 angular.module('iReceptionistApp')
     .controller('SettingsCompanyCtrl', function($rootScope, $scope, $cookies, BusinessService, DropZone) {
         $rootScope.currentState = 'settings-company';
+        $scope.currentStep = 0;
 
         $('#page-content-ui-view').resize(function() {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
