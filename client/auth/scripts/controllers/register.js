@@ -188,7 +188,8 @@ angular.module('iReceptionistApp')
         };
 
         $scope.submitRegistration = function () {
-            $trace(lastUploadedBg);
+            $trace("register bg:" + lastUploadedBg);
+            $trace("register logo:" + lastUploadedLogo);
             AuthenticationService.register({
                     'role': '2',
                     'name': $scope.register.step1.fullName,
@@ -228,8 +229,6 @@ angular.module('iReceptionistApp')
                                 path = '/vip';
                             }
                             $trace(userObj);
-                            $cookies.putObject('user', userObj.user, {'path': '/auth'});
-                            $cookies.put('token', userObj.token, {'path': '/auth'});
                             $cookies.put('token', userObj.token, {'path': '/checkin'});
                             $cookies.putObject('user', userObj.user, {'path': path});
                             $cookies.put('token', userObj.token, {'path': path});

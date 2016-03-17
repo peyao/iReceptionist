@@ -10,6 +10,7 @@ angular.module('iReceptionistApp')
     $scope.doLogout = function() {
         $cookies.remove('user', {'path': '/'});
         $cookies.remove('token', {'path': '/'});
+        $cookies.remove('business', {'path': '/'});
         $window.location.href = '/auth';
     };
 
@@ -30,7 +31,6 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function (busObj){
                 $trace("Business: " + busObj);
-                $trace(busObj.business.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {

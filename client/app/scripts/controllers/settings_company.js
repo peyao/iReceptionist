@@ -19,7 +19,8 @@ angular.module('iReceptionistApp')
         $scope.logoId = $scope.business.iconURL;
         $scope.bgId = $scope.business.backgroundImageUrl;
 
-        $trace($scope.business.iconURL);
+        $trace("comp logo: " + $scope.business.iconURL);
+        $trace("comp bg: " + $scope.business.backgroundImageUrl);
 
         var lastUploadedLogo = $scope.logoId;
         var lastUploadedBg = $scope.bgId;

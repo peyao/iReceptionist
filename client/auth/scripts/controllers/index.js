@@ -11,6 +11,7 @@ angular.module('iReceptionistApp')
     var token = $cookies.get('token');
 
     if (token && user.rememberMe) {
+        $trace("check");
         var path = '/app';
         if (user.role < 0) {
             path = '/vip';
