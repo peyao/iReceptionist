@@ -5,7 +5,6 @@ angular.module('iReceptionistApp')
 .controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService, BusinessService) {
     $scope.showFirst=true;
     $scope.showSecond=false;
-   
 
     $builder.forms=JSON.parse(sessionStorage.builderJson);
     console.log($builder);
@@ -83,6 +82,10 @@ angular.module('iReceptionistApp')
             }
         );
     };
+
+    $('body').css(
+        "background", "url(http://res.cloudinary.com/phoenix-sol/image/upload/) 50% fixed"
+    );
 });
 
 
