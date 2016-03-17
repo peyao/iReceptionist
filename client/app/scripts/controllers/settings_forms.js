@@ -63,14 +63,16 @@ angular.module('iReceptionistApp')
             }
             else {
                 // Remove employee select from the form
-                var index;
+                var index = -1;
                 for (var i = 0; i < $builder.forms['default'].length; i++) {
                     if ($builder.forms['default'][i]['id'] === 'employee') {
                         index = i;
-                        break
+                        break;
                     }
                 }
-                $builder.removeFormObject('default', index);
+                if (index != -1) {
+                    $builder.removeFormObject('default', index);
+                }
             }
         };
 

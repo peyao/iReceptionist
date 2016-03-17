@@ -45,7 +45,7 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function (busObj){
                 $trace("Business: " + busObj);
-                $trace(busObj.business.name);
+                $trace(busObj.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
