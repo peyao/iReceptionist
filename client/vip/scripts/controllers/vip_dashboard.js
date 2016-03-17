@@ -6,7 +6,7 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('VipDashboardCtrl', function($scope, $rootScope, $cookies, BusinessService) {
+.controller('VipDashboardCtrl', function($scope, $rootScope, $cookies, BusinessService, AnalyticsService) {
     $rootScope.currentState = 'vip-dashboard';
 
     /* Here's an example of how to call suspendBusiness -- when you click on the suspend button for the business, you'll
@@ -33,6 +33,38 @@ angular.module('iReceptionistApp')
     //        $trace("Business List error");
     //    }
     //);
+    $scope.getAnalyticsUse = function () {
+        AnalyticsService.getAnalyticsUser(
+            '03-10-2016',
+            '03-16-2016',
+            function (analyticsObject) {
+                $trace("Suspended business: " + analyticsObject);
+                console.log(analyticsObject);
+            },
+            function (err) {
+                $trace("Suspend business fail: " + err);
+            }
+        );  
+    };
+    
+    $scope.getAnalyticsVis = function () {
+        AnalyticsService.getAnalyticsVisitor(
+            $cookies.get('token'),
+            '03-10-2016',
+            '03-16-2016',
+            function (analyticsObject) {
+                $trace("Suspended business: " + analyticsObject);
+                console.log(analyticsObject);
+            },
+            function (err) {
+                $trace("Suspend business fail: " + err);
+            }
+        );  
+    };
+    
+    $scope.getAnalyticsUse();
+    $scope.getAnalyticsVis();
+    
     
     $scope.suspendBusiness = function() {
         var businessID = $scope.clientsToShow[this.$index]._id;
@@ -196,7 +228,8 @@ angular.module('iReceptionistApp')
                 updateSuspension(true, i);
             }
             else {
-            /*    var dateObj =  new Date($scope.clients[i].timeStamp.created);
+                /*
+                var dateObj =  new Date($scope.clients[i].timeStamp.created);
 
                 var dayStr = dateObj.getDate();
                 var monthStr = monthsToPrint[dateObj.getMonth()];
