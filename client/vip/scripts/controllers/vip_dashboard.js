@@ -39,7 +39,6 @@ angular.module('iReceptionistApp')
             '03-16-2016',
             function (analyticsObject) {
                 $trace("Suspended business: " + analyticsObject);
-                $scope.allAnalytics=analyticsObject;
                 console.log(analyticsObject);
             },
             function (err) {
@@ -64,7 +63,9 @@ angular.module('iReceptionistApp')
     };
     
     $scope.getAnalyticsUse();
- 
+    $scope.getAnalyticsVis();
+    
+    
     $scope.suspendBusiness = function() {
         var businessID = $scope.clientsToShow[this.$index]._id;
         var suspendedToggle = !$scope.clientsToShow[this.$index].suspended;
@@ -246,20 +247,15 @@ angular.module('iReceptionistApp')
          * Plugins included in this template: pie, resize, stack, time
          */
         var widgetChartPie = $('#widget-chart-pie');
-
-        console.log($scope.allAnalytics.basic.count);
-        var freePct = $scope.allAnalytics.free.count;
-        var basicPct = $scope.allAnalytics.basic.count;
-        var premPct = $scope.allAnalytics.premier.count;
-        $scope.totalClients = freePct+basicPct+premPct;
         $.plot(widgetChartPie,
             [
-                {label: 'Free', data: freePct},
-                {label: 'Basic', data: basicPct},
-                {label: 'Premier', data: premPct},
+                {label: 'Free', data: 20},
+                {label: 'Basic', data: 10},
+                {label: 'Premium', data: 60},
+                {label: 'Enterprise', data: 10}
             ],
             {
-                colors: ['#f54e59', '#5cafde', '#7cdd7e'],
+                colors: ['#454e59', '#5cafde', '#5ccdde', '#fac42e'],
                 legend: {show: false},
                 series: {
                     pie: {
@@ -334,14 +330,8 @@ angular.module('iReceptionistApp')
                 }
                 else {
                     $scope.clients.sort(function(a,b) {
-                        if (a.suspended | b.suspended) {
-                            if (a.suspended) {
-                                return 1;
-                            }
-                            else {
-                                return -1;
-                            }
-                        }
+                        //var aDate = new Date(a.timeStamp.created);
+                        //var bDate = new Date(b.timeStamp.created);
                         return Date.parse(a.timeStamp.created)-Date.parse(b.timeStamp.created);
                     });                 
                     $scope.lastSort='joined';
@@ -364,7 +354,7 @@ angular.module('iReceptionistApp')
                 }
                 else {
                     $scope.clients.sort(function(a,b) {
-                        var plans = ['free', 'basic', 'premier'];
+                        var plans = ['free', 'basic', 'premium', 'enterprise'];
                         return plans.indexOf(a.planLevel.toLowerCase())-plans.indexOf(b.planLevel.toLowerCase());
                     });
                     $scope.lastSort='plan';
@@ -440,10 +430,6 @@ angular.module('iReceptionistApp')
         }
     }
     
-    var getPlotData = function() {
-        
-    }
-    
     //plots whichever top category you pick
     $scope.plotNewData = function(whichData) {
             var dataMonths = [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']];
@@ -452,7 +438,7 @@ angular.module('iReceptionistApp')
                 // hard coded for now until get routes from backend
                 switch(whichData) {
                     case 'total_clients':
-                        return ['Total Clients','#afde5c', [1, 100], [2, 210], [3, 220], [4, 250], [5, 250], [6, 310], [7, 360], [8, 361], [9, 460], [10, 490], [11, 500], [12, 520]];
+                        return ['Total Clients','#afde5c', [1, 1900], [2, 2300], [3, 3200], [4, 2500], [5, 4200], [6, 3100], [7, 3600], [8, 2500], [9, 4600], [10, 3700], [11, 4200], [12, 5200]];
                     case 'employees_client':
                         return ['Employees per Client','#deb25c', [1, 850], [2, 750], [3, 1500], [4, 900], [5, 1500], [6, 1150], [7, 1500], [8, 900], [9, 1800], [10, 1700], [11, 1900], [12, 2550]];
                     case 'new_clients':
