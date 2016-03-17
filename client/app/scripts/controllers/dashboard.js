@@ -55,6 +55,15 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (visObj) {
                     $scope.visitors = visObj;
+        $scope.visitors = [{
+            'name': 'Peter Yao',
+            'timeStamp': {
+                'created': Date.now(),
+                'updated': Date.now()
+            },
+            'phone': '6261234567'
+        }];
+
                     $trace("Grabbing active visitors: ");
                     $trace(visObj);
                 },
@@ -282,7 +291,18 @@ angular.module('iReceptionistApp')
             $scope.$digest();
         });
 
-        //var lastSort = '';
-        ////initially sort by name
-        //$scope.sortBy('name');
+        $scope.showVisitorBlock = false;
+        $scope.activeVisitor = {};
+        $scope.hoverVisitor = function(v) {
+            $scope.showVisitorBlock = true;
+            $scope.activeVisitor = v;
+        };
+        $scope.selectVisitor = function(v) {
+            $scope.showVisitorBlock = true;
+            $scope.activeVisitor = v;
+        };
+        $scope.deselectVisitor = function() {
+            $scope.showVisitorBlock = false;
+            $scope.activeVisitor = {};
+        }
     });
