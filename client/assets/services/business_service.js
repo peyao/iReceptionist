@@ -10,6 +10,18 @@ angular.module('iReceptionistApp')
     var API_URL = 'http://52.86.89.63:3000';
 
     return {
+        getBusinessSubdomain(busId, token, success, error) {
+            this.getBusiness(
+                busId,
+                token,
+                function(busObj) {
+                    console.log(busObj);
+                    var subdomain = busObj.name.toLowerCase().replace(/[^a-zA-Z0-9]/g,"");
+                    return success(subdomain);
+                },
+                error
+            );
+        },
         getBusiness: function(busId, token, success, error) {
             var req = {
                 method: 'GET',
@@ -43,7 +55,7 @@ angular.module('iReceptionistApp')
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 data: {
-                    'deleteUserId': busId,
+                    'businessId': busId,
                     'suspended': isSuspend,
                 },
             };

@@ -15,8 +15,9 @@ angular
         'ngAria',
         'ui.router',
         'ui.bootstrap',
-        'anim-in-out',
         'ngRoute',
+        'builder',
+        'builder.components',
         'cloudinary'
     ])
     .config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
