@@ -6,7 +6,8 @@
  * Controller for the registration page
  */
 angular.module('iReceptionistApp')
-    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
+    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window,
+        $cookies, $location, AuthenticationService, BusinessService, DropZone) {
 
         var REGISTRATION_STEPS = 4;
         var ONE = 1;
@@ -128,9 +129,58 @@ angular.module('iReceptionistApp')
         $scope.alert = {
             success: 'Registration',
             warning: 'Warning',
-            danger: 'Danger'
+            danger: ''
         };
 
+        $scope.doLogin = function() {
+            AuthenticationService.login(
+                {
+                    'email': $scope.register.step1.email,
+                    'password': $scope.register.step1.password,
+                },
+                // Success
+                function(userObj) {
+                    BusinessService.getBusinessSubdomain(
+                        userObj.user.business,
+                        userObj.token,
+                        function(subdomain) {
+                            var domain = $location.host();
+                            if (domain === 'localhost') {
+                                // localhost is not a valid domain; it cannot handle subdomains,
+                                // so we leave out subdomains when working locally.
+                                subdomain = '';
+                            } else {
+                                subdomain += '.';
+                            }
+                            var cookieDefaults = {
+                                'path': '/',
+                                'domain': domain
+                            };
+
+                            var path = '/app';
+                            if (userObj.user.role < 0) {
+                                path = '/vip';
+                                subdomain = '';
+                            }
+
+                            userObj.user.rememberMe = $scope.rememberMe;
+                            $cookies.putObject('user', userObj.user, cookieDefaults);
+                            $cookies.put('token', userObj.token, cookieDefaults);
+
+                            $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
+                        },
+                        function(err) {
+                            //$trace('Log in fail: ', err);
+                            $scope.alert.danger = err. Error
+                        }
+                    );
+                },
+                // Failure
+                function(err) {
+                    $scope.alert.danger = err.Error;
+                }
+            );
+        };
 
         $scope.submitRegistration = function () {
             AuthenticationService.register({
@@ -145,6 +195,7 @@ angular.module('iReceptionistApp')
                 // Success
                 function (regObj) {
                     $trace('register success');
+
                     //
                     // Automatically log-in after registration
                     //
@@ -175,14 +226,21 @@ angular.module('iReceptionistApp')
                         },
                         // Failure
                         function (err) {
-                            $trace('log in fail');
+                            //$trace('log in fail');
+                            $scope.alert.danger = err.Error;
+                            //console.log(err);
                         }
                     );
+
+                    $scope.doLogin();
+
                 },
 
                 // Error
                 function (err) {
-                    $trace('register fail');
+                    //$trace('register fail');
+                    $scope.alert.danger = err.Error;
+                    //console.log(err);
                 }
             );
         };
