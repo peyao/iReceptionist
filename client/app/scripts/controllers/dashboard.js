@@ -15,6 +15,8 @@ angular.module('iReceptionistApp')
                 $trace("Change Date");
                 $scope.getInactive();
             });
+
+
         var PAGE_DEFAULT = 1;
         var ACTIVE_PER_DEFAULT = 500;
         $scope.totalItems = 0;
@@ -37,8 +39,6 @@ angular.module('iReceptionistApp')
             perPage : {id: '10', name: '10'},
         };
 
-        $trace($scope.data.perPage);
-
         var getActive = function(){
             VisitorService.getVisitorQueue(
                 PAGE_DEFAULT,
@@ -50,7 +50,6 @@ angular.module('iReceptionistApp')
                     $trace(visObj);
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
                 }
             );
         };
@@ -135,7 +134,7 @@ angular.module('iReceptionistApp')
                     getActive();
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
+            //        $scope.alert.danger = err.errorMsg;
                 }
             );
         };
@@ -152,7 +151,7 @@ angular.module('iReceptionistApp')
                     $trace("Delete Visitor Failed: " + visObj);
                 }
             );
-        }
+        };
 
         var chartClassicDash = $('#chart-classic-dash');
         $.plot(chartClassicDash,

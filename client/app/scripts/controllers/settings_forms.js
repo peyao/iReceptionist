@@ -55,7 +55,6 @@ angular.module('iReceptionistApp')
             }
         }
 
-
         $scope.updateEmployeeSelect = function() {
             if ($scope.employeeSelect) {
                 // Add employee select to the form
@@ -107,5 +106,4 @@ angular.module('iReceptionistApp')
                 return $trace('error');
             });
         };
-
     });

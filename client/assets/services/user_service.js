@@ -4,9 +4,13 @@
 angular.module('iReceptionistApp')
     .factory('UserService', function ($http) {
         var API_URL = 'http://52.86.89.63:3000';
+        var avatar = {
+            Id: 'tablet_icon',
+        };
 
         // apiDocs: https://cse112.siriolabs.com/doc/#api-User
         return {
+
             // User - Get User
             getUserByToken: function (token, success, error) {
                 var req = {
