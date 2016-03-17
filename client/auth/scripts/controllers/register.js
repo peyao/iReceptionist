@@ -13,9 +13,8 @@ angular.module('iReceptionistApp')
         var TWO = 2;
         var THREE = 3;
         var FOUR = 4;
-
-        var logoId = '';
-        var bgId = '';
+        var DEFAULT_LOGO = 'tablet_icon';
+        var DEFAULT_BG = 'tablet_icon';
 
         // Initialize Dropzones
         $scope.logoUpload = DropZone.createNew('#logoUpload');
@@ -46,21 +45,23 @@ angular.module('iReceptionistApp')
         $scope.register.step4.email = '';
         $scope.register.step4.phone = '';
 
-        var localLogoId = '';
-        var localBgId = '';
+        var lastUploadedLogo = null;
+        var lastUploadedBg = null;
 
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
         });
 
-        $scope.logoUpload.on("success", function (file) {
-            localLogoId = DropZone.getId();
-            $trace("logo pic: " + localLogoId);
+        $scope.logoUpload.on("success", function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedLogo = response.public_id;
         });
 
-        $scope.bgUpload.on("success", function (file) {
-            localBgId = DropZone.getId();
-            $trace("Bg pic:" + localBgId);
+        $scope.bgUpload.on("success", function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedBg = response.public_id;
         });
 
         $scope.disableNext = function () {
@@ -156,6 +157,7 @@ angular.module('iReceptionistApp')
 
 
         $scope.submitRegistration = function () {
+            $trace(lastUploadedBg);
             AuthenticationService.register({
                     'role': '2',
                     'name': $scope.register.step1.fullName,
@@ -163,6 +165,9 @@ angular.module('iReceptionistApp')
                     'password': $scope.register.step1.password,
                     'phone': $scope.register.step1.phone,
                     'businessName': $scope.register.step2.businessName,
+                    'businessType': $scope.register.step2.type,
+                    'iconURL': lastUploadedLogo || DEFAULT_LOGO,
+                    'backgroundImageUrl': lastUploadedBg || DEFAULT_BG,
                 },
 
                 // Success

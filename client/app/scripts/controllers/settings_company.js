@@ -7,22 +7,22 @@
  */
 angular.module('iReceptionistApp')
     .controller('SettingsCompanyCtrl', function ($rootScope, $scope, $cookies, BusinessService, DropZone) {
-        $rootScope.currentState = 'settings-company';
-        $scope.business = $cookies.getObject('business').business;
-
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');
-
-        $scope.logoId = $scope.business.iconURL;
-        $scope.bgId = $scope.business.backgroundImageUrl;
-
-        var lastUploadedLogo = $scope.logoId;
-        var lastUploadedBg = $scope.bgId;
-
         $('#page-content-ui-view').resize(function () {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
             $('#page-content').height($rootScope.pageContentHeight());
         });
+
+        $rootScope.currentState = 'settings-company';
+        $scope.business = $cookies.getObject('business').business;
+        $scope.logoUpload = DropZone.createNew('#logoUpload');
+        $scope.bgUpload = DropZone.createNew('#bgUpload');
+        $scope.logoId = $scope.business.iconURL;
+        $scope.bgId = $scope.business.backgroundImageUrl;
+
+        $trace($scope.business.iconURL);
+
+        var lastUploadedLogo = $scope.logoId;
+        var lastUploadedBg = $scope.bgId;
 
         $scope.logoUpload.on("success", function (file, response) {
             console.log(file);
