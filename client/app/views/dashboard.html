@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-xs-6 push-inner-top-bottom">
                         <h3 class="widget-heading"><i class="gi gi-user_add text-dark push"></i> <br>
-                            <small>+10% Today</small>
+                            <small>{{avgWaitTime}} Average Wait Time</small>
                         </h3>
                     </div>
                 </div>
@@ -66,18 +66,16 @@
                     <thead>
                     <!-- TODO Backend do your stuff -->
                     <th>Name</th>
+                    <th>Check-in time</th>
                     <th>Employee</th>
-                    <th>Notes</th>
-                    <th>Phone</th>
                     <th style="width: 100px;" class="text-center"></th>
                     </thead>
                     <tbody>
                     <!-- TODO filter by employee -->
                     <tr ng-repeat="v in visitors">
                         <td><strong>{{v.name}}</strong></td>
+						<td>{{v.phone | tel}}</td>
                         <td>{{v.employee}}</td>
-                        <td>{{v.notes}}</td>
-                        <td>{{v.phone | tel}}</td>
                         <td class="grid-btn container-fluid">
                             <div class="col-xs-offset-1">
                                 <button class="col-xs-5 btn btn-primary btn-sm" ng-click="doCheckOff(v)"><i
@@ -87,11 +85,12 @@
                                 <button class="btn btn-danger btn-sm" ng-click="saveVis(v)" data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
                                 </button>
                             </div>
-                        </td>
+                        </td>		
                     </tr>
                     </tbody>
                 </table>
-            </div>
+				<p ng-show="!visitors.length">There are no current visitors.</p>
+			</div>
         </div>
 
         <!-- START inactive table -->
@@ -131,8 +130,8 @@
                     <thead>
                     <!-- TODO Backend do your stuff -->
                     <th id="name_categ" ng-click="sortBy('name');">Name</th>
-                    <th id="emp_categ" ng-click="sortBy('employee');">Employee</th>
-                    <th id="notes_categ" ng-click="sortBy('notes');">Notes</th>
+                    <th id="emp_categ" ng-click="sortBy('employee');">Check-in time</th>
+                    <th id="notes_categ" ng-click="sortBy('notes');">Check-out time</th>
                     <th id="phone_categ" ng-click="sortBy('phone');">Phone</th>
                     <th style="width: 65px;" class="text-center"></th>
                     </thead>
@@ -143,9 +142,9 @@
                         <!-- TODO Backend do your stuff.... -->
                         <!-- TODO modal popup?? -->
                         <td><strong>{{v.name}}</strong></td>
-                        <td>{{v.employee}}</td>
                         <td>{{v.email}}</td>
                         <td>{{v.phone | tel}}</td>
+						<td>{{v.employee}}</td>
                         <td class="grid-btn container-fluid">
                             <div class="col-xs-12 btn-del">
                                 <button class="btn btn-danger btn-sm" ng-click=saveVis(v) data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
@@ -155,6 +154,7 @@
                     </tr>
                     </tbody>
                 </table>
+				<p ng-show="!inactive.length">There are no past visitors for the selected date.</p>
             </div>
 
             <div class="row container-fluid">
