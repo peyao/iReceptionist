@@ -10,14 +10,23 @@ angular.module('iReceptionistApp')
     $cookies, $location, BusinessService) {
 
     $scope.doLogout = function() {
+        $cookies.remove('business', {'path': '/app'});
         var domain = $location.host();
         var urlParts = domain.split('.');
         var tld = '';
         if (urlParts[0] === 'localhost') {
+            // localhost
             domain = urlParts[0];
         } else {
+            // *.ireceptionist.cf
             domain = urlParts[1];
             tld = '.' + urlParts[2];
+
+            // ireceptionist.cf
+            if (!tld) {
+                domain = urlParts[0];
+                tld = '.' + urlParts[1];
+            }
         }
         $window.location.href = 'http://' + domain + tld + ':' + $location.port() + '/auth/#/logout';
     };
@@ -30,6 +39,8 @@ angular.module('iReceptionistApp')
     }
 
     $scope.user = $cookies.getObject('user');
+    $rootScope.publicId = $scope.user.avatar;
+
     if (!$cookies.get('business')) {
         $trace("business cookie");
         BusinessService.getBusiness(
@@ -37,11 +48,9 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function (busObj){
                 $trace("Business: " + busObj);
-                $trace(busObj.business.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
-                //$scope.alert.danger = err.errorMsg;
             }
         );
     }

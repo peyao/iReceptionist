@@ -9,12 +9,23 @@ angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService, UserService) {
         $rootScope.currentState = 'dashboard';
 
+        if($cookies.get('tourDash') != -1){
+          $scope.currentStepD = 0;
+        }
+          //$cookies.put('tourDash',0);
+
+        $scope.tourComplete=function(){
+          $trace("tourcompleted" + $scope.currentStepD);
+          $cookies.put('tourDash',-1);
+        };
 		// Initialize Datepicker
         $('#example-datepicker3').datepicker('setDate', new Date())
             .on('changeDate', function(){
                 $trace("Change Date");
                 $scope.getInactive();
             });
+
+
         var PAGE_DEFAULT = 1;
         var ACTIVE_PER_DEFAULT = 500;
         $scope.totalItems = 0;
@@ -37,8 +48,6 @@ angular.module('iReceptionistApp')
             perPage : {id: '10', name: '10'},
         };
 
-        $trace($scope.data.perPage);
-
         var getActive = function(){
             VisitorService.getVisitorQueue(
                 PAGE_DEFAULT,
@@ -50,16 +59,15 @@ angular.module('iReceptionistApp')
                     $trace(visObj);
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
                 }
             );
         };
-		
+
         $scope.saveVis = function(v){
           $scope.vname = v.name;
           $scope.vId = v._id;
         };
-		
+
         $scope.getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var date = $('#example-datepicker3').datepicker('getDate');
@@ -135,7 +143,7 @@ angular.module('iReceptionistApp')
                     getActive();
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
+            //        $scope.alert.danger = err.errorMsg;
                 }
             );
         };
@@ -152,7 +160,7 @@ angular.module('iReceptionistApp')
                     $trace("Delete Visitor Failed: " + visObj);
                 }
             );
-        }
+        };
 
         var chartClassicDash = $('#chart-classic-dash');
         $.plot(chartClassicDash,

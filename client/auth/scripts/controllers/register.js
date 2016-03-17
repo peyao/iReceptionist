@@ -14,7 +14,13 @@ angular.module('iReceptionistApp')
         var TWO = 2;
         var THREE = 3;
         var FOUR = 4;
+        var DEFAULT_LOGO = 'tablet_icon';
+        var DEFAULT_BG = 'tablet_icon';
+        var DEFAULT_AVATAR = 'avatar'
 
+        // Initialize Dropzones
+        $scope.logoUpload = DropZone.createNew('#logoUpload');
+        $scope.bgUpload = DropZone.createNew('#bgUpload');
 
         $scope.max = REGISTRATION_STEPS;
         $scope.step = 1;
@@ -41,9 +47,23 @@ angular.module('iReceptionistApp')
         $scope.register.step4.email = '';
         $scope.register.step4.phone = '';
 
+        var lastUploadedLogo = null;
+        var lastUploadedBg = null;
 
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
+        });
+
+        $scope.logoUpload.on("success", function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedLogo = response.public_id;
+        });
+
+        $scope.bgUpload.on("success", function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedBg = response.public_id;
         });
 
         $scope.disableNext = function () {
@@ -89,7 +109,12 @@ angular.module('iReceptionistApp')
         $scope.nextStep = function () {
             if ($scope.step === REGISTRATION_STEPS) {
                 $scope.submitRegistration();
-            } else {
+            }
+            else if ($scope.step === THREE) {
+                $scope.step++;
+                registerWizard.formwizard('show', 'register-step' + $scope.step);
+            }
+            else {
                 $scope.step++;
                 registerWizard.formwizard('show', 'register-step' + $scope.step);
             }
@@ -129,7 +154,7 @@ angular.module('iReceptionistApp')
         $scope.alert = {
             success: 'Registration',
             warning: 'Warning',
-            danger: 'Danger'
+            danger: ''
         };
 
         $scope.doLogin = function() {
@@ -166,51 +191,60 @@ angular.module('iReceptionistApp')
                             userObj.user.rememberMe = $scope.rememberMe;
                             $cookies.putObject('user', userObj.user, cookieDefaults);
                             $cookies.put('token', userObj.token, cookieDefaults);
+                            $cookies.put('tourDash',$scope.currentStepD,cookieDefaults);
+                            $cookies.put('tourEmp',$scope.currentStepE,cookieDefaults);
+                            $cookies.put('tourSetU',$scope.currentStepU,cookieDefaults);
+                            $cookies.put('tourSetC',$scope.currentStepC,cookieDefaults);
+                            $cookies.put('tourSetF',$scope.currentStepF,cookieDefaults);
 
                             $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
                         },
                         function(err) {
-                            $trace('Log in fail: ', err);
+                            //$trace('Log in fail: ', err);
+                            $scope.alert.danger = err. Error
                         }
                     );
                 },
                 // Failure
                 function(err) {
-                    $scope.alert.danger = err.errorMsg;
+                    $scope.alert.danger = err.Error;
                 }
             );
         };
 
         $scope.submitRegistration = function () {
+            $trace("register bg:" + lastUploadedBg);
+            $trace("register logo:" + lastUploadedLogo);
             AuthenticationService.register({
                     'role': '2',
                     'name': $scope.register.step1.fullName,
                     'email': $scope.register.step1.email,
                     'password': $scope.register.step1.password,
                     'phone': $scope.register.step1.phone,
-                    'businessName': $scope.register.step2.businessName
+                    'businessName': $scope.register.step2.businessName,
+                    'businessType': $scope.register.step2.type,
+                    'iconURL': lastUploadedLogo || DEFAULT_LOGO,
+                    'backgroundImageUrl': lastUploadedBg || DEFAULT_BG,
+                    'avatar': DEFAULT_AVATAR,
                 },
 
                 // Success
                 function (regObj) {
                     $trace('register success');
-
-                    //
                     // Automatically log-in after registration
-                    //
                     $scope.doLogin();
                 },
 
                 // Error
                 function (err) {
-                    $trace('register fail');
+                    //$trace('register fail');
+                    $scope.alert.danger = err.Error;
+                    //console.log(err);
                 }
             );
         };
 
-        // Initialize Dropzones
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');
+
 
         /**
          *  Jquery Wizard
@@ -286,46 +320,46 @@ angular.module('iReceptionistApp')
                 rules: {
                     'register-step1-email': {
                         required: true,
-                        email: true
+                        email: true,
                     },
                     'register-step1-fullname': {
                         required: true,
-                        minlength: 3
+                        minlength: 3,
                     },
                     'register-step1-terms': {
-                        required: true
+                        required: true,
                     },
                     'register-step1-password': {
                         required: true,
-                        minlength: 5
+                        minlength: 5,
                     },
                     'register-step1-phone': {
                         required: true,
-                        minlength: 7
+                        minlength: 10,
                     },
                     'register-step1-confirm-password': {
                         required: true,
-                        equalTo: '#register-step1-password'
+                        equalTo: '#register-step1-password',
                     },
                     'register-step2-business-name': {
                         required: true,
-                        minlength: 2
+                        minlength: 2,
                     },
                     'register-step2-business-phone': {
                         required: true,
-                        minlength: 7
+                        minlength: 7,
                     },
                     'register-step4-name': {
                         required: false,
-                        minlength: 2
+                        minlength: 2,
                     },
                     'register-step4-email': {
                         required: false,
-                        email: true
+                        email: true,
                     },
                     'register-step4-phone': {
                         required: false,
-                        minlength: 7
+                        minlength: 10,
                     }
                 },
                 messages: {
@@ -333,7 +367,6 @@ angular.module('iReceptionistApp')
                     'register-step1-terms': 'Please accept the terms to continue',
                     'register-step1-phone': 'Please enter a valid phone number',
                     'register-step2-business-phone': 'Please enter a valid phone number'
-
                 }
             },
             inDuration: 0,
@@ -341,10 +374,6 @@ angular.module('iReceptionistApp')
         });
 
         $scope.termsHandler = function (isChecked) {
-            if (isChecked) {
-                $scope.disableNextButton = false;
-            } else {
-                $scope.disableNextButton = true;
-            }
+            $scope.disableNextButton = !isChecked;
         };
     });

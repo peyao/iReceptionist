@@ -49,12 +49,12 @@
             <div class="block-title clearfix">
                 <!-- TODO These buttons shold only appear if employee is a field name-->
                 <div class="btn-group pull-right col-lg-3 col-md-3 col-sm-5 col-xs-4">
-                    <span id="tip1"></span><button class="btn btn-primary col-md-6" ng-class="{'active': showMine == false}"
+                    <button id = "tip1" class="btn btn-primary col-md-6" ng-class="{'active': showMine == false}"
                             ng-click="showMine = false;">All
                     </button>
 
-                        <button class="btn btn-primary col-md-6" ng-class="{'active': showMine == true}"
-                            ng-click="showMine = true;"><span id="tip2">Mine</span>
+                        <button id="tip2" class="btn btn-primary col-md-6" ng-class="{'active': showMine == true}"
+                            ng-click="showMine = true;">Mine
                         </button>
 
                 </div>
@@ -84,7 +84,7 @@
 									<button class="btn btn-danger btn-sm" ng-click="saveVis(v)" data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
 									</button>
 								</div>
-							</td>		
+							</td>
 						</tr>
                     </tbody>
                 </table>
@@ -112,12 +112,12 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-5 col-xs-4 pull-right inactive-widget">
-                    <span id="tip3"></span><div class="input-group date">
-                        <input type="text" id="example-datepicker3" name="example-datepicker3"
+                    <div class="input-group date">
+                        <input  type="text" id="example-datepicker3" name="example-datepicker3"
                                class="form-control input-datepicker" data-date-format="mm-dd-yyyy"
                                data-date-today-highlight="true" data-date-autoclose="true">
                         <div class="input-group-addon">
-                             <span class="fa fa-calendar">
+                             <span id="tip3" class="fa fa-calendar">
                         </div></span>
                     </div>
                 </div>
@@ -211,13 +211,13 @@
     </div>
   </div>
 </div>
-
 <!-- at the bottom of the page -->
-<tour step="currentStep">
-  <virtual-step tourtip="See all visitors" tourtip-offset-vertical="16"
-      tourtip-offset-horizontal="2" tourtip-element="#tip1"></virtual-step>
-  <virtual-step tourtip="See only your visitors" tourtip-offset-vertical="8"
-      tourtip-offset-horizontal="-15" tourtip-step="1" tourtip-element="#tip2"></virtual-step>
-  <virtual-step tourtip="Choose a date"  tourtip-placement="right" tourtip-offset-vertical="-22"
-  tourtip-offset-horizontal="83" tourtip-step="2" tourtip-element="#tip3"></virtual-step>
+<tour step="currentStepD" tour-complete="tourComplete()">
+  <virtual-step tourtip="See all visitors" tourtip-offset-vertical="14" tourtip-step="0"
+      tourtip-offset-horizontal="0" tourtip-element="#tip1"></virtual-step>
+  <virtual-step tourtip="See only your visitors" tourtip-offset-vertical="12" tourtip-step="1"
+      tourtip-offset-horizontal="-1" tourtip-step="1" tourtip-element="#tip2"></virtual-step>
+  <virtual-step tourtip="Select a date"  tourtip-next-label="Got it!" tourtip-placement="left" tourtip-offset-vertical="-33"
+  tourtip-offset-horizontal="-113" tourtip-step="2" tourtip-element="#tip3" tourtip-step="2"></virtual-step>
+  <virtual-step></virtual-step>
 </tour>
