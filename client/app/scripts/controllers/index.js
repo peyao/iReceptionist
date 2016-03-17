@@ -19,9 +19,20 @@ angular.module('iReceptionistApp')
     } else {
         App.togglePageLoading(); // Stop Page Loading
     }
-    $scope.currentStep = 0;
 
-    $scope.user = $cookies.getObject('user');
+    $scope.currentStep =  $cookies.get('tour');
+    $trace("Current step " + $scope.currentStep);
+    $scope.stepComplete = function() {
+      $cookies.get('tour', $scope.currentStep);
+    };
+  //  $cookies.put('tour',1);
+
+    $scope.tourComplete=function(){
+      $trace("tourcompleted" + $scope.currentStep);
+      $cookies.put('tour',-1);
+      $scope.done = 0;
+
+    };
     if (!$cookies.get('business')){
         $trace("business cookie");
         BusinessService.getBusiness(

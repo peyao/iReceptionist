@@ -14,6 +14,7 @@ angular.module('iReceptionistApp')
         var THREE = 3;
         var FOUR = 4;
 
+        $scope.currentStep = 0;
 
         $scope.max = REGISTRATION_STEPS;
         $scope.step = 1;
@@ -171,6 +172,7 @@ angular.module('iReceptionistApp')
                             $cookies.put('token', userObj.token, {'path': '/checkin'});
                             $cookies.putObject('user', userObj.user, {'path': path});
                             $cookies.put('token', userObj.token, {'path': path});
+                            $cookies.put('tour',$scope.currentStep,{'path': path});
                             $window.location.href = path; // Redirect
                         },
                         // Failure

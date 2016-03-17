@@ -16,7 +16,7 @@
                     <h2>Drop Here</h2>
                 </div>
                 <div fb-builder="default"></div>
-                <div class="text-center">
+                <div id="tip13" class="text-center">
                     <button class="btn btn-default form-builder-button" data-toggle="modal" data-target="#form-modal">Preview Form</button>
                     <button class="btn btn-primary form-builder-button" onclick="App.alert('forms-themes');">Save Form</button>
                 </div>
@@ -64,7 +64,9 @@
     </div>
 </div>
 
-<tour step="currentStep">
+<tour step="currentStep" tour-complete="tourComplete()">
+  <virtual-step tourtip="We've got you started with this default form, feel free to change it!" tourtip-placement="center-top" tourtip-offset-vertical="35"
+      tourtip-offset-horizontal="750" tourtip-next-label= "Got it!" tourtip-element="#tip13"></virtual-step>
   <virtual-step tourtip="Drag and drop each input to customize your form" tourtip-placement="center-top" tourtip-offset-vertical="35"
       tourtip-offset-horizontal="750" tourtip-next-label= "Got it!" tourtip-element="#tip10"></virtual-step>
 </tour>

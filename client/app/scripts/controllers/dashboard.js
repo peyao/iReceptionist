@@ -8,7 +8,11 @@
 angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService, UserService) {
         $rootScope.currentState = 'dashboard';
-        $scope.currentStep = 0;
+
+            if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
+              $scope.currentStep = 0;
+              $trace("currstep " + $scope.currentStep);
+            }
 		// Initialize Datepicker
         $('#example-datepicker3').datepicker('setDate', new Date())
             .on('changeDate', function(){

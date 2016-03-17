@@ -1,6 +1,6 @@
 <div class="content-header">
    <div class="row">
-      <button type="submit" id="tip4" class="btn btn-primary invite-emp" data-toggle="modal" data-target="#inviteEmp">Invite Employee</button>
+      <button type="submit" class="btn btn-primary invite-emp" data-toggle="modal" data-target="#inviteEmp">Invite Employee</button>
       <div class="col-sm-6">
          <div class="header-section">
             <h1>Employees</h1>
@@ -11,8 +11,8 @@
 
 <div class="col-xs-12">
    <div class="col-xs-10 col-sm-6 col-md-4 col-lg-3" ng-repeat="e in employees | orderBy:'name'" ng-click="saveEmp(e);">
-      <div id="tip5" class="btn-group edit-emp">
-         <button  class="btn btn-sm btn-primary edit-emp dropdown-toggle"  data-toggle="dropdown">
+      <div class="btn-group edit-emp">
+         <button id="tip5" class="btn btn-sm btn-primary edit-emp dropdown-toggle"  data-toggle="dropdown">
             <i class="caret"></i>
          </button>
          <ul class="dropdown-menu dropdown-menu-right">
@@ -193,7 +193,7 @@
       </div>
    </div>
 </div>
-<tour step="currentStep">
+<tour step="currentStep" post-step="stepComplete()">
   <virtual-step tourtip="Edit or Delete Employee" tourtip-next-label="Got it!" tourtip-offset-vertical="27"
-      tourtip-offset-horizontal="-27" tourtip-element="#tip5"></virtual-step>
+      tourtip-offset-horizontal="-21" tourtip-element="#tip5"></virtual-step>
 </tour>

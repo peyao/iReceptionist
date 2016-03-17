@@ -8,7 +8,10 @@
 angular.module('iReceptionistApp')
     .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, UserService) {
         $rootScope.currentState = 'settings-account';
-
+        if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
+          $scope.currentStep = 0;
+          $trace("currstep " + $scope.currentStep);
+        }
         toastr.options = {
             "positionClass": "toast-top-right",
             "timeOut": "2500"
@@ -18,7 +21,6 @@ angular.module('iReceptionistApp')
         $scope.oldPassword = '';
         $scope.password = '';
         $scope.confirmPassword = '';
-        $scope.currentStep = 0;
 
         $scope.selectedTheme = $scope.user.settings.theme;
 
