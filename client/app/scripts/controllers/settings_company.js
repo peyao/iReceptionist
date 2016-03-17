@@ -16,12 +16,24 @@ angular.module('iReceptionistApp')
         $scope.logoId = $scope.business.iconURL;
         $scope.bgId = $scope.business.backgroundImageUrl;
 
-        var localLogoId = $scope.business.iconURL;
-        var localBgId = $scope.business.backgroundImageUrl;
+        var lastUploadedLogo = $scope.logoId;
+        var lastUploadedBg = $scope.bgId;
 
         $('#page-content-ui-view').resize(function () {
             $('#page-content-ui-view').width($rootScope.pageContentWidth());
             $('#page-content').height($rootScope.pageContentHeight());
+        });
+
+        $scope.logoUpload.on("success", function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedLogo = response.public_id;
+        });
+
+        $scope.bgUpload.on("success", function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedBg = response.public_id;
         });
 
         toastr.options = {
@@ -46,17 +58,6 @@ angular.module('iReceptionistApp')
                 }
             }
         };
-
-        $scope.logoUpload.on("success", function (file) {
-            localLogoId = DropZone.getId();
-            $trace("logo pic: " + localLogoId);
-        });
-
-        $scope.bgUpload.on("success", function (file) {
-            localBgId = DropZone.getId();
-            $trace("Bg pic:" + localBgId);
-        });
-
 
         $scope.updateBusiness = function () {
             checkFieldsBusiness();
@@ -85,9 +86,9 @@ angular.module('iReceptionistApp')
         };
 
         var checkImagesBusiness = function () {
-            businessFields['iconURL'] = localLogoId;
+            businessFields['iconURL'] = lastUploadedLogo;
             $trace("check icon: " + businessFields['iconURL']);
-            businessFields['backgroundImageUrl'] = localBgId;
+            businessFields['backgroundImageUrl'] = lastUploadedBg;
             $trace("check bg: " + businessFields['backgroundImageUrl']);
         };
 
@@ -105,8 +106,8 @@ angular.module('iReceptionistApp')
                     var businessCookie = $cookies.getObject('business');
                     businessCookie.business = busObj;
                     $cookies.putObject('business', businessCookie);
-                    $scope.logoId = localLogoId;
-                    $scope.bgId = localBgId;
+                    $scope.logoId = lastUploadedLogo;
+                    $scope.bgId = lastUploadedBg;
                 },
                 function (err) {
                     toastr.error("Error updating settings.");
