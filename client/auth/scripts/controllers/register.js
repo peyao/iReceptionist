@@ -15,6 +15,7 @@ angular.module('iReceptionistApp')
         var FOUR = 4;
         var DEFAULT_LOGO = 'tablet_icon';
         var DEFAULT_BG = 'tablet_icon';
+        var DEFAULT_AVATAR = 'avatar'
 
         // Initialize Dropzones
         $scope.logoUpload = DropZone.createNew('#logoUpload');
@@ -198,6 +199,7 @@ angular.module('iReceptionistApp')
                     'businessType': $scope.register.step2.type,
                     'iconURL': lastUploadedLogo || DEFAULT_LOGO,
                     'backgroundImageUrl': lastUploadedBg || DEFAULT_BG,
+                    'avatar': DEFAULT_AVATAR,
                 },
 
                 // Success

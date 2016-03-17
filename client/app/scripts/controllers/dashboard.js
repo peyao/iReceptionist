@@ -135,7 +135,7 @@ angular.module('iReceptionistApp')
                     getActive();
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
+            //        $scope.alert.danger = err.errorMsg;
                 }
             );
         };
