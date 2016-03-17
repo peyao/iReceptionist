@@ -6,7 +6,8 @@
  * Controller for the registration page
  */
 angular.module('iReceptionistApp')
-    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
+    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window,
+        $cookies, $location, AuthenticationService, BusinessService, DropZone) {
 
         var REGISTRATION_STEPS = 4;
         var ONE = 1;
@@ -131,6 +132,43 @@ angular.module('iReceptionistApp')
             danger: 'Danger'
         };
 
+        $scope.doLogin = function() {
+            AuthenticationService.login(
+                {
+                    'email': $scope.register.step1.email,
+                    'password': $scope.register.step1.password,
+                },
+                // Success
+                function(userObj) {
+                    BusinessService.getBusinessSubdomain(
+                        userObj.user.business,
+                        userObj.token,
+                        function(subdomain) {
+                            var cookieDefaults = {
+                                'path': '/',
+                            };
+                            var path = '/app';
+                            if (userObj.user.role < 0) {
+                                path = '/vip';
+                            }
+                            $cookies.putObject('user', userObj.user, cookieDefaults);
+                            $cookies.put('token', userObj.token, cookieDefaults);
+
+                            var domain = $location.host().replace(/[a-zA-Z]*\./,""); // Removes any subdomain.
+                            console.log('http://' + subdomain + '.' + domain + ':' + $location.port() + path);
+                            $window.location.href = 'http://' + subdomain + '.' + domain + ':' + $location.port() + path;
+                        },
+                        function(err) {
+                            $trace('log in fail');
+                        }
+                    );
+                },
+                // Failure
+                function(err) {
+                    $scope.alert.danger = err.errorMsg;
+                }
+            );
+        };
 
         $scope.submitRegistration = function () {
             AuthenticationService.register({
@@ -148,36 +186,7 @@ angular.module('iReceptionistApp')
                     //
                     // Automatically log-in after registration
                     //
-                    AuthenticationService.login(
-                        {
-                            'email': $scope.register.step1.email,
-                            'password': $scope.register.step1.password
-                        },
-
-                        // Success
-                        function (userObj) {
-                            // Need to set path because we are going from '/auth' to '/app' or '/vip'
-                            // TODO: On VIP side, need to use token to reverify the user has the correct role
-                            // or else log them off because they don't belong there.
-                            // TODO: For now, just do local role level check here and redirect.
-
-                            var path = '/app';
-                            if (userObj.user.role === -1) {
-                                path = '/vip';
-                            }
-                            $trace(userObj);
-                            $cookies.putObject('user', userObj.user, {'path': '/auth'});
-                            $cookies.put('token', userObj.token, {'path': '/auth'});
-                            $cookies.put('token', userObj.token, {'path': '/checkin'});
-                            $cookies.putObject('user', userObj.user, {'path': path});
-                            $cookies.put('token', userObj.token, {'path': path});
-                            $window.location.href = path; // Redirect
-                        },
-                        // Failure
-                        function (err) {
-                            $trace('log in fail');
-                        }
-                    );
+                    $scope.doLogin();
                 },
 
                 // Error

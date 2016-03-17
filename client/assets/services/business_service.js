@@ -10,6 +10,17 @@ angular.module('iReceptionistApp')
     var API_URL = 'http://52.86.89.63:3000';
 
     return {
+        getBusinessSubdomain(busId, token, success, error) {
+            this.getBusiness(
+                busId,
+                token,
+                function(busObj) {
+                    var subdomain = busObj.business.name.toLowerCase().replace(/[^a-zA-Z0-9]/g,"");
+                    return success(subdomain);
+                },
+                error
+            );
+        },
         getBusiness: function(busId, token, success, error) {
             var req = {
                 method: 'GET',

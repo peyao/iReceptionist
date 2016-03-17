@@ -7,7 +7,7 @@
  */
 angular.module('iReceptionistApp')
 .controller('LoginCtrl', function($scope, $rootScope, $timeout, $state,
-    $window, $cookies, AuthenticationService) {
+    $window, $cookies, $location, AuthenticationService, BusinessService) {
 
     $scope.email = '';
     $scope.password = '';
@@ -26,14 +26,28 @@ angular.module('iReceptionistApp')
             },
             // Success
             function(userObj) {
-                var path = '/app';
-                if (userObj.user.role < 0) {
-                    path = '/vip';
-                }
-                userObj.user.rememberMe = $scope.rememberMe;
-                $cookies.putObject('user', userObj.user, {'path': '/'});
-                $cookies.put('token', userObj.token, {'path': '/'});
-                $window.location.href = path; // Redirect
+                BusinessService.getBusinessSubdomain(
+                    userObj.user.business,
+                    userObj.token,
+                    function(subdomain) {
+                        var cookieDefaults = {
+                            'path': '/',
+                        };
+                        var path = '/app';
+                        if (userObj.user.role < 0) {
+                            path = '/vip';
+                        }
+                        userObj.user.rememberMe = $scope.rememberMe;
+                        $cookies.putObject('user', userObj.user, cookieDefaults);
+                        $cookies.put('token', userObj.token, cookieDefaults);
+
+                        var domain = $location.host().replace(/[a-zA-Z0-9]*\./,""); // Removes any subdomain.
+                        $window.location.href = 'http://' + subdomain + '.' + domain + ':' + $location.port() + path;
+                    },
+                    function(err) {
+                        $scope.alert.danger = err.errorMsg;
+                    }
+                );
             },
             // Failure
             function(err) {
