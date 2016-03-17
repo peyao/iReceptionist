@@ -84,7 +84,7 @@
 									<button class="btn btn-danger btn-sm" ng-click="saveVis(v)" data-toggle="modal" data-target="#delete"><i class="hi hi-trash"></i>
 									</button>
 								</div>
-							</td>		
+							</td>
 						</tr>
                     </tbody>
                 </table>
@@ -212,7 +212,7 @@
   </div>
 </div>
 <!-- at the bottom of the page -->
-<tour step="currentStep" tour-complete="tourComplete()">
+<tour step="currentStep" post-step="stepComplete()">
   <virtual-step tourtip="See all visitors" tourtip-offset-vertical="14" tourtip-step="0"
       tourtip-offset-horizontal="0" tourtip-element="#tip1"></virtual-step>
   <virtual-step tourtip="See only your visitors" tourtip-offset-vertical="12" tourtip-step="1"

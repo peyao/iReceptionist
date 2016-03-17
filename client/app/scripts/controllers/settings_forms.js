@@ -9,6 +9,11 @@ angular.module('iReceptionistApp')
     .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, BusinessService, UserService) {
         $rootScope.currentState = 'settings-forms';
 
+        if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
+          $scope.currentStep = 0;
+          $trace("currstep " + $scope.currentStep);
+        }
+
         $scope.business = $cookies.getObject('business');
         var employeeSelectObject = {"id":"employee","component":"select","editable":true,"index":3,"label":"Employee","description":"Who are you seeing today?","placeholder":"placeholder","options":["Anyone is fine"],"required":false,"validation":"/.*/","$$hashKey":"object:61"};
 

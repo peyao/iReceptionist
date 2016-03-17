@@ -22,6 +22,7 @@ angular.module('iReceptionistApp')
       $scope.currentStep = 0;
       $trace("currstep " + $scope.currentStep);
     }
+
     var getEmployeeList = function() {
       UserService.getEmployees(
         $cookies.get('token'),
