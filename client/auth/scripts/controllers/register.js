@@ -149,7 +149,7 @@ angular.module('iReceptionistApp')
 
             BusinessService.updateBusiness(
                 {
-                    "businessId": regObj.business,
+                    "businessId": regObj.user.business,
                     "form": form
                 },
                 regObj.token,
@@ -174,7 +174,6 @@ angular.module('iReceptionistApp')
 
                 // Success
                 function (regObj) {
-                    console.log(regObj);
                     $trace('register success');
                     createForm(regObj);
 

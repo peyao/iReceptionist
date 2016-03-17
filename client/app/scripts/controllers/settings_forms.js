@@ -17,7 +17,6 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function(empObj) {
                 $scope.employees = empObj;
-                console.log($scope.employees);
                 $trace("Grabbing employees");
 
                 for (var i = 0; i < $scope.employees.length; i++) {
