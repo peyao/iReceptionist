@@ -15,7 +15,6 @@ angular
         'ngAria',
         'ui.router',
         'ui.bootstrap',
-        'anim-in-out',
         'ngRoute',
         'cloudinary'
     ])
