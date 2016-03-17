@@ -2,7 +2,7 @@
  * Created by Amanda on 3/3/2016.
  */
 angular.module('iReceptionistApp')
-.controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService, BusinessService) {
+.controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService) {
     $scope.showFirst=true;
     $scope.showSecond=false;
 
@@ -67,8 +67,6 @@ angular.module('iReceptionistApp')
         $scope.showFirst=false;
         $scope.showSecond=true;
     };
-
-
 });
 
 

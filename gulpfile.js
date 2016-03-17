@@ -1,24 +1,24 @@
 // gulpfile.js
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
-var sass        = require('gulp-sass');
-var bower       = require('gulp-bower');
-var nodemon     = require('gulp-nodemon');
-var uglify      = require('gulp-uglify');
-var concat      = require('gulp-concat');
-var rename      = require('gulp-rename');
-var exec        = require('child_process').exec;
+var sass = require('gulp-sass');
+var bower = require('gulp-bower');
+var nodemon = require('gulp-nodemon');
+var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var exec = require('child_process').exec;
 var karmaServer = require('karma').Server;
 
-gulp.task('nodemon', function(cb) {
+gulp.task('nodemon', function (cb) {
     nodemon({
         script: 'app.js',
         ext: 'js',
     });
 });
 
-gulp.task('start-server', function(cb) {
-    exec('node app.js', function(err, stdout, stderr) {
+gulp.task('start-server', function (cb) {
+    exec('node app.js', function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
         cb(err);
@@ -28,34 +28,34 @@ gulp.task('start-server', function(cb) {
 /**
  * Sass Tasks
  */
-gulp.task('sass-app', function() {
+gulp.task('sass-app', function () {
     return gulp.src('./client/app/styles/*.scss')
-        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./client/app/styles'));
 });
-gulp.task('sass-marketing', function() {
+gulp.task('sass-marketing', function () {
     return gulp.src('./client/marketing/styles/*.scss')
-        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./client/marketing/styles'));
 });
-gulp.task('sass-vip', function() {
+gulp.task('sass-vip', function () {
     return gulp.src('./client/vip/styles/*.scss')
-        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./client/vip/styles'));
 });
-gulp.task('sass-auth', function() {
+gulp.task('sass-auth', function () {
     return gulp.src('./client/auth/styles/*.scss')
-        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./client/auth/styles'));
 });
-gulp.task('sass-checkin', function() {
+gulp.task('sass-checkin', function () {
     return gulp.src('./client/checkin/styles/*.scss')
-        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./client/checkin/styles'));
 });
-gulp.task('sass-assets', function() {
+gulp.task('sass-assets', function () {
     return gulp.src('./client/assets/styles/*.scss')
-        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./client/assets/styles'));
 });
 gulp.task('sass-all', [
@@ -71,12 +71,12 @@ gulp.task('sass-all', [
 /**
  * Bower Tasks
  */
-gulp.task('bower-assets', function() {
+gulp.task('bower-assets', function () {
     return bower({
         cwd: './client/assets',
     });
 });
-gulp.task('bower-marketing', function() {
+gulp.task('bower-marketing', function () {
     return bower({
         cwd: './client/marketing',
     });
@@ -87,59 +87,59 @@ gulp.task('bower-all', [
 ]);
 
 // path
-var jsApp      = './client/app/**/*.js',
-    jsAuth     = './client/auth/**/*.js',
-    jsCheckIn  = './client/checkin/**/*.js',
-    jsVIP      = './client/vip/**/*.js',
-    jsAssets   = './client/assets/services/*.js',
-    jsMins     = './client/**/*.min.js',
-    jsDest     = './dist/';
+var jsApp = './client/app/**/*.js',
+    jsAuth = './client/auth/**/*.js',
+    jsCheckIn = './client/checkin/**/*.js',
+    jsVIP = './client/vip/**/*.js',
+    jsAssets = './client/assets/services/*.js',
+    jsMins = './client/**/*.min.js',
+    jsDest = './dist/';
 
 /**
  * Concat
  */
-gulp.task('uglify-app', function() {
+gulp.task('uglify-app', function () {
     return gulp.src([jsApp, jsAssets])
         .pipe(uglify())
-        .pipe(gulp.dest(jsDest+'app'));
+        .pipe(gulp.dest(jsDest + 'app'));
 })
-gulp.task('concat-app', function() {
-    return gulp.src([jsDest+'app', jsMins])
+gulp.task('concat-app', function () {
+    return gulp.src([jsDest + 'app', jsMins])
         .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest+'app'));
+        .pipe(gulp.dest(jsDest + 'app'));
 })
 
-gulp.task('uglify-auth', function() {
+gulp.task('uglify-auth', function () {
     return gulp.src([jsAuth, jsAssets])
         .pipe(uglify())
-        .pipe(gulp.dest(jsDest+'auth'));
+        .pipe(gulp.dest(jsDest + 'auth'));
 })
-gulp.task('concat-auth', function() {
-    return gulp.src([jsDest+'auth', jsMins])
+gulp.task('concat-auth', function () {
+    return gulp.src([jsDest + 'auth', jsMins])
         .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest+'auth'));
+        .pipe(gulp.dest(jsDest + 'auth'));
 })
 
-gulp.task('uglify-checkin', function() {
+gulp.task('uglify-checkin', function () {
     return gulp.src([jsCheckIn, jsAssets])
         .pipe(uglify())
-        .pipe(gulp.dest(jsDest+'checkin'));
+        .pipe(gulp.dest(jsDest + 'checkin'));
 })
-gulp.task('concat-checkin', function() {
-    return gulp.src([jsDest+'checkin', jsMins])
+gulp.task('concat-checkin', function () {
+    return gulp.src([jsDest + 'checkin', jsMins])
         .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest+'checkin'));
+        .pipe(gulp.dest(jsDest + 'checkin'));
 })
 
-gulp.task('uglify-vip', function() {
+gulp.task('uglify-vip', function () {
     return gulp.src([jsVIP, jsAssets])
         .pipe(uglify())
-        .pipe(gulp.dest(jsDest+'vip'));
+        .pipe(gulp.dest(jsDest + 'vip'));
 })
-gulp.task('concat-vip', function() {
-    return gulp.src([jsDest+'vip', jsMins])
+gulp.task('concat-vip', function () {
+    return gulp.src([jsDest + 'vip', jsMins])
         .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest+'vip'));
+        .pipe(gulp.dest(jsDest + 'vip'));
 })
 
 gulp.task('minify-all', [
@@ -154,7 +154,7 @@ gulp.task('minify-all', [
 );
 
 
-gulp.task('browser-sync', [], function() {
+gulp.task('browser-sync', [], function () {
 
     // for more browser-sync config options: http://www.browsersync.io/docs/options/
     browserSync.init({
@@ -199,20 +199,20 @@ gulp.task('default', [
  * 'gulp setup' : Do the sass and bower tasks
  */
 gulp.task('setup', [
-    'sass-all',
-    'bower-all']
+        'sass-all',
+        'bower-all']
     //'minify-all']
 );
 
 /**
  * 'gulp test' : Run Karma tests.
  */
- gulp.task('test', function(done) {
-     new karmaServer({
-         configFile: __dirname + '/karma.conf.js',
-         singleRun: false
-     }, done).start();
- });
+gulp.task('test', function (done) {
+    new karmaServer({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: false
+    }, done).start();
+});
 
 /**
  * 'gulp dev' : Runs the production environment.
