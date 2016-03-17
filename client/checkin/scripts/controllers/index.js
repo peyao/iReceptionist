@@ -8,5 +8,4 @@
 angular.module('iReceptionistApp')
 .controller('IndexCtrl', function($scope, $rootScope, $timeout, $state) {
 
-
 });
