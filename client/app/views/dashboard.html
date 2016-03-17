@@ -22,28 +22,41 @@
                 </div>
             </div>
 
-            <div class="widget-content border-bottom themed-background-muted">
-                <div id="chart-classic-dash" style="height: 280px;">
-                </div>
+            <div class="widget-content widget-content-full" ng-show="showVisitorBlock">
+                <table class="table table-borderless remove-margin">
+                    <tbody>
+                        <tr ng-repeat="(key,value) in activeVisitor">
+                            <td ng-show="key !== 'timeStamp'"><a href="javascript:void(0)" class="text-black">{{key | uppercase}}</a></td>
+                            <td ng-show="key !== 'timeStamp'" class="text-center" style="width: 80px;"><span class="text-muted">{{value}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="widget-content widget-content-full-top-bottom border-bottom">
-                <div class="row text-center">
-                    <div class="col-xs-6 push-inner-top-bottom border-right">
-                        <h3 class="widget-heading"><i class="gi gi-book_open text-dark push"></i> <br>
-                            <small>123 Total Visitors</small>
-                        </h3>
-                    </div>
-                    <div class="col-xs-6 push-inner-top-bottom">
-                        <h3 class="widget-heading"><i class="gi gi-user_add text-dark push"></i> <br>
-                            <small>{{avgWaitTime}} Average Wait Time</small>
-                        </h3>
+            <div ng-show="!showVisitorBlock">
+                <div class="widget-content border-bottom">
+                    <div id="chart-classic-dash" style="height: 280px;">
                     </div>
                 </div>
+                <div class="widget-content widget-content-full-top-bottom border-bottom">
+                    <div class="row text-center">
+                        <div class="col-xs-6 push-inner-top-bottom border-right">
+                            <h3 class="widget-heading"><i class="gi gi-book_open text-dark push"></i> <br>
+                                <small>123 Total Visitors</small>
+                            </h3>
+                        </div>
+                        <div class="col-xs-6 push-inner-top-bottom">
+                            <h3 class="widget-heading"><i class="gi gi-user_add text-dark push"></i> <br>
+                                <small>{{avgWaitTime}} Average Wait Time</small>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- ng-click="doCheckOff(v)"
+                <button ng-class="active" title="Set Inactive" class="btn btn-effect-ripple btn-block btn-success">
+                    <i class="fa fa-check"></i> Check Off Visitor
+                </button>
+                -->
             </div>
-            <!-- ng-click="doCheckOff(v)" -->
-            <button ng-class="active" title="Set Inactive" class="btn btn-effect-ripple btn-block btn-success">
-                <i class="fa fa-check"></i> Check Off Visitor
-            </button>
         </div>
         <!-- END Statistics Widget -->
     </div>
@@ -77,7 +90,10 @@
                     </thead>
                     <tbody>
 						<!-- TODO: Change phone to employee -->
-						<tr ng-repeat="v in visitors | filter: (showMine === true || '') && { phone: user.name }"
+                        <!--
+						<tr ng-repeat="v in visitors track by $index | filter: (showMine === true || '') && { phone: user.name }"
+                        -->
+						<tr ng-repeat="v in visitors track by $index"
                             ng-mouseover="hoverVisitor(visitors[$index])" ng-mouseleave="deselectVisitor()"
                             ng-click="selectVisitor(visitors[$index])">
 							<td><strong>{{v.name}}</strong></td>

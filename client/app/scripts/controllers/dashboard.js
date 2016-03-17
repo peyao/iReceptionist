@@ -283,14 +283,17 @@ angular.module('iReceptionistApp')
         });
 
         $scope.showVisitorBlock = false;
-        $scope.hoverVisitor = function(i) {
+        $scope.activeVisitor = {};
+        $scope.hoverVisitor = function(v) {
             $scope.showVisitorBlock = true;
-
+            $scope.activeVisitor = v;
         };
-        $scope.selectVisitor = function(i) {
+        $scope.selectVisitor = function(v) {
             $scope.showVisitorBlock = true;
+            $scope.activeVisitor = v;
         };
         $scope.deselectVisitor = function() {
             $scope.showVisitorBlock = false;
+            $scope.activeVisitor = {};
         }
     });
