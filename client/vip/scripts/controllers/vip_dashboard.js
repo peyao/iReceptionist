@@ -196,7 +196,8 @@ angular.module('iReceptionistApp')
                 updateSuspension(true, i);
             }
             else {
-            /*    var dateObj =  new Date($scope.clients[i].timeStamp.created);
+                /*
+                var dateObj =  new Date($scope.clients[i].timeStamp.created);
 
                 var dayStr = dateObj.getDate();
                 var monthStr = monthsToPrint[dateObj.getMonth()];
