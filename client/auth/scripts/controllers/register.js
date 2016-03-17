@@ -154,7 +154,7 @@ angular.module('iReceptionistApp')
         $scope.alert = {
             success: 'Registration',
             warning: 'Warning',
-            danger: 'Danger'
+            danger: ''
         };
 
         $scope.doLogin = function() {
@@ -195,13 +195,14 @@ angular.module('iReceptionistApp')
                             $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
                         },
                         function(err) {
-                            $trace('Log in fail: ', err);
+                            //$trace('Log in fail: ', err);
+                            $scope.alert.danger = err. Error
                         }
                     );
                 },
                 // Failure
                 function(err) {
-                    $scope.alert.danger = err.errorMsg;
+                    $scope.alert.danger = err.Error;
                 }
             );
         };
@@ -225,14 +226,15 @@ angular.module('iReceptionistApp')
                 // Success
                 function (regObj) {
                     $trace('register success');
-
                     // Automatically log-in after registration
                     $scope.doLogin();
                 },
 
                 // Error
                 function (err) {
-                    $trace('register fail');
+                    //$trace('register fail');
+                    $scope.alert.danger = err.Error;
+                    //console.log(err);
                 }
             );
         };

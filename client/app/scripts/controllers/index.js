@@ -15,10 +15,18 @@ angular.module('iReceptionistApp')
         var urlParts = domain.split('.');
         var tld = '';
         if (urlParts[0] === 'localhost') {
+            // localhost
             domain = urlParts[0];
         } else {
+            // *.ireceptionist.cf
             domain = urlParts[1];
             tld = '.' + urlParts[2];
+
+            // ireceptionist.cf
+            if (!tld) {
+                domain = urlParts[0];
+                tld = '.' + urlParts[1];
+            }
         }
         $window.location.href = 'http://' + domain + tld + ':' + $location.port() + '/auth/#/logout';
     };
