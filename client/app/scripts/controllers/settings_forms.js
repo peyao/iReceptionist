@@ -105,4 +105,5 @@ angular.module('iReceptionistApp')
                 return $trace('error');
             });
         };
+
     });
