@@ -3,7 +3,8 @@
  */
 angular.module('iReceptionistApp')
 .controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService, BusinessService) {
-       
+
+        var bgImg = '';
         var getBusiness = function() {
     
         console.log("hi again");
@@ -14,7 +15,11 @@ angular.module('iReceptionistApp')
             function (busObj){
                 $trace("Business: " + busObj);
                 $trace(busObj.name);
-                $trace(busObj.backgroundImageUrl);
+                $('body').css(
+                    "background", "url(http://res.cloudinary.com/phoenix-sol/image/upload/" + busObj.backgroundImageUrl + ") 50% fixed"
+                );
+                $scope.publicId = busObj.iconURL;
+                $scope.companyName = busObj.name;
                 $cookies.putObject('business', busObj);
             },
             function (err) {
@@ -89,10 +94,6 @@ angular.module('iReceptionistApp')
         $scope.showFirst=false;
         $scope.showSecond=true;
     };
-
-    $('body').css(
-        "background", "url(http://res.cloudinary.com/phoenix-sol/image/upload/) 50% fixed"
-    );
 });
 
 
