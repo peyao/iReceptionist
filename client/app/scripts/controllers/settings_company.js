@@ -26,14 +26,14 @@ angular.module('iReceptionistApp')
         var lastUploadedBg = $scope.bgId;
 
         $scope.logoUpload.on("success", function (file, response) {
-            console.log(file);
-            console.log('Success! Cloudinary public ID is', response.public_id);
+            $trace(file);
+            $trace('Success! Cloudinary public ID is', response.public_id);
             lastUploadedLogo = response.public_id;
         });
 
         $scope.bgUpload.on("success", function (file, response) {
-            console.log(file);
-            console.log('Success! Cloudinary public ID is', response.public_id);
+            $trace(file);
+            $trace('Success! Cloudinary public ID is', response.public_id);
             lastUploadedBg = response.public_id;
         });
 
