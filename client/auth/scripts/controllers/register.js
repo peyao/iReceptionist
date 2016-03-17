@@ -6,7 +6,7 @@
  * Controller for the registration page
  */
 angular.module('iReceptionistApp')
-    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone, FormService) {
+    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone, BusinessService) {
 
         var REGISTRATION_STEPS = 4;
         var ONE = 1;
@@ -137,25 +137,27 @@ angular.module('iReceptionistApp')
 
         var createForm = function (regObj) {
             var form;
-            if ($scope.register.step2.type === 'Health Care') {
+            if ($scope.register.step2.type === 'health_care') {
                 form = healthForm;
             }
-            else if ($scope.register.step2.type === 'Fitness') {
+            else if ($scope.register.step2.type === 'fitness') {
                 form = fitnessForm;
             }
-            else if ($scope.register.step2.type === 'Other') {
+            else if ($scope.register.step2.type === 'other') {
                 form = otherForm;
             }
 
-            FormService.createForm(
-                regObj.business,
-                form,
+            BusinessService.updateBusiness(
+                {
+                    "businessId": regObj.business,
+                    "form": form
+                },
                 regObj.token,
-                function(busObj) {
+                function (busObj){
                     $trace(busObj);
                 },
-                function(err) {
-                    $trace('Error creating form');
+                function (err) {
+                    $trace(err);
                 }
             );
         };

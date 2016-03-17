@@ -6,16 +6,34 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, FormService, DropZone) {
+    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, BusinessService, UserService) {
         $rootScope.currentState = 'settings-forms';
 
-        $scope.business = $cookies.getObject('business').business;
-        $scope.form = $cookies.getObject('business').form;
+        $scope.business = $cookies.getObject('business');
         var employeeSelectObject = {"id":"employee","component":"select","editable":true,"index":3,"label":"Employee","description":"Who are you seeing today?","placeholder":"placeholder","options":["Anyone is fine"],"required":false,"validation":"/.*/","$$hashKey":"object:61"};
 
-        var form = JSON.parse($scope.form);
+        // Add the employees as options in the employee select
+        UserService.getEmployees(
+            $cookies.get('token'),
+            function(empObj) {
+                $scope.employees = empObj;
+                console.log($scope.employees);
+                $trace("Grabbing employees");
+
+                for (var i = 0; i < $scope.employees.length; i++) {
+                    employeeSelectObject.options.push($scope.employees[i]['name']);
+                }
+            },
+            function(err) {
+                $trace("Employee list error");
+            }
+        );
+
         $scope.employeeSelect = false;
-        if (form != null) {
+        if ($scope.business.form) {
+            var form = JSON.parse($scope.business.form);
+            $builder.forms['default'] = form;
+
             for (var i = 0; i < form.length; i++) {
                 if (form[i].hasOwnProperty('id') && form[i]['id'] === 'employee') {
                     $scope.employeeSelect = true;
@@ -23,6 +41,21 @@ angular.module('iReceptionistApp')
                 }
             }
         }
+        else {
+            // Make the default form
+            if (!$builder.forms['default'].length) {
+                name = $builder.addFormObject('default', {
+                    id: 'name',
+                    component: 'textInput',
+                    label: 'Name',
+                    description: 'Your name',
+                    placeholder: 'Your name',
+                    required: true,
+                    editable: false
+                });
+            }
+        }
+
 
         $scope.updateEmployeeSelect = function() {
             if ($scope.employeeSelect) {
@@ -42,26 +75,27 @@ angular.module('iReceptionistApp')
             }
         };
 
-        /* Add default name field if it hasn't been added already */
-        var name;
-        var nameAdded = false;
-        for (var i = 0; i < $builder.forms['default'].length; i++) {
-            if ($builder.forms['default'][i]['id'] === 'name') {
-                nameAdded = true;
-            }
-        }
+        $scope.saveForm = function() {
+            console.log(JSON.stringify($scope.form));
+            BusinessService.updateBusiness(
+                {
+                    "businessId": $scope.business._id,
+                    "form": JSON.stringify($scope.form)
+                },
+                $cookies.get('token'),
+                function (busObj){
+                    toastr.success("Your form was updated!");
 
-        if (!nameAdded) {
-            name = $builder.addFormObject('default', {
-                id: 'name',
-                component: 'textInput',
-                label: 'Name',
-                description: 'Your name',
-                placeholder: 'Your name',
-                required: true,
-                editable: false
-            });
-        }
+                    // Update the business cookie
+                    $cookies.putObject('business', busObj);
+                    console.log(busObj);
+                },
+                function (err) {
+                    toastr.error("Error saving form.");
+                    $trace(err);
+                }
+            );
+        };
 
         $scope.form = $builder.forms['default'];
         $scope.input = [];
