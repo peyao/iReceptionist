@@ -6,26 +6,38 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies, BusinessService) {
+.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window,
+    $cookies, $location, BusinessService) {
+
     $scope.doLogout = function() {
-        $cookies.remove('user', {'path': '/'});
-        $cookies.remove('token', {'path': '/'});
-        $window.location.href = '/auth';
+        var domain = $location.host();
+        var urlParts = domain.split('.');
+        var tld = '';
+        if (urlParts[0] === 'localhost') {
+            // localhost
+            domain = urlParts[0];
+        } else {
+            // *.ireceptionist.cf
+            domain = urlParts[1];
+            tld = '.' + urlParts[2];
+
+            // ireceptionist.cf
+            if (!tld) {
+                domain = urlParts[0];
+                tld = '.' + urlParts[1];
+            }
+        }
+        $window.location.href = 'http://' + domain + tld + ':' + $location.port() + '/auth/#/logout';
     };
 
-    // If user has no token, they are not authorized.
-    if (!$cookies.get('token')) {
-        $scope.doLogout();
-    } else {
-        App.togglePageLoading(); // Stop Page Loading
-    }
+
 
     $scope.currentStep =  $cookies.get('tour');
     $trace("Current step " + $scope.currentStep);
     $scope.stepComplete = function() {
       $cookies.get('tour', $scope.currentStep);
     };
-  //  $cookies.put('tour',1);
+    //  $cookies.put('tour',1);
 
     $scope.tourComplete=function(){
       $trace("tourcompleted" + $scope.currentStep);
@@ -33,7 +45,15 @@ angular.module('iReceptionistApp')
       $scope.done = 0;
 
     };
-    if (!$cookies.get('business')){
+    // If user has no token, they are not authorized.
+    if (!$cookies.get('token')) {
+        $scope.doLogout();
+    } else {
+        App.togglePageLoading(); // Stop Page Loading
+    }
+
+    $scope.user = $cookies.getObject('user');
+    if (!$cookies.get('business')) {
         $trace("business cookie");
         BusinessService.getBusiness(
             $scope.user.business,
@@ -54,7 +74,7 @@ angular.module('iReceptionistApp')
     });
 
     var channel;
-    if ($scope.user) {
+    if ($scope.user && $cookies.getObject('user').settings.receiveBrowserNotification) {
         channel = pusher.subscribe($scope.user.business);
         channel.bind('newVisitor', function(data){
             toastr.options = {

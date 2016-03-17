@@ -1,73 +1,66 @@
-/**
- * @ngdoc function
- * @name iReceptionistApp.controller:SettingsCtrl
- * @description
- * # SettingsCompanyCtrl
- * Controller for the settings page
- */
-angular.module('iReceptionistApp')
-    .controller('SettingsCompanyCtrl', function($rootScope, $scope, $cookies, BusinessService, DropZone) {
-        $rootScope.currentState = 'settings-company';
-
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
-        if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
-          $scope.currentStep = 0;
-          $trace("currstep " + $scope.currentStep);
-        }
-        toastr.options = {
-            "positionClass": "toast-top-right",
-            "timeOut": "2500"
-        };
-
-        $scope.business = $cookies.getObject('business').business;
-
-        // Object that holds the fields to update in the business. Must also include businessId.
-        var businessFields = {
-            "businessId": $scope.user.business
-        };
-
-        $scope.businessFieldChanged = function(field) {
-            businessFields[field] = $scope.business[field];
-        };
-
-        var checkFieldsBusiness = function() {
-            // Make sure we only send fields that have changed
-            for (var key in businessFields) {
-                if (businessFields[key] === $cookies.getObject('business').business[key]) {
-                    delete businessFields[key];
+        /**
+         * @ngdoc function
+         * @name iReceptionistApp.controller:SettingsCtrl
+         * @description
+         * # SettingsCompanyCtrl
+         * Controller for the settings page
+         */
+        angular.module('iReceptionistApp')
+            .controller('SettingsCompanyCtrl', function($rootScope, $scope, $cookies, BusinessService, DropZone) {
+                $rootScope.currentState = 'settings-company';
+                if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
+                  $scope.currentStep = 0;
+                  $trace("currstep " + $scope.currentStep);
                 }
-            }
-        };
+                toastr.options = {
+                    "positionClass": "toast-top-right",
+                    "timeOut": "2500"
+                };
 
-        $scope.updateBusiness = function() {
-            checkFieldsBusiness();
+                $scope.business = $cookies.getObject('business');
 
-            BusinessService.updateBusiness(
-                businessFields,
-                $cookies.get('token'),
-                function (busObj){
-                    toastr.success("Your settings were updated!");
+                // Object that holds the fields to update in the business. Must also include businessId.
+                var businessFields = {
+                    "businessId": $scope.business._id
+                };
 
-                    // Update the business cookie
-                    var businessCookie = $cookies.getObject('business');
-                    businessCookie.business = busObj;
-                    $cookies.putObject('business', businessCookie);
-                },
-                function (err) {
-                    toastr.error("Error updating settings.");
-                    $trace(err);
-                }
-            );
+                $scope.businessFieldChanged = function(field) {
+                    businessFields[field] = $scope.business[field];
+                };
 
-            // Reset the changed fields
-            businessFields = {
-                "businessId": $scope.user.business
-            };
-        };
+                var checkFieldsBusiness = function() {
+                    // Make sure we only send fields that have changed
+                    for (var key in businessFields) {
+                        if (businessFields[key] === $cookies.getObject('business')[key]) {
+                            delete businessFields[key];
+                        }
+                    }
+                };
 
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');
-    });
+                $scope.updateBusiness = function() {
+                    checkFieldsBusiness();
+
+                    BusinessService.updateBusiness(
+                        businessFields,
+                        $cookies.get('token'),
+                        function (busObj){
+                            toastr.success("Your settings were updated!");
+
+                            // Update the business cookie
+                            $cookies.putObject('business', busObj);
+                        },
+                        function (err) {
+                            toastr.error("Error updating settings.");
+                            $trace(err);
+                        }
+                    );
+
+                    // Reset the changed fields
+                    businessFields = {
+                        "businessId": $scope.user.business
+                    };
+                };
+
+                $scope.logoUpload = DropZone.createNew('#logoUpload');
+                $scope.bgUpload = DropZone.createNew('#bgUpload');
+            });
