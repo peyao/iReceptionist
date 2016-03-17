@@ -15,7 +15,8 @@ angular.module('iReceptionistApp')
                 busId,
                 token,
                 function(busObj) {
-                    var subdomain = busObj.business.name.toLowerCase().replace(/[^a-zA-Z0-9]/g,"");
+                    console.log(busObj);
+                    var subdomain = busObj.name.toLowerCase().replace(/[^a-zA-Z0-9]/g,"");
                     return success(subdomain);
                 },
                 error
