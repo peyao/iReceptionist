@@ -8,14 +8,21 @@
 angular.module('iReceptionistApp')
     .controller('SettingsAccountCtrl', function($rootScope, $scope, $cookies, DropZone, UserService) {
         $rootScope.currentState = 'settings-account';
-        if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
-          $scope.currentStep = 0;
-          $trace("currstep " + $scope.currentStep);
-        }
+
         toastr.options = {
             "positionClass": "toast-top-right",
             "timeOut": "2500"
         };
+
+        if($cookies.get('tourSetU') != -1){
+          $scope.currentStepU = 0;
+        }
+        //$cookies.put('tourSetU',0);
+        $scope.tourComplete=function(){
+          $trace("tourcompleted" + $scope.currentStepU);
+          $cookies.put('tourSetU',-1);
+        };
+
 
         $scope.user = $cookies.getObject('user');
         $scope.oldPassword = '';

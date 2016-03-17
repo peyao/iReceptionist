@@ -18,10 +18,15 @@ angular.module('iReceptionistApp')
     $scope.editEmp = {};
     $scope.newEmp = {};
 
-    if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
-      $scope.currentStep = 0;
-      $trace("currstep " + $scope.currentStep);
+    if($cookies.get('tourEmp') != -1){
+      $scope.currentStepE = 0;
     }
+
+    //$cookies.put('tourEmp',0);
+    $scope.tourComplete=function(){
+      $trace("tourcompleted" + $scope.currentStepE);
+      $cookies.put('tourEmp',-1);
+    };
 
     var getEmployeeList = function() {
       UserService.getEmployees(
@@ -39,7 +44,7 @@ angular.module('iReceptionistApp')
     getEmployeeList();
 
     $scope.cancel = function() {
-      $trace('resetting form')
+      $trace('resetting form');
       $scope.editEmp = {};
       $scope.newEmp = {};
       $scope.editEmp.phone = '';

@@ -9,10 +9,15 @@ angular.module('iReceptionistApp')
     .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService, UserService) {
         $rootScope.currentState = 'dashboard';
 
-        if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
-          $scope.currentStep = 0;
-          $trace("currstep " + $scope.currentStep);
+        if($cookies.get('tourDash') != -1){
+          $scope.currentStepD = 0;
         }
+          //$cookies.put('tourDash',0);
+
+        $scope.tourComplete=function(){
+          $trace("tourcompleted" + $scope.currentStepD);
+          $cookies.put('tourDash',-1);
+        };
 		// Initialize Datepicker
         $('#example-datepicker3').datepicker('setDate', new Date())
             .on('changeDate', function(){

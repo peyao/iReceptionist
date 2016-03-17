@@ -8,13 +8,19 @@
         angular.module('iReceptionistApp')
             .controller('SettingsCompanyCtrl', function($rootScope, $scope, $cookies, BusinessService, DropZone) {
                 $rootScope.currentState = 'settings-company';
-                if(($cookies.get('token')!= '-1') && ($scope.done != '0')) {
-                  $scope.currentStep = 0;
-                  $trace("currstep " + $scope.currentStep);
-                }
+
                 toastr.options = {
                     "positionClass": "toast-top-right",
                     "timeOut": "2500"
+                };
+
+                if($cookies.get('tourSetC') != -1){
+                  $scope.currentStepC = 0;
+                }
+                //$cookies.put('tourSetC',0);
+                $scope.tourComplete=function(){
+                  $trace("tourcompleted" + $scope.currentStepC);
+                  $cookies.put('tourSetC',-1);
                 };
 
                 $scope.business = $cookies.getObject('business');

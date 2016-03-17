@@ -166,7 +166,12 @@ angular.module('iReceptionistApp')
                             userObj.user.rememberMe = $scope.rememberMe;
                             $cookies.putObject('user', userObj.user, cookieDefaults);
                             $cookies.put('token', userObj.token, cookieDefaults);
-                            $cookies.put('tour',$scope.currentStep,cookieDefaults);
+                            $cookies.put('tourDash',$scope.currentStepD,cookieDefaults);
+                            $cookies.put('tourEmp',$scope.currentStepE,cookieDefaults);
+                            $cookies.put('tourSetU',$scope.currentStepU,cookieDefaults);
+                            $cookies.put('tourSetC',$scope.currentStepC,cookieDefaults);
+                            $cookies.put('tourSetF',$scope.currentStepF,cookieDefaults);
+
                             $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
                         },
                         function(err) {

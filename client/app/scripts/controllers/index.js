@@ -30,21 +30,6 @@ angular.module('iReceptionistApp')
         $window.location.href = 'http://' + domain + tld + ':' + $location.port() + '/auth/#/logout';
     };
 
-
-
-    $scope.currentStep =  $cookies.get('tour');
-    $trace("Current step " + $scope.currentStep);
-    $scope.stepComplete = function() {
-      $cookies.get('tour', $scope.currentStep);
-    };
-    //  $cookies.put('tour',1);
-
-    $scope.tourComplete=function(){
-      $trace("tourcompleted" + $scope.currentStep);
-      $cookies.put('tour',-1);
-      $scope.done = 0;
-
-    };
     // If user has no token, they are not authorized.
     if (!$cookies.get('token')) {
         $scope.doLogout();
