@@ -3,7 +3,14 @@
 
     <div class="card">
         <form class="" ng-show="showFirst">
-            <p class="title" align="center"> hello. </p>
+            <div class="title">
+                {{companyName}}
+            </div>
+            <div class="col-xs-3">
+                <cl-image public-id="{{publicId}}" class="avatar">
+                    <cl-transformation height="150" width="150" crop="fill" />
+                </cl-image>
+            </div>
 
             <button class="startbutton" ng-click="gotoCheckIn()">
                 <span class="check">Tap to Check In </span>
@@ -17,12 +24,7 @@
         <form class="login">
             <h1 class="" align="center">Please Fill Out Information</h1>
 
-            <!--<input ng-model="fstname" type="text" autocapitalize="off" autocorrect="off" placeholder="First Name" autofocus/>
-            <input ng-model="lstname" type="text" autocapitalize="off" autocorrect="off" placeholder="Last Name" />
-            <input ng-model="phonenum" type="text" autocapitalize="off" autocorrect="off" placeholder="Phone Number" /> -->
-            
-            <!--pattern="[0­9]*-->
-            <div ng-model="input" fb-form="default" fb-default="defaultValue"></div>
+            <div ng-model="input" fb-form="visitorForm"></div>
 
             <button ng-click="doCheckIn()">
                 <i class="spinner"></i>

@@ -10,6 +10,7 @@ angular.module('iReceptionistApp')
     $cookies, $location, BusinessService) {
 
     $scope.doLogout = function() {
+        $cookies.remove('business', {'path': '/app'});
         var domain = $location.host();
         var urlParts = domain.split('.');
         var tld = '';
@@ -38,6 +39,8 @@ angular.module('iReceptionistApp')
     }
 
     $scope.user = $cookies.getObject('user');
+    $rootScope.publicId = $scope.user.avatar;
+
     if (!$cookies.get('business')) {
         $trace("business cookie");
         BusinessService.getBusiness(
@@ -45,11 +48,9 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function (busObj){
                 $trace("Business: " + busObj);
-                $trace(busObj.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
-                //$scope.alert.danger = err.errorMsg;
             }
         );
     }
@@ -59,6 +60,9 @@ angular.module('iReceptionistApp')
     });
 
     var channel;
+    console.log($cookies.getObject('user'));
+    console.log($cookies.getObject('user').settings);
+
     if ($scope.user && $cookies.getObject('user').settings.receiveBrowserNotification) {
         channel = pusher.subscribe($scope.user.business);
         channel.bind('newVisitor', function(data){
