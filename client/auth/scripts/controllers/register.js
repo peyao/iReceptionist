@@ -129,7 +129,7 @@ angular.module('iReceptionistApp')
         $scope.alert = {
             success: 'Registration',
             warning: 'Warning',
-            danger: 'Danger'
+            danger: ''
         };
 
 
@@ -176,14 +176,18 @@ angular.module('iReceptionistApp')
                         },
                         // Failure
                         function (err) {
-                            $trace('log in fail');
+                            //$trace('log in fail'); // commented out for now
+                            $scope.alert.danger = err.Error;
+                            console.log(err);
                         }
                     );
                 },
 
                 // Error
                 function (err) {
-                    $trace('register fail');
+                    //$trace('register fail'); // commented out for now
+                    $scope.alert.danger = err.Error;
+                    console.log(err);
                 }
             );
         };
