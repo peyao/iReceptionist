@@ -51,7 +51,7 @@ angular.module('iReceptionistApp')
     });
 
     var channel;
-    if ($scope.user) {
+    if ($scope.user && $cookies.getObject('user').settings.receiveBrowserNotification) {
         channel = pusher.subscribe($scope.user.business);
         channel.bind('newVisitor', function(data){
             toastr.options = {

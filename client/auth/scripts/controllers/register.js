@@ -194,6 +194,7 @@ angular.module('iReceptionistApp')
                 // Success
                 function (regObj) {
                     $trace('register success');
+
                     //
                     // Automatically log-in after registration
                     //
