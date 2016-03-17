@@ -49,7 +49,7 @@
     <body>
         <div ui-view></div>
 
-        <!--<script src="/dist/dist.js"></script>-->
+        <!--<script src="dist/dist.js"></script>-->
 
         <!-- jQuery, Bootstrap, jQuery plugins and Custom JS code -->
         <script src="/assets/vendor/js/vendor/jquery-2.2.0.min.js"></script>
@@ -59,33 +59,35 @@
         <!-- build:js(.) scripts/vendor.js -->
 
         <!-- bower:js -->
+        <script src="dist/dist.js"></script>
         <!--<script src="/assets/bower_components/angular/angular.min.js"></script>-->
-        <script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>
-        <script src="/assets/bower_components/angular-cookies/angular-cookies.min.js"></script>
-        <script src="/assets/bower_components/angular-resource/angular-resource.min.js"></script>
-        <script src="/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-        <script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>
-        <script src="/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-        <script src="/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-        <script src="/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
+        <!--<script src="/assets/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-cookies/angular-cookies.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-resource/angular-resource.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-sanitize/angular-sanitize.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>-->
 
         <!-- Cloudinary -->
-        <script src="/assets/bower_components/lodash/lodash.min.js"></script>
-        <script src="/assets/bower_components/cloudinary-core/cloudinary-core.min.js"></script>
-        <script src="/assets/bower_components/angular-route/angular-route.min.js"></script>
-        <script src="/assets/bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
+        <!--<script src="/assets/bower_components/lodash/lodash.min.js"></script>-->
+        <!--<script src="/assets/bower_components/cloudinary-core/cloudinary-core.min.js"></script>-->
+        <!--<script src="/assets/bower_components/angular-route/angular-route.min.js"></script>-->
+        <!--<script src="/assets/bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>-->
 
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="/assets/services/authentication_service.js"></script>
+        <script src="/assets/services/drop_zone.js"></script>
         <script src="scripts/controllers/index.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/controllers/reset-password.js"></script>
-        <script src="/assets/services/authentication_service.js"></script>
-        <script src="/assets/services/drop_zone.js"></script>
+
         <!-- endbuild -->
         <script>
             var _rollbarConfig = {

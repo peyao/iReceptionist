@@ -93,8 +93,41 @@ var jsApp      = './client/app/**/*.js',
     jsCheckIn  = './client/checkin/**/*.js',
     jsVIP      = './client/vip/**/*.js',
     jsAssets   = './client/assets/services/*.js',
-    jsMins     = './client/**/*.min.js',
-    jsDest     = './dist/';
+    //jsMins     = ['/client/assets/vendor/js/**/*.js',
+    //    '/client/assets/bower_components/**/*.min.js',
+    //    '/client/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js'],
+    jsAuthMins     = ['./client/assets/bower_components/angular/*.min.js',
+        './client/assets/bower_components/angular-ui-router/**/*.min.js',
+        './client/assets/bower_components/angular-animate/*.min.js',
+        './client/assets/bower_components/angular-cookies/*.min.js',
+        './client/assets/bower_components/angular-resource/*.min.js',
+        './client/assets/bower_components/angular-sanitize/*.min.js',
+        './client/assets/bower_components/angular-aria/*.min.js',
+        './client/assets/bower_components/angular-bootstrap/*.min.js',
+        './client/assets/bower_components/angular-ui-router-anim-in-out/*.js',
+        './client/assets/bower_components/lodash/*.min.js',
+        './client/assets/bower_components/cloudinary-core/*.min.js',
+        './client/assets/bower_components/angular-route/*.min.js',
+        './client/assets/bower_components/cloudinary_ng/js/*.js'
+    ],
+    jsAppMins   = ['./client/assets/bower_components/angular/*.min.js',
+        './client/assets/bower_components/angular-ui-router/**/*.min.js',
+        './client/assets/bower_components/angular-animate/*.min.js',
+        './client/assets/bower_components/angular-cookies/*.min.js',
+        './client/assets/bower_components/angular-resource/*.min.js',
+        './client/assets/bower_components/angular-sanitize/*.min.js',
+        './client/assets/bower_components/angular-aria/*.min.js',
+        './client/assets/bower_components/angular-bootstrap/*.min.js',
+        './client/assets/bower_components/angular-ui-router-anim-in-out/*.js',
+        './client/assets/bower_components/toastr/*.min.js',
+        './client/assets/bower_components/pusher/dist/*.min.js',
+        './client/assets/bower_components/loading-bar/*.min.js',
+        './client/assets/bower_components/lodash/*.min.js',
+        './client/assets/bower_components/cloudinary-core/*.min.js',
+        './client/assets/bower_components/angular-route/*.min.js',
+        './client/assets/bower_components/cloudinary_ng/js/*.js'
+    ],
+    jsDest     = './client/auth/dist/';
 
 /**
  * Concat
@@ -102,68 +135,70 @@ var jsApp      = './client/app/**/*.js',
 // Concatenate the .min.js files in assets/bower_componenets
 // Concat the .min.js files in assets/vendor/js/vendor/
 gulp.task('concat-min', function() {
-    return gulp.src([jsMins])
+    return gulp.src(jsAuthMins)
         .pipe(concat('dist.js'))
         .pipe(gulp.dest(jsDest));
 })
 
-gulp.task('uglify-app', function() {
-    return gulp.src([jsApp, jsAssets])
-        .pipe(uglify())
-        .pipe(gulp.dest(jsDest+'app'));
-})
-gulp.task('concat-app', function() {
-    return gulp.src([jsDest+'app', jsMins])
-        .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest+'app'));
-})
-
-gulp.task('uglify-auth', function() {
-    return gulp.src([jsAuth, jsAssets])
-        .pipe(annotate())
-        .pipe(uglify())
-        .pipe(gulp.dest(jsDest+'auth'));
-})
-gulp.task('concat-auth', function() {
-    return gulp.src([jsDest+'auth', jsMins])
-        .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest+'auth'));
-})
-
-gulp.task('uglify-checkin', function() {
-    return gulp.src([jsCheckIn, jsAssets])
-        .pipe(annotate())
-        .pipe(uglify())
-        .pipe(gulp.dest(jsDest+'checkin'));
-})
-gulp.task('concat-checkin', function() {
-    return gulp.src([jsDest+'checkin', jsMins])
-        .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest+'checkin'));
-})
-
-gulp.task('uglify-vip', function() {
-    return gulp.src([jsVIP, jsAssets])
-        .pipe(annotate())
-        .pipe(uglify())
-        .pipe(gulp.dest(jsDest+'vip'));
-})
-gulp.task('concat-vip', function() {
-    return gulp.src([jsDest+'vip', jsMins])
-        .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest+'vip'));
-})
+//gulp.task('uglify-app', function() {
+//    return gulp.src([jsApp, jsAssets])
+//        .pipe(uglify({
+//            mangle: false
+//        }))
+//        .pipe(gulp.dest(jsDest+'app'));
+//})
+//gulp.task('concat-app', function() {
+//    return gulp.src([jsDest+'app', jsMins])
+//        .pipe(concat('dist.js'))
+//        .pipe(gulp.dest(jsDest+'app'));
+//})
+//
+//gulp.task('uglify-auth', function() {
+//    return gulp.src([jsAuth, jsAssets])
+//        .pipe(annotate())
+//        .pipe(uglify())
+//        .pipe(gulp.dest(jsDest+'auth'));
+//})
+//gulp.task('concat-auth', function() {
+//    return gulp.src([jsDest+'auth', jsMins])
+//        .pipe(concat('dist.js'))
+//        .pipe(gulp.dest(jsDest+'auth'));
+//})
+//
+//gulp.task('uglify-checkin', function() {
+//    return gulp.src([jsCheckIn, jsAssets])
+//        .pipe(annotate())
+//        .pipe(uglify())
+//        .pipe(gulp.dest(jsDest+'checkin'));
+//})
+//gulp.task('concat-checkin', function() {
+//    return gulp.src([jsDest+'checkin', jsMins])
+//        .pipe(concat('dist.js'))
+//        .pipe(gulp.dest(jsDest+'checkin'));
+//})
+//
+//gulp.task('uglify-vip', function() {
+//    return gulp.src([jsVIP, jsAssets])
+//        .pipe(annotate())
+//        .pipe(uglify())
+//        .pipe(gulp.dest(jsDest+'vip'));
+//})
+//gulp.task('concat-vip', function() {
+//    return gulp.src([jsDest+'vip', jsMins])
+//        .pipe(concat('dist.js'))
+//        .pipe(gulp.dest(jsDest+'vip'));
+//})
 
 gulp.task('minify-all', [
-    'concat-min',
-    'uglify-app',
-    'concat-app',
-    'uglify-auth',
-    'concat-auth',
-    'uglify-checkin',
-    'concat-checkin',
-    'uglify-vip',
-    'concat-vip']
+    'concat-min']
+    //'uglify-app',
+    //'concat-app',
+    //'uglify-auth',
+    //'concat-auth',
+    //'uglify-checkin',
+    //'concat-checkin',
+    //'uglify-vip',
+    //'concat-vip']
 );
 
 
@@ -212,8 +247,8 @@ gulp.task('default', [
  */
 gulp.task('setup', [
     'sass-all',
-    'bower-all']
-    //'minify-all']
+    'bower-all',
+    'minify-all']
 );
 
 /**
