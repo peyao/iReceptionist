@@ -17,30 +17,71 @@ angular
     'ui.bootstrap',
     'ngRoute',
     'cloudinary',
+    'builder',
+    'builder.components',
+    'validator.rules',
+    'angular-loading-bar',
+    'angular-tour'
 ])
-.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
+.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider, cfpLoadingBarProvider) {
+
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 250; // Only display after 500ms.
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
-        .state('login', {
+        .state('dashboard', {
             url: '/',
-            templateUrl: 'views/login.html',
-            controller: 'LoginCtrl'
+            templateUrl: 'views/dashboard.html',
+            controller: 'DashboardCtrl'
         })
-        .state('logout', {
-            url: '/logout',
-            templateUrl: 'views/logout.html',
-            controller: 'LogoutCtrl'
+        .state('employees', {
+            url: '/employees',
+            templateUrl: 'views/employees.html',
+            controller: 'EmployeesCtrl'
         })
-        .state('reset-password', {
-            url: '/reset',
-            templateUrl: 'views/reset-password.html',
-            controller: 'ResetPasswordCtrl'
+        .state('settings-account', {
+            url: '/settings/account',
+            templateUrl: 'views/settings/settings_account.html',
+            controller: 'SettingsAccountCtrl'
         })
+        .state('settings-company', {
+            url: '/settings/company',
+            templateUrl: 'views/settings/settings_company.html',
+            controller: 'SettingsCompanyCtrl'
+        })
+        .state('settings-notifications', {
+            url: '/settings/notifications',
+            templateUrl: 'views/settings/settings_notifications.html',
+            controller: 'SettingsNotificationsCtrl'
+        })
+        .state('settings-forms', {
+            url: '/settings/forms',
+            templateUrl: 'views/settings/settings_forms.html',
+            controller: 'SettingsFormsCtrl'
+        })
+        .state('settings-billing', {
+            url: '/settings/billing',
+            templateUrl: 'views/settings/settings_billing.html',
+            controller: 'SettingsBillingCtrl'
+        })
+
+
+        // .state('checkin', {
+            // url: '/checkin',
+            // templateUrl: 'views/checkin/checkin.html',
+            //controller: 'CheckinCtrl'
+        // })
+
         .state('register', {
             url: '/register',
-            templateUrl: 'views/register.html',
+            templateUrl: 'views/auth/register.html',
             controller: 'RegisterCtrl'
+        })
+        .state('search', {
+            url: '/search',
+            templateUrl: 'views/search.html',
+            controller: 'SearchCtrl'
         });
 
     cloudinaryProvider

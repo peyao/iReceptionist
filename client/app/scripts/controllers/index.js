@@ -9,6 +9,11 @@ angular.module('iReceptionistApp')
 .controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window,
     $cookies, $location, BusinessService) {
 
+      /*$cookies.put('tourSetC',0);
+      $cookies.put('tourSetF',0);
+      $cookies.put('tourSetU',0);
+      $cookies.put('tourDash',0);
+      $cookies.put('tourEmp',0);*/
     $scope.doLogout = function() {
         $cookies.remove('business', {'path': '/app'});
         var domain = $location.host();
