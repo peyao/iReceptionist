@@ -19,7 +19,7 @@ angular.module('iReceptionistApp')
         var ACTIVE_PER_DEFAULT = 500;
         $scope.totalItems = 0;
         $scope.currentPage = 1;
-
+        $scope.vname = '';
         $scope.user = $cookies.getObject('user');
         $scope.showMine = false;
         $scope.showActive = null;
@@ -55,7 +55,10 @@ angular.module('iReceptionistApp')
                 }
             );
         };
-
+        $scope.saveVis = function(v){
+          $scope.vname = v.name;
+          $scope.vId = v._id;
+        };
         $scope.getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var date = $('#example-datepicker3').datepicker('getDate');
@@ -136,9 +139,9 @@ angular.module('iReceptionistApp')
             );
         };
 
-        $scope.doDelete = function (data){
+        $scope.doDelete = function (){
             VisitorService.deleteVisitor(
-                data._id,
+                $scope.vId,
                 $cookies.get('token'),
                 function (visObj){
                     $trace("Deleted: " + visObj);
