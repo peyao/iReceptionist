@@ -207,12 +207,13 @@ footer {
 
 .title {
 	color: #ffffff; 
-	//font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-family: "Verdana", cursive;
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	//font-family: "Verdana", cursive;
 	font-size: 60px; 
-	font-weight: normal; 
-	margin-top: 80px; 
-	text-align: center; 
+	font-weight: normal;
+	text-align: center;
+	margin-bottom: 20px;
+
 	//text-shadow: 4px 4px #808080; 
 
 }
@@ -242,8 +243,7 @@ footer {
 	box-shadow: 10px 10px 5px #3498DF;
 }
 
-
-
+.avatar{	}
 
 
 
