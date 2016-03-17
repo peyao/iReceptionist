@@ -313,46 +313,46 @@ angular.module('iReceptionistApp')
                 rules: {
                     'register-step1-email': {
                         required: true,
-                        email: true
+                        email: true,
                     },
                     'register-step1-fullname': {
                         required: true,
-                        minlength: 3
+                        minlength: 3,
                     },
                     'register-step1-terms': {
-                        required: true
+                        required: true,
                     },
                     'register-step1-password': {
                         required: true,
-                        minlength: 5
+                        minlength: 5,
                     },
                     'register-step1-phone': {
                         required: true,
-                        minlength: 7
+                        minlength: 10,
                     },
                     'register-step1-confirm-password': {
                         required: true,
-                        equalTo: '#register-step1-password'
+                        equalTo: '#register-step1-password',
                     },
                     'register-step2-business-name': {
                         required: true,
-                        minlength: 2
+                        minlength: 2,
                     },
                     'register-step2-business-phone': {
                         required: true,
-                        minlength: 7
+                        minlength: 7,
                     },
                     'register-step4-name': {
                         required: false,
-                        minlength: 2
+                        minlength: 2,
                     },
                     'register-step4-email': {
                         required: false,
-                        email: true
+                        email: true,
                     },
                     'register-step4-phone': {
                         required: false,
-                        minlength: 7
+                        minlength: 10,
                     }
                 },
                 messages: {
@@ -360,7 +360,6 @@ angular.module('iReceptionistApp')
                     'register-step1-terms': 'Please accept the terms to continue',
                     'register-step1-phone': 'Please enter a valid phone number',
                     'register-step2-business-phone': 'Please enter a valid phone number'
-
                 }
             },
             inDuration: 0,
@@ -368,10 +367,6 @@ angular.module('iReceptionistApp')
         });
 
         $scope.termsHandler = function (isChecked) {
-            if (isChecked) {
-                $scope.disableNextButton = false;
-            } else {
-                $scope.disableNextButton = true;
-            }
+            $scope.disableNextButton = !isChecked;
         };
     });
