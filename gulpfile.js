@@ -181,6 +181,7 @@ gulp.task('browser-sync', [], function() {
 	gulp.watch('./client/vip/styles/*.scss', ['sass-vip']);
 	gulp.watch('./client/auth/styles/*.scss', ['sass-auth']);
 	gulp.watch('./client/assets/styles/*.scss', ['sass-assets']);
+    gulp.watch('./client/checkin/styles/*.scss', ['sass-checkin']);
 });
 
 

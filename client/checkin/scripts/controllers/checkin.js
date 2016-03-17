@@ -10,6 +10,7 @@ angular.module('iReceptionistApp')
     var form = JSON.parse($scope.business.form);
     $builder.forms['visitorForm'] = form;
 
+
     var working = false;
     $('.login').on('submit', function (e) {
         $trace('submitted checkin');
