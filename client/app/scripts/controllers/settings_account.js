@@ -19,7 +19,8 @@ angular.module('iReceptionistApp')
         $scope.password = '';
         $scope.confirmPassword = '';
         $scope.selectedTheme = $scope.user.settings.theme;
-        $scope.publicId = $scope.user.avatar;
+        $rootScope.publicId = $scope.user.avatar;
+
         var lastUploadedAvatar = '';
 
         $scope.avatarUpload = DropZone.createNew('#avatarUpload');
@@ -59,6 +60,7 @@ angular.module('iReceptionistApp')
             userFields['avatar'] = lastUploadedAvatar;
             $trace(lastUploadedAvatar);
             $trace("avatar: " + userFields['avatar']);
+            $trace("root before update: " + $rootScope.publicId);
 
             UserService.updateUser(
                 userFields,
@@ -67,7 +69,11 @@ angular.module('iReceptionistApp')
                     toastr.success("Your settings have been updated!");
                     // Update the user cookie
                     $cookies.putObject('user', userObj);
-                    $scope.publicId = lastUploadedAvatar;
+                    $rootScope.publicId = lastUploadedAvatar;
+
+                    $scope.publicId = $rootScope.publicId;
+                    $trace("root after update: " + $rootScope.publicId);
+
                 },
                 function (err) {
                     toastr.error("Error updating settings.");
