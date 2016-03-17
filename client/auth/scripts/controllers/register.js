@@ -14,7 +14,13 @@ angular.module('iReceptionistApp')
         var TWO = 2;
         var THREE = 3;
         var FOUR = 4;
+        var DEFAULT_LOGO = 'tablet_icon';
+        var DEFAULT_BG = 'tablet_icon';
+        var DEFAULT_AVATAR = 'avatar'
 
+        // Initialize Dropzones
+        $scope.logoUpload = DropZone.createNew('#logoUpload');
+        $scope.bgUpload = DropZone.createNew('#bgUpload');
 
         $scope.max = REGISTRATION_STEPS;
         $scope.step = 1;
@@ -41,9 +47,23 @@ angular.module('iReceptionistApp')
         $scope.register.step4.email = '';
         $scope.register.step4.phone = '';
 
+        var lastUploadedLogo = null;
+        var lastUploadedBg = null;
 
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
+        });
+
+        $scope.logoUpload.on("success", function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedLogo = response.public_id;
+        });
+
+        $scope.bgUpload.on("success", function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedBg = response.public_id;
         });
 
         $scope.disableNext = function () {
@@ -89,7 +109,12 @@ angular.module('iReceptionistApp')
         $scope.nextStep = function () {
             if ($scope.step === REGISTRATION_STEPS) {
                 $scope.submitRegistration();
-            } else {
+            }
+            else if ($scope.step === THREE) {
+                $scope.step++;
+                registerWizard.formwizard('show', 'register-step' + $scope.step);
+            }
+            else {
                 $scope.step++;
                 registerWizard.formwizard('show', 'register-step' + $scope.step);
             }
@@ -166,6 +191,11 @@ angular.module('iReceptionistApp')
                             userObj.user.rememberMe = $scope.rememberMe;
                             $cookies.putObject('user', userObj.user, cookieDefaults);
                             $cookies.put('token', userObj.token, cookieDefaults);
+                            $cookies.put('tourDash',$scope.currentStepD,cookieDefaults);
+                            $cookies.put('tourEmp',$scope.currentStepE,cookieDefaults);
+                            $cookies.put('tourSetU',$scope.currentStepU,cookieDefaults);
+                            $cookies.put('tourSetC',$scope.currentStepC,cookieDefaults);
+                            $cookies.put('tourSetF',$scope.currentStepF,cookieDefaults);
 
                             $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
                         },
@@ -183,57 +213,26 @@ angular.module('iReceptionistApp')
         };
 
         $scope.submitRegistration = function () {
+            $trace("register bg:" + lastUploadedBg);
+            $trace("register logo:" + lastUploadedLogo);
             AuthenticationService.register({
                     'role': '2',
                     'name': $scope.register.step1.fullName,
                     'email': $scope.register.step1.email,
                     'password': $scope.register.step1.password,
                     'phone': $scope.register.step1.phone,
-                    'businessName': $scope.register.step2.businessName
+                    'businessName': $scope.register.step2.businessName,
+                    'businessType': $scope.register.step2.type,
+                    'iconURL': lastUploadedLogo || DEFAULT_LOGO,
+                    'backgroundImageUrl': lastUploadedBg || DEFAULT_BG,
+                    'avatar': DEFAULT_AVATAR,
                 },
 
                 // Success
                 function (regObj) {
                     $trace('register success');
-
-                    //
                     // Automatically log-in after registration
-                    //
-                    AuthenticationService.login(
-                        {
-                            'email': $scope.register.step1.email,
-                            'password': $scope.register.step1.password
-                        },
-
-                        // Success
-                        function (userObj) {
-                            // Need to set path because we are going from '/auth' to '/app' or '/vip'
-                            // TODO: On VIP side, need to use token to reverify the user has the correct role
-                            // or else log them off because they don't belong there.
-                            // TODO: For now, just do local role level check here and redirect.
-
-                            var path = '/app';
-                            if (userObj.user.role === -1) {
-                                path = '/vip';
-                            }
-                            $trace(userObj);
-                            $cookies.putObject('user', userObj.user, {'path': '/auth'});
-                            $cookies.put('token', userObj.token, {'path': '/auth'});
-                            $cookies.put('token', userObj.token, {'path': '/checkin'});
-                            $cookies.putObject('user', userObj.user, {'path': path});
-                            $cookies.put('token', userObj.token, {'path': path});
-                            $window.location.href = path; // Redirect
-                        },
-                        // Failure
-                        function (err) {
-                            //$trace('log in fail');
-                            $scope.alert.danger = err.Error;
-                            //console.log(err);
-                        }
-                    );
-
                     $scope.doLogin();
-
                 },
 
                 // Error
@@ -245,9 +244,7 @@ angular.module('iReceptionistApp')
             );
         };
 
-        // Initialize Dropzones
-        $scope.logoUpload = DropZone.createNew('#logoUpload');
-        $scope.bgUpload = DropZone.createNew('#bgUpload');
+
 
         /**
          *  Jquery Wizard
@@ -323,46 +320,46 @@ angular.module('iReceptionistApp')
                 rules: {
                     'register-step1-email': {
                         required: true,
-                        email: true
+                        email: true,
                     },
                     'register-step1-fullname': {
                         required: true,
-                        minlength: 3
+                        minlength: 3,
                     },
                     'register-step1-terms': {
-                        required: true
+                        required: true,
                     },
                     'register-step1-password': {
                         required: true,
-                        minlength: 5
+                        minlength: 5,
                     },
                     'register-step1-phone': {
                         required: true,
-                        minlength: 7
+                        minlength: 10,
                     },
                     'register-step1-confirm-password': {
                         required: true,
-                        equalTo: '#register-step1-password'
+                        equalTo: '#register-step1-password',
                     },
                     'register-step2-business-name': {
                         required: true,
-                        minlength: 2
+                        minlength: 2,
                     },
                     'register-step2-business-phone': {
                         required: true,
-                        minlength: 7
+                        minlength: 7,
                     },
                     'register-step4-name': {
                         required: false,
-                        minlength: 2
+                        minlength: 2,
                     },
                     'register-step4-email': {
                         required: false,
-                        email: true
+                        email: true,
                     },
                     'register-step4-phone': {
                         required: false,
-                        minlength: 7
+                        minlength: 10,
                     }
                 },
                 messages: {
@@ -370,7 +367,6 @@ angular.module('iReceptionistApp')
                     'register-step1-terms': 'Please accept the terms to continue',
                     'register-step1-phone': 'Please enter a valid phone number',
                     'register-step2-business-phone': 'Please enter a valid phone number'
-
                 }
             },
             inDuration: 0,
@@ -378,10 +374,6 @@ angular.module('iReceptionistApp')
         });
 
         $scope.termsHandler = function (isChecked) {
-            if (isChecked) {
-                $scope.disableNextButton = false;
-            } else {
-                $scope.disableNextButton = true;
-            }
+            $scope.disableNextButton = !isChecked;
         };
     });

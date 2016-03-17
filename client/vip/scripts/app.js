@@ -36,6 +36,9 @@ angular
         });
 });
 
+var DEBUG = true;
 function $trace(message) {
-    console.log("(DEBUG) " + message);
+    if (DEBUG){
+        console.log("(DEBUG) " + message);
+    }
 }

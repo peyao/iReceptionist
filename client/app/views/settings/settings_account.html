@@ -34,9 +34,9 @@
                                 <label for="avatarUpload" class="text-left">Avatar</label>
                                 <div id="user-upload-row" class="row">
                                     <div class="col-xs-3">
-                                        <cl-image public-id="avatar" class="avatar"></cl-image>
+                                        <cl-image public-id="{{publicId}}" class="avatar"></cl-image>
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div id="tip7" class="col-xs-6">
                                         <div id="avatarUpload" class="dropzone">
                                             <div class="dz-default dz-message"></div>
                                         </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="block">
                         <div class="block-title">
-                            <h2>Theme</h2>
+                            <h2 id="tip8">Theme</h2>
                         </div>
                         <div class="themes">
                             <ul class="sidebar-themes clearfix">
@@ -271,3 +271,10 @@
         </div>
     </div>
 </section>
+
+<tour step="currentStepU" tour-complete="tourComplete()">
+  <virtual-step tourtip="Update your avatar" tourtip-placement="right" tourtip-offset-vertical="30"
+      tourtip-offset-horizontal="-100" tourtip-element="#tip7"></virtual-step>
+  <virtual-step tourtip="Change your theme" tourtip-offset-vertical="55"
+      tourtip-offset-horizontal="190" tourtip-next-label="Got it!"tourtip-placement="left" tourtip-element="#tip8"></virtual-step>
+</tour>

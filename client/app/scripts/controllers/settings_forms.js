@@ -9,6 +9,15 @@ angular.module('iReceptionistApp')
     .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, BusinessService, UserService) {
         $rootScope.currentState = 'settings-forms';
 
+        if($cookies.get('tourSetF') != -1){
+          $scope.currentStepF = 0;
+        }
+        //$cookies.put('tourSetF',0);
+        $scope.tourComplete=function(){
+          $trace("tourcompleted" + $scope.currentStepF);
+          $cookies.put('tourSetF',-1);
+        };
+
         $scope.business = $cookies.getObject('business');
         var employeeSelectObject = {"id":"employee","component":"select","editable":true,"index":3,"label":"Employee","description":"Who are you seeing today?","placeholder":"placeholder","options":["Anyone is fine"],"required":false,"validation":"/.*/","$$hashKey":"object:61"};
 
@@ -54,7 +63,6 @@ angular.module('iReceptionistApp')
                 });
             }
         }
-
 
         $scope.updateEmployeeSelect = function() {
             if ($scope.employeeSelect) {
@@ -107,5 +115,4 @@ angular.module('iReceptionistApp')
                 return $trace('error');
             });
         };
-
     });

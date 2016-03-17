@@ -31,7 +31,7 @@ angular.module('iReceptionistApp')
                 $trace("Employee list error");
             }
         );
-        
+
         // Restrict input for credit card fields
         $('[data-numeric]').payment('restrictNumeric');
         $('#credit-card').payment('formatCardNumber');
