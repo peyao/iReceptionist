@@ -6,15 +6,13 @@
  * Controller for the registration page
  */
 angular.module('iReceptionistApp')
-    .controller('RegisterCtrl', function($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
+    .controller('RegisterCtrl', function ($rootScope, $scope, $http, $window, $cookies, AuthenticationService, DropZone) {
 
         var REGISTRATION_STEPS = 4;
         var ONE = 1;
         var TWO = 2;
         var THREE = 3;
         var FOUR = 4;
-
-
 
 
         $scope.max = REGISTRATION_STEPS;
@@ -44,13 +42,9 @@ angular.module('iReceptionistApp')
         $scope.register.step4.phone = '';
 
 
-
-
-
         $('.select-select2').select2({
             minimumResultsForSearch: Infinity
         });
-
 
         $scope.disableNext = function () {
 
@@ -68,29 +62,25 @@ angular.module('iReceptionistApp')
 
                 // if on step 2 and fields not filled out disable button
                 if ($scope.register.step2.businessName && $scope.register.step2.phone && $scope.register.step2.type) {
-                       return false;
+                    return false;
                 }
                 return true;
             }
 
-            if($scope.step === FOUR) {
+            if ($scope.step === FOUR) {
                 // if on step 4 and fill out name, then finish rest before moving on
-                if($scope.register.step4.name)
-                {
-                    if(!($scope.register.step4.email && $scope.register.step4.phone))
-                    {
-                         return true;
+                if ($scope.register.step4.name || $scope.register.step4.email || $scope.register.step4.phone) {
+                    if ($scope.register.step4.name && $scope.register.step4.email && $scope.register.step4.phone) {
+                        return false;
                     }
+                    return true;
                 }
                 else {
                     return false;
                 }
             }
-
             return false;
-
         };
-
 
         $scope.backStep = function () {
             $scope.step--;
@@ -155,7 +145,7 @@ angular.module('iReceptionistApp')
 
                 // Success
                 function (regObj) {
-                    console.log('register success');
+                    $trace('register success');
                     //
                     // Automatically log-in after registration
                     //
@@ -176,7 +166,7 @@ angular.module('iReceptionistApp')
                             if (userObj.user.role === -1) {
                                 path = '/vip';
                             }
-                            console.log(userObj);
+                            $trace(userObj);
                             $cookies.putObject('user', userObj.user, {'path': '/auth'});
                             $cookies.put('token', userObj.token, {'path': '/auth'});
                             $cookies.put('token', userObj.token, {'path': '/checkin'});
@@ -186,14 +176,14 @@ angular.module('iReceptionistApp')
                         },
                         // Failure
                         function (err) {
-                            console.log('log in fail');
+                            $trace('log in fail');
                         }
                     );
                 },
 
                 // Error
                 function (err) {
-                    console.log('register fail');
+                    $trace('register fail');
                 }
             );
         };
@@ -330,11 +320,7 @@ angular.module('iReceptionistApp')
             outDuration: 0
         });
 
-
-
-
-
-        $scope.termsHandler = function(isChecked) {
+        $scope.termsHandler = function (isChecked) {
             if (isChecked) {
                 $scope.disableNextButton = false;
             } else {

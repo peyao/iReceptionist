@@ -15,14 +15,17 @@ angular
     'ngAria',
     'ui.router',
     'ui.bootstrap',
-    'anim-in-out',
     'ngRoute',
     'cloudinary',
     'builder',
     'builder.components',
-    'validator.rules'
+    'validator.rules',
+    'angular-loading-bar',
 ])
-.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
+.config(function($stateProvider, $urlRouterProvider, cloudinaryProvider, cfpLoadingBarProvider) {
+
+    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.latencyThreshold = 250; // Only display after 500ms.
 
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -41,6 +44,16 @@ angular
             templateUrl: 'views/settings/settings_account.html',
             controller: 'SettingsAccountCtrl'
         })
+        .state('settings-company', {
+            url: '/settings/company',
+            templateUrl: 'views/settings/settings_company.html',
+            controller: 'SettingsCompanyCtrl'
+        })
+        .state('settings-notifications', {
+            url: '/settings/notifications',
+            templateUrl: 'views/settings/settings_notifications.html',
+            controller: 'SettingsNotificationsCtrl'
+        })
         .state('settings-forms', {
             url: '/settings/forms',
             templateUrl: 'views/settings/settings_forms.html',
@@ -51,6 +64,7 @@ angular
             templateUrl: 'views/settings/settings_billing.html',
             controller: 'SettingsBillingCtrl'
         })
+
 
         // .state('checkin', {
             // url: '/checkin',
@@ -73,3 +87,7 @@ angular
         .set("cloud_name", "phoenix-sol")
         .set("upload_preset", "phtsmngp");
 });
+
+function $trace(message) {
+    console.log("(DEBUG) " + message);
+}

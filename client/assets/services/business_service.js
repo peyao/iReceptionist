@@ -13,10 +13,13 @@ angular.module('iReceptionistApp')
         getBusiness: function(busId, token, success, error) {
             var req = {
                 method: 'GET',
-                url: '/business?businessId=' + busId,
+                url: '/business',
                 headers: {
                     'Authorization': 'Bearer ' + token
-                }
+                },
+                params:{
+                    businessId: busId,
+                },
             };
             this.apiCall(req, success, error);
         },
@@ -27,7 +30,32 @@ angular.module('iReceptionistApp')
                 headers: {
                     'Authorization': 'Bearer ' + token
                 },
-                data: busObj
+                data: busObj,
+            };
+            this.apiCall(req, success, error);
+        },
+        suspendBusiness: function(busId, isSuspend, token, success, error){
+            var req = {
+                method: 'DELETE',
+                url: '/business',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                data: {
+                    'deleteUserId': busId,
+                    'suspended': isSuspend,
+                },
+            };
+            this.apiCall(req, success, error);
+        },
+        getBusinessList: function(token, success, error){
+            var req = {
+                method: 'GET',
+                url: '/business/list',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                },
             };
             this.apiCall(req, success, error);
         },

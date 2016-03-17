@@ -36,7 +36,9 @@
         <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
         <link rel="stylesheet" href="/assets/vendor/css/main.css">
         <link rel="stylesheet" href="styles/ireceptionist.css">
+        <link rel="stylesheet" href="/assets/styles/ireceptionist-common.css">
 
+        <link rel="stylesheet" href="/assets/vendor/js/angular-loading-bar/loading-bar.css"/>
         <link rel="stylesheet" href="/assets/vendor/css/angular-form-builder.css"/>
         <link rel="stylesheet" href="/assets/bower_components/toastr/toastr.css"/>
 
@@ -44,6 +46,7 @@
 
 
         <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" ng-if="user.settings.theme && user.settings.theme.split('-')[0] !== 'default'" ng-href="/assets/vendor/css/themes/{{user.settings.theme.split('-')[0]}}.css">
         <link rel="stylesheet" href="/assets/vendor/css/themes.css">
         <!-- END Stylesheets -->
 
@@ -90,7 +93,7 @@
 
                 'enable-cookies'                                enables cookies for remembering active color theme when changed from the sidebar links (You can add it along with any other class)
             -->
-            <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
+            <div id="page-container" class="header-fixed-top sidebar-visible-lg-full" ng-class="(user.settings.theme.split('-')[2] === 'light') ? 'sidebar-light' : ''">
                 <!-- Alternative Sidebar -->
                 <div id="sidebar-alt" tabindex="-1" aria-hidden="true">
                     <!-- Toggle Alternative Sidebar Button (visible only in static layout) -->
@@ -118,7 +121,7 @@
                     <!-- Sidebar Brand -->
                     <div id="sidebar-brand" class="themed-background">
                         <a href="/app" class="sidebar-title">
-                            <i class="fa fa-cube"></i> <span class="sidebar-nav-mini-hide"><strong>iReceptionist</strong></span>
+                            <span class="sidebar-nav-mini-hide"><strong>iReceptionist</strong></span>
                         </a>
                     </div>
                     <!-- END Sidebar Brand -->
@@ -131,20 +134,20 @@
                             <ul class="sidebar-nav">
                                 <li>
                                     <a ui-sref="dashboard" ng-class="{active: currentState === 'dashboard'}">
-                                        <i class="gi gi-compass sidebar-nav-icon"></i>
+                                        <i class="hi hi-dashboard sidebar-nav-icon"></i>
                                         <span class="sidebar-nav-mini-hide">Dashboard</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="employees" ng-class="{active: currentState === 'employees'}">
-                                        <i class="gi gi-compass sidebar-nav-icon"></i>
+                                    <a ui-sref="employees" ng-show="user.role > 0" ng-class="{active: currentState === 'employees'}">
+                                        <i class="gi gi-group sidebar-nav-icon"></i>
                                         <span class="sidebar-nav-mini-hide">Employees</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#" class="sidebar-nav-menu">
                                         <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
-                                        <i class="fa fa-rocket sidebar-nav-icon"></i>
+                                        <i class="hi hi-cog sidebar-nav-icon"></i>
                                         <span class="sidebar-nav-mini-hide">Settings</span>
                                     </a>
                                     <ul>
@@ -152,10 +155,16 @@
                                             <a ui-sref="settings-account" ng-class="{active: currentState === 'settings-account'}">
                                                 Account
                                             </a>
-                                            <a ui-sref="settings-forms" ng-class="{active: currentState === 'settings-forms'}">
+                                            <a ui-sref="settings-company" ng-show="user.role > 0" ng-class="{active: currentState === 'settings-company'}">
+                                                Company
+                                            </a>
+                                            <a ui-sref="settings-notifications" ng-class="{active: currentState === 'settings-notifications'}">
+                                                Notifications
+                                            </a>
+                                            <a ui-sref="settings-forms" ng-show="user.role > 0" ng-class="{active: currentState === 'settings-forms'}">
                                                 Forms
                                             </a>
-                                            <a ui-sref="settings-billing" ng-class="{active: currentState === 'settings-billing'}">
+                                            <a ui-sref="settings-billing" ng-show="user.role > 0" ng-class="{active: currentState === 'settings-billing'}">
                                                 Billing
                                             </a>
                                         </li>
@@ -184,7 +193,7 @@
                     <!-- Sidebar Extra Info -->
                     <div id="sidebar-extra-info" class="sidebar-content sidebar-nav-mini-hide">
                         <div class="text-center">
-                            <small><span id="year-copy"></span> &copy; <a href="#" target="_blank">iReceptionist</a></small>
+                            <small><span>2016</span> &copy; <a href="#" target="_blank">iReceptionist</a></small>
                         </div>
                     </div>
                     <!-- END Sidebar Extra Info -->
@@ -207,14 +216,14 @@
                         'navbar-fixed-bottom'       for a bottom fixed header (fixed main sidebar with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar()))
                             'header-fixed-bottom'   has to be added on #page-container only if the class 'navbar-fixed-bottom' was added
                     -->
-                    <header class="navbar navbar-inverse navbar-fixed-top">
+                    <header class="navbar navbar-fixed-top" ng-class="(user.settings.theme.split('-')[1] === 'default') ? 'navbar-default' : 'navbar-inverse'">
                         <!-- Left Header Navigation -->
                         <ul class="nav navbar-nav-custom">
                             <!-- Main Sidebar Toggle Button -->
                             <li>
                                 <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');this.blur();">
-                                    <i class="fa fa-ellipsis-v fa-fw animation-fadeInRight" id="sidebar-toggle-mini"></i>
-                                    <i class="fa fa-bars fa-fw animation-fadeInRight" id="sidebar-toggle-full"></i>
+                                    <i class="hi hi-chevron-left fa-fw animation-fadeInRight" id="sidebar-toggle-mini"></i>
+                                    <i class="hi hi-chevron-right fa-fw animation-fadeInRight" id="sidebar-toggle-full"></i>
                                 </a>
                             </li>
                             <!-- END Main Sidebar Toggle Button -->
@@ -232,18 +241,11 @@
                             <!-- Search Form -->
                             <li>
                                 <form action="javascript:void(0);" class="navbar-form-custom" role="search">
-                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control" placeholder="Search" ng-change="search(searchString)">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control hidden-sm hidden-xs" placeholder="Search for visitors and employees..." ng-change="search(searchString)">
+                                    <input type="text" id="top-search" ng-model="searchString" name="top-search" class="form-control visible-sm visible-xs" placeholder="Search..." ng-change="search(searchString)">
                                 </form>
                             </li>
                             <!-- END Search Form -->
-
-                            <!-- Alternative Sidebar Toggle Button -->
-                            <li>
-                                <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar-alt');this.blur();">
-                                    <i class="gi gi-settings"></i>
-                                </a>
-                            </li>
-                            <!-- END Alternative Sidebar Toggle Button -->
 
                             <!-- User Dropdown -->
                             <li class="dropdown">
@@ -271,8 +273,8 @@
                     <!-- END Header -->
 
                     <!-- Page content -->
-                    <div id="page-content" style="min-height: {{pageContentHeight()}}px">
-                        <div ui-view id="page-content-ui-view" class="anim-in-out anim-fade anim-slide-below" data-anim-speed="500" style="position: absolute; width: {{pageContentWidth()}}px;"></div>
+                    <div id="page-content">
+                        <div ui-view></div>
                     </div>
                     <!-- END Page Content -->
                 </div>
@@ -304,6 +306,7 @@
         <script src="/assets/bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
         <script src="/assets/bower_components/toastr/toastr.min.js"></script>
         <script src="/assets/bower_components/pusher/dist/pusher.min.js"></script>
+        <script src="/assets/vendor/js/angular-loading-bar/loading-bar.js"></script>
 
         <!-- Cloudinary -->
         <script src="/assets/bower_components/lodash/lodash.js"></script>
@@ -322,6 +325,8 @@
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/controllers/settings_billing.js"></script>
         <script src="scripts/controllers/settings_forms.js"></script>
+        <script src="scripts/controllers/settings_company.js"></script>
+        <script src="scripts/controllers/settings_notifications.js"></script>
         <script src="/assets/services/authentication_service.js"></script>
         <script src="/assets/services/visitor_service.js"></script>
         <script src="/assets/services/form_service.js"></script>

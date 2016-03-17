@@ -6,13 +6,8 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsBillingCtrl', function($rootScope, $scope, $cookies, BusinessService) {
+    .controller('SettingsBillingCtrl', function($rootScope, $scope, $cookies, BusinessService, UserService) {
         $rootScope.currentState = 'settings-billing';
-
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
 
         toastr.options = {
             "positionClass": "toast-top-right",
@@ -26,6 +21,17 @@ angular.module('iReceptionistApp')
         $scope.planClicked = "";
         $scope.planInfo = "";
 
+        UserService.getEmployees(
+            $cookies.get('token'),
+            function (empObj) {
+                $scope.numEmployees = empObj.length;
+                $trace("Grabbing employees: " + empObj);
+            },
+            function (err) {
+                $trace("Employee list error");
+            }
+        );
+        
         // Restrict input for credit card fields
         $('[data-numeric]').payment('restrictNumeric');
         $('#credit-card').payment('formatCardNumber');
@@ -124,7 +130,7 @@ angular.module('iReceptionistApp')
                 },
                 function (err) {
                     toastr.error("Error updating plan.");
-                    console.log("Error updating business plan level");
+                    $trace("Error updating business plan level");
                 }
             );
 

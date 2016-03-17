@@ -40,7 +40,7 @@
   margin-left: 10px
 }
 
-.save-form-button {
+.form-builder-button {
   margin-bottom: 30px;
 }
 
@@ -55,3 +55,71 @@
 .credit-card-error {
   margin-top: 30px;
 }
+
+.form-builder-arrow {
+  margin-top: 170px;
+  cursor: default;
+}
+
+.form-image-label {
+  margin-left: 17px;
+}
+
+.site-theme {
+  opacity: .35;
+}
+
+.themes {
+  margin: auto;
+  width: 37%;
+}
+
+.edit-emp{
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 7px;
+  background-color: transparent;
+  color: black;
+  border-color: transparent;
+}
+.invite-emp{
+  float:right;
+  margin-left: 0px;
+  margin-top: 15px;
+  margin-right:45px;
+}
+.widget-emp{
+  font-size:13px;
+  word-wrap: break-word;
+  padding-top: 7px;
+  overflow: scroll;
+}
+.grid-btn {
+  padding: 0 !important;
+}
+
+.btn-del{
+  background-color: transparent;
+  display: none;
+}
+
+tr:hover .btn-del{
+  display: block;
+}
+.inactive-widget{
+  padding: 0;
+}
+
+//.dropdown-menu {
+//  display: none;
+//  position: absolute;
+//}
+//
+//ul.dropmenu {
+//  z-index: 5000;
+//}
+//
+//.active-table{
+//  overflow-x: visible;
+//}

@@ -7,11 +7,9 @@
  */
 angular.module('iReceptionistApp')
 .controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $window, $cookies, BusinessService) {
-
-
     $scope.doLogout = function() {
-        $cookies.remove('user');
-        $cookies.remove('token');
+        $cookies.remove('user', {'path': '/'});
+        $cookies.remove('token', {'path': '/'});
         $window.location.href = '/auth';
     };
 
@@ -24,13 +22,13 @@ angular.module('iReceptionistApp')
 
     $scope.user = $cookies.getObject('user');
     if (!$cookies.get('business')){
-        console.log("business cookie");
+        $trace("business cookie");
         BusinessService.getBusiness(
             $scope.user.business,
             $cookies.get('token'),
             function (busObj){
-                console.log("Business: " + busObj);
-                console.log(busObj.business.name);
+                $trace("Business: " + busObj);
+                $trace(busObj.business.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
@@ -39,27 +37,29 @@ angular.module('iReceptionistApp')
         );
     }
 
-    /**
-    * Set up for anim-in-out because it requires a position: absolute element.
-    */
-    $rootScope.pageContentWidth = function() {
-        return $('#page-content').width();
-    };
-    $rootScope.pageContentHeight = function() {
-        return $('#page-content-ui-view').innerHeight();
-    };
-    $('#page-content').resize(function() {
-        $('#page-content-ui-view').width($rootScope.pageContentWidth());
-        $('#page-content').height($rootScope.pageContentHeight());
+    var pusher = new Pusher('7c84af4dd6941414d752', {
+        encrypted: true
     });
+
+    var channel;
+    if ($scope.user) {
+        channel = pusher.subscribe($scope.user.business);
+        channel.bind('newVisitor', function(data){
+            toastr.options = {
+                "positionClass": "toast-bottom-right",
+                "timeOut": "2500"
+            };
+            toastr.info('New visitor added to queue');
+        });
+    }
 
     /**
     * Clock Functionality
     */
     $scope.clock = '';
-    $scope.tickInterval = 10000; //ms
+    $scope.tickInterval = 1000; //ms
     var tick = function() {
-        $scope.clock = moment().format('LT');
+        $scope.clock = moment().format('LTS');
         $timeout(tick, $scope.tickInterval); // Reset Timer
     };
     // Start the timer
