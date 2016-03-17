@@ -37,12 +37,16 @@ angular.module('iReceptionistApp')
     $scope.suspendBusiness = function() {
         var businessID = $scope.clientsToShow[this.$index]._id;
         var suspendedToggle = !$scope.clientsToShow[this.$index].suspended;
+        console.log(businessID);
+        console.log(suspendedToggle);
+        $scope.indexToChange=this.$index;
         BusinessService.suspendBusiness(
             businessID,
             suspendedToggle, // Toggle the current suspension -- if true, send false, if false, send true
             $cookies.get('token'),
             function (busObj) {
                 $trace("Suspended business: " + busObj);
+                $scope.showSuspended($scope.indexToChange);
             },
             function (err) {
                 $trace("Suspend business fail: " + err.errorMsg);
@@ -173,25 +177,33 @@ angular.module('iReceptionistApp')
         getClientsDB();   //gets full business list.
     }
     
+    
+    
     //had to add this hack to not load rest of page until the business list is successfully loaded.
     $scope.continue = function() {
+        //initally show all clients
+        $scope.clientsToShow=$scope.clients;
         
         //initialize dates/suspended
         for (var i=0; i<$scope.clients.length; i++) {
-            var monthsToPrint = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            //var monthsToPrint = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             
             if ($scope.clients[i].suspended) {
+                /*
                 $scope.clients[i].dateJoined = 'SUSPENDED';
-                $('dateJoined'+i).addClass("suspended");
+                $('#dateJoined'+(i-1)).addClass("suspended");
+                */
+                updateSuspension(true, i);
             }
             else {
-                var dateObj =  new Date($scope.clients[i].timeStamp.created);
+            /*    var dateObj =  new Date($scope.clients[i].timeStamp.created);
 
                 var dayStr = dateObj.getDate();
                 var monthStr = monthsToPrint[dateObj.getMonth()];
                 var yearStr = dateObj.getFullYear();
 
-                $scope.clients[i].dateJoined = monthStr + ' ' + dayStr + ', ' + yearStr;
+                $scope.clients[i].dateJoined = monthStr + ' ' + dayStr + ', ' + yearStr;*/
+                updateSuspension(false, i);
             }
         }
         
@@ -235,90 +247,101 @@ angular.module('iReceptionistApp')
         $scope.currIcon = $('#plan_icon');
         $scope.currSorted.addClass('activeCategory');
 
-        //sort the chart
-        $scope.sortBy = function(category) {
-            switch(category) {
-                case 'name':
-                    if (lastSort==='name') {
-                        $scope.clients.reverse();
-                        lastSort='name';
-                        
-                        swapIcons('#name_icon', true);
-                    }
-                    else {
-                        $scope.clients.sort(function(a,b) {
-                            if (a.name.toLowerCase() < b.name.toLowerCase())
-                                return -1;
-                            else if (a.name.toLowerCase() > b.name.toLowerCase())
-                                return 1;
-                            else 
-                                return 0;
-                        });
-                        lastSort='name';
-                        
-                        swapIcons('#name_icon', false);
-                    }
+        // ALL INITIAL VALUES SET HERE //
+        $scope.lastSort = '';
+        var initialPlot = 'total_clients';
 
-                    $scope.currSorted.removeClass('activeCategory');
-                    $scope.currSorted = $('#name_categ');
-                    $scope.currIcon = $('#name_icon');
-                    $scope.currSorted.addClass('activeCategory');
+        //initially plot total_clients
+        $scope.plotNewData(initialPlot);
 
-                    break;
-                case 'joined':
-                    if (lastSort==='joined') {
-                        $scope.clients.reverse();
-                        lastSort='joined';
-                        
-                        swapIcons('#join_icon', true);
-                    }
-                    else {
-                        $scope.clients.sort(function(a,b) {
-                            //var aDate = new Date(a.timeStamp.created);
-                            //var bDate = new Date(b.timeStamp.created);
-                            return Date.parse(a.timeStamp.created)-Date.parse(b.timeStamp.created);
-                        });                 
-                        lastSort='joined';
-                        
-                        swapIcons('#join_icon', false);                 
-                    }
+        //initially sort by name
+        $scope.sortBy('name');
+    };
+    
+    //sort the chart
+    $scope.sortBy = function(category) {
+        switch(category) {
+            case 'name':
+                if ($scope.lastSort==='name') {
+                    $scope.clients.reverse();
+                    $scope.lastSort='name';
 
-                    $scope.currSorted.removeClass('activeCategory');
-                    $scope.currSorted = $('#join_categ');
-                    $scope.currIcon = $('#join_icon');
-                    $scope.currSorted.addClass('activeCategory');
+                    swapIcons('#name_icon', true);
+                }
+                else {
+                    $scope.clients.sort(function(a,b) {
+                        if (a.name.toLowerCase() < b.name.toLowerCase())
+                            return -1;
+                        else if (a.name.toLowerCase() > b.name.toLowerCase())
+                            return 1;
+                        else 
+                            return 0;
+                    });
+                    $scope.lastSort='name';
 
-                    break;
-                case 'plan':
-                    if (lastSort==='plan') {
-                        $scope.clients.reverse();
-                        lastSort='plan';
-                        
-                        swapIcons('#plan_icon', true);
-                    }
-                    else {
-                        $scope.clients.sort(function(a,b) {
-                            var plans = ['free', 'basic', 'premium', 'enterprize'];
-                            return plans.indexOf(a.planLevel.toLowerCase())-plans.indexOf(b.planLevel.toLowerCase());
-                        });
-                        lastSort='plan';
-                        
-                        swapIcons('#plan_icon', false);
-                    }
+                    swapIcons('#name_icon', false);
+                }
 
-                    $scope.currSorted.removeClass('activeCategory');
-                    $scope.currSorted = $('#plan_categ');
-                    $scope.currIcon = $('#plan_icon');
-                    $scope.currSorted.addClass('activeCategory');   
-                    
-                    break;
-                default:
-                    break;
-            }
-        };
+                $scope.currSorted.removeClass('activeCategory');
+                $scope.currSorted = $('#name_categ');
+                $scope.currIcon = $('#name_icon');
+                $scope.currSorted.addClass('activeCategory');
 
-        //idToSwap is the id of icon and reverse is boolean t/f if list was reversed
-        function swapIcons(idToSwap, reverse) {
+                break;
+            case 'joined':
+                if ($scope.lastSort==='joined') {
+                    $scope.clients.reverse();
+                    $scope.lastSort='joined';
+
+                    swapIcons('#join_icon', true);
+                }
+                else {
+                    $scope.clients.sort(function(a,b) {
+                        //var aDate = new Date(a.timeStamp.created);
+                        //var bDate = new Date(b.timeStamp.created);
+                        return Date.parse(a.timeStamp.created)-Date.parse(b.timeStamp.created);
+                    });                 
+                    $scope.lastSort='joined';
+
+                    swapIcons('#join_icon', false);                 
+                }
+
+                $scope.currSorted.removeClass('activeCategory');
+                $scope.currSorted = $('#join_categ');
+                $scope.currIcon = $('#join_icon');
+                $scope.currSorted.addClass('activeCategory');
+
+                break;
+            case 'plan':
+                if ($scope.lastSort==='plan') {
+                    $scope.clients.reverse();
+                    $scope.lastSort='plan';
+
+                    swapIcons('#plan_icon', true);
+                }
+                else {
+                    $scope.clients.sort(function(a,b) {
+                        var plans = ['free', 'basic', 'premium', 'enterprise'];
+                        return plans.indexOf(a.planLevel.toLowerCase())-plans.indexOf(b.planLevel.toLowerCase());
+                    });
+                    $scope.lastSort='plan';
+
+                    swapIcons('#plan_icon', false);
+                }
+
+                $scope.currSorted.removeClass('activeCategory');
+                $scope.currSorted = $('#plan_categ');
+                $scope.currIcon = $('#plan_icon');
+                $scope.currSorted.addClass('activeCategory');   
+
+                break;
+            default:
+                break;
+        }
+    };
+    
+    //idToSwap is the id of icon and reverse is boolean t/f if list was reversed
+    function swapIcons(idToSwap, reverse) {
             if (reverse) {
                 if($(idToSwap).hasClass('hi-sort-by-attributes')) {
                     $(idToSwap).removeClass('hi-sort-by-attributes');
@@ -344,12 +367,38 @@ angular.module('iReceptionistApp')
                 $scope.currIcon = $('idToSwap');
             }
         }
-        
-        
-        
+    
+    $scope.showSuspended = function(indToChange) {
+        console.log(indToChange);
+        if( $('#dateJoined'+indToChange).hasClass('SUSPENDED')) {
+            $('#dateJoined'+indToChange).removeClass('SUSPENDED');
+            updateSuspension(false, indToChange);
+        }
+        else {
+            $('#dateJoined'+indToChange).addClass('SUSPENDED');
+            updateSuspension(true, indToChange);
+        }
+    };
+    
+    //suspends/unsuspends business
+    var updateSuspension = function(trueIfSus, indexIntoClients) {
+        if (trueIfSus) { //suspend
+            $scope.clientsToShow[indexIntoClients].dateJoined='SUSPENDED';
+        }
+        else { //unsuspend
+            var monthsToPrint = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var dateObj =  new Date($scope.clientsToShow[indexIntoClients].timeStamp.created);
 
-        //plots whichever top category you pick
-        $scope.plotNewData = function(whichData) {
+            var dayStr = dateObj.getDate();
+            var monthStr = monthsToPrint[dateObj.getMonth()];
+            var yearStr = dateObj.getFullYear();
+
+            $scope.clientsToShow[indexIntoClients].dateJoined = monthStr + ' ' + dayStr + ', ' + yearStr;
+        }
+    }
+    
+    //plots whichever top category you pick
+    $scope.plotNewData = function(whichData) {
             var dataMonths = [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']];
             var dataToPlot = [];
             var updateData = function(whichData) {
@@ -422,45 +471,28 @@ angular.module('iReceptionistApp')
                 }
             });
         };
-
-
-        //search the list of clients
-        $('#chartSearch').keyup(function() {
-            var searchVal = $('#chartSearch').val().toLowerCase();
-            if (searchVal == '') {
-                $scope.clientsToShow=$scope.clients;
-            }
-            else {
-                var clientList = [];
-                for (var i=0; i<$scope.clients.length; i++) {
-                    var clientName = $scope.clients[i].name.toLowerCase();
-                    if (clientName.includes(searchVal)) {
-                        clientList.push($scope.clients[i]);
-                    }
+    
+    //search the list of clients
+    $('#chartSearch').keyup(function() {
+        var searchVal = $('#chartSearch').val().toLowerCase();
+        if (searchVal == '') {
+            $scope.clientsToShow=$scope.clients;
+        }
+        else {
+            var clientList = [];
+            for (var i=0; i<$scope.clients.length; i++) {
+                var clientName = $scope.clients[i].name.toLowerCase();
+                if (clientName.includes(searchVal)) {
+                    clientList.push($scope.clients[i]);
                 }
-                $scope.clientsToShow=clientList;
             }
-            $scope.$digest();
-        });
-
-        
-        
-        
-        // ALL INITIAL VALUES SET HERE //
-        var lastSort = '';
-        var initialPlot = 'total_clients';
-
-        //initially plot total_clients
-        $scope.plotNewData(initialPlot);
-
-        //initially sort by name
-        $scope.sortBy('name');
-
-        //initally show all clients
-        $scope.clientsToShow=$scope.clients;
-    };
+            $scope.clientsToShow=clientList;
+        }
+        $scope.$digest();
+    });
 
 });
+
 
     
 

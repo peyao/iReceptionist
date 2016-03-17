@@ -54,7 +54,7 @@ angular.module('iReceptionistApp')
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 data: {
-                    'deleteUserId': busId,
+                    'businessId': busId,
                     'suspended': isSuspend,
                 },
             };
