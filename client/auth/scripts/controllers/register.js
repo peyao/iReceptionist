@@ -144,22 +144,33 @@ angular.module('iReceptionistApp')
                         userObj.user.business,
                         userObj.token,
                         function(subdomain) {
+                            var domain = $location.host();
+                            if (domain === 'localhost') {
+                                // localhost is not a valid domain; it cannot handle subdomains,
+                                // so we leave out subdomains when working locally.
+                                subdomain = '';
+                            } else {
+                                subdomain += '.';
+                            }
                             var cookieDefaults = {
                                 'path': '/',
+                                'domain': domain
                             };
+
                             var path = '/app';
                             if (userObj.user.role < 0) {
                                 path = '/vip';
+                                subdomain = '';
                             }
+
+                            userObj.user.rememberMe = $scope.rememberMe;
                             $cookies.putObject('user', userObj.user, cookieDefaults);
                             $cookies.put('token', userObj.token, cookieDefaults);
 
-                            var domain = $location.host().replace(/[a-zA-Z]*\./,""); // Removes any subdomain.
-                            console.log('http://' + subdomain + '.' + domain + ':' + $location.port() + path);
-                            $window.location.href = 'http://' + subdomain + '.' + domain + ':' + $location.port() + path;
+                            $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
                         },
                         function(err) {
-                            $trace('log in fail');
+                            $trace('Log in fail: ', err);
                         }
                     );
                 },
