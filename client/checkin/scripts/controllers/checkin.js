@@ -2,13 +2,32 @@
  * Created by Amanda on 3/3/2016.
  */
 angular.module('iReceptionistApp')
-.controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService) {
+.controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService, BusinessService) {
     $scope.showFirst=true;
     $scope.showSecond=false;
 
     $scope.business = $cookies.getObject('business');
     var form = JSON.parse($scope.business.form);
     $builder.forms['visitorForm'] = form;
+
+    BusinessService.getBusiness(
+        "56ea6daa9992374421d390bd",
+        $cookies.get('token'),
+        function (busObj){
+            $trace("Business: " + busObj);
+            $trace(busObj.name);
+            $('body').css(
+                "background", "url(http://res.cloudinary.com/phoenix-sol/image/upload/" + busObj.backgroundImageUrl + ") 50% fixed"
+            );
+            $scope.publicId = busObj.iconURL;
+            $scope.companyName = busObj.name;
+            $cookies.putObject('business', busObj);
+        },
+        function (err) {
+            $trace("failure");
+            //$scope.alert.danger = err.errorMsg;
+        }
+    );
 
 
     var working = false;
