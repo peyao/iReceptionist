@@ -15,9 +15,8 @@ angular
     'ngAria',
     'ui.router',
     'ui.bootstrap',
-    'anim-in-out',
     'ngRoute',
-    'cloudinary'
+    'cloudinary',
 ])
 .config(function($stateProvider, $urlRouterProvider, cloudinaryProvider) {
 
@@ -27,6 +26,11 @@ angular
             url: '/',
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl'
+        })
+        .state('logout', {
+            url: '/logout',
+            templateUrl: 'views/logout.html',
+            controller: 'LogoutCtrl'
         })
         .state('reset-password', {
             url: '/reset',

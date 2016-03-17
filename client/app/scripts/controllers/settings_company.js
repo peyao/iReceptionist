@@ -9,21 +9,16 @@ angular.module('iReceptionistApp')
     .controller('SettingsCompanyCtrl', function($rootScope, $scope, $cookies, BusinessService, DropZone) {
         $rootScope.currentState = 'settings-company';
 
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
-
         toastr.options = {
             "positionClass": "toast-top-right",
             "timeOut": "2500"
         };
 
-        $scope.business = $cookies.getObject('business').business;
+        $scope.business = $cookies.getObject('business');
 
         // Object that holds the fields to update in the business. Must also include businessId.
         var businessFields = {
-            "businessId": $scope.user.business
+            "businessId": $scope.business._id
         };
 
         $scope.businessFieldChanged = function(field) {
@@ -33,7 +28,7 @@ angular.module('iReceptionistApp')
         var checkFieldsBusiness = function() {
             // Make sure we only send fields that have changed
             for (var key in businessFields) {
-                if (businessFields[key] === $cookies.getObject('business').business[key]) {
+                if (businessFields[key] === $cookies.getObject('business')[key]) {
                     delete businessFields[key];
                 }
             }
@@ -49,9 +44,7 @@ angular.module('iReceptionistApp')
                     toastr.success("Your settings were updated!");
 
                     // Update the business cookie
-                    var businessCookie = $cookies.getObject('business');
-                    businessCookie.business = busObj;
-                    $cookies.putObject('business', businessCookie);
+                    $cookies.putObject('business', busObj);
                 },
                 function (err) {
                     toastr.error("Error updating settings.");
