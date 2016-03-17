@@ -6,7 +6,7 @@ angular.module('iReceptionistApp')
 
         var bgImg = '';
         var getBusiness = function() {
-    
+
         console.log("hi again");
         console.log($cookies.get('token'));
         BusinessService.getBusiness(
@@ -27,16 +27,15 @@ angular.module('iReceptionistApp')
                 //$scope.alert.danger = err.errorMsg;
             }
         );
-             
+
         }
 
     $scope.showFirst=true;
     $scope.showSecond=false;
 
-    getBusiness();
-    //$scope.business = $cookies.getObject('business');
-    //$builder.forms=JSON.parse(sessionStorage.builderJson);
-    //console.log($builder);
+    $scope.business = $cookies.getObject('business');
+    var form = JSON.parse($scope.business.form);
+    $builder.forms['visitorForm'] = form;
 
     var working = false;
     $('.login').on('submit', function (e) {
@@ -94,7 +93,9 @@ angular.module('iReceptionistApp')
         $scope.showFirst=false;
         $scope.showSecond=true;
     };
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> final-dashboard
 });
-
-
-
