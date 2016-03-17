@@ -6,6 +6,7 @@ var bower       = require('gulp-bower');
 var nodemon     = require('gulp-nodemon');
 var uglify      = require('gulp-uglify');
 var concat      = require('gulp-concat');
+var annotate  = require('gulp-ng-annotate');
 var rename      = require('gulp-rename');
 var exec        = require('child_process').exec;
 var karmaServer = require('karma').Server;
@@ -98,6 +99,14 @@ var jsApp      = './client/app/**/*.js',
 /**
  * Concat
  */
+// Concatenate the .min.js files in assets/bower_componenets
+// Concat the .min.js files in assets/vendor/js/vendor/
+gulp.task('concat-min', function() {
+    return gulp.src([jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest));
+})
+
 gulp.task('uglify-app', function() {
     return gulp.src([jsApp, jsAssets])
         .pipe(uglify())
@@ -111,6 +120,7 @@ gulp.task('concat-app', function() {
 
 gulp.task('uglify-auth', function() {
     return gulp.src([jsAuth, jsAssets])
+        .pipe(annotate())
         .pipe(uglify())
         .pipe(gulp.dest(jsDest+'auth'));
 })
@@ -122,6 +132,7 @@ gulp.task('concat-auth', function() {
 
 gulp.task('uglify-checkin', function() {
     return gulp.src([jsCheckIn, jsAssets])
+        .pipe(annotate())
         .pipe(uglify())
         .pipe(gulp.dest(jsDest+'checkin'));
 })
@@ -133,6 +144,7 @@ gulp.task('concat-checkin', function() {
 
 gulp.task('uglify-vip', function() {
     return gulp.src([jsVIP, jsAssets])
+        .pipe(annotate())
         .pipe(uglify())
         .pipe(gulp.dest(jsDest+'vip'));
 })
@@ -143,6 +155,7 @@ gulp.task('concat-vip', function() {
 })
 
 gulp.task('minify-all', [
+    'concat-min',
     'uglify-app',
     'concat-app',
     'uglify-auth',
