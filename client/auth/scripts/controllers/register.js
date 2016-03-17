@@ -170,13 +170,14 @@ angular.module('iReceptionistApp')
                             $window.location.href = 'http://' + subdomain + domain + ':' + $location.port() + path;
                         },
                         function(err) {
-                            $trace('Log in fail: ', err);
+                            //$trace('Log in fail: ', err);
+                            $scope.alert.danger = err. Error
                         }
                     );
                 },
                 // Failure
                 function(err) {
-                    $scope.alert.danger = err.errorMsg;
+                    $scope.alert.danger = err.Error;
                 }
             );
         };
@@ -198,7 +199,6 @@ angular.module('iReceptionistApp')
                     //
                     // Automatically log-in after registration
                     //
-<<<<<<< HEAD
                     AuthenticationService.login(
                         {
                             'email': $scope.register.step1.email,
@@ -231,9 +231,9 @@ angular.module('iReceptionistApp')
                             //console.log(err);
                         }
                     );
-=======
+
                     $scope.doLogin();
->>>>>>> 8db3a7031979838bc0c50a79458c8f0ae1df5cab
+
                 },
 
                 // Error
