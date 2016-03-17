@@ -652,6 +652,8 @@ var App = function() {
       toastr.success("Employee has been promoted to admin")
     } else if (page === "delete-emp") {
       toastr.success("Employee has been deleted")
+    } else if (page === "delete-vis") {
+      toastr.success("Visitor has been deleted")
     }
   };
 
