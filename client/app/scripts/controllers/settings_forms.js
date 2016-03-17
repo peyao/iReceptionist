@@ -10,15 +10,15 @@ angular.module('iReceptionistApp')
         console.log('builder');
         console.log($builder);
 
-        $scope.saveNewForm = function() {
-            App.alert('forms-themes');
-            console.log($builder);
-            console.log(JSON.stringify($builder));
-            sessionStorage.builderJson = JSON.stringify($builder.forms);
-        };
+        //$scope.saveNewForm = function() {
+        //    App.alert('forms-themes');
+        //    console.log($builder);
+        //    console.log(JSON.stringify($builder));
+        //    sessionStorage.builderJson = JSON.stringify($builder.forms);
+        //};
 
         $rootScope.currentState = 'settings-forms';
-        $scope.defaultValue = {};
+
         $scope.user = $cookies.getObject('user');
 
         FormService.createForm(
@@ -29,10 +29,10 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function (formObj) {
                 $scope.employees = formObj;
-                console.log("Create form: " + formObj.form.form.some);
+                $trace("Create form: " + formObj.form.form.some);
             },
             function (err) {
-                console.log("Create form fail");
+                $trace("Create form fail");
             }
         );
 
@@ -55,16 +55,15 @@ angular.module('iReceptionistApp')
                 required: true,
                 editable: false
             });
-            $scope.defaultValue[name.id] = 'default value';
         }
 
         $scope.form = $builder.forms['default'];
         $scope.input = [];
         return $scope.submit = function() {
             return $validator.validate($scope, 'default').success(function() {
-                return console.log('success');
+                return $trace('success');
             }).error(function() {
-                return console.log('error');
+                return $trace('error');
             });
         };
 

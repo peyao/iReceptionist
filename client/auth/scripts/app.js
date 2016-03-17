@@ -15,7 +15,6 @@ angular
     'ngAria',
     'ui.router',
     'ui.bootstrap',
-    'anim-in-out',
     'ngRoute',
     'cloudinary'
 ])
@@ -43,3 +42,7 @@ angular
         .set("cloud_name", "phoenix-sol")
         .set("upload_preset", "phtsmngp");
 });
+
+function $trace(message) {
+    console.log("(DEBUG) " + message);
+}

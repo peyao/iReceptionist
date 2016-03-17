@@ -1,9 +1,12 @@
 // gulpfile.js
-var gulp        = require('gulp');
+var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var sass        = require('gulp-sass');
 var bower       = require('gulp-bower');
 var nodemon     = require('gulp-nodemon');
+var uglify      = require('gulp-uglify');
+var concat      = require('gulp-concat');
+var rename      = require('gulp-rename');
 var exec        = require('child_process').exec;
 var karmaServer = require('karma').Server;
 
@@ -83,6 +86,73 @@ gulp.task('bower-all', [
     'bower-marketing',
 ]);
 
+// path
+var jsApp      = './client/app/**/*.js',
+    jsAuth     = './client/auth/**/*.js',
+    jsCheckIn  = './client/checkin/**/*.js',
+    jsVIP      = './client/vip/**/*.js',
+    jsAssets   = './client/assets/services/*.js',
+    jsMins     = './client/**/*.min.js',
+    jsDest     = './dist/';
+
+/**
+ * Concat
+ */
+gulp.task('uglify-app', function() {
+    return gulp.src([jsApp, jsAssets])
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'app'));
+})
+gulp.task('concat-app', function() {
+    return gulp.src([jsDest+'app', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'app'));
+})
+
+gulp.task('uglify-auth', function() {
+    return gulp.src([jsAuth, jsAssets])
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'auth'));
+})
+gulp.task('concat-auth', function() {
+    return gulp.src([jsDest+'auth', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'auth'));
+})
+
+gulp.task('uglify-checkin', function() {
+    return gulp.src([jsCheckIn, jsAssets])
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'checkin'));
+})
+gulp.task('concat-checkin', function() {
+    return gulp.src([jsDest+'checkin', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'checkin'));
+})
+
+gulp.task('uglify-vip', function() {
+    return gulp.src([jsVIP, jsAssets])
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest+'vip'));
+})
+gulp.task('concat-vip', function() {
+    return gulp.src([jsDest+'vip', jsMins])
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'vip'));
+})
+
+gulp.task('minify-all', [
+    'uglify-app',
+    'concat-app',
+    'uglify-auth',
+    'concat-auth',
+    'uglify-checkin',
+    'concat-checkin',
+    'uglify-vip',
+    'concat-vip']
+);
+
 
 gulp.task('browser-sync', [], function() {
 
@@ -130,6 +200,7 @@ gulp.task('default', [
 gulp.task('setup', [
     'sass-all',
     'bower-all']
+    //'minify-all']
 );
 
 /**

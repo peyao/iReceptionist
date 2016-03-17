@@ -22,19 +22,35 @@ angular.module('iReceptionistApp')
 
     $scope.user = $cookies.getObject('user');
     if (!$cookies.get('business')){
-        console.log("business cookie");
+        $trace("business cookie");
         BusinessService.getBusiness(
             $scope.user.business,
             $cookies.get('token'),
             function (busObj){
-                console.log("Business: " + busObj);
-                console.log(busObj.business.name);
+                $trace("Business: " + busObj);
+                $trace(busObj.business.name);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
                 //$scope.alert.danger = err.errorMsg;
             }
         );
+    }
+
+    var pusher = new Pusher('7c84af4dd6941414d752', {
+        encrypted: true
+    });
+
+    var channel;
+    if ($scope.user) {
+        channel = pusher.subscribe($scope.user.business);
+        channel.bind('newVisitor', function(data){
+            toastr.options = {
+                "positionClass": "toast-bottom-right",
+                "timeOut": "2500"
+            };
+            toastr.info('New visitor added to queue');
+        });
     }
 
     /**

@@ -29,9 +29,13 @@ angular
             templateUrl: 'views/vip_dashboard.html',
             controller: 'VipDashboardCtrl'
         })
-        .state('vip-settings', {
-            url: '/settings',
-            templateUrl: 'views/vip_settings.html',
-            controller: 'VipSettingsCtrl'
+        .state('vip-employees', {
+            url: '/employees',
+            templateUrl: 'views/vip_employees.html',
+            controller: 'VipEmployeesCtrl'
         });
 });
+
+function $trace(message) {
+    console.log("(DEBUG) " + message);
+}
