@@ -21,6 +21,7 @@ angular.module('iReceptionistApp')
         $scope.step = 1;
         $scope.register = {};
         $scope.disableNextButton = true;
+        $scope.disabled = true;
         $scope.inputType = 'password';
 
 
