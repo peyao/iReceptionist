@@ -171,13 +171,23 @@ angular.module('iReceptionistApp')
                         },
                         function(err) {
                             //$trace('Log in fail: ', err);
-                            $scope.alert.danger = err.Error
+                            if(err!=null) {
+                                $scope.alert.danger = err.Error;
+                            }
+                            console.log('got here 1');
+                            console.log(err);
+
                         }
                     );
                 },
                 // Failure
                 function(err) {
-                    $scope.alert.danger = err.Error;
+                    if(err!=null) {
+                        $scope.alert.danger = err.Error;
+                    }
+                    console.log('got here 2');
+                    console.log(err);
+
                 }
             );
         };
@@ -227,8 +237,12 @@ angular.module('iReceptionistApp')
                         // Failure
                         function (err) {
                             //$trace('log in fail');
-                            $scope.alert.danger = err.Error;
-                            //console.log(err);
+                            if(err!=null){
+                                $scope.alert.danger = err.Error;
+                            }
+                            console.log('got here 3');
+                            console.log(err);
+
                         }
                     );
 
@@ -239,8 +253,12 @@ angular.module('iReceptionistApp')
                 // Error
                 function (err) {
                     //$trace('register fail');
-                    $scope.alert.danger = err.Error;
-                    //console.log(err);
+                    if(err!=null) {
+                        $scope.alert.danger = err.Error;
+                    }
+                    console.log('got here 4');
+                    console.log(err);
+
                 }
             );
         };
