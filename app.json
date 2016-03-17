@@ -4,7 +4,8 @@
   "scripts": {
   },
   "env": {
-    "MONGOLAB_URI": "mongodb://heroku_2028zcwv:c71fqlakfjr8tvski2tos40n7i@ds023438.mlab.com:23438/heroku_2028zcwv"
+    "MONGOLAB_URI": "mongodb://heroku_2028zcwv:c71fqlakfjr8tvski2tos40n7i@ds023438.mlab.com:23438/heroku_2028zcwv",
+    "NPM_CONFIG_PRODUCTION": "false"
   },
   "addons": [
 

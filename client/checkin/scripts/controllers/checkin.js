@@ -28,7 +28,6 @@ angular.module('iReceptionistApp')
                 $('.spinner').hide();
             }, 4000);
         }, 3000);
-
     });
 
     $scope.doCheckIn = function(){

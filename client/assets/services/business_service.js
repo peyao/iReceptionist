@@ -43,8 +43,18 @@ angular.module('iReceptionistApp')
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 data: {
-                    'deleteUserId': busId,
+                    'businessId': busId,
                     'suspended': isSuspend,
+                },
+            };
+            this.apiCall(req, success, error);
+        },
+        getBusinessList: function(token, success, error){
+            var req = {
+                method: 'GET',
+                url: '/business/list',
+                headers: {
+                    'Authorization': 'Bearer ' + token,
                 },
             };
             this.apiCall(req, success, error);

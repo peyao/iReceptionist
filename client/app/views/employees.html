@@ -1,6 +1,6 @@
 <div class="content-header">
   <div class="row">
-    <button type="submit" class="btn btn-primary"  style="float:right; margin-left: 0px; margin-top: 15px; margin-right:45px;" data-toggle="modal" data-target="#inviteEmp">Invite Employee</button>
+    <button type="submit" class="btn btn-primary invite-emp"  data-toggle="modal" data-target="#inviteEmp">Invite Employee</button>
     <div class="col-sm-6">
       <div class="header-section">
         <h1>Employees</h1>
@@ -16,19 +16,18 @@
                       class="caret"></i></button>
               <ul class="dropdown-menu dropdown-menu-right">
                   <li>
-                    <a href="javascript:void(0)" data-toggle="modal" data-target="#editEmp">
+                    <a href="" data-toggle="modal" data-target="#editEmp">
                     <i class="gi gi-edit pull-right"></i>
                     Edit </a>
-
                   </li>
-                  <li>
-                      <a href="javascript:void(0)" data-toggle="modal" data-target="#delete">
+                  <li ng-hide="role==2">
+                      <a href="" data-toggle="modal" data-target="#delete">
                       <i class="hi hi-trash pull-right"></i>
                       Delete </a>
                   </li>
               </ul>
           </div>
-          <a href="javascript:void(0)" class="widget">
+          <a href="javascript:void(0)" class="widget" style="height:360px;">
               <div class="widget-content text-center">
                 <img src="/assets/vendor/img/placeholders/avatars/avatar6@2x.jpg" class="img-circle img-thumbnail img-thumbnail-avatar-2x" alt="avatar"
                      class="img-circle img-thumbnail gi gi-picture">
@@ -36,28 +35,27 @@
               </div>
               <div class="widget-content themed-background-muted text-dark text-center">
                   <strong>
-                      <div ng-if="e.role==2">Manager</div>
+                    <div ng-if="e.role==1">Manager</div>
+                      <div ng-if="e.role==2">Owner</div>
                       <div ng-if="e.role==0">Employee</div>
                   </strong>
               </div>
-              <div class="widget-content">
+              <div class="widget-content" style="padding-top:10px;">
                   <div class="row text-center">
-                    <div class="col-xs-12">
                       <div class="col-xs-6">
                           <h3 class="widget-heading">
                               <i class="gi gi-envelope"></i>
                               <br>
-                              <span style="font-size:13px;"> {{e.email}}</span>
+                              <div class="widget-emp"> {{e.email}}</div>
                           </h3>
                       </div>
-                      <div class="col-xs-6" style="padding:0px;">
+                      <div class="col-xs-6 grid-btn">
                           <h3 class="widget-heading">
                               <i class="gi gi-earphone"></i>
                               <br>
-                              <span style="font-size:13px;" ng-bind="e.phone | tel"> </span>
+                              <div class="widget-emp" ng-bind="e.phone | tel"> </div>
                           </h3>
                       </div>
-                    </div>
                   </div>
               </div>
           </a>
@@ -101,8 +99,11 @@
           </div>
         </div>
         <div class="modal-footer form-group form-actions">
-          <button type="submit" class="btn btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee()">Invite</button>
-          <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+          <div class="col-xs-6">
+          <button type="button" class="btn btn-block btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+          </div>
+          <div class="col-xs-6">
+          <button type="submit" class="btn btn-block btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee()">Invite</button>
         </div>
       </form>
     </div>
@@ -134,7 +135,6 @@
             <div class="col-sm-12">
               <input type="email" id="email" ng-model="editEmp.email" placeholder="jsmith@email.com" name="email" class="form-control" required>
               <span class="help-block" ng-show="editForm.email.$invalid && !editForm.email.$pristine">Please enter a valid email address</span>
-
             </div>
           </div>
           <div class="form-group row">
@@ -145,16 +145,18 @@
               </span>
             </div>
           </div>
-          <div class="form-group row">
+          <div class="form-group row" ng-hide="role==2">
             <label class="col-md-8 control-label" for="example-select">Role</label>
             <div class="col-sm-12">
-              <select id="example-select" name="example-select" class="form-control" size="1">
-                <option value="0">
-                  <div>{{role==2 ? 'Manager' : 'Employee'}}</div>
+              <select id="example-select" name="{{role}}" name="example-select" ng-model="editEmp.role" class="form-control" ng-change="changeRole()" size="1">
+               <option value="">{{role==1 ? 'Manager' : 'Employee'}}</option>
+                <option ng-hide="role==1" value="1">
+                  <div>Manager<div>
                 </option>
-                <option value="1">
-                  <div>{{role==0 ? 'Manager' : 'Employee'}}</div>
+                <option ng-hide="role==0" value="0">
+                  <div>Employee</div>
                 </option>
+
               </select>
             </div>
           </div>

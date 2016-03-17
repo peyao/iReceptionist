@@ -138,7 +138,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="employees" ng-class="{active: currentState === 'employees'}">
+                                    <a ui-sref="employees" ng-show="user.role > 0" ng-class="{active: currentState === 'employees'}">
                                         <i class="gi gi-group sidebar-nav-icon"></i>
                                         <span class="sidebar-nav-mini-hide">Employees</span>
                                     </a>
@@ -154,16 +154,16 @@
                                             <a ui-sref="settings-account" ng-class="{active: currentState === 'settings-account'}">
                                                 Account
                                             </a>
-                                            <a ui-sref="settings-company" ng-class="{active: currentState === 'settings-company'}">
+                                            <a ui-sref="settings-company" ng-show="user.role > 0" ng-class="{active: currentState === 'settings-company'}">
                                                 Company
                                             </a>
                                             <a ui-sref="settings-notifications" ng-class="{active: currentState === 'settings-notifications'}">
                                                 Notifications
                                             </a>
-                                            <a ui-sref="settings-forms" ng-class="{active: currentState === 'settings-forms'}">
+                                            <a ui-sref="settings-forms" ng-show="user.role > 0" ng-class="{active: currentState === 'settings-forms'}">
                                                 Forms
                                             </a>
-                                            <a ui-sref="settings-billing" ng-class="{active: currentState === 'settings-billing'}">
+                                            <a ui-sref="settings-billing" ng-show="user.role > 0" ng-class="{active: currentState === 'settings-billing'}">
                                                 Billing
                                             </a>
                                         </li>
