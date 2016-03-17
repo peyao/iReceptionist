@@ -55,7 +55,7 @@
                                 <label for="logoUpload" class="text-left">Logo</label>
                                 <div  class="row">
                                     <div class="col-xs-4">
-                                        <cl-image public-id="tablet_icon" class="tablet-image"></cl-image>
+                                        <cl-image public-id="{{logoId}}" class="tablet-image"></cl-image>
                                     </div>
                                     <div class="col-xs-6">
                                         <div id="logoUpload" class="dropzone">
@@ -68,7 +68,7 @@
                                 <label for="bgUpload" class="text-left">Visitor Background</label>
                                 <div class="row">
                                     <div class="col-xs-4">
-                                        <cl-image public-id="tablet_icon" class="tablet-image"></cl-image>
+                                        <cl-image public-id="{{bgId}}" class="tablet-image"></cl-image>
 
                                     </div>
                                     <div class="col-xs-6">
@@ -76,6 +76,11 @@
                                             <div class="dz-default dz-message"></div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-effect-ripple btn-primary" ng-click="updateImages();">Submit</button>
                                 </div>
                             </div>
                         </form>

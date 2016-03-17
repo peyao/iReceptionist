@@ -62,7 +62,7 @@ angular.module('iReceptionistApp')
             },
             // Failure
             function(err) {
-                $scope.alert.danger = err.errorMsg;
+                $scope.alert.danger = err.Error;
             }
         );
     };

@@ -28,7 +28,7 @@ angular
                 url: '/',
                 templateUrl: 'views/checkin.html',
                 controller: 'CheckinCtrl'
-            })
+            });
         cloudinaryProvider
             .set("cloud_name", "phoenix-sol")
             .set("upload_preset", "phtsmngp");

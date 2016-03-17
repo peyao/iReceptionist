@@ -30,6 +30,17 @@ angular.module('iReceptionistApp')
         $scope.confirmPassword = '';
 
         $scope.selectedTheme = $scope.user.settings.theme;
+        $rootScope.publicId = $scope.user.avatar;
+
+        var lastUploadedAvatar = '';
+
+        $scope.avatarUpload = DropZone.createNew('#avatarUpload');
+
+        $scope.avatarUpload.on('success', function (file, response) {
+            console.log(file);
+            console.log('Success! Cloudinary public ID is', response.public_id);
+            lastUploadedAvatar = response.public_id;
+        });
 
         // Highlight the selected theme or the first one if a theme hasn't been chosen yet
         if ($scope.selectedTheme) {
@@ -57,15 +68,23 @@ angular.module('iReceptionistApp')
 
         $scope.updateUser = function() {
             checkFieldsUser();
+            userFields['avatar'] = lastUploadedAvatar;
+            $trace(lastUploadedAvatar);
+            $trace("avatar: " + userFields['avatar']);
+            $trace("root before update: " + $rootScope.publicId);
 
             UserService.updateUser(
                 userFields,
                 $cookies.get('token'),
                 function (userObj) {
                     toastr.success("Your settings have been updated!");
-
                     // Update the user cookie
                     $cookies.putObject('user', userObj);
+                    $rootScope.publicId = lastUploadedAvatar;
+
+                    $scope.publicId = $rootScope.publicId;
+                    $trace("root after update: " + $rootScope.publicId);
+
                 },
                 function (err) {
                     toastr.error("Error updating settings.");
@@ -150,5 +169,4 @@ angular.module('iReceptionistApp')
             );
         };
 
-        $scope.avatarUpload = DropZone.createNew('#avatarUpload');
     });
