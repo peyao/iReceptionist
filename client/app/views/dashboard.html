@@ -26,8 +26,8 @@
         <table class="table table-borderless remove-margin">
           <tbody>
             <tr ng-repeat="(key,value) in activeVisitor">
-              <td ng-show="key !== 'timeStamp'"><a href="javascript:void(0)" class="text-black">{{key | uppercase}}</a></td>
-              <td ng-show="key !== 'timeStamp'" class="text-center" style="width: 80px;"><span class="text-muted">{{value}}</span></td>
+              <td ng-show="keyLeaveOut(key)"><a href="javascript:void(0)" class="text-black">{{key | uppercase}}</a></td>
+              <td ng-show="keyLeaveOut(key)" class="text-center" style="width: 80px;"><span class="text-muted">{{value || 'None'}}</span></td>
             </tr>
           </tbody>
         </table>

@@ -143,6 +143,7 @@ angular.module('iReceptionistApp')
                 function (visObj){
                     $trace("Checked off: " + visObj);
                     getActive();
+                    $scope.getInactive();
                 },
                 function (err) {
             //        $scope.alert.danger = err.errorMsg;
@@ -296,13 +297,17 @@ angular.module('iReceptionistApp')
             $scope.$digest();
         });
 
+        $scope.keyLeaveOut = function(key) {
+            if (['_id','businessId', '__v', 'form', 'timeStamp', 'checkOff'].indexOf(key) === -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         $scope.showVisitorBlock = false;
         $scope.activeVisitor = {};
         $scope.hoverVisitor = function(v) {
-            $scope.showVisitorBlock = true;
-            $scope.activeVisitor = v;
-        };
-        $scope.selectVisitor = function(v) {
             $scope.showVisitorBlock = true;
             $scope.activeVisitor = v;
         };
