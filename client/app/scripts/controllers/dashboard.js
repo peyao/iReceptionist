@@ -73,8 +73,7 @@ angular.module('iReceptionistApp')
         $scope.getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var date = $('#example-datepicker3').datepicker('getDate');
-            $trace(date);
-            var searchDate = (date.getMonth()+1) + "-" + date.getDate() + "-" + date.getFullYear();
+            var searchDate = moment(date).add(1,'d').format('MM-DD-YYYY');
             $trace(searchDate);
             $trace($scope.data.perPage.id);
             VisitorService.getVisited(
@@ -158,6 +157,7 @@ angular.module('iReceptionistApp')
                 function (visObj){
                     $trace("Deleted: " + visObj);
                     getActive();
+                    $scope.getInactive();
                 },
                 function (err) {
                     $trace("Delete Visitor Failed: " + visObj);
