@@ -12,3 +12,10 @@ http://ireceptionist.cf
 ### How to Run Tests
 
     gulp test
+
+
+### Backend
+
+https://github.com/MartinGao/CSE112-Server-Team8
+
+https://cse112.siriolabs.com/doc/
