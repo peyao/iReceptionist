@@ -1,4 +1,4 @@
-# iReceptionist
+# iReceptionist [![Code Climate](https://codeclimate.com/github/peyao/iReceptionist/badges/gpa.svg)](https://codeclimate.com/github/peyao/iReceptionist)
 
 A new take on the original iReceptionist.
 
