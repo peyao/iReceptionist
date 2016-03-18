@@ -204,8 +204,6 @@ angular.module('iReceptionistApp')
                             if(err!=null) {
                                 $scope.alert.danger = err.Error;
                             }
-                            console.log('got here 1');
-                            console.log(err);
 
                         }
                     );
@@ -215,8 +213,6 @@ angular.module('iReceptionistApp')
                     if(err!=null) {
                         $scope.alert.danger = err.Error;
                     }
-                    console.log('got here 2');
-                    console.log(err);
 
                 }
             );
@@ -242,8 +238,7 @@ angular.module('iReceptionistApp')
                 function (regObj) {
                     $trace('register success');
                     // Automatically log-in after registration
-                    //
-                    AuthenticationService.login(
+                    /*AuthenticationService.login(
                         {
                             'email': $scope.register.step1.email,
                             'password': $scope.register.step1.password
@@ -278,7 +273,7 @@ angular.module('iReceptionistApp')
                             console.log(err);
 
                         }
-                    );
+                    );*/
 
                     $scope.doLogin();
                 },
@@ -289,8 +284,6 @@ angular.module('iReceptionistApp')
                     if(err!=null) {
                         $scope.alert.danger = err.Error;
                     }
-                    console.log('got here 4');
-                    console.log(err);
 
                 }
             );
