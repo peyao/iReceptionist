@@ -3,39 +3,35 @@
  */
 angular.module('iReceptionistApp')
 .controller('CheckinCtrl', function($scope, $builder, $rootScope, $cookies, VisitorService, BusinessService) {
-
-        var bgImg = '';
-        var getBusiness = function() {
-
-        console.log("hi again");
-        console.log($cookies.get('token'));
-        BusinessService.getBusiness(
-            "56ea6daa9992374421d390bd",
-            $cookies.get('token'),
-            function (busObj){
-                $trace("Business: " + busObj);
-                $trace(busObj.name);
-                $('body').css(
-                    "background", "url(http://res.cloudinary.com/phoenix-sol/image/upload/" + busObj.backgroundImageUrl + ") 50% fixed"
-                );
-                $scope.publicId = busObj.iconURL;
-                $scope.companyName = busObj.name;
-                $cookies.putObject('business', busObj);
-            },
-            function (err) {
-                $trace("failure");
-                //$scope.alert.danger = err.errorMsg;
-            }
-        );
-
-        }
-
     $scope.showFirst=true;
     $scope.showSecond=false;
 
     $scope.business = $cookies.getObject('business');
+    console.log($scope.business);
     var form = JSON.parse($scope.business.form);
     $builder.forms['visitorForm'] = form;
+    $scope.form = $builder.forms['visitorForm'];
+    $scope.input = [];
+
+    BusinessService.getBusiness(
+        "56ea6daa9992374421d390bd",
+        $cookies.get('token'),
+        function (busObj){
+            $trace("Business: " + busObj);
+            $trace(busObj.name);
+            $('body').css(
+                "background", "url(http://res.cloudinary.com/phoenix-sol/image/upload/" + busObj.backgroundImageUrl + ") 50% fixed"
+            );
+            $scope.publicId = busObj.iconURL;
+            $scope.companyName = busObj.name;
+            $cookies.putObject('business', busObj);
+        },
+        function (err) {
+            $trace("failure");
+            //$scope.alert.danger = err.errorMsg;
+        }
+    );
+
 
     var working = false;
     $('.login').on('submit', function (e) {
@@ -71,31 +67,30 @@ angular.module('iReceptionistApp')
     };
 
     $scope.doCheckIn = function(){
+        console.log($scope.input);
+        var name;
+        // Find the name field
+        for (var i = 0; i < $scope.input.length; i++) {
+            if ($scope.input[i]['label'] === 'Name') {
+                name = $scope.input[i]['value'];
+            }
+        }
 
-        $trace($scope.fstname + " " + $scope.lstname);
         $trace($cookies.get('token'));
         VisitorService.checkin(
             {
-                'name' : $scope.fstname + " " + $scope.lstname,
-                'phone': $scope.phonenum
+                'name' : name
             },
             $cookies.get('token'),
             function(){
                 $trace("Success new visitor");
-                $scope.fstname = null;
-                $scope.lstname = null;
-                $scope.phonenum = null;
+                $scope.input = [];
             },
             function(err) {
-                $scope.alert.danger = err.errorMsg;
+                $scope.alert.danger = err.error;
             }
         );
         $scope.showFirst=false;
         $scope.showSecond=true;
     };
-<<<<<<< HEAD
-=======
-
-
->>>>>>> final-dashboard
 });

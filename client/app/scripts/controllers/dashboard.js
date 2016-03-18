@@ -6,7 +6,9 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-    .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService, UserService) {
+    .controller('DashboardCtrl', function($rootScope, $scope, $cookies,
+        VisitorService, UserService, AnalyticsService) {
+
         $rootScope.currentState = 'dashboard';
 
         if($cookies.get('tourDash') != -1){
@@ -55,15 +57,6 @@ angular.module('iReceptionistApp')
                 $cookies.get('token'),
                 function (visObj) {
                     $scope.visitors = visObj;
-        $scope.visitors = [{
-            'name': 'Peter Yao',
-            'timeStamp': {
-                'created': Date.now(),
-                'updated': Date.now()
-            },
-            'phone': '6261234567'
-        }];
-
                     $trace("Grabbing active visitors: ");
                     $trace(visObj);
                 },
@@ -150,6 +143,7 @@ angular.module('iReceptionistApp')
                 function (visObj){
                     $trace("Checked off: " + visObj);
                     getActive();
+                    $scope.getInactive();
                 },
                 function (err) {
             //        $scope.alert.danger = err.errorMsg;
@@ -170,6 +164,18 @@ angular.module('iReceptionistApp')
                 }
             );
         };
+
+        AnalyticsService.getAnalyticsVisitor(
+            $cookies.get('token'),
+            moment().format('MM-DD-YYYY'),
+            moment().subtract(7,'d').format('MM-DD-YYYY'),
+            function(data) {
+                console.log(data);
+                $scope.chartDataUnformatted = data;
+                $scope.numVisitors = data.count;
+            },
+            function() {}
+        );
 
         var chartClassicDash = $('#chart-classic-dash');
         $.plot(chartClassicDash,
@@ -291,13 +297,17 @@ angular.module('iReceptionistApp')
             $scope.$digest();
         });
 
+        $scope.keyLeaveOut = function(key) {
+            if (['_id','businessId', '__v', 'form', 'timeStamp', 'checkOff'].indexOf(key) === -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         $scope.showVisitorBlock = false;
         $scope.activeVisitor = {};
         $scope.hoverVisitor = function(v) {
-            $scope.showVisitorBlock = true;
-            $scope.activeVisitor = v;
-        };
-        $scope.selectVisitor = function(v) {
             $scope.showVisitorBlock = true;
             $scope.activeVisitor = v;
         };
