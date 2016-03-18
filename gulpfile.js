@@ -104,7 +104,6 @@ var jsApp      = './client/app/**/*.js',
         './client/assets/bower_components/angular-sanitize/*.min.js',
         './client/assets/bower_components/angular-aria/*.min.js',
         './client/assets/bower_components/angular-bootstrap/*.min.js',
-        './client/assets/bower_components/angular-ui-router-anim-in-out/*.js',
         './client/assets/bower_components/lodash/*.min.js',
         './client/assets/bower_components/cloudinary-core/*.min.js',
         './client/assets/bower_components/angular-route/*.min.js',
@@ -118,7 +117,6 @@ var jsApp      = './client/app/**/*.js',
         './client/assets/bower_components/angular-sanitize/*.min.js',
         './client/assets/bower_components/angular-aria/*.min.js',
         './client/assets/bower_components/angular-bootstrap/*.min.js',
-        './client/assets/bower_components/angular-ui-router-anim-in-out/*.js',
         './client/assets/bower_components/toastr/*.min.js',
         './client/assets/bower_components/pusher/dist/*.min.js',
         './client/assets/bower_components/loading-bar/*.min.js',
@@ -127,17 +125,55 @@ var jsApp      = './client/app/**/*.js',
         './client/assets/bower_components/angular-route/*.min.js',
         './client/assets/bower_components/cloudinary_ng/js/*.js'
     ],
-    jsDest     = './client/auth/dist/';
+    jsCheckinMins   = ['./client/assets/bower_components/angular/*.min.js',
+        './client/assets/bower_components/angular-ui-router/**/*.min.js',
+        './client/assets/bower_components/angular-animate/*.min.js',
+        './client/assets/bower_components/angular-cookies/*.min.js',
+        './client/assets/bower_components/angular-resource/*.min.js',
+        './client/assets/bower_components/angular-sanitize/*.min.js',
+        './client/assets/bower_components/angular-aria/*.min.js',
+        './client/assets/bower_components/angular-bootstrap/*.min.js',
+        './client/assets/bower_components/lodash/*.min.js',
+        './client/assets/bower_components/cloudinary-core/*.min.js',
+        './client/assets/bower_components/angular-route/*.min.js',
+        './client/assets/bower_components/cloudinary_ng/js/*.js'
+    ],
+    jsVIPMins   = ['./client/assets/bower_components/angular/*.min.js',
+        './client/assets/bower_components/angular-ui-router/**/*.min.js',
+        './client/assets/bower_components/angular-animate/*.min.js',
+        './client/assets/bower_components/angular-cookies/*.min.js',
+        './client/assets/bower_components/angular-resource/*.min.js',
+        './client/assets/bower_components/angular-sanitize/*.min.js',
+        './client/assets/bower_components/angular-aria/*.min.js',
+        './client/assets/bower_components/angular-bootstrap/*.min.js',
+        './client/assets/vendor/js/angular-loading-bar/*.js'
+    ],
+    jsDest     = './client/';
 
 /**
  * Concat
  */
 // Concatenate the .min.js files in assets/bower_componenets
 // Concat the .min.js files in assets/vendor/js/vendor/
-gulp.task('concat-min', function() {
+gulp.task('concat-app-min', function() {
+    return gulp.src(jsAppMins)
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'app/dist/'));
+})
+gulp.task('concat-auth-min', function() {
     return gulp.src(jsAuthMins)
         .pipe(concat('dist.js'))
-        .pipe(gulp.dest(jsDest));
+        .pipe(gulp.dest(jsDest+'auth/dist/'));
+})
+gulp.task('concat-checkin-min', function() {
+    return gulp.src(jsCheckinMins)
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'checkin/dist/'));
+})
+gulp.task('concat-vip-min', function() {
+    return gulp.src(jsVIPMins)
+        .pipe(concat('dist.js'))
+        .pipe(gulp.dest(jsDest+'vip/dist/'));
 })
 
 //gulp.task('uglify-app', function() {
@@ -190,7 +226,10 @@ gulp.task('concat-min', function() {
 //})
 
 gulp.task('minify-all', [
-    'concat-min']
+    'concat-app-min',
+    'concat-auth-min',
+    'concat-checkin-min',
+    'concat-vip-min']
     //'uglify-app',
     //'concat-app',
     //'uglify-auth',
