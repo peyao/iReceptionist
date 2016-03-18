@@ -48,6 +48,12 @@ angular.module('iReceptionistApp')
             $cookies.get('token'),
             function (busObj){
                 $trace("Business: " + busObj);
+                var domain = $location.host();
+                var cookieDefaults = {
+                    'path': '/checkin',
+                    'domain': domain
+                };
+                $cookies.putObject('business', busObj, cookieDefaults);
                 $cookies.putObject('business', busObj);
             },
             function (err) {
@@ -63,7 +69,7 @@ angular.module('iReceptionistApp')
     console.log($cookies.getObject('user'));
     console.log($cookies.getObject('user').settings);
 
-    if ($scope.user && $cookies.getObject('user').settings.receiveBrowserNotification) {
+    if ($scope.user) {
         channel = pusher.subscribe($scope.user.business);
         channel.bind('newVisitor', function(data){
             toastr.options = {

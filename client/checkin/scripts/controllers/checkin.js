@@ -7,6 +7,7 @@ angular.module('iReceptionistApp')
     $scope.showSecond=false;
 
     $scope.business = $cookies.getObject('business');
+    console.log($scope.business);
     var form = JSON.parse($scope.business.form);
     $builder.forms['visitorForm'] = form;
     $scope.form = $builder.forms['visitorForm'];
