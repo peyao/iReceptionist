@@ -9,6 +9,8 @@ angular.module('iReceptionistApp')
     $scope.business = $cookies.getObject('business');
     var form = JSON.parse($scope.business.form);
     $builder.forms['visitorForm'] = form;
+    $scope.form = $builder.forms['visitorForm'];
+    $scope.input = [];
 
     BusinessService.getBusiness(
         "56ea6daa9992374421d390bd",
@@ -64,23 +66,27 @@ angular.module('iReceptionistApp')
     };
 
     $scope.doCheckIn = function(){
+        console.log($scope.input);
+        var name;
+        // Find the name field
+        for (var i = 0; i < $scope.input.length; i++) {
+            if ($scope.input[i]['label'] === 'Name') {
+                name = $scope.input[i]['value'];
+            }
+        }
 
-        $trace($scope.fstname + " " + $scope.lstname);
         $trace($cookies.get('token'));
         VisitorService.checkin(
             {
-                'name' : $scope.fstname + " " + $scope.lstname,
-                'phone': $scope.phonenum
+                'name' : name
             },
             $cookies.get('token'),
             function(){
                 $trace("Success new visitor");
-                $scope.fstname = null;
-                $scope.lstname = null;
-                $scope.phonenum = null;
+                $scope.input = [];
             },
             function(err) {
-                $scope.alert.danger = err.errorMsg;
+                $scope.alert.danger = err.error;
             }
         );
         $scope.showFirst=false;
