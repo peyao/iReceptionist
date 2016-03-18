@@ -84,8 +84,8 @@ angular.module('iReceptionistApp')
         $scope.newEmp.email,
         "Please Accept your Invitation",
         "Welcome " + $scope.newEmp.name + "! \n You have been invited to join our " +
-         "iReceptionist app. Please log in to the website at linkiReceptionist.cf/auth with the email: " + $scope.newEmp.email +
-         "\n Please use the password: HelloWorld \n\n Remember to change your password once youve logged in.",
+         "iReceptionist app. Please log in to the website at link iReceptionist.cf/auth with the email: " + $scope.newEmp.email +
+         "\n Please use the password: HelloWorld \n\n Remember to change your password once you've logged in.",
       $cookies.get('token'),
       function (succ){
         $trace("Sent email to" + $scope.newEmp.email);
