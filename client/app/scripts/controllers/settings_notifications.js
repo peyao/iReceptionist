@@ -9,11 +9,6 @@ angular.module('iReceptionistApp')
     .controller('SettingsNotificationsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, UserService) {
         $rootScope.currentState = 'settings-notifications';
 
-        $('#page-content-ui-view').resize(function() {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
-
         $scope.user = $cookies.getObject('user');
 
         $scope.updateEmailNotifications = function() {
@@ -60,8 +55,25 @@ angular.module('iReceptionistApp')
             );
         };
 
-        // Need browser notifications field in user settings
-        /*$scope.updateBrowserNotifications = function() {
-         // User service call
-         };*/
+        $scope.updateBrowserNotifications = function() {
+            var receiveBrowser = $scope.user.settings.receiveBrowserNotification === true ? "true" : "false";
+
+            UserService.updateUser(
+                {
+                    "receiveBrowserNotification": receiveBrowser
+                },
+                $cookies.get('token'),
+                function (userObj) {
+                    toastr.success("Your settings have been updated!");
+
+                    // Update the user cookie
+                    $cookies.putObject('user', userObj);
+                    $trace(userObj);
+                },
+                function (err) {
+                    toastr.error("Error updating notification settings.");
+                    $trace(err);
+                }
+            );
+        };
     });

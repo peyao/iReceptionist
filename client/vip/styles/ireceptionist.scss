@@ -13,3 +13,24 @@
     color: red;
     text-emphasis: bold;
 }
+
+.edit-emp{
+     position: absolute;
+     z-index: 100;
+     top: 0;
+     right: 7px;
+     background-color: transparent;
+     color: black;
+     border-color: transparent;
+}
+.invite-emp{
+     float:right;
+     margin-left: 0px;
+     margin-top: 15px;
+     margin-right:45px;
+}
+.widget-emp{
+     font-size:13px;
+     word-wrap: break-word;
+     padding-top: 7px;
+}

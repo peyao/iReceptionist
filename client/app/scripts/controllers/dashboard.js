@@ -6,15 +6,28 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-    .controller('DashboardCtrl', function($rootScope, $scope, $cookies, VisitorService, UserService) {
+    .controller('DashboardCtrl', function($rootScope, $scope, $cookies,
+        VisitorService, UserService, AnalyticsService) {
+
         $rootScope.currentState = 'dashboard';
 
+        if($cookies.get('tourDash') != -1){
+          $scope.currentStepD = 0;
+        }
+          //$cookies.put('tourDash',0);
+
+        $scope.tourComplete=function(){
+          $trace("tourcompleted" + $scope.currentStepD);
+          $cookies.put('tourDash',-1);
+        };
 		// Initialize Datepicker
         $('#example-datepicker3').datepicker('setDate', new Date())
             .on('changeDate', function(){
                 $trace("Change Date");
                 $scope.getInactive();
             });
+
+
         var PAGE_DEFAULT = 1;
         var ACTIVE_PER_DEFAULT = 500;
         $scope.totalItems = 0;
@@ -37,8 +50,6 @@ angular.module('iReceptionistApp')
             perPage : {id: '10', name: '10'},
         };
 
-        $trace($scope.data.perPage);
-
         var getActive = function(){
             VisitorService.getVisitorQueue(
                 PAGE_DEFAULT,
@@ -50,21 +61,19 @@ angular.module('iReceptionistApp')
                     $trace(visObj);
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
                 }
             );
         };
-		
+
         $scope.saveVis = function(v){
           $scope.vname = v.name;
           $scope.vId = v._id;
         };
-		
+
         $scope.getInactive = function(){
             //TODO: remove date for final - this is for testing - should get date from picker
             var date = $('#example-datepicker3').datepicker('getDate');
-            $trace(date);
-            var searchDate = (date.getMonth()+1) + "-" + date.getDate() + "-" + date.getFullYear();
+            var searchDate = moment(date).add(1,'d').format('MM-DD-YYYY');
             $trace(searchDate);
             $trace($scope.data.perPage.id);
             VisitorService.getVisited(
@@ -133,9 +142,10 @@ angular.module('iReceptionistApp')
                 function (visObj){
                     $trace("Checked off: " + visObj);
                     getActive();
+                    $scope.getInactive();
                 },
                 function (err) {
-                    $scope.alert.danger = err.errorMsg;
+            //        $scope.alert.danger = err.errorMsg;
                 }
             );
         };
@@ -147,12 +157,25 @@ angular.module('iReceptionistApp')
                 function (visObj){
                     $trace("Deleted: " + visObj);
                     getActive();
+                    $scope.getInactive();
                 },
                 function (err) {
                     $trace("Delete Visitor Failed: " + visObj);
                 }
             );
-        }
+        };
+
+        AnalyticsService.getAnalyticsVisitor(
+            $cookies.get('token'),
+            moment().format('MM-DD-YYYY'),
+            moment().subtract(7,'d').format('MM-DD-YYYY'),
+            function(data) {
+                console.log(data);
+                $scope.chartDataUnformatted = data;
+                $scope.numVisitors = data.count;
+            },
+            function() {}
+        );
 
         var chartClassicDash = $('#chart-classic-dash');
         $.plot(chartClassicDash,
@@ -174,88 +197,6 @@ angular.module('iReceptionistApp')
             }
         );
 
-        //$scope.currSorted = $('#name_categ');
-        //$scope.currSorted.addClass('activeCategory');
-        //
-        ////sort the chart
-        //$scope.sortBy = function(category) {
-        //    switch(category) {
-        //        case 'name':
-        //            if (lastSort==='name') {
-        //                $scope.inactive.reverse();
-        //                lastSort='name';
-        //            }
-        //            else {
-        //                $scope.inactive.sort(function(a,b) {
-        //                    if (a.name < b.name)
-        //                        return -1;
-        //                    else if (a.name > b.name)
-        //                        return 1;
-        //                    else
-        //                        return 0;
-        //                });
-        //                lastSort='name';
-        //            }
-        //
-        //            $scope.currSorted.removeClass('activeCategory');
-        //            $scope.currSorted = $('#name_categ');
-        //            $scope.currSorted.addClass('activeCategory');
-        //
-        //            break;
-        //        case 'employee':
-        //            if (lastSort==='employee') {
-        //                $scope.inactive.reverse();
-        //                lastSort='employee';
-        //            }
-        //            else {
-        //                $scope.inactive.sort(function(a,b) {
-        //                    return a.numEmployees-b.numEmployees;
-        //                });
-        //                lastSort='employee';
-        //            }
-        //
-        //            $scope.currSorted.removeClass('activeCategory');
-        //            $scope.currSorted = $('#emp_categ');
-        //            $scope.currSorted.addClass('activeCategory');
-        //
-        //            break;
-        //        case 'notes':
-        //            if (lastSort==='notes') {
-        //                $scope.inactive.reverse();
-        //                lastSort='notes';
-        //            }
-        //            else {
-        //                $scope.inactive.sort(function(a,b) {
-        //                    return a.numVisitors-b.numVisitors;
-        //                });
-        //                lastSort='notes';
-        //            }
-        //
-        //            $scope.currSorted.removeClass('activeCategory');
-        //            $scope.currSorted = $('#notes_categ');
-        //            $scope.currSorted.addClass('activeCategory');
-        //
-        //            break;
-        //        case 'phone':
-        //            if (lastSort==='phone') {
-        //                $scope.inactive.reverse();
-        //                lastSort='phone';
-        //            }
-        //            else {
-        //                // NOT SURE HOW TO SORT DATES YET, WAITING TO SEE HOW STRUCTURED IN JSON OBJECT
-        //                lastSort='phone';
-        //            }
-        //
-        //            $scope.currSorted.removeClass('activeCategory');
-        //            $scope.currSorted = $('#phone_categ');
-        //            $scope.currSorted.addClass('activeCategory');
-        //
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //};
-
         $('#chartSearch').keyup(function() {
             var searchVal = $('#chartSearch').val().toLowerCase();
             $trace(searchVal);
@@ -274,7 +215,22 @@ angular.module('iReceptionistApp')
             $scope.$digest();
         });
 
-        //var lastSort = '';
-        ////initially sort by name
-        //$scope.sortBy('name');
+        $scope.keyLeaveOut = function(key) {
+            if (['_id','businessId', '__v', 'form', 'timeStamp', 'checkOff'].indexOf(key) === -1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        $scope.showVisitorBlock = false;
+        $scope.activeVisitor = {};
+        $scope.hoverVisitor = function(v) {
+            $scope.showVisitorBlock = true;
+            $scope.activeVisitor = v;
+        };
+        $scope.deselectVisitor = function() {
+            $scope.showVisitorBlock = false;
+            $scope.activeVisitor = {};
+        }
     });

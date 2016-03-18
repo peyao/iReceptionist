@@ -6,7 +6,5 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state) {
-
-
+.controller('IndexCtrl', function($scope, $rootScope, $timeout, $state, $cookies) {
 });

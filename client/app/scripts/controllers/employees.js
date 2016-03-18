@@ -6,7 +6,7 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-  .controller('EmployeesCtrl', function($rootScope, $scope, $cookies, UserService) {
+  .controller('EmployeesCtrl', function($rootScope, $scope, $cookies, UserService, NotificationService) {
     $rootScope.currentState = 'employees';
 
     $scope.showEmployeesMore = false;
@@ -17,6 +17,16 @@ angular.module('iReceptionistApp')
     $scope.phone = '';
     $scope.editEmp = {};
     $scope.newEmp = {};
+
+    if($cookies.get('tourEmp') != -1){
+      $scope.currentStepE = 0;
+    }
+
+    //$cookies.put('tourEmp',0);
+    $scope.tourComplete=function(){
+      $trace("tourcompleted" + $scope.currentStepE);
+      $cookies.put('tourEmp',-1);
+    };
 
     var getEmployeeList = function() {
       UserService.getEmployees(
@@ -34,7 +44,7 @@ angular.module('iReceptionistApp')
     getEmployeeList();
 
     $scope.cancel = function() {
-      $trace('resetting form')
+      $trace('resetting form');
       $scope.editEmp = {};
       $scope.newEmp = {};
       $scope.editEmp.phone = '';
@@ -64,11 +74,29 @@ angular.module('iReceptionistApp')
           $trace("Add employee error");
         }
       );
-      $scope.newEmp = {};
       $('#inviteEmp').modal('hide');
 
     };
 
+    $scope.inviteEmployee = function() {
+
+      NotificationService.sendEmail(
+        $scope.newEmp.email,
+        "Please Accept your Invitation",
+        "Welcome " + $scope.newEmp.name + "! \n You have been invited to join our " +
+         "iReceptionist app. Please log in to the website at link iReceptionist.cf/auth with the email: " + $scope.newEmp.email +
+         "\n Please use the password: HelloWorld \n\n Remember to change your password once you've logged in.",
+      $cookies.get('token'),
+      function (succ){
+        $trace("Sent email to" + $scope.newEmp.email);
+        $scope.newEmp = {};
+      },
+      function (err){
+        $trace("Error with email");
+      }
+    );
+   };
+    
     $scope.saveEmp = function(e) {
       $scope.name = e.name;
       $scope.email = e.email;

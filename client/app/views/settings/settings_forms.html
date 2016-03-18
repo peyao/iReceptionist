@@ -15,11 +15,18 @@
                 <div class="block-title">
                     <h2>Drop Here</h2>
                 </div>
-                <div fb-builder="default"></div>
+
+                <div id="tip13" fb-builder="default"></div>
                 <div class="text-center">
-                    <!--<button class="btn btn-primary save-form-button" ng-click="saveNewForm();">Save Form</button>-->
+                    <div class="checkbox">
+                        <label  id="tip10" for="employee-select">
+                            <input type="checkbox" id="employee-select" ng-model="employeeSelect" ng-change="updateEmployeeSelect();">Enable employee select
+                        </label>
+                    </div>
+                </div>
+                <div class="text-center">
                     <button class="btn btn-default form-builder-button" data-toggle="modal" data-target="#form-modal">Preview Form</button>
-                    <button class="btn btn-primary form-builder-button" onclick="App.alert('forms-themes');">Save Form</button>
+                    <button class="btn btn-primary form-builder-button" ng-click="saveForm();">Save Form</button>
                 </div>
             </div>
         </div>
@@ -65,3 +72,10 @@
     </div>
 </div>
 
+
+<tour step="currentStepF" tour-complete="tourComplete()">
+  <virtual-step tourtip="We've got you started with this default form, feel free to change it!" tourtip-placement="center-top" tourtip-offset-vertical="-50"
+      tourtip-offset-horizontal="50" tourtip-element="#tip13"></virtual-step>
+  <virtual-step tourtip="Its easy! Just drag and drop each input to customize your form" tourtip-placement="center-top" tourtip-offset-vertical="150"
+      tourtip-offset-horizontal="550" tourtip-next-label= "Got it!" tourtip-element="#tip10"></virtual-step>
+</tour>

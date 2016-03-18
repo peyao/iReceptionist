@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="col-xs-4">
                                     <label for="browser-notifications">Browser Notifications</label>
-                                    <label class="switch switch-success"><input type="checkbox" id="browser-notifications"><span></span></label>
+                                    <label class="switch switch-success"><input type="checkbox" id="browser-notifications" ng-model="user.settings.receiveBrowserNotification" ng-change="updateBrowserNotifications();"><span></span></label>
                                 </div>
                             </div>
                         </form>

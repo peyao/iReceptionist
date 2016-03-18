@@ -15,7 +15,7 @@ angular.module('iReceptionistApp')
         };
 
         $scope.user = $cookies.getObject('user');
-        $scope.business = $cookies.getObject('business').business;
+        $scope.business = $cookies.getObject('business');
         // Get the current plan and capitalize the first letter of it
         $scope.currentPlan = $scope.business.planLevel.charAt(0).toUpperCase() + $scope.business.planLevel.slice(1);
         $scope.planClicked = "";
@@ -31,7 +31,7 @@ angular.module('iReceptionistApp')
                 $trace("Employee list error");
             }
         );
-        
+
         // Restrict input for credit card fields
         $('[data-numeric]').payment('restrictNumeric');
         $('#credit-card').payment('formatCardNumber');

@@ -6,34 +6,42 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-.controller('VipDashboardCtrl', function($scope, $rootScope, $cookies, BusinessService) {
+.controller('VipDashboardCtrl', function($scope, $rootScope, $cookies, BusinessService, AnalyticsService) {
     $rootScope.currentState = 'vip-dashboard';
 
-    /* Here's an example of how to call suspendBusiness -- when you click on the suspend button for the business, you'll
-    need to capture that data and store it somewhere in scope - then you can access it
-     */
-    //BusinessService.suspendBusiness(
-    //    $scope.clickedBusiness.businessId,
-    //    !$scope.clickedBusiness.suspended, // Toggle the current suspension -- if true, send false, if false, send true
-    //    $cookies.get('token'),
-    //    function (busObj) {
-    //        $trace("Suspended business: " + busObj);
-    //    },
-    //    function (err) {
-    //        $trace("Suspend business fail: " + busObj);
-    //    }
-    //);
-
-    //BusinessService.getBusinessList(
-    //    $cookies.get('token'),
-    //    function (busObj) {
-    //        $trace("Business List " + busObj);
-    //    },
-    //    function (err) {
-    //        $trace("Business List error");
-    //    }
-    //);
+    $scope.getAnalyticsUse = function () {
+        AnalyticsService.getAnalyticsUser(
+            '03-10-2016',
+            '03-16-2016',
+            function (analyticsObject) {
+                $trace("Suspended business: " + analyticsObject);
+                $scope.allAnalytics=analyticsObject;
+                //$scope.getPlotData();
+                console.log(analyticsObject);
+            },
+            function (err) {
+                $trace("Suspend business fail: " + err);
+            }
+        );  
+    };
     
+    $scope.getAnalyticsVis = function () {
+        AnalyticsService.getAnalyticsVisitor(
+            $cookies.get('token'),
+            '03-10-2016',
+            '03-16-2016',
+            function (analyticsObject) {
+                $trace("Suspended business: " + analyticsObject);
+                console.log(analyticsObject);
+            },
+            function (err) {
+                $trace("Suspend business fail: " + err);
+            }
+        );  
+    };
+    
+    $scope.getAnalyticsUse();
+ 
     $scope.suspendBusiness = function() {
         var businessID = $scope.clientsToShow[this.$index]._id;
         var suspendedToggle = !$scope.clientsToShow[this.$index].suspended;
@@ -186,23 +194,12 @@ angular.module('iReceptionistApp')
         
         //initialize dates/suspended
         for (var i=0; i<$scope.clients.length; i++) {
-            //var monthsToPrint = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             
-            if ($scope.clients[i].suspended) {
-                /*
-                $scope.clients[i].dateJoined = 'SUSPENDED';
-                $('#dateJoined'+(i-1)).addClass("suspended");
-                */
+            
+            if ($scope.clients[i].suspended) {  
                 updateSuspension(true, i);
             }
             else {
-            /*    var dateObj =  new Date($scope.clients[i].timeStamp.created);
-
-                var dayStr = dateObj.getDate();
-                var monthStr = monthsToPrint[dateObj.getMonth()];
-                var yearStr = dateObj.getFullYear();
-
-                $scope.clients[i].dateJoined = monthStr + ' ' + dayStr + ', ' + yearStr;*/
                 updateSuspension(false, i);
             }
         }
@@ -214,15 +211,20 @@ angular.module('iReceptionistApp')
          * Plugins included in this template: pie, resize, stack, time
          */
         var widgetChartPie = $('#widget-chart-pie');
+
+        console.log($scope.allAnalytics.basic.count);
+        var freePct = $scope.allAnalytics.free.count;
+        var basicPct = $scope.allAnalytics.basic.count;
+        var premPct = $scope.allAnalytics.premier.count;
+        $scope.totalClients = freePct+basicPct+premPct;
         $.plot(widgetChartPie,
             [
-                {label: 'Free', data: 20},
-                {label: 'Basic', data: 10},
-                {label: 'Premium', data: 60},
-                {label: 'Enterprise', data: 10}
+                {label: 'Free', data: freePct},
+                {label: 'Basic', data: basicPct},
+                {label: 'Premier', data: premPct},
             ],
             {
-                colors: ['#454e59', '#5cafde', '#5ccdde', '#fac42e'],
+                colors: ['#f54e59', '#5cafde', '#7cdd7e'],
                 legend: {show: false},
                 series: {
                     pie: {
@@ -297,8 +299,14 @@ angular.module('iReceptionistApp')
                 }
                 else {
                     $scope.clients.sort(function(a,b) {
-                        //var aDate = new Date(a.timeStamp.created);
-                        //var bDate = new Date(b.timeStamp.created);
+                        if (a.suspended | b.suspended) {
+                            if (a.suspended) {
+                                return 1;
+                            }
+                            else {
+                                return -1;
+                            }
+                        }
                         return Date.parse(a.timeStamp.created)-Date.parse(b.timeStamp.created);
                     });                 
                     $scope.lastSort='joined';
@@ -321,7 +329,7 @@ angular.module('iReceptionistApp')
                 }
                 else {
                     $scope.clients.sort(function(a,b) {
-                        var plans = ['free', 'basic', 'premium', 'enterprise'];
+                        var plans = ['free', 'basic', 'premier'];
                         return plans.indexOf(a.planLevel.toLowerCase())-plans.indexOf(b.planLevel.toLowerCase());
                     });
                     $scope.lastSort='plan';
@@ -397,6 +405,72 @@ angular.module('iReceptionistApp')
         }
     }
     
+    //not used for demo because we don't have enough data in DB.
+    $scope.getPlotData = function() {
+        var freeDict = {};
+        var basicDict = {};
+        var premierDict = {};
+        
+        for (var key in $scope.allAnalytics.free.timeStamps) {
+            var keyVal = key.slice(0,2);
+            var countKey = $scope.allAnalytics.free.timeStamps[key].count;
+            if (freeDict[keyVal] === undefined) {
+                freeDict[keyVal]=countKey;
+            }
+            else {
+                freeDict[keyVal]=freeDict[keyVal]+countKey;
+            }
+        }
+        
+        for (var key in $scope.allAnalytics.basic.timeStamps) {
+            var keyVal = key.slice(0,2);
+            var countKey = $scope.allAnalytics.basic.timeStamps[key].count;
+            if (basicDict[keyVal] === undefined) {
+                basicDict[keyVal]=countKey;
+            }
+            else {
+                basicDict[keyVal]=basicDict[keyVal]+countKey;
+            } 
+        }
+        
+        for (var key in $scope.allAnalytics.premier.timeStamps) {
+            var keyVal = key.slice(0,2);
+            var countKey = $scope.allAnalytics.premier.timeStamps[key].count;
+            if (premierDict[keyVal] === undefined) {
+                premierDict[keyVal]=countKey;
+            }
+            else {
+                premierDict[keyVal]=premierDict[keyVal]+countKey;
+            }
+        }
+        console.log(freeDict);
+        console.log(basicDict);
+        console.log(premierDict);
+        
+        //new clients
+        var keyList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        var newClients = [[1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0], [9, 0], [10, 0], [11, 0], [12, 0]];
+        for (var key in freeDict) {
+            newClients[keyList.indexOf(key)][1]+=freeDict[key];
+        }
+        for (var key in basicDict) {
+            newClients[keyList.indexOf(key)][1]+=basicDict[key];
+        }
+        for (var key in premierDict) {
+            newClients[keyList.indexOf(key)][1]+=premierDict[key];
+        }
+        console.log(newClients);
+        
+        //totalClients
+        var totalClients = $.extend(true, [], newClients); //make deep copy
+        for (var i=0; i<12; i++) {
+            for (var j=0; j<i; j++) {
+                totalClients[i][1]=totalClients[i][1]+newClients[j][1];
+            }
+        }
+        console.log(totalClients);
+    }
+    
     //plots whichever top category you pick
     $scope.plotNewData = function(whichData) {
             var dataMonths = [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']];
@@ -405,15 +479,15 @@ angular.module('iReceptionistApp')
                 // hard coded for now until get routes from backend
                 switch(whichData) {
                     case 'total_clients':
-                        return ['Total Clients','#afde5c', [1, 1900], [2, 2300], [3, 3200], [4, 2500], [5, 4200], [6, 3100], [7, 3600], [8, 2500], [9, 4600], [10, 3700], [11, 4200], [12, 5200]];
+                        return ['Total Clients','#afde5c', [1, 100], [2, 210], [3, 220], [4, 250], [5, 250], [6, 310], [7, 360], [8, 361], [9, 460], [10, 490], [11, 500], [12, 520]];
                     case 'employees_client':
-                        return ['Employees per Client','#deb25c', [1, 850], [2, 750], [3, 1500], [4, 900], [5, 1500], [6, 1150], [7, 1500], [8, 900], [9, 1800], [10, 1700], [11, 1900], [12, 2550]];
+                        return ['Employees per Client','#deb25c', [1, 23], [2, 25], [3, 22], [4, 26], [5, 29], [6, 25], [7, 28], [8, 33], [9, 29], [10, 30], [11, 29], [12, 34]];
                     case 'new_clients':
-                        return ['New Clients','rgb(222,75,57)', [1, 130], [2, 330], [3, 220], [4, 350], [5, 150], [6, 275], [7, 280], [8, 380], [9, 120], [10, 330], [11, 190], [12, 410]];
+                        return ['New Clients','rgb(222,75,57)', [1, 50], [2, 39], [3, 22], [4, 51], [5, 54], [6, 80], [7, 44], [8, 83], [9, 66], [10, 87], [11, 71], [12, 102]];
                     case 'total_income':
                         return ['Total Income','#de815c', [1, 1530], [2, 2330], [3, 3220], [4, 4330], [5, 5510], [6, 6765], [7, 7780], [8, 8380], [9, 9120], [10, 9330], [11, 10090], [12, 10410]];
                     default:
-                        return ['Total Clients','#afde5c', [1, 1900], [2, 2300], [3, 3200], [4, 2500], [5, 4200], [6, 3100], [7, 3600], [8, 2500], [9, 4600], [10, 3700], [11, 4200], [12, 5200]]; //clients by default
+                        return ['Total Clients','#afde5c', [1, 100], [2, 210], [3, 220], [4, 250], [5, 250], [6, 310], [7, 360], [8, 361], [9, 460], [10, 490], [11, 500], [12, 520]]; //clients by default
                 }
             };
 
