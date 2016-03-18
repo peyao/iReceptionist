@@ -6,7 +6,7 @@
  * Controller for the settings page
  */
 angular.module('iReceptionistApp')
-    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, BusinessService, UserService) {
+    .controller('SettingsFormsCtrl', function($scope, $builder, $validator, $rootScope, $cookies, $location, BusinessService, UserService) {
         $rootScope.currentState = 'settings-forms';
 
         if($cookies.get('tourSetF') != -1){
@@ -97,6 +97,13 @@ angular.module('iReceptionistApp')
 
                     // Update the business cookie
                     $cookies.putObject('business', busObj);
+                    var domain = $location.host();
+                    var cookieDefaults = {
+                        'path': '/checkin',
+                        'domain': domain
+                    };
+                    $cookies.remove('business', cookieDefaults);
+                    $cookies.putObject('business', busObj, cookieDefaults);
                     console.log(busObj);
                 },
                 function (err) {
