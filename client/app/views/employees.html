@@ -104,7 +104,7 @@
                   <button type="button" class="btn btn-block btn-effect-ripple btn-danger" data-dismiss="modal" ng-click="cancel()">Cancel</button>
                </div>
                <div class="col-xs-6">
-                  <button type="submit" class="btn btn-block btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee()">Invite</button>
+                  <button type="submit" class="btn btn-block btn-primary" ng-disabled="inviteForm.$invalid" onclick="App.alert('invite-emp');" ng-click="addEmployee();inviteEmployee()">Invite</button>
                </div>
             </div>
          </form>

@@ -6,7 +6,7 @@
  * Controller of the iReceptionistApp
  */
 angular.module('iReceptionistApp')
-  .controller('EmployeesCtrl', function($rootScope, $scope, $cookies, UserService) {
+  .controller('EmployeesCtrl', function($rootScope, $scope, $cookies, UserService, NotificationService) {
     $rootScope.currentState = 'employees';
 
     $scope.showEmployeesMore = false;
@@ -74,11 +74,29 @@ angular.module('iReceptionistApp')
           $trace("Add employee error");
         }
       );
-      $scope.newEmp = {};
       $('#inviteEmp').modal('hide');
 
     };
 
+    $scope.inviteEmployee = function() {
+
+      NotificationService.sendEmail(
+        $scope.newEmp.email,
+        "Please Accept your Invitation",
+        "Welcome " + $scope.newEmp.name + "! \n You have been invited to join our " +
+         "iReceptionist app. Please log in to the website at linkiReceptionist.cf/auth with the email: " + $scope.newEmp.email +
+         "\n Please use the password: HelloWorld \n\n Remember to change your password once youve logged in.",
+      $cookies.get('token'),
+      function (succ){
+        $trace("Sent email to" + $scope.newEmp.email);
+        $scope.newEmp = {};
+      },
+      function (err){
+        $trace("Error with email");
+      }
+    );
+   };
+    
     $scope.saveEmp = function(e) {
       $scope.name = e.name;
       $scope.email = e.email;

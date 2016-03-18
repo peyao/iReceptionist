@@ -53,15 +53,13 @@ angular.module('iReceptionistApp')
 
 
         $scope.addEmployee = function() {
-          UserService.addEmployee({
-              "name": $scope.newEmp.name,
-              "phone": $scope.newEmp.phone,
-              "email": $scope.newEmp.email,
-            },
+          UserService.addStaff(
+            $scope.newEmp.name,
+            $scope.newEmp.phone,
+            $scope.newEmp.email,
             $cookies.get('token'),
             function(empObj) {
               $trace("Added employee " + empObj.name);
-              //TODO: PUSHER
               getEmployeeList();
             },
             function(err) {

@@ -10,6 +10,8 @@ angular.module('iReceptionistApp')
     $location, $window) {
 
     $scope.doLogout = function() {
+        console.log($cookies);
+        $cookies.remove('business', {'path': '/'});
         var domain = $location.host();
         var urlParts = domain.split('.');
         var tld = '';
@@ -19,6 +21,7 @@ angular.module('iReceptionistApp')
             domain = urlParts[0];
             tld = '.' + urlParts[1];
         }
+        console.log($cookies);
         $window.location.href = 'http://' + domain + tld + ':' + $location.port() + '/auth/#/logout';
     };
 
