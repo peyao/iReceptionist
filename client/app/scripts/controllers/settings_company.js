@@ -7,11 +7,6 @@
  */
 angular.module('iReceptionistApp')
     .controller('SettingsCompanyCtrl', function ($rootScope, $scope, $cookies, BusinessService, DropZone) {
-        $('#page-content-ui-view').resize(function () {
-            $('#page-content-ui-view').width($rootScope.pageContentWidth());
-            $('#page-content').height($rootScope.pageContentHeight());
-        });
-
         $rootScope.currentState = 'settings-company';
         $scope.business = $cookies.getObject('business');
         $scope.logoUpload = DropZone.createNew('#logoUpload');
